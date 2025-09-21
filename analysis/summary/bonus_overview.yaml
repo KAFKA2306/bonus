@@ -1,0 +1,75 @@
+summary_generated_on: '2025-09-21'
+total_unique_companies: 28
+stage_priority:
+- researched
+- phase3_estimate
+overall:
+  total_companies: 28
+  classification_counts:
+    ハイブリッド: 7
+    ハイブリッド型: 2
+    基本給連動型: 2
+    業績連動: 4
+    業績連動型: 6
+    総合判断: 2
+    総合判断型: 5
+  confidence_counts:
+    A: 3
+    B: 7
+    C: 16
+    D: 2
+  sector_counts:
+    automotive: 1
+    manufacturing: 1
+    pharma: 1
+    retail: 1
+    不動産業: 1
+    化学: 6
+    卸売業: 1
+    情報・通信業: 3
+    機械: 5
+    輸送用機器: 1
+    鉄鋼: 3
+    電気機器: 4
+  average_reliability: 65.45
+by_stage:
+  researched:
+    total_companies: 25
+    classification_counts:
+      ハイブリッド: 7
+      ハイブリッド型: 2
+      基本給連動型: 2
+      業績連動: 4
+      業績連動型: 5
+      総合判断: 2
+      総合判断型: 3
+    confidence_counts:
+      A: 3
+      B: 7
+      C: 13
+      D: 2
+    sector_counts:
+      automotive: 1
+      manufacturing: 1
+      pharma: 1
+      retail: 1
+      化学: 6
+      卸売業: 1
+      情報・通信業: 2
+      機械: 5
+      輸送用機器: 1
+      鉄鋼: 3
+      電気機器: 3
+    average_reliability: 67.89
+  phase3_estimate:
+    total_companies: 3
+    classification_counts:
+      業績連動型: 1
+      総合判断型: 2
+    confidence_counts:
+      C: 3
+    sector_counts:
+      不動産業: 1
+      情報・通信業: 1
+      電気機器: 1
+    average_reliability: 50.0

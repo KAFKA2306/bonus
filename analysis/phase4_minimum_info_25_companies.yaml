@@ -1,0 +1,431 @@
+phase4_minimum_info:
+  metadata:
+    title: Phase 4 最低限情報整備リスト
+    phase: Phase 4
+    objective: 信頼度Dレベルの企業について最低限の分類と調査着手計画を整理
+    creation_date: '2025-09-21'
+    prepared_by: Desk Research Team
+    total_companies: 25
+    coverage_summary:
+      Construction: 4
+      Food Products: 7
+      Services: 3
+      Other Financing Business: 1
+      Real Estate: 2
+      Railway & Bus: 8
+    dataset_version: phase4_draft_v1
+  assumption_summary:
+  - 分類は業界慣行および既存報道に基づく暫定評価であり一次ソース確認は未完了
+  - 全25社の信頼度はDとし、有価証券報告書・春闘資料の確認後に順次更新予定
+  - 主要フォローアップソースはEDINET、労働組合資料、決算説明会・統合報告書
+  follow_up_actions:
+    immediate:
+    - 有価証券報告書2025年3月期の賞与関連記載の抜き出し
+    - 主要労組（私鉄総連、JR連合、食品産業労連、建設労連）の春闘回答収集整理
+    short_term:
+    - 統合報告書・人的資本開示で賞与算定ロジックを確認
+    - 部門別の賞与水準が把握できる公開資料を抽出
+    medium_term:
+    - 同業他社との比較指標を整理しPhase 3推定ロジックに組み込み
+    - IR問い合わせ候補企業（JR各社、オリックス、日本郵政）をリストアップ
+  company_list:
+  - stock_code: '1801'
+    company_name_ja: 大成建設
+    company_name_en: Taisei
+    sector: 建設業
+    sector_en: Construction
+    priority_rank: 2
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 春闘交渉で決定する年2回の一時金に大型案件の利益調整を加味
+    assumption_basis: ゼネコン大手は労使交渉で一時金月数を決定するとの業界慣行に基づく推定
+    information_gap: 2025年春闘回答と有価証券報告書の従業員賞与記載が未確認
+    next_actions:
+    - EDINETで2025年3月期有価証券報告書（従業員関連記載）を確認
+    - 建設業労働組合連合会の春闘回答資料を収集
+    preliminary_signals:
+    - 2024年春闘速報で一時金7ヶ月要求との報道あり
+    notes: 海外大型プロジェクト比率が高く、案件採算の反映度合いを検証する必要あり
+  - stock_code: '1802'
+    company_name_ja: 大林組
+    company_name_en: Obayashi
+    sector: 建設業
+    sector_en: Construction
+    priority_rank: 2
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 工事利益・個人評価・安全指標を総合した一時金算定
+    assumption_basis: 大手ゼネコンは安全・品質指標を賞与査定に含めるとの専門誌記載を参照
+    information_gap: 安全評価と賞与の連動指標の有無が不明
+    next_actions:
+    - 専門誌『日経コンストラクション』の賞与関連記事を調査
+    - 労使協定書の公開有無をヒアリング
+    preliminary_signals:
+    - 2023年度は業績回復に伴い一時金加算があったとの業界インタビュー
+    notes: 海外PPP案件拡大中のため地域別業績評価を確認したい
+  - stock_code: '1803'
+    company_name_ja: 清水建設
+    company_name_en: Shimizu
+    sector: 建設業
+    sector_en: Construction
+    priority_rank: 2
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 工事粗利益と個人評価を組み合わせた査定方式
+    assumption_basis: 決算説明会で人材投資強化を掲げている点から成果・評価併用を推定
+    information_gap: 建設不採算案件時の減額ルールが不明
+    next_actions:
+    - IR説明会資料での人事施策スライド確認
+    - 建設労連清水支部の春闘資料を入手
+    preliminary_signals:
+    - 2024年春闘で一時金6.5ヶ月回答と報道される
+    notes: 不採算案件による赤字経験があり減額ロジックの検証が必要
+  - stock_code: '1812'
+    company_name_ja: 鹿島建設
+    company_name_en: Kajima
+    sector: 建設業
+    sector_en: Construction
+    priority_rank: 2
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 年2回の春闘一時金を基礎に特別加算を案件別で調整
+    assumption_basis: 鹿島は大型案件比率と利益変動が大きく、総合判断での調整が多いとの専門誌記事
+    information_gap: 特別賞与やプロジェクトインセンティブの仕組みが不明
+    next_actions:
+    - 鹿島労働組合の春闘資料の有無を確認
+    - 大型案件落札時の社内報を調査
+    preliminary_signals:
+    - 災害復旧案件での特別手当支給事例が過去に報道
+    notes: 海外土木案件の損益反映が想定されるため詳細確認が必要
+  - stock_code: '2002'
+    company_name_ja: 日清製粉グループ本社
+    company_name_en: Nisshin Seifun Group
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 3
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: 基準内賃金×月数で年2回支給し、業績に応じて月数増減
+    assumption_basis: 食品産業労連の交渉慣行では月数で扱う例が多い
+    information_gap: 小麦価格高騰時の賞与調整幅が不明
+    next_actions:
+    - 食品産業労連 春闘回答集の確認
+    - 決算説明資料の人的資本開示を確認
+    preliminary_signals:
+    - 2024年春闘速報で一時金5.5ヶ月要求との報道
+    notes: 原材料価格連動の加算有無を確認したい
+  - stock_code: '2269'
+    company_name_ja: 明治ホールディングス
+    company_name_en: Meiji Holdings
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 3
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: 職能等級に応じた月数回答に業績指標を小幅連動
+    assumption_basis: 乳業各社は基本給連動を採用しているとの過去調査結果
+    information_gap: ヘルスケア事業分の評価指標が不明
+    next_actions:
+    - ヘルスケア事業説明会資料の人材投資項目を確認
+    - 労使協定書の公開可否を確認
+    preliminary_signals:
+    - 株主通信で『賞与は業績と連動』との一般的説明あり
+    notes: 医薬事業を含むため事業別の差異を把握する
+  - stock_code: '2432'
+    company_name_ja: ディー・エヌ・エー
+    company_name_en: DeNA
+    sector: サービス業
+    sector_en: Services
+    priority_rank: 2
+    tentative_classification: ハイブリッド型
+    assumed_bonus_structure: 個人評価ベースの賞与に加え業績連動インセンティブと株式報酬を併用
+    assumption_basis: IT企業は年俸制＋短期インセンティブの併用例が多い
+    information_gap: ゲーム事業の業績変動が賞与にどう反映されるか不明
+    next_actions:
+    - 統合報告書の人的資本セクションを精査
+    - エンジニア採用ページでの報酬説明を確認
+    preliminary_signals:
+    - 採用サイトで年俸制と半期評価の記載あり
+    notes: 事業ポートフォリオ変動が大きく評価指標確認が必要
+  - stock_code: '2502'
+    company_name_ja: アサヒグループホールディングス
+    company_name_en: Asahi Group Holdings
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 2
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: 本社は基本給月数、海外子会社は業績連動の要素を加味
+    assumption_basis: ビール大手は春闘で月数回答する慣行がある
+    information_gap: グローバル報酬制度の統合状況が不明
+    next_actions:
+    - グローバル統合報告書での報酬ポリシーを確認
+    - 酒類労連の春闘結果を参照
+    preliminary_signals:
+    - 2024年春闘で一時金5.4ヶ月回答と日経報道
+    notes: 海外事業の扱いが異なる可能性を検証
+  - stock_code: '2503'
+    company_name_ja: キリンホールディングス
+    company_name_en: Kirin Holdings
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 2
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: ベース給与に連動した月数回答を基礎に個人評価を加算
+    assumption_basis: 酒類各社の春闘では一時金を月数で回答するのが一般的
+    information_gap: 医薬・ヘルスサイエンス事業の制度差が不明
+    next_actions:
+    - 医薬事業説明資料の報酬方針を確認
+    - 労使交渉資料における部門差異を確認
+    preliminary_signals:
+    - 2024年春闘回答で基準内賃金5.4ヶ月との労連資料
+    notes: 部門間の制度差が大きい可能性に注意
+  - stock_code: '2801'
+    company_name_ja: キッコーマン
+    company_name_en: Kikkoman
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 3
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: 職能等級ごとの基準月数で年2回支給
+    assumption_basis: 食品メーカーの慣行として月数回答が一般的
+    information_gap: 海外売上の拡大に伴うグローバル制度の統一状況不明
+    next_actions:
+    - 北米事業のIR資料で報酬構造言及を確認
+    - 食品産業労連の春闘結果でキッコーマンの回答を確認
+    preliminary_signals:
+    - 2023年度に賞与月数を据え置いたとの労組コメント
+    notes: 海外現法との制度差を把握する
+  - stock_code: '2871'
+    company_name_ja: ニチレイ
+    company_name_en: Nichirei
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 3
+    tentative_classification: 基本給連動型
+    assumed_bonus_structure: 加工食品・低温物流の利益配分を反映しつつ月数で回答
+    assumption_basis: 食品・物流一体型企業の賞与は部門別月数加算が多い
+    information_gap: 低温物流部門の変動賞与の有無が不明
+    next_actions:
+    - 低温物流事業の決算説明資料を確認
+    - 組合ニュースでの賞与報告を収集
+    preliminary_signals:
+    - 物流部門でインセンティブ導入検討との社内報記事
+    notes: 物流部門で変動幅が高い可能性がある
+  - stock_code: '2914'
+    company_name_ja: 日本たばこ産業
+    company_name_en: Japan Tobacco
+    sector: 食料品
+    sector_en: Food Products
+    priority_rank: 1
+    tentative_classification: ハイブリッド型
+    assumed_bonus_structure: 国内は基本給連動、海外事業は業績連動を組み合わせたグローバル制度
+    assumption_basis: JTはグローバル報酬を導入しているとの統合報告書記載
+    information_gap: 海外正社員向け短期インセンティブの仕組みが未確認
+    next_actions:
+    - 統合報告書の報酬セクションを精査
+    - 海外事業のForm20-F等を確認
+    preliminary_signals:
+    - 人的資本レポートで賞与を短期インセンティブと表現
+    notes: 国内市場縮小の中で業績指標の比重が高まっているか確認
+  - stock_code: '4755'
+    company_name_ja: 楽天グループ
+    company_name_en: Rakuten Group
+    sector: サービス業
+    sector_en: Services
+    priority_rank: 1
+    tentative_classification: ハイブリッド型
+    assumed_bonus_structure: 年俸制に基づく半期評価＋事業部業績連動ボーナス
+    assumption_basis: 楽天は人事制度改定でOKR評価と業績連動賞与を導入と過去発表
+    information_gap: モバイル事業の赤字時の賞与調整ルールが不明
+    next_actions:
+    - 有価証券報告書の人的資本開示を確認
+    - 採用サイトの報酬制度Q&Aを確認
+    preliminary_signals:
+    - 社長メッセージで成果連動賞与を強調
+    notes: モバイル事業の赤字で賞与抑制があるかを確認
+  - stock_code: '6178'
+    company_name_ja: 日本郵政
+    company_name_en: Japan Post Holdings
+    sector: サービス業
+    sector_en: Services
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 公的色の強い評価制度に基づき、連結業績と労使交渉結果で決定
+    assumption_basis: 郵政グループはユニオン交渉で一時金を決定するとの報道
+    information_gap: 持株会社と事業会社の賞与連動指標の差が不明
+    next_actions:
+    - 郵政労働組合の春闘資料を確認
+    - 人的資本開示レポートでの賞与記述を確認
+    preliminary_signals:
+    - 2024年春闘で月数回答据え置きとの組合発表
+    notes: ユニバーサルサービス義務による調整が想定される
+  - stock_code: '8591'
+    company_name_ja: オリックス
+    company_name_en: ORIX
+    sector: その他金融業
+    sector_en: Other Financing Business
+    priority_rank: 1
+    tentative_classification: ハイブリッド型
+    assumed_bonus_structure: 業績連動ボーナスと個人業績評価を組み合わせ、役職に応じてストック報酬を付与
+    assumption_basis: 金融業ではROEや部門利益連動の短期インセンティブが一般的
+    information_gap: 海外拠点での賞与指標の整合性が不明
+    next_actions:
+    - 統合報告書での役職別報酬テーブルを確認
+    - 金融庁提出資料の報酬委員会報告を確認
+    preliminary_signals:
+    - 役員報酬で短期業績連動賞与を採用と開示済み
+    notes: 多角化事業ごとに指標が異なる可能性を確認
+  - stock_code: '8801'
+    company_name_ja: 三井不動産
+    company_name_en: Mitsui Fudosan
+    sector: 不動産業
+    sector_en: Real Estate
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: プロジェクト収益と個人評価を総合し年2回支給
+    assumption_basis: 大手デベロッパーは大型開発の進捗に連動した賞与調整があるとの業界ヒアリング
+    information_gap: 海外開発案件の評価指標が不明
+    next_actions:
+    - 決算説明資料の人的資本項目を確認
+    - 不動産業界誌での報酬特集を参照
+    preliminary_signals:
+    - 2023年度に成果連動賞与を拡充との決算説明コメント
+    notes: 国内外の案件比率変化が評価指標にどう影響するか確認
+  - stock_code: '8802'
+    company_name_ja: 三菱地所
+    company_name_en: Mitsubishi Estate
+    sector: 不動産業
+    sector_en: Real Estate
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 大型オフィス・再開発プロジェクトの利益と個人評価を合わせて算定
+    assumption_basis: 不動産大手はプロジェクト利益連動の賞与を導入しているとの専門誌記事
+    information_gap: 海外不動産部門の評価指標未確認
+    next_actions:
+    - 海外投資家向けIR資料の報酬説明をチェック
+    - 都市開発部門の社内報を確認
+    preliminary_signals:
+    - 2024年統合報告書で人的資本投資強化を明記
+    notes: 再開発案件の長期性が賞与にどう反映されるか分析が必要
+  - stock_code: '9001'
+    company_name_ja: 東武鉄道
+    company_name_en: Tobu Railway
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 3
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 鉄道・流通事業の利益と春闘交渉結果に基づき年2回支給
+    assumption_basis: 私鉄大手は春闘で一時金月数を交渉する慣行がある
+    information_gap: 観光事業の季節変動が賞与に与える影響が不明
+    next_actions:
+    - 私鉄総連の春闘回答を確認
+    - 観光事業IR資料の従業員施策を確認
+    preliminary_signals:
+    - 2024年春闘で一時金5.2ヶ月回答と私鉄総連資料に記載
+    notes: ホテル・レジャー事業の比率が高く部門差異を把握する
+  - stock_code: '9005'
+    company_name_ja: 東京急行電鉄
+    company_name_en: Tokyu
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 2
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 都市開発・交通・生活サービスの業績総合で月数決定
+    assumption_basis: 東急グループは多角化事業の利益を統合した賞与回答と推定
+    information_gap: 不動産・交通・通信の各部門で賞与差があるか不明
+    next_actions:
+    - 東急グループ統合報告書を確認
+    - 私鉄総連資料で東急の回答値を確認
+    preliminary_signals:
+    - 2023年はコロナ後需要回復で賞与増額と報道
+    notes: 多角化事業の評価指標を整理する
+  - stock_code: '9006'
+    company_name_ja: 京浜急行電鉄
+    company_name_en: Keikyu
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 3
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 鉄道・不動産・空港アクセス需要を踏まえ月数回答
+    assumption_basis: 空港需要連動で業績が変動し春闘で調整される傾向
+    information_gap: 羽田アクセス需要の変動時の賞与調整不明
+    next_actions:
+    - 京急の決算説明資料で人件費記載を確認
+    - 私鉄総連の春闘速報を確認
+    preliminary_signals:
+    - 観光回復に伴い一時金増額との地域紙報道
+    notes: 空港需要依存度が高いため外部環境感応度を確認
+  - stock_code: '9007'
+    company_name_ja: 小田急電鉄
+    company_name_en: Odakyu Electric Railway
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 3
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 鉄道・小売・不動産を総合し一時金を決定
+    assumption_basis: 私鉄は生活サービス事業含め総合判断で賞与を決定する
+    information_gap: 沿線再開発による賞与への影響が不明
+    next_actions:
+    - 沿線開発プロジェクトのIR情報を確認
+    - 組合機関紙の賞与報告を収集
+    preliminary_signals:
+    - 2024年度に観光需要回復で一時金増額と発表
+    notes: ホテル事業の寄与度確認が必要
+  - stock_code: '9008'
+    company_name_ja: 京王電鉄
+    company_name_en: Keio
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 3
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 鉄道事業の安定収益を基礎にレジャー・小売の成果で加減
+    assumption_basis: 私鉄グループは鉄道基礎＋生活サービスの総合判断が一般的
+    information_gap: 沿線商業施設の好不調が賞与に与える影響不明
+    next_actions:
+    - 京王労組の春闘回答を確認
+    - 商業施設運営部門のIR資料を確認
+    preliminary_signals:
+    - 2024年春闘で観光需要回復を踏まえ上積み回答と報道
+    notes: テーマパーク事業との連動度合いを確認
+  - stock_code: '9020'
+    company_name_ja: 東日本旅客鉄道
+    company_name_en: JR East
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: JR連合の春闘一時金月数と鉄道・生活サービス利益を総合判断
+    assumption_basis: JR各社は労使交渉で一時金月数を回答する慣行
+    information_gap: ポストコロナの旅客回復に伴う増額幅が不明
+    next_actions:
+    - JR東労組の春闘資料を確認
+    - 人的資本開示での賞与記載を確認
+    preliminary_signals:
+    - 2024年春闘で月数5.5ヶ月回答とJR連合資料に記載
+    notes: 地域別収益差が賞与に反映されているか検証
+  - stock_code: '9021'
+    company_name_ja: 西日本旅客鉄道
+    company_name_en: JR West
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: JR連合春闘月数を基礎に観光需要・鉄道安全指標を加味
+    assumption_basis: JR各社で共通する春闘回答方式に基づく推定
+    information_gap: 安全投資増の影響で賞与がどう調整されるか不明
+    next_actions:
+    - JR西労組の春闘交渉結果を確認
+    - 関西圏の観光需要指標との連動を分析
+    preliminary_signals:
+    - 大阪万博準備で人材確保策強化との報道
+    notes: 観光需要依存度が高く変動幅を確認する
+  - stock_code: '9022'
+    company_name_ja: 東海旅客鉄道
+    company_name_en: JR Central
+    sector: 陸運業
+    sector_en: Railway & Bus
+    priority_rank: 1
+    tentative_classification: 総合判断型
+    assumed_bonus_structure: 東海道新幹線の業績を基礎に春闘で一時金月数を決定
+    assumption_basis: JR東海は新幹線収益重視で春闘回答するとの過去報道
+    information_gap: リニア建設投資期の賞与減額ルール不明
+    next_actions:
+    - JR東海労組の春闘資料を確認
+    - リニア中央新幹線投資説明資料で人件費方針を確認
+    preliminary_signals:
+    - リニア投資影響で一時金据え置きとの報道がある
+    notes: リニア建設によるコスト負担が賞与にどう反映されるか重要

@@ -1,0 +1,130 @@
+summary_generated_on: '2025-09-21'
+total_sectors: 12
+sector_breakdown:
+  automotive:
+    total_companies: 1
+    classification_counts:
+      業績連動: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      C: 1
+    average_reliability: 60.0
+  manufacturing:
+    total_companies: 1
+    classification_counts:
+      ハイブリッド: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      C: 1
+    average_reliability: 70.0
+  pharma:
+    total_companies: 1
+    classification_counts:
+      ハイブリッド: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      B: 1
+    average_reliability: 80.0
+  retail:
+    total_companies: 1
+    classification_counts:
+      総合判断: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      D: 1
+    average_reliability: 30.0
+  不動産業:
+    total_companies: 1
+    classification_counts:
+      総合判断型: 1
+    stage_counts:
+      phase3_estimate: 1
+    confidence_counts:
+      C: 1
+    average_reliability: 45.0
+  化学:
+    total_companies: 6
+    classification_counts:
+      ハイブリッド: 2
+      基本給連動型: 1
+      業績連動: 2
+      総合判断型: 1
+    stage_counts:
+      researched: 6
+    confidence_counts:
+      B: 2
+      C: 4
+    average_reliability: 65.0
+  卸売業:
+    total_companies: 1
+    classification_counts:
+      業績連動型: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      A: 1
+    average_reliability: 95.0
+  情報・通信業:
+    total_companies: 3
+    classification_counts:
+      基本給連動型: 1
+      業績連動型: 1
+      総合判断型: 1
+    stage_counts:
+      phase3_estimate: 1
+      researched: 2
+    confidence_counts:
+      C: 3
+    average_reliability: 58.33
+  機械:
+    total_companies: 5
+    classification_counts:
+      ハイブリッド: 2
+      ハイブリッド型: 1
+      業績連動: 1
+      総合判断: 1
+    stage_counts:
+      researched: 5
+    confidence_counts:
+      B: 1
+      C: 3
+      D: 1
+    average_reliability: 57.5
+  輸送用機器:
+    total_companies: 1
+    classification_counts:
+      総合判断型: 1
+    stage_counts:
+      researched: 1
+    confidence_counts:
+      B: 1
+    average_reliability: 80.0
+  鉄鋼:
+    total_companies: 3
+    classification_counts:
+      ハイブリッド: 1
+      業績連動型: 2
+    stage_counts:
+      researched: 3
+    confidence_counts:
+      B: 1
+      C: 2
+    average_reliability: 70.0
+  電気機器:
+    total_companies: 4
+    classification_counts:
+      ハイブリッド型: 1
+      業績連動型: 2
+      総合判断型: 1
+    stage_counts:
+      phase3_estimate: 1
+      researched: 3
+    confidence_counts:
+      A: 2
+      B: 1
+      C: 1
+    average_reliability: 81.67
