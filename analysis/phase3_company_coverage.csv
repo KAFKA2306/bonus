@@ -1,0 +1,112 @@
+stock_code,company_name_ja,company_name_en,sector,sector_en,status,existing_files
+4307,野村総合研究所,Nomura Research Institute,情報・通信業,Information & Communication,missing,
+4324,電通グループ,Dentsu Group,情報・通信業,Information & Communication,missing,
+9432,日本電信電話,NTT,情報・通信業,Information & Communication,covered,companies/other/9432_ntt.yaml
+9433,KDDI,KDDI,情報・通信業,Information & Communication,covered,companies/other/9433_kddi.yaml
+9437,NTTドコモ,NTT DOCOMO,情報・通信業,Information & Communication,missing,
+9984,ソフトバンクグループ,SoftBank Group,情報・通信業,Information & Communication,missing,
+6501,日立製作所,Hitachi,電気機器,Electric Appliances,missing,
+6502,東芝,Toshiba,電気機器,Electric Appliances,missing,
+6503,三菱電機,Mitsubishi Electric,電気機器,Electric Appliances,missing,
+6504,富士電機,Fuji Electric,電気機器,Electric Appliances,missing,
+6506,安川電機,Yaskawa Electric,電気機器,Electric Appliances,missing,
+6645,オムロン,OMRON,電気機器,Electric Appliances,missing,
+6674,GSユアサ,GS Yuasa,電気機器,Electric Appliances,missing,
+6701,NEC,NEC,電気機器,Electric Appliances,missing,
+6702,富士通,Fujitsu,電気機器,Electric Appliances,missing,
+6752,パナソニックホールディングス,Panasonic Holdings,電気機器,Electric Appliances,missing,
+6758,ソニーグループ,Sony Group,電気機器,Electric Appliances,covered,companies/tech/6758_sony.yaml
+6762,TDK,TDK,電気機器,Electric Appliances,missing,
+6770,アルプスアルパイン,Alps Alpine,電気機器,Electric Appliances,missing,
+6841,横河電機,Yokogawa Electric,電気機器,Electric Appliances,missing,
+6857,アドバンテスト,Advantest,電気機器,Electric Appliances,missing,
+6861,キーエンス,KEYENCE,電気機器,Electric Appliances,covered,companies/tech/6861_keyence.yaml
+6902,デンソー,DENSO,電気機器,Electric Appliances,missing,
+6952,カシオ計算機,Casio Computer,電気機器,Electric Appliances,missing,
+6954,ファナック,FANUC,電気機器,Electric Appliances,covered,companies/manufacturing/machinery/6954_fanuc.yaml
+6976,太陽誘電,Taiyo Yuden,電気機器,Electric Appliances,missing,
+7735,SCREENホールディングス,SCREEN Holdings,電気機器,Electric Appliances,missing,
+7751,キヤノン,Canon,電気機器,Electric Appliances,missing,
+8035,東京エレクトロン,Tokyo Electron,電気機器,Electric Appliances,missing,
+7201,日産自動車,Nissan Motor,輸送用機器,Transportation Equipment,covered,companies/automotive/7201_nissan.yaml
+7202,いすゞ自動車,Isuzu Motors,輸送用機器,Transportation Equipment,missing,
+7203,トヨタ自動車,Toyota Motor,輸送用機器,Transportation Equipment,covered,companies/automotive/7203_toyota.yaml
+7261,マツダ,Mazda Motor,輸送用機器,Transportation Equipment,missing,
+7267,ホンダ,Honda Motor,輸送用機器,Transportation Equipment,missing,
+7269,スズキ,Suzuki Motor,輸送用機器,Transportation Equipment,missing,
+7270,SUBARU,SUBARU,輸送用機器,Transportation Equipment,missing,
+4005,住友化学,Sumitomo Chemical,化学,Chemicals,covered,companies/manufacturing/chemicals/4005_sumitomo-chemical.yaml;companies/manufacturing/chemicals/4005_sumitomo_chemical.yaml
+4021,日産化学,Nissan Chemical,化学,Chemicals,covered,companies/manufacturing/chemicals/4021_nissan_chemical.yaml
+4043,トクヤマ,Tokuyama,化学,Chemicals,missing,
+4061,デンカ,Denka,化学,Chemicals,missing,
+4063,信越化学工業,Shin-Etsu Chemical,化学,Chemicals,covered,companies/manufacturing/chemicals/4063_shin-etsu.yaml;companies/manufacturing/chemicals/4063_shin_etsu_chemical.yaml
+4183,三井化学,Mitsui Chemicals,化学,Chemicals,covered,companies/manufacturing/chemicals/4183_mitsui_chemicals.yaml
+4188,三菱ケミカルホールディングス,Mitsubishi Chemical Holdings,化学,Chemicals,covered,companies/manufacturing/chemicals/4188_mitsubishi_chemical_holdings.yaml
+4208,宇部三菱セメント,UBE-Mitsubishi Cement,化学,Chemicals,missing,
+4272,日本化薬,Nippon Kayaku,化学,Chemicals,covered,companies/manufacturing/chemicals/4272_nippon_kayaku.yaml
+4151,協和キリン,Kyowa Kirin,医薬品,Pharmaceuticals,missing,
+4502,武田薬品工業,Takeda Pharmaceutical,医薬品,Pharmaceuticals,missing,
+4503,アステラス製薬,Astellas Pharma,医薬品,Pharmaceuticals,missing,
+4506,住友ファーマ,Sumitomo Pharma,医薬品,Pharmaceuticals,missing,
+4507,塩野義製薬,Shionogi,医薬品,Pharmaceuticals,missing,
+4519,中外製薬,Chugai Pharmaceutical,医薬品,Pharmaceuticals,covered,companies/pharma/4519_chugai.yaml
+4523,エーザイ,Eisai,医薬品,Pharmaceuticals,missing,
+4568,第一三共,Daiichi Sankyo,医薬品,Pharmaceuticals,missing,
+4578,大塚ホールディングス,Otsuka Holdings,医薬品,Pharmaceuticals,missing,
+8301,日本銀行,Bank of Japan,銀行業,Banks,missing,
+8303,あおぞら銀行,Aozora Bank,銀行業,Banks,missing,
+8304,あかつき金融グループ,Akatsuki Financial Group,銀行業,Banks,missing,
+8306,三菱UFJフィナンシャル・グループ,Mitsubishi UFJ Financial Group,銀行業,Banks,missing,
+8309,三井住友トラスト・ホールディングス,Sumitomo Mitsui Trust Holdings,銀行業,Banks,missing,
+8316,三井住友フィナンシャルグループ,Sumitomo Mitsui Financial Group,銀行業,Banks,missing,
+8331,千葉銀行,Chiba Bank,銀行業,Banks,missing,
+8354,ふくおかフィナンシャルグループ,Fukuoka Financial Group,銀行業,Banks,missing,
+8355,静岡銀行,Shizuoka Bank,銀行業,Banks,missing,
+7453,良品計画,Ryohin Keikaku,小売業,Retail Trade,covered,companies/retail/7453_ryohin_keikaku.yaml
+8233,高島屋,Takashimaya,小売業,Retail Trade,missing,
+8267,イオン,AEON,小売業,Retail Trade,missing,
+8279,ヤオコー,Yaoko,小売業,Retail Trade,missing,
+9983,ファーストリテイリング,Fast Retailing,小売業,Retail Trade,missing,
+9001,東武鉄道,Tobu Railway,陸運業,Railway & Bus,missing,
+9005,東京急行電鉄,Tokyu,陸運業,Railway & Bus,missing,
+9006,京浜急行電鉄,Keikyu,陸運業,Railway & Bus,missing,
+9007,小田急電鉄,Odakyu Electric Railway,陸運業,Railway & Bus,missing,
+9008,京王電鉄,Keio,陸運業,Railway & Bus,missing,
+9020,東日本旅客鉄道,JR East,陸運業,Railway & Bus,missing,
+9021,西日本旅客鉄道,JR West,陸運業,Railway & Bus,missing,
+9022,東海旅客鉄道,JR Central,陸運業,Railway & Bus,missing,
+2002,日清製粉グループ本社,Nisshin Seifun Group,食料品,Food Products,missing,
+2269,明治ホールディングス,Meiji Holdings,食料品,Food Products,missing,
+2502,アサヒグループホールディングス,Asahi Group Holdings,食料品,Food Products,missing,
+2503,キリンホールディングス,Kirin Holdings,食料品,Food Products,missing,
+2801,キッコーマン,Kikkoman,食料品,Food Products,missing,
+2802,味の素,Ajinomoto,食料品,Food Products,missing,
+2871,ニチレイ,Nichirei,食料品,Food Products,missing,
+2914,日本たばこ産業,Japan Tobacco,食料品,Food Products,missing,
+6101,ツガミ,Tsugami,機械,Machinery,covered,companies/manufacturing/machinery/6101_tsugami.yaml
+6103,オークマ,Okuma,機械,Machinery,covered,companies/manufacturing/machinery/6103_okuma.yaml
+6113,アマダ,Amada,機械,Machinery,covered,companies/manufacturing/machinery/6113_amada.yaml
+6141,DMG森精機,DMG MORI,機械,Machinery,covered,companies/manufacturing/machinery/6141_dmg_mori.yaml
+6301,コマツ,Komatsu,機械,Machinery,covered,companies/manufacturing/machinery/6301_komatsu.yaml
+6305,日立建機,Hitachi Construction Machinery,機械,Machinery,covered,companies/manufacturing/6305_hitachi_construction_machinery.yaml
+8725,MS&ADインシュアランスグループホールディングス,MS&AD Insurance Group Holdings,保険業,Insurance,missing,
+8750,第一生命ホールディングス,Dai-ichi Life Holdings,保険業,Insurance,missing,
+8766,東京海上ホールディングス,Tokio Marine Holdings,保険業,Insurance,missing,
+8411,みずほフィナンシャルグループ,Mizuho Financial Group,その他金融業,Other Financing Business,missing,
+8591,オリックス,ORIX,その他金融業,Other Financing Business,missing,
+2432,ディー・エヌ・エー,DeNA,サービス業,Services,missing,
+4755,楽天グループ,Rakuten Group,サービス業,Services,missing,
+6178,日本郵政,Japan Post Holdings,サービス業,Services,missing,
+7974,任天堂,Nintendo,その他製品,Other Products,missing,
+1801,大成建設,Taisei,建設業,Construction,missing,
+1802,大林組,Obayashi,建設業,Construction,missing,
+1803,清水建設,Shimizu,建設業,Construction,missing,
+1812,鹿島建設,Kajima,建設業,Construction,missing,
+5401,日本製鉄,Nippon Steel,鉄鋼,Iron & Steel,covered,companies/manufacturing/steel/5401_nippon-steel.yaml
+5406,神戸製鋼所,Kobe Steel,鉄鋼,Iron & Steel,covered,companies/manufacturing/steel/5406_kobe_steel.yaml
+5411,JFEホールディングス,JFE Holdings,鉄鋼,Iron & Steel,covered,companies/manufacturing/steel/5411_jfe-holdings.yaml;companies/manufacturing/steel/5411_jfe_holdings.yaml
+5701,日本軽金属ホールディングス,Nippon Light Metal Holdings,非鉄金属,Nonferrous Metals,missing,
+5711,三菱マテリアル,Mitsubishi Materials,非鉄金属,Nonferrous Metals,missing,
+5713,住友金属鉱山,Sumitomo Metal Mining,非鉄金属,Nonferrous Metals,missing,
+8801,三井不動産,Mitsui Fudosan,不動産業,Real Estate,missing,
+8802,三菱地所,Mitsubishi Estate,不動産業,Real Estate,missing,

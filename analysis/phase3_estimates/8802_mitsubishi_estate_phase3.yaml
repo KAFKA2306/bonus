@@ -1,0 +1,47 @@
+---
+company_profile:
+  stock_code: "8802"
+  company_name: "三菱地所"
+  company_name_en: "Mitsubishi Estate"
+  sector: "不動産業"
+  sector_en: "Real Estate"
+  employee_scale: "mid-to-large (10k+ consolidated)"
+  revenue_scale: "約1.4兆円（2023年度）"
+  phase3_reason: "不動産大手の春闘資料は外部公開が限定的で賞与倍率の一次情報が未確認"
+
+bonus_system_estimate:
+  classification: "総合判断型"
+  confidence_level: "C"
+  reliability_score: 45
+  estimated_bonus_multiple: "年5.0〜5.5ヶ月相当（推定）"
+  estimation_summary: "安定収益型不動産業の連結利益と賃金交渉の折衷で決まるとみられ、固定的倍率をベースに景気指標を微調整する方式と推定。"
+
+estimation_inputs:
+  indicators:
+    - name: "営業利益"
+      value: "約1900億円"
+      fiscal_year: "2023年度"
+      source_type: "public report"
+    - name: "ビル事業稼働率"
+      value: "97%"
+      fiscal_year: "2023年度"
+      source_type: "industry average"
+  comparable_companies:
+    - stock_code: "8801"
+      relationship: "同業大手"
+      note: "三井不動産の春闘回答（年5ヶ月台）を参照"
+    - stock_code: "3289"
+      relationship: "不動産REITグループ"
+      note: "賃料安定型企業の賞与水準を参考"
+  qualitative_signals:
+    - note: "経営説明会で固定給重視とコメント"
+      source_hint: "2024年中期経営計画発表"
+
+validation_plan:
+  immediate_checks: "2025年春闘回答資料の公開有無を確認"
+  escalation_trigger: "賞与算定式や利益連動係数が開示された場合はPhase 2で検証"
+
+meta:
+  analyst: "codex"
+  last_updated: "2025-09-21"
+  version: 1

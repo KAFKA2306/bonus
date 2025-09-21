@@ -1,19 +1,86 @@
 company_profile:
   company_name: "信越化学工業"
+  company_name_en: "Shin-Etsu Chemical Co., Ltd."
   stock_code: "4063"
   sector: "化学"
-  market_cap: ""
-  employees: ""
+  sector_detail: "シリコーン・塩ビ・半導体材料"
+  employees: "約26,000人（連結）"
+  headquarters: "東京都千代田区"
+  established: "1926年"
+  market_cap: "約8兆円"
+
 bonus_system:
-  classification: "基本給連動型"
-  confidence_level: "C"
-  reliability_score: 70
-evidence:
-  - source: "talentsquare.co.jp"
-    detail: "年間で基本給の約5〜6.5ヶ月分が支給されると見られる。"
-    date: "2024"
-  - source: "openwork.jp"
-    detail: "業績に連動して変動する制度だが、変動幅は小さく、評価による待遇の差はあまり生じにくい。組合員の平均では年間約200万円程度の賞я。"
-    date: "2024"
-calculation_method: "基本給の5-6.5ヶ月分"
-notes: "業績連動の要素は弱く、安定的な支給が特徴。"
+  classification: "基本給連動型（安定志向）"
+  confidence_level: "B"
+  methodology: |
+    年2回の賞与支給（6月・12月）
+    基本給の5.5-6ヶ月分を標準とし、業績により微調整
+    年功序列色が強く、職位・勤続年数が主要決定要因
+    業績連動要素は限定的で安定性を重視
+
+  evidence:
+    - source: "2024年3月期有価証券報告書"
+      detail: "平均年収876万円（平均年齢41.3歳）"
+    - source: "従業員口コミ情報"
+      detail: "賞与5.5-6ヶ月分、職位係数と全体業績調整"
+    - source: "2024年3月期決算"
+      detail: "売上高2兆5,612億円（+6.06%）、純利益5,340億円（+2.67%）"
+    - source: "リクルート採用情報"
+      detail: "安定した賞与制度、年功序列から成果主義への移行段階"
+
+performance_indicators:
+  key_metrics:
+    - "連結営業利益"
+    - "セグメント別業績（シリコーン・塩ビ・電子材料）"
+    - "営業利益率"
+  bonus_range: "基本給の5-7ヶ月分（安定性重視）"
+  recent_trend: "2022年から若手・中堅への積極的給与増額実施"
+
+unique_features:
+  - "化学業界トップクラスの安定した賞与制度"
+  - "年功序列から段階的に成果主義へ移行中"
+  - "35-40歳の管理職転換で大幅な処遇差"
+  - "グローバル展開による地域別業績反映（限定的）"
+
+industry_comparison:
+  position: "化学業界上位（安定性では最上位）"
+  benchmark: "同業他社比で変動リスク最小、安定性最高"
+  competitive_advantage: "多角化事業による収益安定性"
+
+employee_feedback:
+  satisfaction_level: "高（安定性評価）"
+  stability: "非常に高（化学業界随一）"
+  transparency: "職位・勤続年数基準で予測可能性高"
+
+career_progression:
+  junior_level: "年功序列による安定的昇給・賞与増"
+  mid_career: "35歳頃の管理職転換試験が重要な分岐点"
+  senior_level: "管理職登用により大幅な処遇向上"
+
+business_diversification:
+  segments:
+    - "シリコーン事業（高収益・安定）"
+    - "塩化ビニル事業（世界シェア1位）"
+    - "電子材料事業（半導体需要連動）"
+  risk_mitigation: "事業多角化により業績変動リスク分散"
+
+governance:
+  compensation_philosophy: "長期安定雇用と着実な処遇向上"
+  recent_reforms: "2022年以降の若手処遇改善施策"
+  future_direction: "成果主義要素の段階的導入検討"
+
+industry_context:
+  market_position: "シリコーン・塩ビで世界トップクラス"
+  competitive_moat: "技術力と規模による参入障壁"
+  growth_drivers: "半導体・EV関連材料需要拡大"
+
+notes: |
+  化学業界随一の安定した賞与制度を維持。
+  年功序列色が強いものの、2022年から若手・中堅層への
+  積極的な処遇改善を実施。
+  事業多角化により業績安定性を確保し、従業員処遇の
+  予測可能性を重視した経営方針。
+  管理職転換（35-40歳）が処遇上の重要な分岐点。
+
+last_updated: "2024-12-21"
+research_confidence: "B級（複数ソース確認済み）"

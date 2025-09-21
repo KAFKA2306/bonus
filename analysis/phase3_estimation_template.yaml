@@ -1,0 +1,41 @@
+---
+# Phase 3 estimation record template (lightweight, assumption-driven)
+company_profile:
+  stock_code: ""
+  company_name: ""
+  company_name_en: ""
+  sector: ""
+  sector_en: ""
+  employee_scale: ""       # e.g. "mid-sized (5k-20k)"
+  revenue_scale: ""         # e.g. "~2.5兆円"
+  phase3_reason: ""         # why the company is handled via estimation rather than detailed research
+
+bonus_system_estimate:
+  classification: ""        # 業績連動型|基本給連動型|総合判断型|ハイブリッド型 (est.)
+  confidence_level: ""       # target: C or D for Phase 3
+  reliability_score: 0
+  estimated_bonus_multiple: ""  # estimated annual bonus months or payout ratio
+  estimation_summary: ""     # short narrative of the estimation logic
+
+estimation_inputs:
+  indicators:
+    - name: ""              # e.g. "営業利益率"
+      value: ""
+      fiscal_year: ""
+      source_type: ""       # public report | industry average | peer proxy
+  comparable_companies:
+    - stock_code: ""        # peer used for inference
+      relationship: ""       # e.g. "同業・同規模"
+      note: ""
+  qualitative_signals:
+    - note: ""              # e.g. "労使交渉で年2回一時金とコメント"
+      source_hint: ""       # URL, publication, or memo keyword
+
+validation_plan:
+  immediate_checks: ""       # quick items to confirm later when data emerges
+  escalation_trigger: ""     # what would move the company into Phase 2/1 follow-up
+
+meta:
+  analyst: ""
+  last_updated: ""
+  version: 1

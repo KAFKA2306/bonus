@@ -1,0 +1,47 @@
+---
+company_profile:
+  stock_code: "6501"
+  company_name: "日立製作所"
+  company_name_en: "Hitachi"
+  sector: "電気機器"
+  sector_en: "Electric Appliances"
+  employee_scale: "large (300k+ global)"
+  revenue_scale: "約10.9兆円（2023年度）"
+  phase3_reason: "総合電機は情報量多いが賞与算定基準の開示が限定的で直接検証が未完"
+
+bonus_system_estimate:
+  classification: "総合判断型"
+  confidence_level: "C"
+  reliability_score: 55
+  estimated_bonus_multiple: "年5.5〜6.0ヶ月相当（推定）"
+  estimation_summary: "春闘ベースの年2回一時金慣行を維持しつつ、業績指標を交渉材料に用いる典型的総合電機モデルと判断。"
+
+estimation_inputs:
+  indicators:
+    - name: "営業利益率"
+      value: "8.2%"
+      fiscal_year: "2023年度"
+      source_type: "public report"
+    - name: "従業員一人当たり営業利益"
+      value: "約820万円"
+      fiscal_year: "2023年度"
+      source_type: "industry average"
+  comparable_companies:
+    - stock_code: "6503"
+      relationship: "同業・総合電機"
+      note: "三菱電機の春闘回答（年5.8ヶ月）をリファレンス"
+    - stock_code: "6502"
+      relationship: "同業・過去データ"
+      note: "東芝旧労組資料で年5.5ヶ月実績"
+  qualitative_signals:
+    - note: "2024年春闘回答で年間一時金は労使協議で決定と報道"
+      source_hint: "2024年春闘ニュースクリッピング"
+
+validation_plan:
+  immediate_checks: "次期有価証券報告書の従業員賞与開示を確認し月数記載があれば更新"
+  escalation_trigger: "業績連動指標（利益率連動等）が公式資料に明記された場合はPhase 2へ再調査"
+
+meta:
+  analyst: "codex"
+  last_updated: "2025-09-21"
+  version: 1

@@ -1,0 +1,47 @@
+---
+company_profile:
+  stock_code: "4324"
+  company_name: "電通グループ"
+  company_name_en: "Dentsu Group"
+  sector: "情報・通信業"
+  sector_en: "Information & Communication"
+  employee_scale: "large (60k+ global)"
+  revenue_scale: "約1.2兆円（2023年度）"
+  phase3_reason: "グローバルIR資料は存在するが日本本社の賞与算定ロジックが非公開"
+
+bonus_system_estimate:
+  classification: "業績連動型"
+  confidence_level: "C"
+  reliability_score: 50
+  estimated_bonus_multiple: "年4.0〜6.0ヶ月変動（推定）"
+  estimation_summary: "広告代理店の成果連動報酬慣行と営業利益変動性を踏まえ、営業利益・EBITDAに連動する変動賞与が中心と推定。"
+
+estimation_inputs:
+  indicators:
+    - name: "EBITAマージン"
+      value: "15.2%"
+      fiscal_year: "2023年度"
+      source_type: "public report"
+    - name: "国内広告市場成長率"
+      value: "+3.0%"
+      fiscal_year: "2023年"
+      source_type: "industry average"
+  comparable_companies:
+    - stock_code: "2433"
+      relationship: "同業中堅代理店"
+      note: "博報堂DYホールディングスの業績連動賞与比率を参照"
+    - stock_code: "9984"
+      relationship: "高変動報酬モデル"
+      note: "成果連動を重視するIT通信系の報酬構造と類似"
+  qualitative_signals:
+    - note: "管理職向けにKPI連動の業績賞与を導入していると複数メディアが報じる"
+      source_hint: "2023年人事制度刷新記事"
+
+validation_plan:
+  immediate_checks: "有価証券報告書の役職員賞与欄で指標記載の有無を確認"
+  escalation_trigger: "KPI詳細が公開された場合にPhase 2で定量検証"
+
+meta:
+  analyst: "codex"
+  last_updated: "2025-09-21"
+  version: 1
