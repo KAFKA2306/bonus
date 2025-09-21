@@ -1,0 +1,125 @@
+      sector: "輸送用機器"
+      sector_en: "Transportation Equipment"
+
+    # 化学 (Chemicals)
+    - stock_code: "4005"
+      company_name_ja: "住友化学"
+      company_name_en: "Sumitomo Chemical"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4021"
+      company_name_ja: "日産化学"
+      company_name_en: "Nissan Chemical"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4043"
+      company_name_ja: "トクヤマ"
+      company_name_en: "Tokuyama"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4061"
+      company_name_ja: "デンカ"
+      company_name_en: "Denka"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4063"
+      company_name_ja: "信越化学工業"
+      company_name_en: "Shin-Etsu Chemical"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4183"
+      company_name_ja: "三井化学"
+      company_name_en: "Mitsui Chemicals"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4188"
+      company_name_ja: "三菱ケミカルホールディングス"
+      company_name_en: "Mitsubishi Chemical Holdings"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4208"
+      company_name_ja: "宇部三菱セメント"
+      company_name_en: "UBE-Mitsubishi Cement"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    - stock_code: "4272"
+      company_name_ja: "日本化薬"
+      company_name_en: "Nippon Kayaku"
+      sector: "化学"
+      sector_en: "Chemicals"
+
+    # 医薬品 (Pharmaceuticals)
+--
+      sector: "食料品"
+      sector_en: "Food Products"
+
+    # 機械 (Machinery)
+    - stock_code: "6101"
+      company_name_ja: "ツガミ"
+      company_name_en: "Tsugami"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    - stock_code: "6103"
+      company_name_ja: "オークマ"
+      company_name_en: "Okuma"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    - stock_code: "6113"
+      company_name_ja: "アマダ"
+      company_name_en: "Amada"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    - stock_code: "6141"
+      company_name_ja: "DMG森精機"
+      company_name_en: "DMG MORI"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    - stock_code: "6301"
+      company_name_ja: "コマツ"
+      company_name_en: "Komatsu"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    - stock_code: "6305"
+      company_name_ja: "日立建機"
+      company_name_en: "Hitachi Construction Machinery"
+      sector: "機械"
+      sector_en: "Machinery"
+
+    # 保険業 (Insurance)
+--
+      sector: "建設業"
+      sector_en: "Construction"
+
+    # 鉄鋼 (Iron & Steel)
+    - stock_code: "5401"
+      company_name_ja: "日本製鉄"
+      company_name_en: "Nippon Steel"
+      sector: "鉄鋼"
+      sector_en: "Iron & Steel"
+
+    - stock_code: "5406"
+      company_name_ja: "神戸製鋼所"
+      company_name_en: "Kobe Steel"
+      sector: "鉄鋼"
+      sector_en: "Iron & Steel"
+
+    - stock_code: "5411"
+      company_name_ja: "JFEホールディングス"
+      company_name_en: "JFE Holdings"
+      sector: "鉄鋼"
+      sector_en: "Iron & Steel"
+
+    # 非鉄金属 (Nonferrous Metals)

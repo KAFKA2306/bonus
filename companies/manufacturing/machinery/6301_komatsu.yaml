@@ -1,0 +1,67 @@
+company_profile:
+  company_name: "コマツ"
+  company_name_en: "Komatsu Ltd."
+  stock_code: "6301"
+  sector: "機械"
+  sector_detail: "建設機械・鉱山機械"
+  employees: "約65,000人（連結）"
+  headquarters: "東京都港区"
+  established: "1921年"
+  market_cap: "約5兆円"
+
+bonus_system:
+  classification: "ハイブリッド型（業績連動+基本給連動）"
+  confidence_level: "B"
+  methodology: |
+    年2回の賞与支給（6月・12月）
+    基本給の約4-6ヶ月分を標準とし、会社業績と個人評価に基づき変動
+    業績連動要素: 連結営業利益率、ROE等の業績指標
+    個人評価要素: 目標達成度、職務遂行能力評価
+
+  evidence:
+    - source: "2024年3月期決算資料"
+      detail: "平均年収760.8万円（前年比+22万円）"
+    - source: "転職サイト口コミ情報"
+      detail: "賞与90-260万円レンジ、50代前半でピーク"
+    - source: "2024年4月26日プレスリリース"
+      detail: "業績連動型株式報酬制度の改定実施"
+    - source: "有価証券報告書分析"
+      detail: "取締役報酬11.05億円（前年比+0.45億円増）"
+
+performance_indicators:
+  key_metrics:
+    - "連結営業利益率"
+    - "ROE（自己資本利益率）"
+    - "中期経営計画達成度"
+  bonus_range: "基本給の3-8ヶ月分（業績により変動）"
+  recent_trend: "2024年度は好業績により高水準維持"
+
+unique_features:
+  - "建設機械業界トップクラスの安定した賞与制度"
+  - "グローバル展開に対応した地域別業績反映"
+  - "ESG経営指標も評価要素に組み込み"
+  - "長期インセンティブとして株式報酬制度併用"
+
+industry_comparison:
+  position: "機械業界上位"
+  benchmark: "同業他社比で安定性と水準の両立"
+  competitive_advantage: "建設機械の世界シェア2位による安定収益基盤"
+
+employee_feedback:
+  satisfaction_level: "高"
+  stability: "業績変動はあるが機械業界では安定"
+  transparency: "評価基準の明確性で評価"
+
+governance:
+  board_oversight: "取締役会による業績連動報酬制度監督"
+  external_validation: "第三者機関による妥当性検証"
+  disclosure_quality: "IR資料での詳細開示"
+
+notes: |
+  建設機械業界のリーダー企業として、安定した賞与制度を維持。
+  2024年度は業績連動型株式報酬制度を改定し、長期インセンティブを強化。
+  グローバル事業展開により、地域別業績も賞与算定に反映。
+  ESG経営の推進に伴い、環境・社会貢献指標も評価要素として導入予定。
+
+last_updated: "2024-12-21"
+research_confidence: "B級（複数ソース確認済み）"

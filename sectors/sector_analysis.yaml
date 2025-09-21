@@ -1,0 +1,133 @@
+---
+# 業種別賞与制度分析（Phase 1完了時点）
+analysis_date: "2025-01-21"
+phase_completed: "Phase 1 - 高確度30社"
+
+sector_classification:
+  tech_electronics:
+    companies_analyzed: 4
+    dominant_method: "業績連動型"
+    characteristics:
+      - "業績連動型が主流（キーエンス、任天堂等）"
+      - "ソニーは逆に基本給重視に移行"
+      - "高い賞与比率"
+      - "グローバル競争を反映した制度設計"
+    examples:
+      - company: "キーエンス"
+        method: "業績連動（営業利益10%還元）"
+        confidence: "A"
+      - company: "ソニーグループ"
+        method: "ハイブリッド（基本給重視に移行）"
+        confidence: "A"
+
+  automotive:
+    companies_analyzed: 2
+    dominant_method: "総合判断型"
+    characteristics:
+      - "労使交渉による決定が主流"
+      - "春闘のベンチマーク業界"
+      - "安定的な賞与水準"
+      - "基本給連動要素が強い"
+    examples:
+      - company: "トヨタ自動車"
+        method: "総合判断（労使交渉）"
+        confidence: "B"
+
+  trading_wholesale:
+    companies_analyzed: 3
+    dominant_method: "業績連動型"
+    characteristics:
+      - "業績連動型絶対額制"
+      - "日本最高水準の賞与"
+      - "資源価格との強い連動"
+      - "年間1000万円超も可能"
+    examples:
+      - company: "三菱商事"
+        method: "業績連動（絶対額制）"
+        confidence: "A"
+      - company: "三井物産"
+        method: "業績連動（絶対額制）"
+        confidence: "A"
+      - company: "伊藤忠商事"
+        method: "業績連動（絶対額制）"
+        confidence: "A"
+
+  finance_banking:
+    companies_analyzed: 5
+    dominant_method: "ハイブリッド型・総合判断型"
+    characteristics:
+      - "基本給連動+業績考慮"
+      - "規制業界としての安定性"
+      - "メガバンクは似た水準"
+      - "証券は業績連動が強い"
+    examples:
+      - company: "三菱UFJフィナンシャル・グループ"
+        method: "ハイブリッド（ESOP含む）"
+        confidence: "B"
+      - company: "野村ホールディングス"
+        method: "業績連動（年1回集中）"
+        confidence: "B"
+
+  pharma:
+    companies_analyzed: 1
+    dominant_method: "総合判断型"
+    characteristics:
+      - "基本給重視への移行傾向"
+      - "安定的な賞与水準"
+      - "成果評価+行動評価"
+    examples:
+      - company: "武田薬品工業"
+        method: "総合判断"
+        confidence: "B"
+
+  utilities:
+    companies_analyzed: 4
+    dominant_method: "総合判断型"
+    characteristics:
+      - "規制業界として安定志向"
+      - "業界平均的な賞与水準"
+      - "基本給連動要素が強い"
+      - "公益性を考慮した制度"
+    confidence_note: "情報公開度が低く、詳細分析には追加調査が必要"
+
+  retail:
+    companies_analyzed: 2
+    dominant_method: "業績連動型"
+    characteristics:
+      - "業績変動が賞与に直結"
+      - "店舗業績との連動"
+      - "制度改革が活発"
+    examples:
+      - company: "ファーストリテイリング"
+        method: "業績連動（2025年制度改革予定）"
+        confidence: "A"
+
+bonus_method_distribution:
+  業績連動型: 13社 # 43.3%
+  総合判断型: 10社 # 33.3%
+  基本給連動型: 4社  # 13.3%
+  ハイブリッド型: 3社 # 10.0%
+
+confidence_distribution:
+  A級_90percent_plus: 8社
+  B級_70_90percent: 10社
+  C級_40_70percent: 8社
+  D級_under_40percent: 4社
+
+key_findings:
+  - "業績連動型が最多（43.3%）で、特に商社・テック企業に集中"
+  - "総合判断型は製造業・金融業に多い"
+  - "ハイブリッド型は大手金融・テック企業の新しいトレンド"
+  - "業界により明確な傾向の違いが存在"
+
+industry_trends_2024:
+  - "大手企業の賞与水準が過去最高レベル"
+  - "業績連動型の採用企業が増加"
+  - "一部企業で抜本的制度見直し（ソニー、ファーストリテイリング）"
+  - "グローバル人材確保を意識した制度設計"
+
+next_phase_priorities:
+  - "製造業（機械・化学・鉄鋼）の詳細分析"
+  - "中堅企業の制度パターン把握"
+  - "業界内での賞与水準格差の定量化"
+  - "規制業界（電力・鉄道）の制度詳細調査"

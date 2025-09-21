@@ -1,0 +1,86 @@
+company_profile:
+  company_name: "日本製鉄"
+  company_name_en: "Nippon Steel Corporation"
+  stock_code: "5401"
+  sector: "鉄鋼"
+  sector_detail: "一貫製鉄業・鉄鋼製品"
+  employees: "約103,000人（連結）"
+  headquarters: "東京都千代田区"
+  established: "2012年（旧新日本製鐵・住友金属工業統合）"
+  market_cap: "約2.7兆円"
+
+bonus_system:
+  classification: "業績連動型（高変動性）"
+  confidence_level: "B"
+  methodology: |
+    年2回の賞与支給（6月・12月）
+    製鉄事業の連結事業利益を基準とした業績連動方式
+    基本給の6-10ヶ月分（業績により大幅変動）
+    2025年度から「実力ベース連結事業利益」に算定基準変更予定
+
+  evidence:
+    - source: "2024年3月期有価証券報告書"
+      detail: "平均年収829万円（一部資料では905万円）"
+    - source: "日刊鉄鋼新聞2024年報道"
+      detail: "2023年度賞与年間235万円（39歳21年勤続ベース）"
+    - source: "2025年度制度改定発表"
+      detail: "算定基準を実力ベース連結事業利益に変更"
+    - source: "従業員口コミ情報"
+      detail: "賞与は景気により3倍程度の変動幅"
+
+performance_indicators:
+  key_metrics:
+    - "製鉄事業連結事業利益（2024年まで）"
+    - "実力ベース連結事業利益（2025年から）"
+    - "営業利益率"
+    - "鉄鋼原料価格変動影響除去後利益"
+  bonus_range: "基本給の4-12ヶ月分（業績により大幅変動）"
+  recent_trend: "2023年度235万円、過去最高は2007年度249万円"
+
+unique_features:
+  - "鉄鋼業界最大手の業績連動型賞与制度"
+  - "原料価格変動の影響を受けやすい変動性"
+  - "2025年度から実力ベース評価への制度改革"
+  - "個人評価差は限定的、会社業績中心"
+
+industry_comparison:
+  position: "鉄鋼業界最上位（規模・賞与水準）"
+  benchmark: "同業他社比で変動幅最大級"
+  competitive_advantage: "国内最大手の安定した収益基盤"
+
+employee_feedback:
+  satisfaction_level: "中（高額だが変動リスク）"
+  stability: "低（景気サイクルにより大幅変動）"
+  transparency: "高（算定基準明確、毎年公表）"
+
+system_reform_2025:
+  background: "鉄鋼原料価格変動による賞与額振れ幅拡大"
+  new_criteria: "実力ベース連結事業利益"
+  expected_impact: "一過性影響除去により安定性向上"
+  implementation: "2025年度から適用開始"
+
+cyclical_factors:
+  steel_demand: "建設・自動車・造船業界需要連動"
+  raw_material: "鉄鉱石・原料炭価格変動影響大"
+  exchange_rate: "為替変動による輸出収益影響"
+
+governance:
+  transparency: "賞与額毎年公表（39歳21年勤続ベース）"
+  board_oversight: "取締役会による制度監督"
+  union_negotiation: "労働組合との年次交渉"
+
+market_environment:
+  position: "粗鋼生産量世界3位（国内1位）"
+  challenges: "中国鉄鋼業との競争激化"
+  opportunities: "インフラ需要・グリーンスチール"
+
+notes: |
+  日本最大の鉄鋼メーカーとして、業績連動型の賞与制度を運用。
+  鉄鋼原料価格の変動により賞与額の振れ幅が大きいことが課題となり、
+  2025年度から実力ベース連結事業利益を算定基準とする制度改革を実施。
+  景気好調時には高額賞与（年間200万円超）を実現する一方、
+  不況時には大幅減額となる高変動性が特徴。
+  従業員の評価は算定基準の明確性と透明性を評価している。
+
+last_updated: "2024-12-21"
+research_confidence: "B級（複数ソース確認済み）"

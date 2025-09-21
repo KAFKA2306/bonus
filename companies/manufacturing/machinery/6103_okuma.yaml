@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "オークマ"
+  stock_code: "6103"
+  sector: "機械"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "openwork.jp"
+    detail: "2024年の平均年収は720万円。賞与は年収の約22%を占める。"
+    date: "2024"
+  - source: "en-hyouban.com"
+    detail: "基本給は年齢給と職能給の合計で決定。年齢給は毎年昇給し、職能給は評価によって上昇幅が変わる。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績評価"
+notes: "年齢給という年功序列の要素と、評価による職能給・賞与という業績連動の要素を併せ持つハイブリッド型。"

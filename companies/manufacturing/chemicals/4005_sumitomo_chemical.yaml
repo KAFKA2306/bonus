@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "住友化学"
+  stock_code: "4005"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "業績連動"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "en-hyouban.com"
+    detail: "賞与は年2回（6月・12月）、業績連動。過去は5-7ヶ月分だったが、業績悪化で減少傾向。"
+    date: "2024"
+  - source: "openmoney.jp"
+    detail: "業績悪化で賞与は以前の半分以下になったとの声や、約4ヶ月分との情報も。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績連動"
+notes: "2024年3月期に過去最大の赤字を計上し、賞与額は減少傾向。"

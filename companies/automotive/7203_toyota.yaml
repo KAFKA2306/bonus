@@ -1,0 +1,83 @@
+---
+# トヨタ自動車株式会社 賞与制度詳細調査
+company_profile:
+  company_name: "トヨタ自動車"
+  company_name_en: "Toyota Motor"
+  stock_code: "7203"
+  sector: "輸送用機器"
+  sector_en: "Transportation Equipment"
+  market_cap: "約40兆円"
+  employees: "約375,000人（連結）"
+
+bonus_system:
+  classification: "総合判断型"
+  confidence_level: "B"
+  reliability_score: 80
+
+  methodology:
+    primary_method: "労使交渉ベース"
+    calculation_base: "基本給の年間7.6ヶ月分（2024年要求ベース）"
+    payment_frequency: "年2回（夏・冬）"
+    decision_process: "春闘における労使交渉で決定"
+
+  performance_metrics:
+    base_salary_months: "7.6ヶ月分（2024年要求）"
+    performance_bonus_ratio: "業績により変動"
+    annual_bonus_amount: "基本給依存"
+    average_annual_income: "約850万円"
+
+evidence:
+  - source: "Bloomberg報道"
+    detail: "2024年春闘で労組が年間一時金7.6カ月分を要求、前年より0.9カ月増"
+    reliability: "A"
+    date: "2024年1月"
+
+  - source: "春闘関連報道"
+    detail: "従来の年間一時金回答制度を一時停止した経緯あり"
+    reliability: "B"
+    date: "2019年"
+
+  - source: "労働組合資料"
+    detail: "業績と経営環境を総合的に判断して決定"
+    reliability: "B"
+    date: "2024年"
+
+financial_data:
+  fy2023_operating_profit: "5兆3,500億円"
+  bonus_determination: "労使交渉による"
+  payment_schedule: "夏季・冬季の2回"
+  negotiation_cycle: "年1回（春闘）"
+
+unique_features:
+  - "日本の春闘のベンチマーク企業"
+  - "2019年に年間一時金回答制度を一時停止"
+  - "業績だけでなく経営環境も考慮"
+  - "労使協議による透明な決定プロセス"
+  - "自動車業界のリーダー的立場"
+
+industry_comparison:
+  rank_in_automotive: "標準的"
+  vs_industry_average: "業界標準"
+  spring_wage_negotiation: "他社の基準となる"
+
+decision_factors:
+  - "会社業績"
+  - "経営環境"
+  - "労働組合との交渉"
+  - "社会的責任"
+  - "従業員のモチベーション"
+
+historical_context: |
+  トヨタは2019年に従来の「年間一時金回答制度」を一時停止し、
+  より柔軟な賞与決定システムに移行。これは終身雇用制度の見直しと
+  併せて、変化する事業環境に対応するための施策として注目された。
+
+notes: |
+  トヨタの賞与制度は日本の労使関係における象徴的存在。
+  春闘での決定内容は他の製造業企業のベンチマークとなることが多い。
+  2024年の7.6ヶ月要求は前年比+0.9ヶ月の大幅増額要求であり、
+  好調な業績を背景とした積極的な姿勢を示している。
+
+last_updated: "2025-01-21"
+data_sources_count: 3
+confidence_notes: "労使交渉の公開情報に基づく信頼性の高いデータ"

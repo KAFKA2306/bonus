@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "アマダ"
+  stock_code: "6113"
+  sector: "機械"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "en-hyouban.com"
+    detail: "賞与は年2回。人事考課によって変動するが、平均を上回る高い水準で安定している。"
+    date: "2024"
+  - source: "openmoney.jp"
+    detail: "過去の口コミでは、賞与が給与の約6ヶ月分に相当するとの情報もあるが、コロナ禍では4ヶ月分になったこともある。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績評価"
+notes: "安定的な支給をベースとしつつ、業績や評価によって変動するハイブリッド型。"

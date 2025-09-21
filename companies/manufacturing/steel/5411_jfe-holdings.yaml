@@ -1,0 +1,91 @@
+company_profile:
+  company_name: "JFEホールディングス"
+  company_name_en: "JFE Holdings, Inc."
+  stock_code: "5411"
+  sector: "鉄鋼"
+  sector_detail: "鉄鋼事業・エンジニアリング・商社機能"
+  employees: "約58,000人（連結）"
+  headquarters: "東京都千代田区"
+  established: "2002年（川崎製鉄・NKK統合）"
+  market_cap: "約1.3兆円"
+
+bonus_system:
+  classification: "業績連動型（中変動性）"
+  confidence_level: "C"
+  methodology: |
+    年2回の賞与支給（6月・12月）
+    連結業績を基準とした業績連動方式
+    鉄鋼事業とエンジニアリング事業の複合評価
+    基本給の4-8ヶ月分程度（業績により変動）
+
+  evidence:
+    - source: "2024年3月期有価証券報告書"
+      detail: "平均年収1,264万円（平均年齢47.0歳）"
+    - source: "2024年第2四半期決算"
+      detail: "連結純利益61.4%減、配当110円→100円に減額"
+    - source: "JFEグループレポート2024"
+      detail: "統合報告書での業績連動報酬制度言及"
+    - source: "IR資料分析"
+      detail: "ホールディングス体制での事業別業績反映"
+
+performance_indicators:
+  key_metrics:
+    - "連結営業利益"
+    - "鉄鋼事業セグメント利益"
+    - "エンジニアリング事業利益"
+    - "ROE・ROA"
+  bonus_range: "基本給の3-9ヶ月分（業績・事業部門により変動）"
+  recent_trend: "2024年度は業績悪化により減額傾向"
+
+unique_features:
+  - "ホールディングス体制による事業別業績反映"
+  - "鉄鋼・エンジニアリング・商社の複合評価"
+  - "日本製鉄比で変動幅やや抑制"
+  - "事業ポートフォリオ多角化による安定化志向"
+
+industry_comparison:
+  position: "鉄鋼業界2位（国内）"
+  benchmark: "日本製鉄比で変動幅小、安定性やや高"
+  competitive_advantage: "エンジニアリング事業による収益多角化"
+
+employee_feedback:
+  satisfaction_level: "中（安定性は日本製鉄比で優位）"
+  stability: "中（鉄鋼単体比で多角化効果）"
+  transparency: "中（ホールディングス体制で複雑）"
+
+business_portfolio:
+  steel_business: "JFEスチール（主力事業）"
+  engineering: "JFEエンジニアリング（安定収益）"
+  trading: "JFE商事（商社機能）"
+  diversification_effect: "事業多角化による収益安定化"
+
+recent_performance:
+  fy2024_q2: "連結純利益61.4%減の大幅悪化"
+  dividend_impact: "配当減額（110円→100円）"
+  outlook: "通期業績下方修正実施"
+
+governance:
+  holding_structure: "持株会社制による事業管理"
+  performance_management: "事業会社別業績評価"
+  disclosure: "統合報告書・決算説明資料"
+
+market_challenges:
+  steel_market: "中国鉄鋼業との競争激化"
+  raw_materials: "原料価格変動リスク"
+  economic_cycle: "建設・製造業需要変動"
+
+competitive_positioning:
+  vs_nippon_steel: "規模で劣るが多角化で差別化"
+  engineering_strength: "海外プラント事業での優位性"
+  innovation_focus: "カーボンニュートラル技術開発"
+
+notes: |
+  日本第2位の鉄鋼メーカーとして、ホールディングス体制により
+  鉄鋼・エンジニアリング・商社機能の複合事業を展開。
+  業績連動型賞与制度は日本製鉄と類似だが、
+  事業多角化により変動幅がやや抑制される傾向。
+  2024年度は鉄鋼事業の業績悪化により賞与水準も影響を受ける見込み。
+  中長期的にはカーボンニュートラル対応と海外展開が成長の鍵。
+
+last_updated: "2024-12-21"
+research_confidence: "C級（限定的情報源）"

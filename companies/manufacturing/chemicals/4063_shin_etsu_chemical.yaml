@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "信越化学工業"
+  stock_code: "4063"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "基本給連動型"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "talentsquare.co.jp"
+    detail: "年間で基本給の約5〜6.5ヶ月分が支給されると見られる。"
+    date: "2024"
+  - source: "openwork.jp"
+    detail: "業績に連動して変動する制度だが、変動幅は小さく、評価による待遇の差はあまり生じにくい。組合員の平均では年間約200万円程度の賞я。"
+    date: "2024"
+calculation_method: "基本給の5-6.5ヶ月分"
+notes: "業績連動の要素は弱く、安定的な支給が特徴。"

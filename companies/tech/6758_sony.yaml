@@ -1,0 +1,90 @@
+---
+# ソニーグループ株式会社 賞与制度詳細調査
+company_profile:
+  company_name: "ソニーグループ"
+  company_name_en: "Sony Group"
+  stock_code: "6758"
+  sector: "電気機器"
+  sector_en: "Electric Appliances"
+  market_cap: "約12兆円"
+  employees: "約109,000人（連結）"
+
+bonus_system:
+  classification: "ハイブリッド型（移行中）"
+  confidence_level: "A"
+  reliability_score: 95
+
+  methodology:
+    primary_method: "業績連動型→基本給重視型へ移行"
+    calculation_base: "従来：業績連動、2025年～：月給+夏季賞与のみ"
+    payment_frequency: "従来：年2回 → 2025年～：年1回（夏季のみ）"
+    transition_date: "2025年1月"
+
+  performance_metrics:
+    base_salary_months: "冬季賞与分を月給と夏季に振り分け"
+    performance_bonus_ratio: "縮小傾向"
+    annual_bonus_amount: "平均年収1,113万円の一部"
+    average_annual_income: "1,113万円"
+
+evidence:
+  - source: "日本経済新聞"
+    detail: "2025年1月から冬季賞与を廃止、月給と夏季賞与に振り分け"
+    reliability: "A"
+    date: "2025年1月"
+
+  - source: "有価証券報告書"
+    detail: "平均年収1,113万円、従来は業績連動型賞与制度"
+    reliability: "A"
+    date: "2024年3月期"
+
+  - source: "人事制度改革発表"
+    detail: "基本給重視の報酬体系に移行"
+    reliability: "A"
+    date: "2024年"
+
+financial_data:
+  fy2024_revenue: "約16兆円"
+  fy2024_operating_profit: "約1兆3,000億円"
+  reform_background: "人材確保と安定収入の提供"
+  policy_change: "業績連動から安定給与へ"
+
+unique_features:
+  - "2025年から冬季賞与を完全廃止"
+  - "業界に逆行する基本給重視への転換"
+  - "グローバル人材確保を目的とした制度改革"
+  - "年2回→年1回賞与への変更"
+  - "月給の底上げによる安定収入の確保"
+
+industry_comparison:
+  rank_in_tech: "制度改革のパイオニア"
+  vs_industry_average: "逆行する施策"
+  global_standard: "欧米基準に近い形"
+
+reform_rationale:
+  primary_goal: "グローバル人材の確保"
+  secondary_goal: "収入の安定化"
+  background: "業績連動リスクの軽減"
+  target: "優秀な人材の獲得・定着"
+
+transition_schedule:
+  phase1: "2025年1月 - 冬季賞与廃止"
+  phase2: "月給への振り分け開始"
+  phase3: "夏季賞与への一部移行"
+  completion: "2025年度内"
+
+impact_analysis: |
+  ソニーの賞与制度改革は日本企業の報酬体系において画期的な事例。
+  多くの企業が業績連動型を強化する中で、あえて基本給重視に転換することで
+  優秀な人材の確保を狙う戦略的判断。特にグローバル競争の激しい
+  テクノロジー分野において、安定収入による人材確保を重視した形。
+
+notes: |
+  ソニーの制度変更は日本の賞与制度史上、極めて注目すべき事例。
+  2025年1月から冬季賞与を完全廃止し、その分を月給と夏季賞与に振り分ける
+  大胆な改革は、業界全体に大きな影響を与える可能性がある。
+  従来の業績連動型から安定給与重視への転換は、グローバル人材確保と
+  従業員の生活安定化を目指した戦略的判断と評価される。
+
+last_updated: "2025-01-21"
+data_sources_count: 3
+confidence_notes: "公式発表と報道による確実性の高い情報"

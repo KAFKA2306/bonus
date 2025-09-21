@@ -1,0 +1,16 @@
+company_profile:
+  company_name: "良品計画"
+  stock_code: "7453"
+  sector: "retail"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "総合判断"
+  confidence_level: "D"
+  reliability_score: 30
+evidence:
+  - source: "talentsquare.co.jp"
+    detail: "2024年8月期の平均年収は643万円。賞与は年2回支給。"
+    date: "2024"
+calculation_method: "不明"
+notes: "具体的な賞与額は非公開"

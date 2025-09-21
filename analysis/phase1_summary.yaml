@@ -1,0 +1,190 @@
+---
+# Phase 1 調査結果サマリー（30社詳細分析）
+analysis_date: "2025-01-21"
+phase: "Phase 1 - 高確度調査"
+companies_surveyed: 30
+
+# 基本統計
+statistics:
+  total_companies: 30
+  high_confidence_A: 8   # 26.7%
+  medium_confidence_B: 10 # 33.3%
+  low_confidence_C: 8    # 26.7%
+  very_low_confidence_D: 4 # 13.3%
+
+# 賞与制度分類の分布
+bonus_method_distribution:
+  業績連動型:
+    count: 13
+    percentage: 43.3
+    companies:
+      - "キーエンス（営業利益10%還元）"
+      - "三菱商事（業績連動絶対額制）"
+      - "三井物産（業績連動絶対額制）"
+      - "伊藤忠商事（業績連動絶対額制）"
+      - "野村ホールディングス"
+      - "任天堂"
+      - "ファーストリテイリング"
+      - "日立製作所"
+      - "パナソニックホールディングス"
+      - "ソフトバンクグループ"
+      - "コマツ"
+      - "ファナック"
+      - "デンソー"
+
+  総合判断型:
+    count: 10
+    percentage: 33.3
+    companies:
+      - "トヨタ自動車（労使交渉）"
+      - "武田薬品工業"
+      - "NTT"
+      - "三井住友フィナンシャルグループ"
+      - "みずほフィナンシャルグループ"
+      - "東京海上ホールディングス"
+      - "東京電力"
+      - "関西電力"
+      - "中部電力"
+      - "味の素"
+      - "アサヒグループホールディングス"
+      - "日本製鉄"
+
+  基本給連動型:
+    count: 4
+    percentage: 13.3
+    companies:
+      - "KDDI"
+      - "JR東日本"
+      - "JR東海"
+
+  ハイブリッド型:
+    count: 3
+    percentage: 10.0
+    companies:
+      - "ソニーグループ（移行中）"
+      - "三菱UFJフィナンシャル・グループ"
+
+# 業界別分析
+sector_analysis:
+  商社_trading:
+    companies: 3
+    dominant_method: "業績連動型"
+    特徴: "絶対額制、年間1000万円超も可能"
+    average_confidence: "A"
+
+  電気機器_electronics:
+    companies: 4
+    dominant_method: "業績連動型"
+    特徴: "キーエンスが突出、ソニーは制度改革"
+    average_confidence: "A"
+
+  金融_finance:
+    companies: 5
+    dominant_method: "ハイブリッド・総合判断"
+    特徴: "規制業界として安定志向"
+    average_confidence: "B-C"
+
+  自動車_automotive:
+    companies: 2
+    dominant_method: "総合判断型"
+    特徴: "労使交渉による決定"
+    average_confidence: "B"
+
+  公益事業_utilities:
+    companies: 4
+    dominant_method: "総合判断型"
+    特徴: "情報開示度が低い"
+    average_confidence: "C-D"
+
+# 注目すべき発見事項
+key_findings:
+  highest_bonus_company:
+    name: "キーエンス"
+    method: "営業利益10%還元"
+    amount: "約450万円/人（2024年度）"
+    ratio: "年収の50-70%"
+
+  unique_reform_cases:
+    - company: "ソニーグループ"
+      change: "2025年冬季賞与廃止→基本給重視"
+      impact: "業界逆行の制度改革"
+
+    - company: "ファーストリテイリング"
+      change: "2025年報酬体系大幅刷新予定"
+      impact: "最大54%昇給も"
+
+  trading_company_pattern:
+    characteristic: "業績連動絶対額制"
+    level: "年間1000万円超の賞与"
+    companies: "三菱商事、三井物産、伊藤忠商事"
+
+# 業界トレンド分析
+industry_trends:
+  performance_linked_increase:
+    description: "業績連動型制度の採用企業増加"
+    percentage: 43.3
+    background: "経営環境の変化と成果主義の浸透"
+
+  traditional_system_persistence:
+    description: "総合判断型の根強い存在"
+    percentage: 33.3
+    background: "日本的労使関係の継続"
+
+  hybrid_emergence:
+    description: "ハイブリッド型の新しいトレンド"
+    percentage: 10.0
+    background: "グローバル化と人材確保"
+
+# データ品質評価
+data_quality:
+  reliable_data_ratio: 60.0  # A+B級の合計
+  information_gaps:
+    - "公益事業の制度詳細"
+    - "中堅製造業の実態"
+    - "新興IT企業の制度"
+
+  verification_needs:
+    - "D級企業の追加調査"
+    - "業界推定の検証"
+    - "最新制度変更の確認"
+
+# Phase 2への提言
+recommendations_for_phase2:
+  priority_sectors:
+    - "製造業（機械・化学・鉄鋼）"
+    - "中堅IT・通信企業"
+    - "食品・小売業界"
+
+  investigation_methods:
+    - "業界レポートの活用強化"
+    - "転職サイト情報の体系的収集"
+    - "IR資料の深堀り分析"
+
+  quality_improvement:
+    - "情報源の多角化"
+    - "同業他社との比較分析"
+    - "時系列変化の追跡"
+
+# 予備的結論
+preliminary_conclusions:
+  - "日本企業の賞与制度は業界により明確に異なる"
+  - "業績連動型が増加傾向にあるが、総合判断型も根強い"
+  - "商社・IT業界で特に高水準の賞与制度"
+  - "一部企業で抜本的な制度見直しが進行中"
+  - "グローバル化による制度変更の圧力が増大"
+
+# 次期調査計画
+next_phase_plan:
+  target_companies: 70
+  focus_industries:
+    - "製造業（40社）"
+    - "サービス業（20社）"
+    - "その他（10社）"
+
+  expected_duration: "5日間"
+  confidence_target: "B-C級中心"
+
+  success_metrics:
+    - "70社すべてのデータ収集"
+    - "50%以上をB級以上の信頼度で"
+    - "業界別パターンの明確化"

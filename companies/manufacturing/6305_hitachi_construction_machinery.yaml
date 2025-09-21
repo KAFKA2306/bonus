@@ -1,0 +1,22 @@
+company_profile:
+  company_name: "日立建機"
+  stock_code: "6305"
+  sector: "manufacturing"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "en-hyouban.com"
+    detail: "賞与は年2回（6月・12月）、前年度の売上によって変動。年収870万円の社員の年間賞与は270万円との報告あり。"
+    date: "2024-02-13"
+  - source: "openwork.jp"
+    detail: "個人の実績評価と上長との面談で決定されるが、年功序列の要素も強い。"
+    date: "2024"
+  - source: "hitachi.co.jp"
+    detail: "親会社である日立製作所は2024年春季交渉で6.17ヶ月分の賞与を回答。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績連動"
+notes: "親会社である日立製作所の賞与制度も影響"

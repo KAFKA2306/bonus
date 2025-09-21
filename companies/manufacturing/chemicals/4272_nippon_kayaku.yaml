@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "日本化薬"
+  stock_code: "4272"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "nipponkayaku.co.jp"
+    detail: "従業員の賞与計算にはROIC（投下資本利益率）が考慮される。役員報酬は連結営業利益目標やROE（自己資本利益率）の達成度などに基づいて決定される。"
+    date: "2024"
+  - source: "en-hyouban.com"
+    detail: "営業職の男性（勤続6～10年）の年間賞与は137万円。昇給は年功序列が基本だが、優れた実績はボーナスの評価係数に反映される。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績評価（ROICなど）"
+notes: "年功序列の要素が強いが、業績評価も一部反映されるハイブリッド型。"

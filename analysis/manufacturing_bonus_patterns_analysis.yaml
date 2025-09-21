@@ -1,0 +1,208 @@
+manufacturing_bonus_analysis_2024:
+  report_metadata:
+    title: "製造業における賞与制度パターン分析レポート"
+    subtitle: "日経225製造業70社の賞与制度体系的調査結果"
+    analysis_date: "2024-12-21"
+    scope: "Phase 2中確度調査結果"
+    companies_analyzed: 70
+    detailed_research: 6  # B級信頼度達成企業数
+
+  executive_summary:
+    key_findings:
+      - "製造業賞与制度は3つの主要パターンに分類される"
+      - "業績連動型が主流だが、業界特性により変動幅に大きな差"
+      - "景気敏感業種は高変動性、技術集約業種は技術プレミアム反映"
+      - "安定業種は基本給連動型で予測可能性を重視"
+      - "2024年度は業界により明暗が分かれる状況"
+
+  industry_classification:
+    type_1_high_volatility:
+      pattern_name: "業績連動型（高変動性）"
+      characteristics:
+        - "基本給の4-12ヶ月分（業績により大幅変動）"
+        - "景気サイクルに強く連動"
+        - "好況時高額、不況時大幅減額"
+        - "原料価格・為替変動の影響大"
+
+      industries:
+        - sector: "鉄鋼業"
+          examples: ["日本製鉄", "JFEホールディングス"]
+          key_metrics: ["営業利益", "原料価格調整後利益"]
+          volatility: "最大級（3倍程度の変動幅）"
+
+        - sector: "建設機械"
+          examples: ["コマツ"]
+          key_metrics: ["営業利益率", "ROE", "地域別業績"]
+          volatility: "高（2-3倍の変動幅）"
+
+    type_2_tech_premium:
+      pattern_name: "業績連動型（技術プレミアム）"
+      characteristics:
+        - "基本給の6-10ヶ月分"
+        - "技術力による高収益維持"
+        - "業績連動だが高水準を維持"
+        - "研究開発投資が評価要素"
+
+      industries:
+        - sector: "工作機械・産業用ロボット"
+          examples: ["ファナック"]
+          key_metrics: ["営業利益率", "技術開発成果", "市場シェア"]
+          premium_factor: "独占的技術力（利益率20-30%）"
+
+        - sector: "電子部品・半導体"
+          examples: ["村田製作所"]
+          key_metrics: ["セグメント別利益", "新製品売上比率"]
+          premium_factor: "高付加価値製品による差別化"
+
+    type_3_stable_oriented:
+      pattern_name: "基本給連動型（安定志向）"
+      characteristics:
+        - "基本給の5-7ヶ月分（安定性重視）"
+        - "年功序列色が残存"
+        - "業績連動要素は限定的"
+        - "長期雇用・安定処遇を重視"
+
+      industries:
+        - sector: "化学業界"
+          examples: ["信越化学工業", "住友化学"]
+          key_metrics: ["連結営業利益", "事業多角化効果"]
+          stability_factor: "事業ポートフォリオ分散"
+
+        - sector: "食品業界"
+          examples: ["味の素"]
+          key_metrics: ["営業利益", "ブランド力指標"]
+          stability_factor: "消費の安定性"
+
+  detailed_sector_analysis:
+    steel_industry:
+      market_environment: "原料価格変動・中国競争・脱炭素要求"
+      bonus_characteristics:
+        - "製鉄事業利益連動（2025年から実力ベース評価）"
+        - "年間200-300万円レンジ（39歳モデル）"
+        - "過去最高2007年249万円、最低時は3分の1"
+      reform_trends:
+        - "日本製鉄：実力ベース利益評価導入"
+        - "一過性要因除去による安定化志向"
+
+    machinery_industry:
+      market_environment: "グローバル建設需要・インフラ投資・自動化"
+      bonus_characteristics:
+        - "営業利益率・ROE連動"
+        - "地域別業績反映（グローバル展開企業）"
+        - "ESG経営指標も評価要素化"
+      differentiation_factors:
+        - "建設機械：世界市場での競争力"
+        - "工作機械：製造業DX需要捕捉"
+
+    chemical_industry:
+      market_environment: "原料価格変動・環境規制・新素材需要"
+      bonus_characteristics:
+        - "事業セグメント別業績反映"
+        - "年功序列から成果主義への段階移行"
+        - "管理職転換（35-40歳）が処遇分岐点"
+      stability_mechanisms:
+        - "多角化による収益平準化"
+        - "長期研究開発投資の成果"
+
+    electronics_industry:
+      market_environment: "半導体サイクル・DX需要・技術革新"
+      bonus_characteristics:
+        - "技術開発成果と業績の両面評価"
+        - "グレード制による昇進・昇給"
+        - "研究開発部門への特別インセンティブ"
+      competitive_advantages:
+        - "独占的技術による高収益"
+        - "イノベーション創出への投資"
+
+  cross_industry_insights:
+    common_trends:
+      - "ESG経営指標の評価要素組み込み"
+      - "グローバル展開企業の地域別業績反映"
+      - "長期インセンティブ（株式報酬）の併用拡大"
+      - "透明性向上（算定基準の明確化）"
+
+    differentiation_factors:
+      cyclicality:
+        high: ["鉄鋼", "建設機械", "工作機械"]
+        medium: ["電子部品", "自動車部品"]
+        low: ["化学", "食品"]
+
+      technology_intensity:
+        high: ["半導体", "工作機械", "精密機器"]
+        medium: ["電子部品", "化学"]
+        low: ["鉄鋼", "食品"]
+
+      globalization:
+        high: ["建設機械", "工作機械", "電子部品"]
+        medium: ["化学", "自動車"]
+        low: ["鉄鋼", "食品"]
+
+  employee_satisfaction_patterns:
+    high_satisfaction:
+      characteristics: ["高水準維持", "透明性確保", "長期安定性"]
+      examples: ["ファナック（高額）", "信越化学（安定）"]
+
+    medium_satisfaction:
+      characteristics: ["標準的水準", "中程度変動", "業界平均"]
+      examples: ["住友化学", "村田製作所"]
+
+    concern_areas:
+      characteristics: ["高変動性", "予測困難", "景気依存"]
+      examples: ["日本製鉄", "JFE"]
+
+  future_outlook:
+    emerging_trends:
+      - "カーボンニュートラル対応による新評価指標"
+      - "DX推進成果の賞与反映"
+      - "サプライチェーン強靭化投資の評価"
+      - "人的資本経営指標の組み込み"
+
+    industry_specific_forecasts:
+      steel: "脱炭素技術開発・アジア市場展開が成長鍵"
+      machinery: "自動化・ロボット化需要拡大により成長期待"
+      chemicals: "新素材・バイオ技術への転換で差別化"
+      electronics: "AI・IoT普及により技術プレミアム継続"
+
+  recommendations:
+    for_companies:
+      - "業界特性に応じた最適な賞与制度設計"
+      - "透明性・予測可能性の向上"
+      - "長期インセンティブとの適切な組み合わせ"
+      - "ESG・DX成果の評価指標化"
+
+    for_investors:
+      - "業界サイクルを考慮した投資判断"
+      - "賞与制度から読み取る企業の長期戦略"
+      - "従業員満足度と企業業績の相関分析"
+
+    for_job_seekers:
+      - "安定性重視なら化学・食品業界"
+      - "高収入狙いなら技術集約型業界"
+      - "変動リスク許容なら景気敏感業界"
+
+notes: |
+  本分析は日経225製造業70社を対象とした賞与制度調査の結果である。
+  6社については詳細調査（B級信頼度）を実施し、残りについては
+  公開情報・業界情報を基に分析を行った。
+
+  製造業の賞与制度は業界特性により大きく3つのパターンに分類され、
+  企業の選択する制度は事業の性質・競争環境・企業文化を反映している。
+
+  2024年度は業界により業績に明暗が分かれており、
+  賞与水準も業界特性に応じた動きを示している。
+
+data_sources:
+  - "有価証券報告書（従業員報酬関連記載）"
+  - "決算説明会資料・IR資料"
+  - "業界専門紙報道"
+  - "転職・就職サイト情報"
+  - "労働組合関連資料"
+
+confidence_assessment:
+  high_confidence: "6社（詳細調査完了）"
+  medium_confidence: "24社（基本情報確認）"
+  low_confidence: "40社（業界推定）"
+  overall_reliability: "製造業全体のパターン把握には十分"
+
+last_updated: "2024-12-21"
+analysis_version: "Phase 2完了版"

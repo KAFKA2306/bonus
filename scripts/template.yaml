@@ -1,0 +1,13 @@
+company_profile:
+  company_name: ""
+  stock_code: ""
+  sector: ""
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: ""
+  confidence_level: ""
+  reliability_score: 0
+evidence: []
+calculation_method: ""
+notes: ""

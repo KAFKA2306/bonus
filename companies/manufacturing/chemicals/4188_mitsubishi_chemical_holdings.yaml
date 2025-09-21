@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "三菱ケミカルグループ"
+  stock_code: "4188"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "業績連動"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "talentsquare.co.jp"
+    detail: "賞与は年に1回（6月）、前年度の業績に連動。子会社の三菱ケミカルでは基本給の5～6ヶ月分が支給される。"
+    date: "2024"
+  - source: "openwork.jp"
+    detail: "不景気でなければ最低4ヶ月分は支給されるとの情報あり。賞与は年収の約22%を占める。"
+    date: "2024"
+calculation_method: "基本給の5-6ヶ月分（業績連動）"
+notes: "現在は三菱ケミカルグループに社名変更。年1回の支給が特徴。"

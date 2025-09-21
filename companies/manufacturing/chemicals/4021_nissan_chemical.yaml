@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "日産化学"
+  stock_code: "4021"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "業績連動"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "talentsquare.co.jp"
+    detail: "2025年3月期の平均年収は845万円（賞与込み）。"
+    date: "2024"
+  - source: "en-hyouban.com"
+    detail: "賞与は業績連動で、業界内で高水準。最近、より業績連動の要素が強まった。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績連動"
+notes: "具体的な賞与計算方法は非公開だが、業績連動の要素が強いとみられる。"

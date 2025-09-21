@@ -1,0 +1,22 @@
+company_profile:
+  company_name: "日産自動車"
+  stock_code: "7201"
+  sector: "automotive"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "業績連動"
+  confidence_level: "C"
+  reliability_score: 60
+evidence:
+  - source: "business-centre.jp"
+    detail: "賞与は年2回（7月・12月）、業績連動で年間5-6ヶ月分程度"
+    date: "2024"
+  - source: "axxis.co.jp"
+    detail: "2024年3月期の平均年収は877万円"
+    date: "2024"
+  - source: "note.com"
+    detail: "2024年春闘で満額回答"
+    date: "2024"
+calculation_method: "基本給の5-6ヶ月分程度（業績連動）"
+notes: "2024年春闘で満額回答"

@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "中外製薬"
+  stock_code: "4519"
+  sector: "pharma"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "B"
+  reliability_score: 80
+evidence:
+  - source: "openwork.jp"
+    detail: "賞与は4月と10月に支給。10月は固定で約2.5ヶ月分、4月は業績に応じた年間ボーナス額から10月分を差し引いた額が支払われる。"
+    date: "2024"
+  - source: "talentsquare.co.jp"
+    detail: "業績が良い年は給与の8-10ヶ月分が支給されることがある。平均年収は約1200万円。"
+    date: "2024"
+calculation_method: "固定賞与（10月）+ 業績連動賞与（4月）"
+notes: "年収に占める賞与の割合が大きい。2025年4月以降に見直しの可能性あり。"

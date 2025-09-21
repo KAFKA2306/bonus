@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "三井化学"
+  stock_code: "4183"
+  sector: "化学"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "inorianco.com"
+    detail: "賞与は年に2回支給され、合計で基本給の5～6か月分が目安。個人の評価と会社の業績によって変動する。"
+    date: "2024"
+  - source: "有価証券報告書"
+    detail: "2024年度の平均年収は約864万円（賞与込み）。"
+    date: "2024"
+calculation_method: "基本給の5-6ヶ月分 + 業績評価"
+notes: "業績によって変動するが、基本給連動の要素が強いとみられる。"
