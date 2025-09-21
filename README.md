@@ -194,4 +194,4 @@ python scripts/validate_data.py --check-completeness --check-consistency
 ---
 
 **最終更新**: 2025年1月21日
-**次回更新予定**: Phase 2完了時（予定：2025年1月26日）
+**次回更新予定**: Phase 2完了時（予定：2025年1月26日）# bonus
