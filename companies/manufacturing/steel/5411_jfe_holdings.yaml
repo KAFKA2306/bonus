@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "JFEホールディングス"
+  stock_code: "5411"
+  sector: "鉄鋼"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "B"
+  reliability_score: 75
+evidence:
+  - source: "japanmetaldaily.com"
+    detail: "JFEスチールでは2024年の賞与は年間で基本給の5.0ヶ月分と、別途一時金が支給されることで合意。2023年の年間4.5ヶ月分から増加。"
+    date: "2024"
+  - source: "talentsquare.co.jp"
+    detail: "JFEホールディングス全体の平均年収は、2024年3月期で870万円。賞与は会社の業績と個人の評価に連動する仕組み。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績評価"
+notes: "JFEスチールでの合意内容を基に判断。グループ全体の業績と個人の評価が反映される。"

@@ -1,13 +1,19 @@
 company_profile:
-  company_name: ""
-  stock_code: ""
-  sector: ""
+  company_name: "DMG森精機"
+  stock_code: "6141"
+  sector: "機械"
   market_cap: ""
   employees: ""
 bonus_system:
-  classification: ""
-  confidence_level: ""
-  reliability_score: 0
-evidence: []
-calculation_method: ""
-notes: ""
+  classification: "業績連動"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "talentsquare.co.jp"
+    detail: "2024年12月期の平均年収は903万円。賞与は業績に大きく左右される。"
+    date: "2024"
+  - source: "openmoney.jp"
+    detail: "基本的に年1回、基本給の約3ヶ月分が支給される。業績が悪化した際には大幅に減額されたり、ほとんど支給されないこともある。"
+    date: "2024"
+calculation_method: "基本給の約3ヶ月分（業績連動）"
+notes: "業績連動の度合いが非常に強く、業績によって支給額が大きく変動する。"

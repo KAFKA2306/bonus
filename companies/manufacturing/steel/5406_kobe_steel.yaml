@@ -1,0 +1,19 @@
+company_profile:
+  company_name: "神戸製鋼所"
+  stock_code: "5406"
+  sector: "鉄鋼"
+  market_cap: ""
+  employees: ""
+bonus_system:
+  classification: "ハイブリッド"
+  confidence_level: "C"
+  reliability_score: 70
+evidence:
+  - source: "japanmetaldaily.com"
+    detail: "2024年度の賞与（一時金）は39歳・勤続21年の社員で185万円。2023年度比27万円増。"
+    date: "2024"
+  - source: "migi-nanameue.co.jp"
+    detail: "賞与は年2回（6月・12月）、会社の業績と個人の評価に基づいて変動するが、安定して高水準。2024年3月期の平均年収は726万円。"
+    date: "2024"
+calculation_method: "基本給連動 + 業績評価"
+notes: "年功序列と業績評価のハイブリッド型。業績が好調なため、賞与も増加傾向にある。"
