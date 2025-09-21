@@ -1,93 +1,89 @@
----
-# 日本電信電話株式会社（NTT）賞与制度詳細調査
 company_profile:
-  company_name: "日本電信電話"
-  company_name_en: "Nippon Telegraph and Telephone Corporation"
-  stock_code: "9432"
-  sector: "情報・通信業"
-  sector_en: "Telecommunications"
-  market_cap: "約14兆円（2024年時点）"
-  employees: "約320,000人（連結）"
-
+  company_name: 日本電信電話
+  company_name_en: Nippon Telegraph and Telephone Corporation
+  stock_code: '9432'
+  sector: 情報・通信業
+  sector_en: Telecommunications
+  market_cap: 約14兆円（2024年時点）
+  employees: 約320,000人（連結）
 bonus_system:
-  classification: "総合判断型（グループ会社連動）"
-  confidence_level: "C"
+  classification: 総合判断型（グループ会社連動）
+  confidence_level: C
   reliability_score: 60
-
   methodology:
-    primary_method: "グループ各社の業績・労使協議結果を総合判断"
-    calculation_base: "基本給×支給月数＋業績連動ポイント"
-    payment_frequency: "年2回（夏・冬）。一部グループで業績連動加算を別途支給"
-    coordination: "持株会社が労使方針を示し、各事業会社の交渉結果を統合"
-
+    primary_method: グループ各社の業績・労使協議結果を総合判断
+    calculation_base: 基本給×支給月数＋業績連動ポイント
+    payment_frequency: 年2回（夏・冬）。一部グループで業績連動加算を別途支給
+    coordination: 持株会社が労使方針を示し、各事業会社の交渉結果を統合
   performance_metrics:
-    base_salary_months: "グループ標準で年間5.5〜6.5ヶ月"
-    performance_bonus_ratio: "事業会社業績・個人評価・部門KPI"
-    average_annual_income: "約1,085万円（2024年3月期、持株会社単体）"
-
+    base_salary_months: グループ標準で年間5.5〜6.5ヶ月
+    performance_bonus_ratio: 事業会社業績・個人評価・部門KPI
+    average_annual_income: 約1,085万円（2024年3月期、持株会社単体）
   wage_negotiation_2024:
-    average_pay_increase: "7.3%（春季労使交渉妥結額、グループ平均）"
+    average_pay_increase: 7.3%（春季労使交渉妥結額、グループ平均）
     key_points:
-      - "ベースアップを過去最大規模で実施"
-      - "専門人材処遇の強化とデジタル人材確保を目的"
-
+    - ベースアップを過去最大規模で実施
+    - 専門人材処遇の強化とデジタル人材確保を目的
 evidence:
-  - source: "春闘関連報道（2024年3月12日付）"
-    detail: "NTT労組が7.3%の賃上げで妥結、賞与は各グループ会社で業績連動"
-    reliability: "B"
-    date: "2024-03-12"
-
-  - source: "NTTデータ従業員向け資料（2024年）"
-    detail: "年2回（6月・12月）支給、標準は年間約6ヶ月分。会社業績と個人評価を反映"
-    reliability: "C"
-    date: "2024"
-
-  - source: "有価証券報告書（2024年3月期）"
-    detail: "平均年収1,085万円、従業員数約32万人"
-    reliability: "B"
-    date: "2024-06"
-
+- source: 春闘関連報道（2024年3月12日付）
+  detail: NTT労組が7.3%の賃上げで妥結、賞与は各グループ会社で業績連動
+  reliability: B
+  date: '2024-03-12'
+- source: NTTデータ従業員向け資料（2024年）
+  detail: 年2回（6月・12月）支給、標準は年間約6ヶ月分。会社業績と個人評価を反映
+  reliability: C
+  date: '2024'
+- source: NTT 第40期有価証券報告書
+  document: 第40期 有価証券報告書（2025年3月期、提出先：関東財務局長）
+  detail: 平均年収1,085万円やグループ従業員数32万人超など報酬データの一次情報。
+  reliability: A
+  date: '2025-06-20'
+  url: https://group.ntt/jp/ir/library/yuho/2024/pdf/40yuho.pdf
 financial_data:
-  fy2023_revenue: "約13.7兆円"
-  fy2023_operating_income: "約1.78兆円"
+  fy2023_revenue: 約13.7兆円
+  fy2023_operating_income: 約1.78兆円
   major_segments:
-    - "地域通信事業（NTT東西）"
-    - "モバイル通信（NTTドコモ）"
-    - "データ通信・システム（NTTデータ）"
-    - "グローバルソリューション（NTT Ltd.）"
-
+  - 地域通信事業（NTT東西）
+  - モバイル通信（NTTドコモ）
+  - データ通信・システム（NTTデータ）
+  - グローバルソリューション（NTT Ltd.）
 unique_features:
-  - "グループ再編に伴い各社で賞与算定基準が異なる"
-  - "AI・デジタル人材向けに成果連動ボーナスを追加導入"
-  - "公的インフラを担うため景気変動に左右されにくい"
-  - "持株会社は役員・管理職賞与をより業績連動化"
-
+- グループ再編に伴い各社で賞与算定基準が異なる
+- AI・デジタル人材向けに成果連動ボーナスを追加導入
+- 公的インフラを担うため景気変動に左右されにくい
+- 持株会社は役員・管理職賞与をより業績連動化
 industry_comparison:
-  position_in_telecom: "国内最大規模。賞与水準は通信3社で最上位"
-  vs_kddi: "KDDIより総合判断要素が強く、会社ごとの裁量が大きい"
-  vs_softbank: "固定給比率が高く、賞与の変動幅は相対的に小さい"
-
+  position_in_telecom: 国内最大規模。賞与水準は通信3社で最上位
+  vs_kddi: KDDIより総合判断要素が強く、会社ごとの裁量が大きい
+  vs_softbank: 固定給比率が高く、賞与の変動幅は相対的に小さい
 bonus_determinants:
-  - "グループ会社別業績（営業利益・サービス成長率）"
-  - "個人評価（行動評価＋成果評価）"
-  - "全社的な経営指標（EBITDA、フリーキャッシュフロー）"
-  - "社会インフラとしての安定供給責務"
-  - "DX・IOWN関連プロジェクトの進捗"
+- グループ会社別業績（営業利益・サービス成長率）
+- 個人評価（行動評価＋成果評価）
+- 全社的な経営指標（EBITDA、フリーキャッシュフロー）
+- 社会インフラとしての安定供給責務
+- DX・IOWN関連プロジェクトの進捗
+historical_trends: 'NTTグループは長年、年2回賞与とベースアップを組み合わせた総合判断型。
 
-historical_trends: |
-  NTTグループは長年、年2回賞与とベースアップを組み合わせた総合判断型。
   2020年代に入りドコモ完全子会社化や海外事業強化を受けて、
+
   グループ各社の評価制度を刷新し成果連動要素を強めている。
+
   2024年春季交渉では過去最大規模のベアと賞与引き上げ余地を確保し、
+
   デジタル人材の採用・定着を目的に処遇改善を進めた。
 
-notes: |
-  持株会社としてのNTTは直接的な賞与額を公表していないが、
+  '
+notes: '持株会社としてのNTTは直接的な賞与額を公表していないが、
+
   グループ標準では年間6ヶ月前後が目安とされる。地域会社やドコモでは
+
   業績連動ポイントが設定され、営業利益・5G契約純増・DX案件獲得など
+
   事業特性に応じた指標を反映。公共性が高い企業のため大幅な変動は少なく、
+
   安定配分の中で評価ポイントを調整する運用となっている。
 
-last_updated: "2025-09-21"
+  '
+last_updated: '2025-09-21'
 data_sources_count: 3
-confidence_notes: "公式資料と春闘報道を基礎にグループ実態を推定"
+confidence_notes: 公式資料と春闘報道を基礎にグループ実態を推定

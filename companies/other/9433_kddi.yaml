@@ -1,86 +1,81 @@
----
-# KDDI株式会社 賞与制度詳細調査
 company_profile:
-  company_name: "KDDI"
-  company_name_en: "KDDI Corporation"
-  stock_code: "9433"
-  sector: "情報・通信業"
-  sector_en: "Telecommunications"
-  market_cap: "約10兆円（2024年時点）"
-  employees: "約64,000人（連結）"
-
+  company_name: KDDI
+  company_name_en: KDDI Corporation
+  stock_code: '9433'
+  sector: 情報・通信業
+  sector_en: Telecommunications
+  market_cap: 約10兆円（2024年時点）
+  employees: 約64,000人（連結）
 bonus_system:
-  classification: "基本給連動型（業績調整付）"
-  confidence_level: "C"
+  classification: 基本給連動型（業績調整付）
+  confidence_level: C
   reliability_score: 65
-
   methodology:
-    primary_method: "基準内賃金（基本給）の月数をベースに労使交渉で決定"
-    calculation_base: "基本給×支給月数＋評価連動加算"
-    payment_frequency: "年2回（夏・冬）を基本とし、必要に応じて特別一時金を上乗せ"
-    special_bonus: "2024年度はインフレ対応として一律12万円の特別賞与を支給"
-
+    primary_method: 基準内賃金（基本給）の月数をベースに労使交渉で決定
+    calculation_base: 基本給×支給月数＋評価連動加算
+    payment_frequency: 年2回（夏・冬）を基本とし、必要に応じて特別一時金を上乗せ
+    special_bonus: 2024年度はインフレ対応として一律12万円の特別賞与を支給
   performance_metrics:
-    base_salary_months: "年間5〜6ヶ月分が標準目安（部門業績により変動）"
-    performance_bonus_ratio: "個人評価・カンパニー業績で上下"
-    average_annual_income: "986万円（2024年3月期、単体平均）"
-
+    base_salary_months: 年間5〜6ヶ月分が標準目安（部門業績により変動）
+    performance_bonus_ratio: 個人評価・カンパニー業績で上下
+    average_annual_income: 986万円（2024年3月期、単体平均）
   wage_negotiation_2024:
-    average_pay_increase: "6.0%（ベア＋定期昇給の合計）"
-    rationale: "物価高対応と専門人材確保を目的に一時金と併せて提示"
-
+    average_pay_increase: 6.0%（ベア＋定期昇給の合計）
+    rationale: 物価高対応と専門人材確保を目的に一時金と併せて提示
 evidence:
-  - source: "KDDIニュースリリース（2024年3月13日 春季労使交渉回答）"
-    detail: "平均6%の賃上げと従業員一人当たり12万円の特別一時金支給を決定"
-    reliability: "B"
-    date: "2024-03-13"
-
-  - source: "転職情報サイト（OpenWork等、2024年投稿）"
-    detail: "年2回の賞与で年間5〜6ヶ月分が目安。カンパニー／事業部業績で増減"
-    reliability: "C"
-    date: "2024"
-
-  - source: "有価証券報告書（2024年3月期）"
-    detail: "平均年収986万円、連結従業員数約6.4万人"
-    reliability: "B"
-    date: "2024-06"
-
+- source: KDDIニュースリリース（2024年3月7日 春季労使交渉回答）
+  detail: 平均6%の賃上げと従業員一人当たり12万円の特別一時金支給を決定
+  reliability: B
+  date: '2024-03-07'
+  document: 2024年春季労使交渉に対する会社回答について
+- source: 転職情報サイト（OpenWork等、2024年投稿）
+  detail: 年2回の賞与で年間5〜6ヶ月分が目安。カンパニー／事業部業績で増減
+  reliability: C
+  date: '2024'
+- source: KDDI 有価証券報告書
+  document: 第41期 有価証券報告書（2025年3月期、金融商品取引法第24条第1項）
+  detail: 平均年収986万円（単体）と従業員数約6.4万人を開示。賞与や給与構成の公式数値を確認。
+  reliability: A
+  date: '2025-06-13'
+  url: https://www.kddi.com/extlib/files/corporate/ir/library/yuka_shoken/pdf/yuho_2025_NMAhBw.pdf
 financial_data:
-  fy2023_revenue: "5兆6,700億円"
-  fy2023_operating_income: "1兆700億円"
-  mobile_subscribers: "au/UQ合計で約6,200万回線"
-  growth_initiatives: "通信と金融・エネルギーを組み合わせたAUGrowth戦略"
-
+  fy2023_revenue: 5兆6,700億円
+  fy2023_operating_income: 1兆700億円
+  mobile_subscribers: au/UQ合計で約6,200万回線
+  growth_initiatives: 通信と金融・エネルギーを組み合わせたAUGrowth戦略
 unique_features:
-  - "通信キャリアとして安定した基本給連動賞与に加え、業績調整を加味"
-  - "各カンパニー別に業績と評価で加算が変動する仕組み"
-  - "2024年度は物価高対応の一時金を全社員に一律支給"
-  - "人材確保のため専門スキル手当や特別インセンティブを導入"
-
+- 通信キャリアとして安定した基本給連動賞与に加え、業績調整を加味
+- 各カンパニー別に業績と評価で加算が変動する仕組み
+- 2024年度は物価高対応の一時金を全社員に一律支給
+- 人材確保のため専門スキル手当や特別インセンティブを導入
 industry_comparison:
-  position_in_telecom: "国内通信大手3社の中で賞与水準は中位〜上位"
-  vs_softbank: "ソフトバンクと比較すると固定給比率がやや高い"
-  vs_docomo: "NTTドコモ同様に総合判断要素があるが、基準内賃金の比重が高い"
-
+  position_in_telecom: 国内通信大手3社の中で賞与水準は中位〜上位
+  vs_softbank: ソフトバンクと比較すると固定給比率がやや高い
+  vs_docomo: NTTドコモ同様に総合判断要素があるが、基準内賃金の比重が高い
 bonus_determinants:
-  - "カンパニー／事業部の業績指標"
-  - "個人評価（等級・役割）"
-  - "全社営業利益・ARPU動向"
-  - "投資・成長施策への貢献度"
-  - "物価や人材市場など外部環境"
+- カンパニー／事業部の業績指標
+- 個人評価（等級・役割）
+- 全社営業利益・ARPU動向
+- 投資・成長施策への貢献度
+- 物価や人材市場など外部環境
+historical_trends: 'KDDIは長年、安定的な基本給連動型の賞与を維持してきたが、
 
-historical_trends: |
-  KDDIは長年、安定的な基本給連動型の賞与を維持してきたが、
   近年は通信以外の成長事業を反映させるために部門別の業績評価を強化。
+
   2024年春季交渉では平均6%の賃上げと一律一時金を実施し、
+
   物価上昇下での社員生活の安定と人材確保の両立を図った。
 
-notes: |
-  賞与月数の公式開示は限定的だが、従業員向け情報から年間5〜6ヶ月が目安。
+  '
+notes: '賞与月数の公式開示は限定的だが、従業員向け情報から年間5〜6ヶ月が目安。
+
   カンパニー業績に応じた変動幅があり、モバイル・エネルギー・金融など
+
   各事業の利益貢献度が配分に影響する。2024年度は物価高対策として
+
   全社員対象の特別一時金を支給し、従来の賞与枠に加算した。
 
-last_updated: "2025-09-21"
+  '
+last_updated: '2025-09-21'
 data_sources_count: 3
-confidence_notes: "公式リリースと複数の従業員情報を組み合わせた推定"
+confidence_notes: 公式リリースと複数の従業員情報を組み合わせた推定
