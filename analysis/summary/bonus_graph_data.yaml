@@ -16,7 +16,7 @@ records:
   confidence_level: B
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 8.5
+  bonus_months_estimate: 8.0
   source_file: companies/manufacturing/steel/5401_nippon-steel.yaml
 - stock_code: '5406'
   company_name: 神戸製鋼所
@@ -34,7 +34,7 @@ records:
   confidence_level: C
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 7.5
+  bonus_months_estimate: 6.0
   source_file: companies/manufacturing/steel/5411_jfe_holdings.yaml
 - stock_code: '4188'
   company_name: 三菱ケミカルグループ
@@ -61,7 +61,7 @@ records:
   confidence_level: B
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 7.38
+  bonus_months_estimate: 5.75
   source_file: companies/manufacturing/chemicals/4063_shin_etsu_chemical.yaml
 - stock_code: '4005'
   company_name: 住友化学
@@ -70,7 +70,7 @@ records:
   confidence_level: B
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 7.0
+  bonus_months_estimate: 5.0
   source_file: companies/manufacturing/chemicals/4005_sumitomo_chemical.yaml
 - stock_code: '4272'
   company_name: 日本化薬
@@ -106,7 +106,7 @@ records:
   confidence_level: B
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 8.5
+  bonus_months_estimate: 8.0
   source_file: companies/manufacturing/machinery/6954_fanuc.yaml
 - stock_code: '6101'
   company_name: ツガミ
@@ -133,7 +133,7 @@ records:
   confidence_level: B
   reliability_score: null
   stage: researched
-  bonus_months_estimate: 7.0
+  bonus_months_estimate: 5.0
   source_file: companies/manufacturing/machinery/6301_komatsu.yaml
 - stock_code: '6141'
   company_name: DMG森精機
@@ -151,7 +151,7 @@ records:
   confidence_level: B
   reliability_score: 80.0
   stage: researched
-  bonus_months_estimate: 4.0
+  bonus_months_estimate: null
   source_file: companies/pharma/4519_chugai.yaml
 - stock_code: '7453'
   company_name: 良品計画
@@ -178,7 +178,7 @@ records:
   confidence_level: A
   reliability_score: 95.0
   stage: researched
-  bonus_months_estimate: 1.0
+  bonus_months_estimate: null
   source_file: companies/tech/6758_sony.yaml
 - stock_code: '6861'
   company_name: キーエンス

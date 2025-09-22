@@ -29,7 +29,7 @@ overall:
     鉄鋼: 3
     電気機器: 4
   average_reliability: 65.45
-  average_bonus_months: 6.14
+  average_bonus_months: 6.07
 by_stage:
   researched:
     total_companies: 25
@@ -56,7 +56,7 @@ by_stage:
       鉄鋼: 3
       電気機器: 3
     average_reliability: 67.89
-    average_bonus_months: 6.36
+    average_bonus_months: 6.32
   phase3_estimate:
     total_companies: 3
     classification_counts:

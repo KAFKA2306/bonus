@@ -30,7 +30,7 @@ sector_breakdown:
     confidence_counts:
       B: 1
     average_reliability: 80.0
-    average_bonus_months: 4.0
+    average_bonus_months: null
   retail:
     total_companies: 1
     classification_counts:
@@ -64,7 +64,7 @@ sector_breakdown:
       B: 2
       C: 4
     average_reliability: 65.0
-    average_bonus_months: 7.19
+    average_bonus_months: 5.38
   卸売業:
     total_companies: 1
     classification_counts:
@@ -101,7 +101,7 @@ sector_breakdown:
       C: 3
       D: 1
     average_reliability: 57.5
-    average_bonus_months: 7.0
+    average_bonus_months: 5.0
   輸送用機器:
     total_companies: 1
     classification_counts:
@@ -123,7 +123,7 @@ sector_breakdown:
       B: 1
       C: 2
     average_reliability: 70.0
-    average_bonus_months: 8.0
+    average_bonus_months: 7.0
   電気機器:
     total_companies: 4
     classification_counts:
@@ -138,4 +138,4 @@ sector_breakdown:
       B: 1
       C: 1
     average_reliability: 81.67
-    average_bonus_months: 5.08
+    average_bonus_months: 6.88

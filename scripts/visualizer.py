@@ -97,14 +97,14 @@ class BonusVisualizer:
         return '\n'.join(fixed_lines)
 
     def _index_company_files(self):
-        companies_dir = self.data_dir / "companies"
-        if not companies_dir.exists():
-            return
-        for path in companies_dir.rglob('*.yaml'):
-            stem = path.stem
-            code = stem.split('_', 1)[0]
-            if code.isdigit():
-                self.company_index[code].append(path)
+        for base in [self.data_dir / "companies", self.data_dir / "analysis" / "phase3_estimates"]:
+            if not base.exists():
+                continue
+            for path in base.rglob('*.yaml'):
+                stem = path.stem
+                code = stem.split('_', 1)[0]
+                if code.isdigit():
+                    self.company_index[code].append(path)
 
     # ------------------------------------------------------------------
     # Plot helpers
@@ -401,20 +401,27 @@ class BonusVisualizer:
 
     def _update_metrics_from_company_yaml(self, metrics: dict, data: dict):
         bonus_system = data.get('bonus_system') or {}
+        bonus_system_estimate = data.get('bonus_system_estimate') or {}
         if not isinstance(bonus_system, dict):
             bonus_system = {}
+        if not isinstance(bonus_system_estimate, dict):
+            bonus_system_estimate = {}
+
         methodology = bonus_system.get('methodology') or {}
         if not isinstance(methodology, dict):
             methodology = {}
         performance_metrics = bonus_system.get('performance_metrics') or {}
         if not isinstance(performance_metrics, dict):
             performance_metrics = {}
+        estimate_metrics = bonus_system_estimate
         financial_data = data.get('financial_data') or {}
         if not isinstance(financial_data, dict):
             financial_data = {}
 
         if isinstance(methodology.get('payment_frequency'), str):
             self._apply_frequency(metrics, methodology['payment_frequency'])
+        if isinstance(estimate_metrics.get('estimated_bonus_multiple'), str):
+            self._apply_bonus_months(metrics, estimate_metrics['estimated_bonus_multiple'])
 
         for key in ('base_salary_months', 'bonus_range', 'annual_bonus_amount'):
             value = performance_metrics.get(key)
