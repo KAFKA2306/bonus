@@ -23,6 +23,7 @@ bonus_system:
   performance_metrics:
     base_salary_months: "冬季賞与分を月給と夏季に振り分け"
     performance_bonus_ratio: "縮小傾向"
+    bonus_range: "夏季賞与で約1ヶ月分（冬季分を月給へ移行）"
     annual_bonus_amount: "平均年収1,113万円の一部"
     average_annual_income: "1,113万円"
 

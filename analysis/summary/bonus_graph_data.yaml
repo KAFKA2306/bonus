@@ -178,7 +178,7 @@ records:
   confidence_level: A
   reliability_score: 95.0
   stage: researched
-  bonus_months_estimate: null
+  bonus_months_estimate: 1.0
   source_file: companies/tech/6758_sony.yaml
 - stock_code: '6861'
   company_name: キーエンス
@@ -187,7 +187,7 @@ records:
   confidence_level: A
   reliability_score: 95.0
   stage: researched
-  bonus_months_estimate: null
+  bonus_months_estimate: 7.0
   source_file: companies/tech/6861_keyence.yaml
 - stock_code: '9433'
   company_name: KDDI

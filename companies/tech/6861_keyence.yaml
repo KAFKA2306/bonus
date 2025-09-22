@@ -23,6 +23,7 @@ bonus_system:
   performance_metrics:
     base_salary_months: "不明"
     performance_bonus_ratio: "年収の50-70%"
+    bonus_range: "基本給換算で年間6-8ヶ月相当（四半期支給）"
     annual_bonus_amount: "約450万円/人（2024年度実績）"
     average_annual_income: "2,039万円"
 

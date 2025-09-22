@@ -309,6 +309,12 @@ def estimate_bonus_months(data: dict, stage: str) -> Optional[float]:
                     candidates.append(value)
                 elif isinstance(value, list) or isinstance(value, dict):
                     candidates.extend(collect_strings(value))
+            metrics_block = bonus_block.get("performance_metrics")
+            if metrics_block:
+                candidates.extend(collect_strings(metrics_block))
+            indicators_block = bonus_block.get("performance_indicators")
+            if indicators_block:
+                candidates.extend(collect_strings(indicators_block))
         perf = data.get("performance_indicators")
         if perf:
             candidates.extend(collect_strings(perf))
