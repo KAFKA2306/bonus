@@ -15,8 +15,8 @@ SUMMARY_DIR = BASE_DIR / "analysis" / "summary"
 
 STAGE_PRIORITY = ("researched", "phase3_estimate")
 CLASSIFICATION_ORDER = ("業績連動型", "基本給連動型", "総合判断型", "ハイブリッド型")
-BONUS_RANGE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*[〜~\-]\s*(\d+(?:\.\d+)?)\s*(?:ヶ?月)")
-BONUS_SIMPLE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)(?=\s*ヶ?月)")
+BONUS_RANGE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*[〜~\-]\s*(\d+(?:\.\d+)?)\s*(?:カ月|か月|ヶ月|月分|months)")
+BONUS_SIMPLE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)(?=\s*(?:カ月|か月|ヶ月|月分|months))")
 
 
 def load_yaml(path: Path):
