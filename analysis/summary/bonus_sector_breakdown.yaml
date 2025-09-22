@@ -1,42 +1,46 @@
-summary_generated_on: '2025-09-21'
+summary_generated_on: '2025-09-23'
 total_sectors: 12
 sector_breakdown:
   automotive:
     total_companies: 1
     classification_counts:
-      業績連動: 1
+      業績連動型: 1
     stage_counts:
       researched: 1
     confidence_counts:
       C: 1
     average_reliability: 60.0
+    average_bonus_months: null
   manufacturing:
     total_companies: 1
     classification_counts:
-      ハイブリッド: 1
+      ハイブリッド型: 1
     stage_counts:
       researched: 1
     confidence_counts:
       C: 1
     average_reliability: 70.0
+    average_bonus_months: null
   pharma:
     total_companies: 1
     classification_counts:
-      ハイブリッド: 1
+      ハイブリッド型: 1
     stage_counts:
       researched: 1
     confidence_counts:
       B: 1
     average_reliability: 80.0
+    average_bonus_months: 4.0
   retail:
     total_companies: 1
     classification_counts:
-      総合判断: 1
+      総合判断型: 1
     stage_counts:
       researched: 1
     confidence_counts:
       D: 1
     average_reliability: 30.0
+    average_bonus_months: null
   不動産業:
     total_companies: 1
     classification_counts:
@@ -46,19 +50,21 @@ sector_breakdown:
     confidence_counts:
       C: 1
     average_reliability: 45.0
+    average_bonus_months: 5.25
   化学:
     total_companies: 6
     classification_counts:
-      ハイブリッド: 2
+      業績連動型: 2
       基本給連動型: 1
-      業績連動: 2
       総合判断型: 1
+      ハイブリッド型: 2
     stage_counts:
       researched: 6
     confidence_counts:
       B: 2
       C: 4
     average_reliability: 65.0
+    average_bonus_months: 7.19
   卸売業:
     total_companies: 1
     classification_counts:
@@ -68,11 +74,12 @@ sector_breakdown:
     confidence_counts:
       A: 1
     average_reliability: 95.0
+    average_bonus_months: null
   情報・通信業:
     total_companies: 3
     classification_counts:
-      基本給連動型: 1
       業績連動型: 1
+      基本給連動型: 1
       総合判断型: 1
     stage_counts:
       phase3_estimate: 1
@@ -80,13 +87,13 @@ sector_breakdown:
     confidence_counts:
       C: 3
     average_reliability: 58.33
+    average_bonus_months: 5.5
   機械:
     total_companies: 5
     classification_counts:
-      ハイブリッド: 2
-      ハイブリッド型: 1
-      業績連動: 1
-      総合判断: 1
+      業績連動型: 1
+      総合判断型: 1
+      ハイブリッド型: 3
     stage_counts:
       researched: 5
     confidence_counts:
@@ -94,6 +101,7 @@ sector_breakdown:
       C: 3
       D: 1
     average_reliability: 57.5
+    average_bonus_months: 7.0
   輸送用機器:
     total_companies: 1
     classification_counts:
@@ -103,23 +111,25 @@ sector_breakdown:
     confidence_counts:
       B: 1
     average_reliability: 80.0
+    average_bonus_months: 7.6
   鉄鋼:
     total_companies: 3
     classification_counts:
-      ハイブリッド: 1
       業績連動型: 2
+      ハイブリッド型: 1
     stage_counts:
       researched: 3
     confidence_counts:
       B: 1
       C: 2
     average_reliability: 70.0
+    average_bonus_months: 8.0
   電気機器:
     total_companies: 4
     classification_counts:
-      ハイブリッド型: 1
       業績連動型: 2
       総合判断型: 1
+      ハイブリッド型: 1
     stage_counts:
       phase3_estimate: 1
       researched: 3
@@ -128,3 +138,4 @@ sector_breakdown:
       B: 1
       C: 1
     average_reliability: 81.67
+    average_bonus_months: 5.08
