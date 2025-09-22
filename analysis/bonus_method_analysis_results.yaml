@@ -1,0 +1,334 @@
+analysis_metadata:
+  generated_on: '2025-09-23T06:54:04.309195'
+  total_companies_analyzed: 30
+  analysis_methodology: Multi-factor employee benefit scoring
+  scoring_weights:
+    salary_level: 0.25
+    bonus_amount: 0.25
+    stability: 0.3
+    data_reliability: 0.2
+ranking_summary:
+  best_for_employees: Base salary-linked
+  worst_for_employees: Hybrid
+  highest_paying: Performance-linked
+  most_stable: Base salary-linked
+  highest_bonus: Performance-linked
+method_analysis:
+  Base salary-linked:
+    rank: 1
+    overall_score: 82.8
+    score_components:
+      salary_level: 88.1
+      bonus_amount: 75.0
+      stability: 90.0
+      data_reliability: 75.0
+    statistics:
+      company_count: 4
+      avg_salary_millions: 876.0
+      avg_bonus_months: 5.75
+      avg_bonus_percentage: 32.3943661971831
+    volatility_distribution:
+      medium: 1
+      low: 3
+    confidence_distribution:
+      C: 2
+      B: 1
+      A: 1
+    strengths:
+    - High average salary
+    - High stability and predictability
+    concerns: []
+  Performance-linked:
+    rank: 2
+    overall_score: 82.0
+    score_components:
+      salary_level: 100.0
+      bonus_amount: 100.0
+      stability: 48.6
+      data_reliability: 87.1
+    statistics:
+      company_count: 14
+      avg_salary_millions: 994.8475000000001
+      avg_bonus_months: 7.666666666666667
+      avg_bonus_percentage: 37.97979797979798
+    volatility_distribution:
+      medium: 10
+      high: 4
+    confidence_distribution:
+      C: 1
+      D: 1
+      B: 4
+      A: 8
+    strengths:
+    - High average salary
+    - Generous bonus amounts
+    - Reliable data quality
+    concerns:
+    - High volatility and uncertainty
+  Comprehensive judgment:
+    rank: 3
+    overall_score: 66.9
+    score_components:
+      salary_level: 50
+      bonus_amount: 99.1
+      stability: 60.0
+      data_reliability: 58.0
+    statistics:
+      company_count: 10
+      avg_salary_millions: null
+      avg_bonus_months: 7.6
+      avg_bonus_percentage: null
+    volatility_distribution:
+      medium: 10
+    confidence_distribution:
+      C: 5
+      B: 2
+      D: 3
+    strengths:
+    - Generous bonus amounts
+    concerns:
+    - Limited reliable data
+  Hybrid:
+    rank: 4
+    overall_score: 61.0
+    score_components:
+      salary_level: 50
+      bonus_amount: 50
+      stability: 60.0
+      data_reliability: 90.0
+    statistics:
+      company_count: 2
+      avg_salary_millions: null
+      avg_bonus_months: null
+      avg_bonus_percentage: null
+    volatility_distribution:
+      medium: 2
+    confidence_distribution:
+      B: 1
+      A: 1
+    strengths:
+    - Reliable data quality
+    concerns: []
+company_details:
+  Performance-linked:
+  - company_name: KEYENCE
+    stock_code: '6861'
+    salary_millions: 20.39
+    bonus_months: null
+    volatility: medium
+    confidence_level: A
+  - company_name: SoftBank Group
+    stock_code: '9984'
+    salary_millions: null
+    bonus_months: null
+    volatility: high
+    confidence_level: C
+  - company_name: Fast Retailing
+    stock_code: '9983'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: A
+  - company_name: Tokyo Electron
+    stock_code: '8035'
+    salary_millions: null
+    bonus_months: null
+    volatility: high
+    confidence_level: A
+  - company_name: Recruit Holdings
+    stock_code: '6098'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: A
+  - company_name: Daikin Industries
+    stock_code: '6367'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  - company_name: Advantest
+    stock_code: '6857'
+    salary_millions: 1049.0
+    bonus_months: 4.5
+    volatility: high
+    confidence_level: A
+  - company_name: Murata Manufacturing
+    stock_code: '6981'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  - company_name: Fanuc
+    stock_code: '6954'
+    salary_millions: 1238.0
+    bonus_months: 8.0
+    volatility: high
+    confidence_level: A
+  - company_name: SMC
+    stock_code: '6273'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: D
+  - company_name: Disco
+    stock_code: '6146'
+    salary_millions: 1672.0
+    bonus_months: 10.5
+    volatility: medium
+    confidence_level: A
+  - company_name: Hoya
+    stock_code: '7741'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  - company_name: Nomura Holdings
+    stock_code: '8604'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  - company_name: Hitachi
+    stock_code: '6501'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: A
+  Comprehensive judgment:
+  - company_name: Toyota Motor
+    stock_code: '7203'
+    salary_millions: null
+    bonus_months: 7.6
+    volatility: medium
+    confidence_level: B
+  - company_name: Takeda
+    stock_code: '4502'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  - company_name: NTT
+    stock_code: '9432'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+  - company_name: Nomura Research Institute
+    stock_code: '4307'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+  - company_name: Olympus
+    stock_code: '7733'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+  - company_name: Terumo
+    stock_code: '4543'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: D
+  - company_name: ANA Holdings
+    stock_code: '9202'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: D
+  - company_name: Japan Airlines
+    stock_code: '9201'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+  - company_name: Daiwa Securities Group
+    stock_code: '8601'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+  - company_name: Mitsubishi Electric
+    stock_code: '6503'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: D
+  Hybrid:
+  - company_name: Sony Group
+    stock_code: '6758'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: A
+  - company_name: UFJ Financial Group
+    stock_code: '8306'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: B
+  Base salary-linked:
+  - company_name: Shin-Etsu Chemical
+    stock_code: '4063'
+    salary_millions: 876.0
+    bonus_months: 5.75
+    volatility: low
+    confidence_level: A
+  - company_name: KDDI
+    stock_code: '9433'
+    salary_millions: null
+    bonus_months: null
+    volatility: low
+    confidence_level: C
+  - company_name: JR East
+    stock_code: '9020'
+    salary_millions: null
+    bonus_months: null
+    volatility: low
+    confidence_level: B
+  - company_name: JR Central
+    stock_code: '9022'
+    salary_millions: null
+    bonus_months: null
+    volatility: medium
+    confidence_level: C
+insights:
+  salary_range:
+    min_millions: 0
+    max_millions: 994.8475000000001
+  bonus_range:
+    min_months: 0
+    max_months: 7.666666666666667
+  volatility_patterns:
+    Performance-linked:
+      dominant_pattern: medium
+      low_volatility_percentage: 0.0
+      high_volatility_percentage: 28.57142857142857
+    Comprehensive judgment:
+      dominant_pattern: medium
+      low_volatility_percentage: 0.0
+      high_volatility_percentage: 0.0
+    Hybrid:
+      dominant_pattern: medium
+      low_volatility_percentage: 0.0
+      high_volatility_percentage: 0.0
+    Base salary-linked:
+      dominant_pattern: low
+      low_volatility_percentage: 75.0
+      high_volatility_percentage: 0.0
+  employee_recommendations:
+    risk_averse_employees:
+      recommended_method: Base salary-linked
+      reason: Highest stability and predictability
+    growth_oriented_employees:
+      recommended_method: Performance-linked
+      reason: Highest earning potential
+    balanced_approach:
+      recommended_method: Base salary-linked
+      reason: Best overall employee benefit score
+    career_stage_considerations:
+      early_career: Base salary-linked for stability
+      mid_career: Performance-linked for growth
+      late_career: Comprehensive judgment for balance
