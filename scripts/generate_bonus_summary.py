@@ -1,29 +1,63 @@
-#!/usr/bin/env python3
 import datetime
 import re
 import statistics
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, Iterable, Optional
-
 import yaml
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 COMPANY_DIR = BASE_DIR / "companies"
 PHASE3_DIR = BASE_DIR / "analysis" / "phase3_estimates"
 SUMMARY_DIR = BASE_DIR / "analysis" / "summary"
-
 STAGE_PRIORITY = ("researched", "phase3_estimate")
 CLASSIFICATION_ORDER = ("業績連動型", "基本給連動型", "総合判断型", "ハイブリッド型")
+CLASSIFICATION_DISPLAY = {
+    "業績連動型": "Performance-linked",
+    "基本給連動型": "Base salary-linked",
+    "総合判断型": "Comprehensive judgment",
+    "ハイブリッド型": "Hybrid",
+    "Unknown": "Unknown",
+}
+SECTOR_DISPLAY = {
+    "automotive": "Automotive",
+    "manufacturing": "Manufacturing",
+    "pharma": "Pharmaceuticals",
+    "retail": "Retail",
+    "financials": "Financials",
+    "鉄鋼": "Steel",
+    "化学": "Chemicals",
+    "卸売業": "Wholesale Trade",
+    "情報・通信業": "Information & Communications",
+    "機械": "Machinery",
+    "輸送用機器": "Transportation Equipment",
+    "電気機器": "Electric Appliances",
+    "不動産業": "Real Estate",
+    "サービス業": "Services",
+    "Unknown": "Unknown",
+}
+def resolve_classification_display(value: Optional[str]) -> str:
+    if not value:
+        return CLASSIFICATION_DISPLAY["Unknown"]
+    return CLASSIFICATION_DISPLAY.get(value, value)
+def resolve_sector_display(sector_value: Optional[str], sector_en: Optional[str]) -> str:
+    if isinstance(sector_en, str) and sector_en.strip():
+        return sector_en.strip()
+    if isinstance(sector_value, str):
+        key = sector_value.strip()
+        if key:
+            display = SECTOR_DISPLAY.get(key)
+            if display:
+                return display
+            display = SECTOR_DISPLAY.get(key.lower())
+            if display:
+                return display
+            return key.title()
+    return SECTOR_DISPLAY["Unknown"]
 BONUS_RANGE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)\s*[〜~\-]\s*(\d+(?:\.\d+)?)\s*(?:カ月|か月|ヶ月|月分|months)")
 BONUS_SIMPLE_PATTERN = re.compile(r"(\d+(?:\.\d+)?)(?=\s*(?:カ月|か月|ヶ月|月分|months))")
-
-
 def load_yaml(path: Path):
     with path.open(encoding="utf-8") as fh:
         return yaml.safe_load(fh)
-
-
 def normalise_classification(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
@@ -40,8 +74,6 @@ def normalise_classification(value: Optional[str]) -> Optional[str]:
         "ハイブリッド": "ハイブリッド型",
     }
     return alias_map.get(result, result)
-
-
 def normalise_confidence(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
@@ -49,8 +81,6 @@ def normalise_confidence(value: Optional[str]) -> Optional[str]:
     if not value:
         return None
     return value[0].upper()
-
-
 def to_float(value) -> Optional[float]:
     if value is None:
         return None
@@ -60,8 +90,6 @@ def to_float(value) -> Optional[float]:
         return float(str(value).strip())
     except ValueError:
         return None
-
-
 def consider_record(records: Dict[str, dict], record: dict):
     code = record.get("stock_code")
     if not code:
@@ -74,8 +102,6 @@ def consider_record(records: Dict[str, dict], record: dict):
     new_score = record.get("reliability_score")
     if new_score is not None and (prev_score is None or new_score > prev_score):
         records[code] = record
-
-
 def parse_company_file(path: Path) -> Optional[dict]:
     data = load_yaml(path)
     if not isinstance(data, dict):
@@ -95,14 +121,20 @@ def parse_company_file(path: Path) -> Optional[dict]:
     if not stock_code:
         stock_code = path.name.split("_", 1)[0]
     stock_code = stock_code.zfill(4)
+    sector_value = profile.get("sector")
+    sector_en = profile.get("sector_en")
+    sector_display = resolve_sector_display(sector_value, sector_en)
     classification = normalise_classification(classification_raw)
     if not classification:
         return None
+    classification_display = resolve_classification_display(classification)
     record = {
         "stock_code": stock_code,
         "company_name": profile.get("company_name"),
-        "sector": profile.get("sector"),
+        "sector": sector_value,
+        "sector_name_eb": sector_display,
         "classification": classification,
+        "classification_name_eb": classification_display,
         "raw_classification": classification_raw,
         "confidence_level": normalise_confidence(confidence_raw),
         "reliability_score": to_float(reliability_raw),
@@ -111,8 +143,6 @@ def parse_company_file(path: Path) -> Optional[dict]:
         "bonus_months_estimate": estimate_bonus_months(data, "researched"),
     }
     return record
-
-
 def parse_phase3_file(path: Path) -> Optional[dict]:
     data = load_yaml(path)
     if not isinstance(data, dict):
@@ -127,14 +157,20 @@ def parse_phase3_file(path: Path) -> Optional[dict]:
     if not stock_code:
         stock_code = path.name.split("_", 1)[0]
     stock_code = stock_code.zfill(4)
+    sector_value = profile.get("sector")
+    sector_en = profile.get("sector_en")
+    sector_display = resolve_sector_display(sector_value, sector_en)
     classification = normalise_classification(bonus_block.get("classification"))
     if not classification:
         return None
+    classification_display = resolve_classification_display(classification)
     record = {
         "stock_code": stock_code,
         "company_name": profile.get("company_name"),
-        "sector": profile.get("sector"),
+        "sector": sector_value,
+        "sector_name_eb": sector_display,
         "classification": classification,
+        "classification_name_eb": classification_display,
         "raw_classification": bonus_block.get("classification"),
         "confidence_level": normalise_confidence(bonus_block.get("confidence_level")),
         "reliability_score": to_float(bonus_block.get("reliability_score")),
@@ -143,22 +179,17 @@ def parse_phase3_file(path: Path) -> Optional[dict]:
         "bonus_months_estimate": estimate_bonus_months(data, "phase3_estimate"),
     }
     return record
-
-
 def gather_records():
     records_by_stage: Dict[str, Dict[str, dict]] = {stage: {} for stage in STAGE_PRIORITY}
-
     for path in COMPANY_DIR.rglob("*.yaml"):
         record = parse_company_file(path)
         if record:
             consider_record(records_by_stage["researched"], record)
-
     if PHASE3_DIR.exists():
         for path in PHASE3_DIR.rglob("*.yaml"):
             record = parse_phase3_file(path)
             if record:
                 consider_record(records_by_stage["phase3_estimate"], record)
-
     overall: Dict[str, dict] = {}
     for stage in STAGE_PRIORITY:
         stage_records = records_by_stage.get(stage, {})
@@ -166,10 +197,7 @@ def gather_records():
             if code in overall:
                 continue
             overall[code] = record.copy()
-
     return overall, records_by_stage
-
-
 def order_counts(counter: Counter) -> Dict[str, int]:
     ordered: Dict[str, int] = {}
     for key in CLASSIFICATION_ORDER:
@@ -179,8 +207,6 @@ def order_counts(counter: Counter) -> Dict[str, int]:
         if key not in ordered:
             ordered[key] = counter[key]
     return ordered
-
-
 def summarise(records_dict: Dict[str, dict]):
     classification_counts = Counter()
     confidence_counts = Counter()
@@ -211,23 +237,18 @@ def summarise(records_dict: Dict[str, dict]):
         "average_reliability": average_reliability,
         "average_bonus_months": average_bonus_months,
     }
-
-
 def build_summary(overall: Dict[str, dict], records_by_stage: Dict[str, Dict[str, dict]]):
     stage_summary = {
         stage: summarise(records)
         for stage, records in records_by_stage.items()
         if records
     }
-
     overall_summary = summarise(overall)
-
     sector_breakdown = {}
     sector_records: Dict[str, list] = defaultdict(list)
     for record in overall.values():
         sector = record.get("sector") or "Unknown"
         sector_records[sector].append(record)
-
     for sector, items in sorted(sector_records.items()):
         classification_counts = Counter()
         stage_counts = Counter()
@@ -258,13 +279,14 @@ def build_summary(overall: Dict[str, dict], records_by_stage: Dict[str, Dict[str
             "average_reliability": average_reliability,
             "average_bonus_months": average_bonus_months,
         }
-
     records_payload = {
         code: {
             "stock_code": code,
             "company_name": record.get("company_name"),
             "sector": record.get("sector"),
+            "sector_name_eb": record.get("sector_name_eb"),
             "classification": record.get("classification"),
+            "classification_name_eb": record.get("classification_name_eb"),
             "confidence_level": record.get("confidence_level"),
             "reliability_score": record.get("reliability_score"),
             "stage": record.get("stage"),
@@ -273,13 +295,9 @@ def build_summary(overall: Dict[str, dict], records_by_stage: Dict[str, Dict[str
         }
         for code, record in overall.items()
     }
-
     return overall_summary, stage_summary, sector_breakdown, records_payload
-
-
 def estimate_bonus_months(data: dict, stage: str) -> Optional[float]:
     candidates = []
-
     def collect_strings(node) -> Iterable[str]:
         if isinstance(node, str):
             if "月" in node:
@@ -290,7 +308,6 @@ def estimate_bonus_months(data: dict, stage: str) -> Optional[float]:
         elif isinstance(node, list):
             for value in node:
                 yield from collect_strings(value)
-
     if stage == "phase3_estimate":
         block = data.get("bonus_system_estimate")
         if isinstance(block, dict):
@@ -321,20 +338,16 @@ def estimate_bonus_months(data: dict, stage: str) -> Optional[float]:
         notes = data.get("notes")
         if notes:
             candidates.extend(collect_strings(notes))
-
     for text in candidates:
         months = parse_bonus_months(text)
         if months is not None:
             return months
     return None
-
-
 def parse_bonus_months(text: Optional[str]) -> Optional[float]:
     if not text:
         return None
     cleaned = text.replace(',', '')
     values = []
-
     def to_months(num_str: str) -> Optional[float]:
         try:
             value = float(num_str)
@@ -343,7 +356,6 @@ def parse_bonus_months(text: Optional[str]) -> Optional[float]:
         if value <= 0 or value > 24:
             return None
         return value
-
     for start, end in BONUS_RANGE_PATTERN.findall(cleaned):
         first = to_months(start)
         second = to_months(end)
@@ -356,16 +368,12 @@ def parse_bonus_months(text: Optional[str]) -> Optional[float]:
         value = to_months(match)
         if value is not None:
             values.append(value)
-
     if not values:
         return None
     return round(statistics.mean(values), 2)
-
-
 def main():
     overall, records_by_stage = gather_records()
     overall_summary, stage_summary, sector_breakdown, records_payload = build_summary(overall, records_by_stage)
-
     summary_payload = {
         "summary_generated_on": datetime.date.today().isoformat(),
         "total_unique_companies": len(overall),
@@ -373,18 +381,15 @@ def main():
         "overall": overall_summary,
         "by_stage": stage_summary,
     }
-
     sector_payload = {
         "summary_generated_on": datetime.date.today().isoformat(),
         "total_sectors": len(sector_breakdown),
         "sector_breakdown": sector_breakdown,
     }
-
     graph_payload = {
         "summary_generated_on": datetime.date.today().isoformat(),
         "records": list(records_payload.values()),
     }
-
     SUMMARY_DIR.mkdir(parents=True, exist_ok=True)
     with (SUMMARY_DIR / "bonus_overview.yaml").open("w", encoding="utf-8") as fh:
         yaml.safe_dump(summary_payload, fh, sort_keys=False, allow_unicode=True)
@@ -392,9 +397,6 @@ def main():
         yaml.safe_dump(sector_payload, fh, sort_keys=False, allow_unicode=True)
     with (SUMMARY_DIR / "bonus_graph_data.yaml").open("w", encoding="utf-8") as fh:
         yaml.safe_dump(graph_payload, fh, sort_keys=False, allow_unicode=True)
-
     print(f"Wrote summary for {len(overall)} companies")
-
-
 if __name__ == "__main__":
     main()
