@@ -50,7 +50,7 @@ def snapshot(records):
         "schema_version": 1,
         "as_of": "2026-08-02",
         "universe": {
-            "source_file": "nikkei225_companies.yaml",
+            "source_file": "nikkei225_bonus_survey_2024_en.yaml",
             "mutation_policy": "frozen",
         },
         "records": records,
