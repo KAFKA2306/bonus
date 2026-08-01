@@ -1,0 +1,43 @@
+name: Verify bonus facts
+
+on:
+  push:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "tests/**"
+      - "analysis/summary/verified_bonus_overview.yaml"
+      - "nikkei225_bonus_survey_2024_en.yaml"
+      - "nikkei225_companies.yaml"
+      - ".github/workflows/verified-bonus.yml"
+  pull_request:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "tests/**"
+      - "analysis/summary/verified_bonus_overview.yaml"
+      - "nikkei225_bonus_survey_2024_en.yaml"
+      - "nikkei225_companies.yaml"
+      - ".github/workflows/verified-bonus.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate frozen-universe facts
+        run: python scripts/generate_bonus_summary.py --check
+      - name: Rebuild deterministic summary
+        run: python scripts/generate_bonus_summary.py
+      - name: Verify generated summary is committed
+        run: git diff --exit-code -- analysis/summary/verified_bonus_overview.yaml
