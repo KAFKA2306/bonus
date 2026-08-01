@@ -2,11 +2,12 @@
 
 **Repository:** https://github.com/KAFKA2306/bonus
 
-日経平均採用企業のうち、このリポジトリで既に管理している銘柄を対象に、従業員賞与の決定方式を一次情報から記録する調査プロジェクトです。
+このリポジトリで既に管理している銘柄を対象に、従業員賞与の決定方式を一次情報から記録する調査プロジェクトです。
 
 ## 更新方針
 
-- `nikkei225_companies.yaml`の銘柄集合は固定し、今回の更新では変更しません。
+- 既存30社を定義する`nikkei225_bonus_survey_2024_en.yaml`の銘柄集合は固定し、今回の更新では変更しません。
+- `nikkei225_companies.yaml`も変更せず、過去の225銘柄スナップショットとして保持します。
 - 従業員賞与だけを対象とし、役員報酬は集計しません。
 - 会社公式、労働組合公式、法定開示資料だけを検証済み根拠として扱います。
 - 月数・回数は資料に明記された値だけを保存し、文章や口コミから推定しません。
@@ -14,13 +15,14 @@
 
 ## 現在の正規データ
 
-- 固定銘柄スナップショット: `nikkei225_companies.yaml`
+- 固定調査銘柄: `nikkei225_bonus_survey_2024_en.yaml`（既存30社）
+- 過去の225銘柄スナップショット: `nikkei225_companies.yaml`（変更なし）
 - 検証済み事実: `data/verified_bonus_facts_2026-08-02.yaml`
 - 自動集計: `analysis/summary/verified_bonus_overview.yaml`
 - 検証ロジック: `scripts/generate_verified_bonus_summary.py`
 - 互換エントリーポイント: `scripts/generate_bonus_summary.py`
 
-`nikkei225_bonus_survey_2024_en.yaml`と従来の`companies/`配下は履歴資料です。出典URLのない月数や推定値を含むため、現在の検証済み集計には使用しません。
+従来の`companies/`配下は履歴資料です。出典URLのない月数や推定値を含むため、現在の検証済み集計には使用しません。
 
 ## データ状態
 
@@ -47,7 +49,7 @@ python scripts/generate_bonus_summary.py
 
 `--check`は次を検証します。
 
-- データ内の証券コードが固定銘柄集合に含まれること
+- データ内の証券コードが既存30社の固定集合に含まれること
 - 重複コードがないこと
 - 検証済みレコードにHTTPSの一次情報URLがあること
 - `unknown`に分類や数値を混入させていないこと
