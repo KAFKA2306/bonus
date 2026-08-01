@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the deployed GitHub Pages bytes against locally generated artifacts."""
+"""Verify deployed Pages bytes against locally generated fact and hypothesis artifacts."""
 
 from __future__ import annotations
 
@@ -8,34 +8,33 @@ import hashlib
 import json
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Callable
 
+from bonus_hypotheses import latest_hypothesis
 from generate_verified_bonus_summary import DATA_DIR, latest_snapshot
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DEFAULT_URL = "https://kafka2306.github.io/bonus/"
-BUILD_MARKER = b'name="bonus-build" content="verified-pages-v2"'
+BUILD_MARKER = b'name="bonus-build" content="verified-pages-v3"'
 
 
-def fetch(url: str, attempts: int, delay: float) -> bytes:
-    last_error: Exception | None = None
+def fetch_once(url: str) -> bytes:
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "KAFKA2306-bonus-live-audit/1.0"},
+        headers={
+            "User-Agent": "KAFKA2306-bonus-live-audit/1.0",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
     )
-    for attempt in range(1, attempts + 1):
-        try:
-            with urllib.request.urlopen(request, timeout=30) as response:
-                if response.status != 200:
-                    raise RuntimeError(f"HTTP {response.status}: {url}")
-                return response.read()
-        except (urllib.error.URLError, TimeoutError, RuntimeError) as exc:
-            last_error = exc
-            if attempt < attempts:
-                time.sleep(delay)
-    raise RuntimeError(f"failed after {attempts} attempts: {url}: {last_error}")
+    with urllib.request.urlopen(request, timeout=30) as response:
+        if response.status != 200:
+            raise RuntimeError(f"HTTP {response.status}: {url}")
+        return response.read()
 
 
 def describe(body: bytes) -> str:
@@ -44,15 +43,59 @@ def describe(body: bytes) -> str:
     return f"bytes={len(body)} sha256={digest} preview={preview!r}"
 
 
-def expected_generated_from(
-    data_dir: Path = DATA_DIR,
-    root: Path = ROOT,
-) -> str:
-    snapshot = latest_snapshot(data_dir).resolve()
+def cache_busted(url: str, token: str, attempt: int) -> str:
+    separator = "&" if urllib.parse.urlsplit(url).query else "?"
+    return f"{url}{separator}audit={token}&attempt={attempt}"
+
+
+def fetch_until(
+    url: str,
+    predicate: Callable[[bytes], bool],
+    attempts: int,
+    delay: float,
+    token: str,
+    expectation: str,
+) -> bytes:
+    last_body = b""
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            last_body = fetch_once(cache_busted(url, token, attempt))
+            if predicate(last_body):
+                return last_body
+            last_error = RuntimeError(
+                f"response did not satisfy {expectation}: {describe(last_body)}"
+            )
+        except (urllib.error.URLError, TimeoutError, RuntimeError) as exc:
+            last_error = exc
+        if attempt < attempts:
+            time.sleep(delay)
+    raise RuntimeError(
+        f"failed after {attempts} attempts: {url}; expected {expectation}; "
+        f"last_error={last_error}; last_body={describe(last_body)}"
+    )
+
+
+def _relative_latest(selector, data_dir: Path, root: Path) -> str:
+    snapshot = selector(data_dir).resolve()
     try:
         return str(snapshot.relative_to(root.resolve()))
     except ValueError:
         return str(snapshot)
+
+
+def expected_generated_from(
+    data_dir: Path = DATA_DIR,
+    root: Path = ROOT,
+) -> str:
+    return _relative_latest(latest_snapshot, data_dir, root)
+
+
+def expected_hypotheses_from(
+    data_dir: Path = DATA_DIR,
+    root: Path = ROOT,
+) -> str:
+    return _relative_latest(latest_hypothesis, data_dir, root)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -71,28 +114,33 @@ def main(argv: list[str] | None = None) -> int:
         "app.js": DOCS / "app.js",
         "data/bonus.json": DOCS / "data" / "bonus.json",
     }
+    token = hashlib.sha256(
+        b"".join(path.read_bytes() for path in expected_paths.values())
+    ).hexdigest()[:16]
 
-    index = fetch(base, args.attempts, args.delay)
+    index = fetch_until(
+        base,
+        lambda body: BUILD_MARKER in body and b"Bonus Evidence Atlas" in body,
+        args.attempts,
+        args.delay,
+        token,
+        "verified-pages-v3 marker and title",
+    )
     if BUILD_MARKER not in index:
-        raise SystemExit(
-            "live index.html does not contain verified-pages-v2 marker; "
-            + describe(index)
-        )
-    if b"Bonus Evidence Atlas" not in index:
-        raise SystemExit(
-            "live index.html does not contain the expected title; " + describe(index)
-        )
+        raise SystemExit("live index.html is missing the v3 build marker")
 
     for relative_url, local_path in expected_paths.items():
         if not local_path.exists():
             raise SystemExit(f"local generated artifact is missing: {local_path}")
-        live = fetch(base + relative_url, args.attempts, args.delay)
         expected = local_path.read_bytes()
-        if live != expected:
-            raise SystemExit(
-                f"live artifact differs from generated bytes: {relative_url}; "
-                f"live={describe(live)} expected={describe(expected)}"
-            )
+        fetch_until(
+            base + relative_url,
+            lambda body, expected=expected: body == expected,
+            args.attempts,
+            args.delay,
+            token,
+            f"byte equality with {relative_url}",
+        )
 
     public = json.loads((DOCS / "data" / "bonus.json").read_text(encoding="utf-8"))
     if public.get("schema_version") != 1:
@@ -105,9 +153,19 @@ def main(argv: list[str] | None = None) -> int:
             f"expected={expected_source!r} actual={public.get('generated_from')!r}"
         )
 
+    expected_hypotheses = expected_hypotheses_from()
+    if public.get("hypotheses_generated_from") != expected_hypotheses:
+        raise SystemExit(
+            "public JSON was not generated from the latest hypothesis snapshot: "
+            f"expected={expected_hypotheses!r} "
+            f"actual={public.get('hypotheses_generated_from')!r}"
+        )
+    if public.get("summary", {}).get("hypothesis_count", 0) < 1:
+        raise SystemExit("public JSON contains no hypotheses")
+
     print(
-        "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON "
-        "exactly match the verified build"
+        "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON exactly match "
+        "the verified facts plus hypothesis build"
     )
     return 0
 

@@ -7,6 +7,7 @@ import json
 import re
 from pathlib import Path
 
+from bonus_hypotheses import latest_hypothesis, validate_hypotheses
 from generate_pages_data import DEFAULT_OUTPUT, build_public_payload, render_json
 from generate_verified_bonus_summary import (
     DATA_DIR,
@@ -22,10 +23,7 @@ DOCS = ROOT / "docs"
 
 
 def relative_luminance(hex_color: str) -> float:
-    channels = [
-        int(hex_color[index : index + 2], 16) / 255
-        for index in (1, 3, 5)
-    ]
+    channels = [int(hex_color[index : index + 2], 16) / 255 for index in (1, 3, 5)]
     linear = [
         channel / 12.92
         if channel <= 0.04045
@@ -51,35 +49,52 @@ def css_variable(css: str, name: str) -> str:
 
 def main() -> int:
     input_path = latest_snapshot(DATA_DIR)
+    hypothesis_path = latest_hypothesis(DATA_DIR)
     snapshot = load_yaml(input_path)
+    hypothesis_snapshot = load_yaml(hypothesis_path)
     universe_codes = load_universe_codes(UNIVERSE_FILE)
     records = validate_snapshot(snapshot, universe_codes)
+    hypotheses = validate_hypotheses(hypothesis_snapshot, universe_codes)
     expected = render_json(
         build_public_payload(
             snapshot,
             records,
             input_path,
             tracked_companies=len(universe_codes),
+            hypotheses=hypotheses,
+            hypothesis_snapshot=hypothesis_snapshot,
+            hypothesis_path=hypothesis_path,
         )
     )
     assert DEFAULT_OUTPUT.exists(), "generated Pages JSON is missing"
     actual = DEFAULT_OUTPUT.read_text(encoding="utf-8")
     assert actual == expected, (
-        "Pages JSON differs from the latest verified snapshot; "
+        "Pages JSON differs from latest facts or hypotheses; "
         "run python scripts/generate_pages_data.py"
     )
     public = json.loads(actual)
     assert public["generated_from"] == str(input_path.relative_to(ROOT))
+    assert public["hypotheses_generated_from"] == str(hypothesis_path.relative_to(ROOT))
     assert public["summary"]["record_count"] == len(records)
+    assert public["summary"]["hypothesis_count"] == len(hypotheses)
+    assert all(item["hypothesis"] is not None for item in public["records"]), (
+        "every currently published company must have a falsifiable hypothesis"
+    )
+    assert all(
+        item["hypothesis"]["not_for_verified_aggregate"] is True
+        for item in public["records"]
+    )
 
     html = (DOCS / "index.html").read_text(encoding="utf-8")
     app = (DOCS / "app.js").read_text(encoding="utf-8")
     css = (DOCS / "styles.css").read_text(encoding="utf-8")
 
     html_markers = (
-        'name="bonus-build" content="verified-pages-v2"',
+        'name="bonus-build" content="verified-pages-v3"',
         'id="companies"',
         'id="method"',
+        'id="metric-hypotheses"',
+        'data-status="estimated"',
         'id="result-count"',
         'role="status"',
         'aria-live="polite"',
@@ -98,10 +113,13 @@ def main() -> int:
     app_markers = (
         "./data/bonus.json",
         "function searchText",
-        "labels[record.classification]",
+        "function hypothesisPanel",
+        "function statusMatch",
+        "record.hypothesis",
+        "hypothesis.falsifiers",
         "setAttribute('aria-pressed'",
         "#result-count",
-        "status-${escapeHtml(record.evidence_status)}",
+        "#metric-hypotheses",
     )
     for marker in app_markers:
         assert marker in app, f"missing app behavior: {marker}"
@@ -113,6 +131,9 @@ def main() -> int:
         ".status-confirmed",
         ".status-partially_confirmed",
         ".status-unknown",
+        ".status-estimated",
+        ".hypothesis",
+        ".confidence-low",
         "@media (max-width: 820px)",
     )
     for marker in css_markers:
@@ -124,8 +145,8 @@ def main() -> int:
         assert ratio >= 4.5, f"--{name} contrast is only {ratio:.2f}:1"
 
     print(
-        f"PASS: Pages v2 matches {input_path.name}; "
-        f"{len(records)} records; contrast and accessibility gates passed"
+        f"PASS: Pages v3 matches {input_path.name} and {hypothesis_path.name}; "
+        f"{len(records)} facts, {len(hypotheses)} hypotheses; accessibility gates passed"
     )
     return 0
 
