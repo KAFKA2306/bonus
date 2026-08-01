@@ -62,21 +62,30 @@ def normalise_code(value: Any) -> str:
 
 
 def load_universe_codes(path: Path = UNIVERSE_FILE) -> set[str]:
-    payload = load_yaml(path)
+    text = path.read_text(encoding="utf-8")
     try:
-        companies = payload["nikkei225"]["companies"]
-    except (KeyError, TypeError) as exc:
-        raise ValidationError(f"invalid universe structure: {path}") from exc
-    if not isinstance(companies, list):
-        raise ValidationError(f"universe companies must be a list: {path}")
+        payload = yaml.safe_load(text)
+    except yaml.YAMLError:
+        payload = None
 
     codes: set[str] = set()
-    for item in companies:
-        if not isinstance(item, dict):
-            continue
-        codes.add(normalise_code(item.get("stock_code")))
+    if isinstance(payload, dict):
+        companies = payload.get("nikkei225", {}).get("companies", [])
+        if isinstance(companies, list):
+            for item in companies:
+                if isinstance(item, dict) and item.get("stock_code") is not None:
+                    codes.add(normalise_code(item.get("stock_code")))
+
     if not codes:
-        raise ValidationError(f"universe contains no stock codes: {path}")
+        # The frozen historical file currently contains malformed YAML. Preserve it
+        # unchanged and recover only explicit 4-digit stock_code entries.
+        pattern = re.compile(
+            r"(?m)^\s*-\s+stock_code:\s*[\"']?(\d{4})[\"']?\s*$"
+        )
+        codes = set(pattern.findall(text))
+
+    if not codes:
+        raise ValidationError(f"universe contains no recoverable stock codes: {path}")
     return codes
 
 
