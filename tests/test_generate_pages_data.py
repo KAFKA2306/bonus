@@ -43,6 +43,29 @@ def record(code: str, *, status: str = "confirmed", months=None):
     }
 
 
+def hypothesis(code: str, central: float = 5.0):
+    return {
+        "stock_code": code,
+        "target": "annual_bonus_months",
+        "estimate": {
+            "minimum": central - 0.5,
+            "central": central,
+            "maximum": central + 0.5,
+            "unit": "base_salary_months",
+        },
+        "classification_hypothesis": "hybrid",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {"level": "medium", "score": 0.55},
+        "method": "test_prior",
+        "basis": [
+            {"type": "legacy_prior", "statement": "旧値", "reference": "legacy"}
+        ],
+        "assumptions": ["前提"],
+        "falsifiers": ["反証"],
+        "not_for_verified_aggregate": True,
+    }
+
+
 class PagesDataTests(unittest.TestCase):
     def test_latest_snapshot_selects_newest_filename(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -53,7 +76,7 @@ class PagesDataTests(unittest.TestCase):
             newer.write_text("new", encoding="utf-8")
             self.assertEqual(latest_snapshot(data_dir), newer)
 
-    def test_projection_preserves_verified_fields(self):
+    def test_projection_preserves_verified_fields_and_hypothesis(self):
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -62,26 +85,40 @@ class PagesDataTests(unittest.TestCase):
             },
             "methodology": {"primary_sources_only": True},
         }
+        hypothesis_snapshot = {
+            "methodology": {"separation_policy": "事実と推定を分離"}
+        }
         item = record("6146")
+        estimate = hypothesis("6146", 10.5)
         payload = build_public_payload(
             snapshot,
             [item],
             ROOT / "data" / "verified_bonus_facts_2026-08-02.yaml",
             tracked_companies=30,
+            hypotheses={"6146": estimate},
+            hypothesis_snapshot=hypothesis_snapshot,
+            hypothesis_path=ROOT / "data" / "bonus_hypotheses_2026-08-02.yaml",
         )
         public = payload["records"][0]
         self.assertEqual(public["employee_scope"], item["employee_scope"])
         self.assertEqual(public["bonus"], item["bonus"])
+        self.assertEqual(public["hypothesis"], estimate)
         self.assertEqual(public["notes"], item["notes"])
         self.assertEqual(public["sources"], item["sources"])
         self.assertEqual(
             payload["generated_from"],
             "data/verified_bonus_facts_2026-08-02.yaml",
         )
+        self.assertEqual(
+            payload["hypotheses_generated_from"],
+            "data/bonus_hypotheses_2026-08-02.yaml",
+        )
+        self.assertEqual(payload["summary"]["hypothesis_count"], 1)
+        self.assertEqual(payload["summary"]["hypothesis_central_months_average"], 10.5)
         self.assertEqual(payload["universe"]["tracked_companies"], 30)
         self.assertTrue(render_json(payload).endswith("\n"))
 
-    def test_average_excludes_minimum_and_partial_records(self):
+    def test_verified_average_excludes_hypotheses_and_minimums(self):
         point = record(
             "6146",
             months={
@@ -106,14 +143,21 @@ class PagesDataTests(unittest.TestCase):
                 "mutation_policy": "frozen",
             },
         }
+        hypotheses = {
+            "6146": hypothesis("6146", 10.0),
+            "6503": hypothesis("6503", 5.5),
+        }
         payload = build_public_payload(
             snapshot,
             [point, minimum, partial],
             ROOT / "data" / "x.yaml",
             tracked_companies=30,
+            hypotheses=hypotheses,
         )
         self.assertEqual(payload["summary"]["explicit_point_months_count"], 1)
         self.assertEqual(payload["summary"]["explicit_point_months_average"], 6.0)
+        self.assertEqual(payload["summary"]["hypothesis_count"], 2)
+        self.assertEqual(payload["summary"]["hypothesis_central_months_average"], 7.75)
 
 
 if __name__ == "__main__":
