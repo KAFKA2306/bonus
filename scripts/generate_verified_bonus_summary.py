@@ -3,7 +3,7 @@
 
 This pipeline deliberately does not infer bonus months from prose. A numeric value is
 accepted only when the snapshot marks it as an explicit value from an eligible primary
-source. The stock universe is read from ``nikkei225_companies.yaml`` and never modified.
+source. The tracked stock universe is read from the existing 30-company survey and never modified.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ from typing import Any, Iterable
 import yaml
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-UNIVERSE_FILE = BASE_DIR / "nikkei225_companies.yaml"
+UNIVERSE_FILE = BASE_DIR / "nikkei225_bonus_survey_2024_en.yaml"
 DATA_DIR = BASE_DIR / "data"
 SUMMARY_FILE = BASE_DIR / "analysis" / "summary" / "verified_bonus_overview.yaml"
 
@@ -70,15 +70,17 @@ def load_universe_codes(path: Path = UNIVERSE_FILE) -> set[str]:
 
     codes: set[str] = set()
     if isinstance(payload, dict):
-        companies = payload.get("nikkei225", {}).get("companies", [])
+        companies = payload.get("companies")
+        if not isinstance(companies, list):
+            companies = payload.get("nikkei225", {}).get("companies", [])
         if isinstance(companies, list):
             for item in companies:
                 if isinstance(item, dict) and item.get("stock_code") is not None:
                     codes.add(normalise_code(item.get("stock_code")))
 
     if not codes:
-        # The frozen historical file currently contains malformed YAML. Preserve it
-        # unchanged and recover only explicit 4-digit stock_code entries.
+        # Preserve historical universe files unchanged and recover only explicit
+        # 4-digit stock_code entries when a legacy YAML file is malformed.
         pattern = re.compile(
             r"(?m)^\s*-\s+stock_code:\s*[\"']?(\d{4})[\"']?\s*$"
         )
@@ -226,8 +228,10 @@ def validate_snapshot(
     universe = payload.get("universe")
     if not isinstance(universe, dict):
         raise ValidationError("universe metadata is required")
-    if universe.get("source_file") != "nikkei225_companies.yaml":
-        raise ValidationError("universe.source_file must be nikkei225_companies.yaml")
+    if universe.get("source_file") != "nikkei225_bonus_survey_2024_en.yaml":
+        raise ValidationError(
+            "universe.source_file must be nikkei225_bonus_survey_2024_en.yaml"
+        )
     if universe.get("mutation_policy") != "frozen":
         raise ValidationError("universe.mutation_policy must be frozen")
 
@@ -293,7 +297,7 @@ def build_summary(
         "input_snapshot": str(input_path.relative_to(BASE_DIR)),
         "snapshot_as_of": snapshot["as_of"],
         "universe": {
-            "source_file": "nikkei225_companies.yaml",
+            "source_file": "nikkei225_bonus_survey_2024_en.yaml",
             "mutation_policy": "frozen",
             "universe_changed": False,
         },
