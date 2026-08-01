@@ -2,6 +2,7 @@
   "schema_version": 1,
   "as_of": "2026-08-02",
   "generated_from": "data/verified_bonus_facts_2026-08-02.yaml",
+  "hypotheses_generated_from": "data/bonus_hypotheses_2026-08-02.yaml",
   "universe": {
     "source_file": "nikkei225_bonus_survey_2024_en.yaml",
     "mutation_policy": "frozen",
@@ -13,9 +14,18 @@
     "numeric_policy": "月数・回数は一次資料に明記された値だけを格納し、文章から推定しない。",
     "unknown_policy": "一次資料で確認できない項目は null とする。"
   },
+  "hypothesis_methodology": {
+    "purpose": "一次情報で確定できない賞与月数について、検証可能な仮説レンジを提示する。",
+    "separation_policy": "確認事実と仮説推定を別レイヤーで保持し、推定値をverified集計へ混入させない。",
+    "interval_policy": "単一点ではなく下限・中心値・上限を示し、前提と反証条件を必須とする。",
+    "confidence_policy": "confidence.scoreは0から1。一次情報の直接性、旧調査との整合性、制度変更リスクを反映する。",
+    "aggregation_policy": "仮説中心値の平均は参考指標であり、確認済み月数平均とは別に表示する。"
+  },
   "summary": {
     "record_count": 5,
     "confirmed_or_partial_count": 4,
+    "hypothesis_count": 5,
+    "hypothesis_central_months_average": 5.8,
     "evidence_status_counts": {
       "confirmed": 3,
       "partially_confirmed": 1,
@@ -47,6 +57,44 @@
         "pool_basis": "会社業績に連動するテーブルで賞与原資・支給月数を決定",
         "allocation_logic": "Will賞与部分は直近6か月の部門Will比率、次に個人Will比率で二段階配分",
         "base_salary_link": "Will収支は基本給とは直接連動しない"
+      },
+      "hypothesis": {
+        "stock_code": "6146",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 9.0,
+          "central": 10.5,
+          "maximum": 12.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "hybrid",
+        "frequency_per_year_hypothesis": 4,
+        "confidence": {
+          "level": "medium",
+          "score": 0.58
+        },
+        "method": "verified_floor_plus_legacy_prior",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "公式情報で年4回、年間最低4.0か月、会社業績連動テーブルとWill配分を確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6146"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査には年間9〜12か月という事前分布があるが、一次情報で月数を再確認できていない。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6146"
+          }
+        ],
+        "assumptions": [
+          "好業績時の業績連動部分が最低保証4.0か月を大きく上回る。",
+          "旧調査時点から賞与原資テーブルの構造が大幅には縮小していない。"
+        ],
+        "falsifiers": [
+          "公式採用情報または報酬資料で年間上限が9か月未満と示される。",
+          "月給への恒久的な振替により賞与比率が大幅に低下する。"
+        ],
+        "not_for_verified_aggregate": true
       },
       "notes": [
         "Will会計は人事評価制度ではなく管理会計制度。",
@@ -94,6 +142,44 @@
         "allocation_logic": "個人の総合評価を賃金・賞与へ直接反映",
         "base_salary_link": "賃金と賞与の双方に総合評価を連動"
       },
+      "hypothesis": {
+        "stock_code": "6503",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.0,
+          "central": 5.5,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.54
+        },
+        "method": "legacy_range_adjusted_for_new_performance_system",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "2024年度の新人事制度で成果・行動評価を賃金と賞与へ直接反映することを確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6503"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年2回、年間5〜6か月を想定していた。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6503"
+          }
+        ],
+        "assumptions": [
+          "制度刷新は配分差を拡大するが、標準評価者の年間総額を急減させない。",
+          "重電大手の労使慣行として年2回支給が維持される。"
+        ],
+        "falsifiers": [
+          "労使交渉資料で標準者の年間一時金がレンジ外と判明する。",
+          "評価連動分を月例賃金へ移す追加改定が公表される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
       "notes": [
         "2024年度に等級・評価・報酬制度を刷新し、年功的要素を廃止。",
         "旧データの5〜6か月・年2回という数値は一次資料で確認できないため移行しない。"
@@ -132,6 +218,44 @@
         "allocation_logic": "対象会社・新卒採用範囲では年1回。全従業員共通制度かは未確認",
         "base_salary_link": null
       },
+      "hypothesis": {
+        "stock_code": "6758",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 0.5,
+          "central": 1.0,
+          "maximum": 1.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 1,
+        "confidence": {
+          "level": "low",
+          "score": 0.42
+        },
+        "method": "post_reform_residual_bonus_prior",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "対象会社の新卒募集要項で業績給を年1回支給すると確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6758"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では冬季分を月給へ振替後、夏季に約1か月を残す仮説が記録されていた。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6758"
+          }
+        ],
+        "assumptions": [
+          "月給へ移管された部分を除く残存業績給が基本給0.5〜1.5か月相当になる。",
+          "新卒募集要項の年1回制度が主要対象会社の標準的な設計を反映する。"
+        ],
+        "falsifiers": [
+          "公式報酬資料で業績給が固定額方式で月数換算不能と判明する。",
+          "対象会社ごとに制度が大きく異なり、共通レンジが成立しない。"
+        ],
+        "not_for_verified_aggregate": true
+      },
       "notes": [
         "応募資格は2027年3月末卒業見込み等。業績給は年1回と明記されているが、全従業員共通制度かは未確認。",
         "旧データの夏季約1か月という数値は公式資料で確認できないため移行しない。"
@@ -162,6 +286,44 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "hypothesis": {
+        "stock_code": "6861",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 6.0,
+          "central": 7.0,
+          "maximum": 8.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 4,
+        "confidence": {
+          "level": "low",
+          "score": 0.4
+        },
+        "method": "legacy_prior_with_high_uncertainty",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "最新法定開示は確認したが、従業員賞与の原資・月数・配分式は公式資料で確定できていない。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6861"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年4回、基本給6〜8か月相当、業績連動という仮説が記録されていた。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6861"
+          }
+        ],
+        "assumptions": [
+          "高い平均年収の一部が四半期業績給として維持されている。",
+          "営業利益連動という旧仮説は方向性としては有効だが、10%という係数は採用しない。"
+        ],
+        "falsifiers": [
+          "公式採用・報酬資料で支給回数または標準月数がレンジ外と示される。",
+          "高年収の主因が賞与ではなく月例給与・株式報酬であると判明する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
       "notes": [
         "2026年3月期の公式有価証券報告書は確認したが、従業員賞与の原資・月数・配分式は公式IR索引から確認できない。",
         "旧データの営業利益約10%・6〜8か月という主張は一次資料で再確認できないため unknown に戻す。"
@@ -191,6 +353,44 @@
         "pool_basis": "会社業績賞与と個人業績連動賞与で構成",
         "allocation_logic": "会社業績と個人の成果に基づき決定。サステナビリティKPIも全社員賞与に連動",
         "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9433",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.5,
+          "central": 5.0,
+          "maximum": 5.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "hybrid",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.55
+        },
+        "method": "stable_sector_prior_bounded_by_legacy_value",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "会社業績賞与と個人業績連動賞与の組合せを公式情報で確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#9433"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年2回、年間約5か月を中心値としていた。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9433"
+          }
+        ],
+        "assumptions": [
+          "通信大手の安定収益構造により、年間月数の変動幅は比較的小さい。",
+          "基本給引上げ後も賞与係数が急激には切り下がっていない。"
+        ],
+        "falsifiers": [
+          "公式労使資料で年間一時金が4.5か月未満または5.5か月超と示される。",
+          "賞与の大部分が月給へ移管される制度改定が行われる。"
+        ],
+        "not_for_verified_aggregate": true
       },
       "notes": [
         "旧データの約5か月・年2回という数値は公式ページで確認できないため移行しない。"

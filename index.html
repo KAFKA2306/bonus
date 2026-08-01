@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="一次情報だけで確認した従業員賞与制度の閲覧ダッシュボード">
+  <meta name="description" content="一次情報の確認事実と、反証可能な賞与仮説を分離して閲覧するダッシュボード">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="verified-pages-v2">
+  <meta name="bonus-build" content="verified-pages-v3">
   <title>Bonus Evidence Atlas</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
@@ -21,24 +21,24 @@
     </a>
     <nav aria-label="主要ナビゲーション">
       <a href="#companies">企業</a>
-      <a href="#method">監査方針</a>
+      <a href="#method">推定方法</a>
       <a href="https://github.com/KAFKA2306/bonus">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero shell">
-      <div class="eyebrow">PRIMARY SOURCE / EMPLOYEE BONUS</div>
-      <h1>賞与制度を、<br><span>推測せずに見る。</span></h1>
-      <p class="lead">会社公式・労働組合公式・法定開示で確認できた範囲だけを表示します。確認できない数値は、未確認のまま残します。</p>
+      <div class="eyebrow">VERIFIED FACTS × FALSIFIABLE HYPOTHESES</div>
+      <h1>未確認で止めず、<br><span>仮説として推定する。</span></h1>
+      <p class="lead">一次情報で確認できた事実と、旧調査・制度構造から推定したレンジを分離表示します。推定には確度、前提、反証条件を必ず付けます。</p>
       <div class="hero-actions">
-        <a class="button primary" href="#companies">データを見る</a>
-        <a class="button secondary" href="#method">集計ルール</a>
+        <a class="button primary" href="#companies">推定を見る</a>
+        <a class="button secondary" href="#method">推定ルール</a>
       </div>
       <div class="meta-line">
         <span id="as-of">基準日 —</span>
         <span>既存銘柄集合を固定</span>
-        <span>役員報酬を除外</span>
+        <span>事実と推定を分離</span>
       </div>
     </section>
 
@@ -54,9 +54,9 @@
         <small>confirmed / partial</small>
       </article>
       <article>
-        <span class="metric-label">明示月数平均</span>
-        <strong id="metric-average">—</strong>
-        <small>推定値・下限値を除外</small>
+        <span class="metric-label">仮説推定</span>
+        <strong id="metric-hypotheses">—</strong>
+        <small>レンジ・確度・反証条件付き</small>
       </article>
       <article>
         <span class="metric-label">固定Universe</span>
@@ -68,22 +68,22 @@
     <section id="companies" class="shell section-block">
       <div class="section-heading">
         <div>
-          <span class="kicker">EVIDENCE RECORDS</span>
-          <h2>企業別の確認結果</h2>
+          <span class="kicker">FACTS AND ESTIMATES</span>
+          <h2>企業別の確認事実と仮説</h2>
         </div>
-        <p>確認状態、制度分類、会社名、証券コードで絞り込めます。</p>
+        <p>会社名、証券コード、制度分類、仮説根拠まで検索できます。</p>
       </div>
 
       <div class="toolbar">
         <label class="search" for="search">
           <span>検索</span>
-          <input id="search" type="search" placeholder="会社名・証券コード・制度分類" autocomplete="off">
+          <input id="search" type="search" placeholder="会社名・証券コード・制度・仮説根拠" autocomplete="off">
         </label>
-        <div class="filters" role="group" aria-label="確認状態フィルター">
+        <div class="filters" role="group" aria-label="表示フィルター">
           <button type="button" class="filter active" data-status="all" aria-pressed="true" aria-controls="cards">すべて</button>
           <button type="button" class="filter" data-status="confirmed" aria-pressed="false" aria-controls="cards">確認済み</button>
           <button type="button" class="filter" data-status="partially_confirmed" aria-pressed="false" aria-controls="cards">一部確認</button>
-          <button type="button" class="filter" data-status="unknown" aria-pressed="false" aria-controls="cards">未確認</button>
+          <button type="button" class="filter" data-status="estimated" aria-pressed="false" aria-controls="cards">仮説あり</button>
         </div>
       </div>
 
@@ -92,20 +92,20 @@
       <p id="empty" class="empty" hidden>条件に一致する企業はありません。</p>
 
       <noscript>
-        <p class="noscript">このビューの検索とカード表示にはJavaScriptが必要です。検証済みデータはGitHubリポジトリの <a href="https://github.com/KAFKA2306/bonus/tree/main/data">dataディレクトリ</a> で確認できます。</p>
+        <p class="noscript">このビューの検索とカード表示にはJavaScriptが必要です。正規データはGitHubリポジトリの <a href="https://github.com/KAFKA2306/bonus/tree/main/data">dataディレクトリ</a> で確認できます。</p>
       </noscript>
     </section>
 
     <section id="method" class="shell section-block method-grid">
       <div>
-        <span class="kicker">AUDIT CONTRACT</span>
-        <h2>数字を増やすより、<br>誤認を減らす。</h2>
+        <span class="kicker">HYPOTHESIS CONTRACT</span>
+        <h2>推定を断定に<br>変えない。</h2>
       </div>
       <div class="rules">
-        <article><b aria-hidden="true">01</b><div><h3>一次情報のみ</h3><p>会社公式、労働組合公式、法定開示だけを検証済み根拠にします。</p></div></article>
-        <article><b aria-hidden="true">02</b><div><h3>対象範囲を明記</h3><p>会社全体、新卒採用範囲、特定制度など、確認できた母集団を分離します。</p></div></article>
-        <article><b aria-hidden="true">03</b><div><h3>月数を推定しない</h3><p>文章、口コミ、年収から賞与月数を逆算しません。明記値だけを保存します。</p></div></article>
-        <article><b aria-hidden="true">04</b><div><h3>Unknownを維持</h3><p>一次情報で確認できない制度は、断定せずunknownとして残します。</p></div></article>
+        <article><b aria-hidden="true">01</b><div><h3>確認事実を固定</h3><p>会社公式・労働組合公式・法定開示で確認した内容はverifiedレイヤーに保存します。</p></div></article>
+        <article><b aria-hidden="true">02</b><div><h3>仮説は別レイヤー</h3><p>旧調査値や業界構造からの推定は、事実の月数や平均へ混入させません。</p></div></article>
+        <article><b aria-hidden="true">03</b><div><h3>レンジと確度</h3><p>中心値だけでなく下限・上限と確度スコアを示し、偽の精密さを避けます。</p></div></article>
+        <article><b aria-hidden="true">04</b><div><h3>反証条件を持つ</h3><p>どの公式情報が出れば仮説を棄却・更新するかを企業ごとに明記します。</p></div></article>
       </div>
     </section>
   </main>
