@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the deployed GitHub Pages bytes against locally generated artifacts."""
+"""Verify deployed Pages bytes against locally generated fact and hypothesis artifacts."""
 
 from __future__ import annotations
 
@@ -11,12 +11,13 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from bonus_hypotheses import latest_hypothesis
 from generate_verified_bonus_summary import DATA_DIR, latest_snapshot
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DEFAULT_URL = "https://kafka2306.github.io/bonus/"
-BUILD_MARKER = b'name="bonus-build" content="verified-pages-v2"'
+BUILD_MARKER = b'name="bonus-build" content="verified-pages-v3"'
 
 
 def fetch(url: str, attempts: int, delay: float) -> bytes:
@@ -44,15 +45,26 @@ def describe(body: bytes) -> str:
     return f"bytes={len(body)} sha256={digest} preview={preview!r}"
 
 
-def expected_generated_from(
-    data_dir: Path = DATA_DIR,
-    root: Path = ROOT,
-) -> str:
-    snapshot = latest_snapshot(data_dir).resolve()
+def _relative_latest(selector, data_dir: Path, root: Path) -> str:
+    snapshot = selector(data_dir).resolve()
     try:
         return str(snapshot.relative_to(root.resolve()))
     except ValueError:
         return str(snapshot)
+
+
+def expected_generated_from(
+    data_dir: Path = DATA_DIR,
+    root: Path = ROOT,
+) -> str:
+    return _relative_latest(latest_snapshot, data_dir, root)
+
+
+def expected_hypotheses_from(
+    data_dir: Path = DATA_DIR,
+    root: Path = ROOT,
+) -> str:
+    return _relative_latest(latest_hypothesis, data_dir, root)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -75,7 +87,7 @@ def main(argv: list[str] | None = None) -> int:
     index = fetch(base, args.attempts, args.delay)
     if BUILD_MARKER not in index:
         raise SystemExit(
-            "live index.html does not contain verified-pages-v2 marker; "
+            "live index.html does not contain verified-pages-v3 marker; "
             + describe(index)
         )
     if b"Bonus Evidence Atlas" not in index:
@@ -105,9 +117,19 @@ def main(argv: list[str] | None = None) -> int:
             f"expected={expected_source!r} actual={public.get('generated_from')!r}"
         )
 
+    expected_hypotheses = expected_hypotheses_from()
+    if public.get("hypotheses_generated_from") != expected_hypotheses:
+        raise SystemExit(
+            "public JSON was not generated from the latest hypothesis snapshot: "
+            f"expected={expected_hypotheses!r} "
+            f"actual={public.get('hypotheses_generated_from')!r}"
+        )
+    if public.get("summary", {}).get("hypothesis_count", 0) < 1:
+        raise SystemExit("public JSON contains no hypotheses")
+
     print(
-        "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON "
-        "exactly match the verified build"
+        "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON exactly match "
+        "the verified facts plus hypothesis build"
     )
     return 0
 
