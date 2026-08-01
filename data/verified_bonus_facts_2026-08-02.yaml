@@ -111,7 +111,7 @@ records:
   - stock_code: "6758"
     company_name_ja: "ソニーグループ"
     subject: "employees"
-    employee_scope: "ソニーグループ株式会社・ソニー株式会社・ソニーセミコンダクタソリューションズ株式会社の2026年度新卒募集要項"
+    employee_scope: "ソニーグループ株式会社・ソニー株式会社・ソニーセミコンダクタソリューションズ株式会社の2027年4月入社向け新卒採用募集要項（給与は2026年度予定）"
     classification: "performance_linked"
     evidence_status: "partially_confirmed"
     as_of: "2026-08-02"
@@ -122,15 +122,15 @@ records:
       allocation_logic: "対象会社・新卒採用範囲では年1回。全従業員共通制度かは未確認"
       base_salary_link: null
     notes:
-      - "確認範囲が採用募集要項に限定されるため partially_confirmed とする。"
+      - "応募資格は2027年3月末卒業見込み等。業績給は年1回と明記されているが、全従業員共通制度かは未確認。"
       - "旧データの夏季約1か月という数値は公式資料で確認できないため移行しない。"
     sources:
       - type: "company_official"
-        title: "2026年度 新卒採用 募集要項"
+        title: "新卒採用 募集要項（2027年4月入社対象）"
         url: "https://www.sony.com/ja/SonyInfo/Jobs/newgrads/info/requirements/group/"
         published_at: null
         retrieved_at: "2026-08-02"
-        page_or_section: "給与・業績給"
+        page_or_section: "募集要項（ジョブマッチング）／給与・業績給"
 
   - stock_code: "6861"
     company_name_ja: "キーエンス"
