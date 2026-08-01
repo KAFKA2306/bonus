@@ -1,0 +1,26 @@
+name: Audit live bonus dashboard
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/audit_live_pages.py"
+      - ".github/workflows/live-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Generate expected public JSON
+        run: python scripts/generate_pages_data.py
+      - name: Audit deployed dashboard
+        run: python scripts/audit_live_pages.py
