@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from generate_verified_bonus_summary import (  # noqa: E402
     ValidationError,
     build_summary,
+    load_universe_codes,
     validate_snapshot,
 )
 
@@ -59,6 +61,19 @@ class VerificationTests(unittest.TestCase):
     def test_rejects_code_outside_frozen_universe(self):
         with self.assertRaisesRegex(ValidationError, "outside the frozen universe"):
             validate_snapshot(snapshot([record("9999")]), {"6146"})
+
+    def test_malformed_universe_falls_back_to_explicit_stock_codes(self):
+        malformed = """nikkei225:
+  companies:
+    - stock_code: \"6146\"
+      company_name_ja: ディスコ
+    broken: value
+    - stock_code: '6503'
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "universe.yaml"
+            path.write_text(malformed, encoding="utf-8")
+            self.assertEqual(load_universe_codes(path), {"6146", "6503"})
 
     def test_unknown_record_cannot_carry_numeric_months(self):
         item = record(status="unknown")
