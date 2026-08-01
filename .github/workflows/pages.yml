@@ -6,6 +6,7 @@ on:
     paths:
       - "docs/**"
       - "data/verified_bonus_facts_*.yaml"
+      - "data/bonus_hypotheses_*.yaml"
       - "nikkei225_bonus_survey_2024_en.yaml"
       - "scripts/**"
       - "tests/**"
@@ -14,6 +15,7 @@ on:
     paths:
       - "docs/**"
       - "data/verified_bonus_facts_*.yaml"
+      - "data/bonus_hypotheses_*.yaml"
       - "nikkei225_bonus_survey_2024_en.yaml"
       - "scripts/**"
       - "tests/**"
@@ -41,7 +43,7 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate verified facts
         run: python scripts/generate_bonus_summary.py --check
-      - name: Generate Pages JSON from latest snapshot
+      - name: Generate fact and hypothesis Pages JSON
         run: python scripts/generate_pages_data.py
       - name: Audit Pages bundle
         run: python scripts/validate_pages.py
@@ -65,9 +67,9 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
-      - name: Generate verified public bundle
+      - name: Generate verified fact and hypothesis bundle
         run: python scripts/generate_pages_data.py
-      - name: Publish verified bundle to gh-pages
+      - name: Publish generated bundle to gh-pages
         shell: bash
         run: |
           set -euo pipefail
@@ -87,9 +89,9 @@ jobs:
 
           git -C "${publish_dir}" add -A
           if git -C "${publish_dir}" diff --cached --quiet; then
-            echo "gh-pages already matches the verified bundle"
+            echo "gh-pages already matches the generated bundle"
           else
-            git -C "${publish_dir}" commit -m "Deploy verified bonus dashboard from ${GITHUB_SHA::12}"
+            git -C "${publish_dir}" commit -m "Deploy bonus dashboard from ${GITHUB_SHA::12}"
             git -C "${publish_dir}" push origin gh-pages
           fi
 
