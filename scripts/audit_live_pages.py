@@ -11,6 +11,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from generate_verified_bonus_summary import DATA_DIR, latest_snapshot
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DEFAULT_URL = "https://kafka2306.github.io/bonus/"
@@ -40,6 +42,17 @@ def describe(body: bytes) -> str:
     preview = body[:800].decode("utf-8", errors="replace").replace("\n", " ")
     digest = hashlib.sha256(body).hexdigest()
     return f"bytes={len(body)} sha256={digest} preview={preview!r}"
+
+
+def expected_generated_from(
+    data_dir: Path = DATA_DIR,
+    root: Path = ROOT,
+) -> str:
+    snapshot = latest_snapshot(data_dir).resolve()
+    try:
+        return str(snapshot.relative_to(root.resolve()))
+    except ValueError:
+        return str(snapshot)
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -84,8 +97,13 @@ def main(argv: list[str] | None = None) -> int:
     public = json.loads((DOCS / "data" / "bonus.json").read_text(encoding="utf-8"))
     if public.get("schema_version") != 1:
         raise SystemExit("unexpected public JSON schema version")
-    if public.get("generated_from") != "data/verified_bonus_facts_2026-08-02.yaml":
-        raise SystemExit("public JSON was not generated from the expected latest snapshot")
+
+    expected_source = expected_generated_from()
+    if public.get("generated_from") != expected_source:
+        raise SystemExit(
+            "public JSON was not generated from the latest verified snapshot: "
+            f"expected={expected_source!r} actual={public.get('generated_from')!r}"
+        )
 
     print(
         "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON "
