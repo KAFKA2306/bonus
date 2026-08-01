@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一次情報だけで確認した従業員賞与制度の閲覧ダッシュボード">
+  <title>Bonus Evidence Atlas</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="トップへ"><span class="brand-mark">B</span><span>Bonus Evidence Atlas</span></a>
+    <nav><a href="#companies">企業</a><a href="#method">監査方針</a><a href="https://github.com/KAFKA2306/bonus">GitHub ↗</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="eyebrow">PRIMARY SOURCE / EMPLOYEE BONUS</div>
+      <h1>賞与制度を、<br><span>推測せずに見る。</span></h1>
+      <p class="lead">会社公式・労働組合公式・法定開示で確認できた範囲だけを表示します。確認できない数値は、空欄のまま残します。</p>
+      <div class="hero-actions"><a class="button primary" href="#companies">データを見る</a><a class="button secondary" href="#method">集計ルール</a></div>
+      <div class="meta-line"><span id="as-of">基準日 —</span><span>既存30社の銘柄集合を固定</span><span>役員報酬を除外</span></div>
+    </section>
+
+    <section class="shell metrics" aria-label="集計概要">
+      <article><span class="metric-label">掲載</span><strong id="metric-records">—</strong><small>一次情報を再監査した企業</small></article>
+      <article><span class="metric-label">確認済み</span><strong id="metric-confirmed">—</strong><small>confirmed / partial</small></article>
+      <article><span class="metric-label">明示月数平均</span><strong id="metric-average">—</strong><small>推定値・下限値を除外</small></article>
+      <article><span class="metric-label">固定Universe</span><strong>30</strong><small>銘柄追加・削除なし</small></article>
+    </section>
+
+    <section id="companies" class="shell section-block">
+      <div class="section-heading"><div><span class="kicker">EVIDENCE RECORDS</span><h2>企業別の確認結果</h2></div><p>状態・分類・会社名で絞り込みできます。</p></div>
+      <div class="toolbar">
+        <label class="search"><span>検索</span><input id="search" type="search" placeholder="会社名・証券コード" autocomplete="off"></label>
+        <div class="filters" role="group" aria-label="状態フィルター">
+          <button class="filter active" data-status="all">すべて</button>
+          <button class="filter" data-status="confirmed">確認済み</button>
+          <button class="filter" data-status="partially_confirmed">一部確認</button>
+          <button class="filter" data-status="unknown">未確認</button>
+        </div>
+      </div>
+      <div id="cards" class="cards" aria-live="polite"></div>
+      <p id="empty" class="empty" hidden>条件に一致する企業はありません。</p>
+    </section>
+
+    <section id="method" class="shell section-block method-grid">
+      <div><span class="kicker">AUDIT CONTRACT</span><h2>数字を増やすより、<br>誤認を減らす。</h2></div>
+      <div class="rules">
+        <article><b>01</b><div><h3>一次情報のみ</h3><p>会社公式、労働組合公式、法定開示だけを検証済み根拠にします。</p></div></article>
+        <article><b>02</b><div><h3>対象範囲を明記</h3><p>会社全体、新卒採用範囲、特定制度など、確認できた母集団を分離します。</p></div></article>
+        <article><b>03</b><div><h3>月数を推定しない</h3><p>文章、口コミ、年収から賞与月数を逆算しません。明記値だけを保存します。</p></div></article>
+        <article><b>04</b><div><h3>Unknownを維持</h3><p>一次情報で確認できない制度は、断定せずunknownとして残します。</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell"><span>Bonus Evidence Atlas</span><span>Data and code: KAFKA2306/bonus</span></footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>

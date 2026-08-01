@@ -1,0 +1,47 @@
+{
+  "as_of": "2026-08-02",
+  "universe": {"source_file": "nikkei225_bonus_survey_2024_en.yaml", "mutation_policy": "frozen", "tracked_companies": 30},
+  "summary": {"record_count": 5, "confirmed_or_partial_count": 4, "explicit_point_months_average": null},
+  "records": [
+    {
+      "stock_code": "6146", "company_name_ja": "ディスコ", "employee_scope": "株式会社ディスコの従業員（公式制度説明・採用情報で確認できる範囲）", "classification": "hybrid", "evidence_status": "confirmed", "as_of": "2026-08-02",
+      "bonus": {"frequency_per_year": 4, "annual_months": {"kind": "minimum", "value": 4.0, "basis": "explicit_source_value"}, "pool_basis": "会社業績に連動するテーブルで賞与原資・支給月数を決定", "allocation_logic": "Will賞与部分は部門Will比率、次に個人Will比率で二段階配分"},
+      "notes": ["Will会計は人事評価制度ではなく管理会計制度。"],
+      "sources": [
+        {"title": "Will会計", "url": "https://www.disco.co.jp/jp/csr/management/will.html"},
+        {"title": "人的資本戦略", "url": "https://www.disco.co.jp/jp/csr/work_env/HumanCapital.html"},
+        {"title": "採用FAQ", "url": "https://www.disco.co.jp/recruit/information/faq/"}
+      ]
+    },
+    {
+      "stock_code": "6503", "company_name_ja": "三菱電機", "employee_scope": "三菱電機の従業員（2024年度導入の新人事制度）", "classification": "performance_linked", "evidence_status": "confirmed", "as_of": "2026-08-02",
+      "bonus": {"frequency_per_year": null, "annual_months": null, "pool_basis": "前年度の成果・行動評価による総合評価", "allocation_logic": "個人の総合評価を賃金・賞与へ直接反映"},
+      "notes": ["2024年度に等級・評価・報酬制度を刷新。"],
+      "sources": [
+        {"title": "人事制度を刷新", "url": "https://www.mitsubishielectric.co.jp/ja/pr/2024/0312/"},
+        {"title": "人財マネジメント", "url": "https://www.mitsubishielectric.co.jp/ja/sustainability/social/humancapital/management/"}
+      ]
+    },
+    {
+      "stock_code": "6758", "company_name_ja": "ソニーグループ", "employee_scope": "ソニーグループ株式会社等の2026年度新卒募集要項で確認できる範囲", "classification": "performance_linked", "evidence_status": "partially_confirmed", "as_of": "2026-08-02",
+      "bonus": {"frequency_per_year": 1, "annual_months": null, "pool_basis": "募集要項では業績給と記載", "allocation_logic": "対象会社・新卒採用範囲では年1回"},
+      "notes": ["全従業員共通制度かは未確認。"],
+      "sources": [{"title": "2026年度 新卒採用 募集要項", "url": "https://www.sony.com/ja/SonyInfo/Jobs/newgrads/info/requirements/group/"}]
+    },
+    {
+      "stock_code": "6861", "company_name_ja": "キーエンス", "employee_scope": "連結・単体の従業員賞与制度", "classification": null, "evidence_status": "unknown", "as_of": "2026-08-02",
+      "bonus": {"frequency_per_year": null, "annual_months": null, "pool_basis": null, "allocation_logic": null},
+      "notes": ["公式開示から賞与原資・月数・配分式を確認できないためunknown。"],
+      "sources": [{"title": "有価証券報告書", "url": "https://www.keyence.co.jp/investor/library/securitiesreport.jsp"}]
+    },
+    {
+      "stock_code": "9433", "company_name_ja": "KDDI", "employee_scope": "KDDI社員（公式サステナビリティサイト記載範囲）", "classification": "hybrid", "evidence_status": "confirmed", "as_of": "2026-08-02",
+      "bonus": {"frequency_per_year": null, "annual_months": null, "pool_basis": "会社業績賞与と個人業績連動賞与で構成", "allocation_logic": "会社業績と個人の成果に基づき決定。サステナビリティKPIも全社員賞与に連動"},
+      "notes": ["月数・支給回数は公式ページで確認できないため未掲載。"],
+      "sources": [
+        {"title": "評価・報酬制度", "url": "https://www.kddi.com/corporate/sustainability/society/employee/"},
+        {"title": "サステナビリティ推進体制", "url": "https://www.kddi.com/corporate/sustainability/management/"}
+      ]
+    }
+  ]
+}
