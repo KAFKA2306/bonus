@@ -2,7 +2,7 @@ summary_generated_on: '2026-08-02'
 input_snapshot: data/verified_bonus_facts_2026-08-02.yaml
 snapshot_as_of: '2026-08-02'
 universe:
-  source_file: nikkei225_companies.yaml
+  source_file: nikkei225_bonus_survey_2024_en.yaml
   mutation_policy: frozen
   universe_changed: false
 record_count: 5
