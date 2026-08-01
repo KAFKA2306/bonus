@@ -117,7 +117,6 @@ def main() -> int:
         "function statusMatch",
         "record.hypothesis",
         "hypothesis.falsifiers",
-        "not_for_verified_aggregate",
         "setAttribute('aria-pressed'",
         "#result-count",
         "#metric-hypotheses",
