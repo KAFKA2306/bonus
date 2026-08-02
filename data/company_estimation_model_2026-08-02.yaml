@@ -2,13 +2,13 @@ schema_version: 1
 as_of: '2026-08-02'
 methodology:
   purpose: 個社一次資料で年間賞与月数を確定できない場合でも、旧個社調査を会社事前分布、連合2026最終集計の業種別年間一時金を実測アンカーとして、全30社へ定量推定を付与する。
-  model_type: empirical_bayes_shrinkage
-  central_formula: 推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数。
+  model_type: empirical_bayes_shrinkage_with_mechanism_upside
+  central_formula: 推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数 + 制度類型補正。
   weight_formula: 会社重み = clamp(基礎重み + 信頼度係数 × 旧信頼度 + 一次資料加点 - セクター推定減点, 下限, 上限)。
-  interval_formula: 下限・上限も会社事前レンジと業種実測値±業種不確実幅を同じ会社重みで合成する。
-  amount_formula: 参考換算額 = 業種実測年間金額 ÷ 業種実測月数 × 個社推定月数。個社の実額ではなく、同業種の平均基本月額を仮定した参考値とする。
-  verified_override_policy: 一次資料で支給回数・算定方式・最低月数を確認できた場合は、その値を推定構造または下限へ優先適用する。
-  disclosure_policy: 推定値、実測アンカー、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。
+  interval_formula: 下限・上限も会社事前レンジと業種実測値±業種不確実幅を合成し、業績連動制度は上側、総合判断・固定制度は上側を抑制する。
+  amount_formula: 原則は業種実測年間金額 ÷ 業種実測年間月数 × 個社推定月数。会社公式の季別月数とモデル額がある場合は、会社基礎月額を優先した参考投影へ切り替える。
+  verified_override_policy: 一次資料で支給回数・算定方式・年間月数・季別モデル額を確認できた場合は、その値をモデルより優先する。
+  disclosure_policy: 推定値、実測アンカー、制度類型、アップサイド、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。
 parameters:
   base_company_weight: 0.45
   confidence_multiplier: 0.50
@@ -17,6 +17,87 @@ parameters:
   minimum_company_weight: 0.55
   maximum_company_weight: 0.90
   minimum_sector_band_months: 0.35
+mechanisms:
+  formula_linked_performance:
+    label_ja: 算式明示型・業績連動
+    broad_classification: performance_linked
+    upside_profile: very_high
+    upside_score: 1.00
+    minimum_adjustment_months: 0.00
+    central_adjustment_months: 0.35
+    maximum_adjustment_months: 1.30
+  nonformula_performance:
+    label_ja: 算式非開示型・業績連動
+    broad_classification: performance_linked
+    upside_profile: high
+    upside_score: 0.80
+    minimum_adjustment_months: 0.00
+    central_adjustment_months: 0.20
+    maximum_adjustment_months: 0.80
+  hybrid:
+    label_ja: 固定＋業績連動ハイブリッド
+    broad_classification: hybrid
+    upside_profile: medium
+    upside_score: 0.55
+    minimum_adjustment_months: 0.00
+    central_adjustment_months: 0.05
+    maximum_adjustment_months: 0.30
+  discretionary:
+    label_ja: 労使妥結・総合判断
+    broad_classification: discretionary
+    upside_profile: low
+    upside_score: 0.25
+    minimum_adjustment_months: 0.00
+    central_adjustment_months: 0.00
+    maximum_adjustment_months: -0.20
+  base_salary_linked:
+    label_ja: 固定・基本給連動
+    broad_classification: base_salary_linked
+    upside_profile: low
+    upside_score: 0.15
+    minimum_adjustment_months: 0.00
+    central_adjustment_months: 0.00
+    maximum_adjustment_months: -0.30
+default_mechanism_by_classification:
+  performance_linked: nonformula_performance
+  hybrid: hybrid
+  discretionary: discretionary
+  base_salary_linked: base_salary_linked
+company_overrides:
+  '6146':
+    classification: hybrid
+    mechanism: formula_linked_performance
+    formula_disclosure: explicit
+    amount_policy: sector_implied
+    source_url: https://www.disco.co.jp/jp/csr/work_env/HumanCapital.html
+    source_note: 会社公式で会社業績連動テーブル、年4回、年間最低4か月の制度構造を確認。固定部分を含むため広義分類はハイブリッドだが、上側は算式明示型として扱う。
+  '8035':
+    classification: performance_linked
+    mechanism: nonformula_performance
+    formula_disclosure: not_disclosed
+    amount_policy: sector_implied
+    source_url: https://www.tel.com/sustainability/management-foundation/human-resource/
+    source_note: 東京エレクトロン公式は会社業績に連動する賞与とperformance bonusを明記する一方、一般従業員の利益連動式・標準月数・上限は開示していない。平均年間給与から賞与額を逆算しない。
+  '9022':
+    classification: discretionary
+    mechanism: discretionary
+    formula_disclosure: not_applicable
+    amount_policy: project_from_official_seasonal_base
+    frequency_per_year: 2
+    source_url: https://jr-central.co.jp/news/release/nws000001_00434.html
+    source_note: JR東海は会社業績との機械的な利益連動式ではなく、各組合への回答として夏季・年末の支給月数を決定する労使妥結・総合判断型と扱う。
+    official_annual_months:
+      period: '2025'
+      value: 6.15
+      source_url: https://jr-central.co.jp/news/release/nws000001_00304.html
+      note: 2025年度は夏季3.05か月と年末3.10か月の合計6.15か月。会社公式の支給実績を年間値として採用。
+    latest_seasonal:
+      period: 2026-summer
+      months: 3.10
+      amount_yen: 1082800
+      model_age: 35
+      source_url: https://jr-central.co.jp/news/release/nws000001_00434.html
+      note: 2026年度夏季手当は3.10か月、35歳モデル1,082,800円。年間額ではなく季別の会社公式モデル値。
 sectors:
   manufacturing:
     name_ja: 製造業
