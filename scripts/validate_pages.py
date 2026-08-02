@@ -125,7 +125,7 @@ def main() -> int:
         "function detailsCell",
         "record.hypothesis",
         "hypothesis.falsifiers",
-        "setAttribute('aria-sort'",
+        "'aria-sort'",
         "setAttribute('aria-pressed'",
         "#table-body",
         "#result-count",
