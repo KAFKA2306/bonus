@@ -6,7 +6,9 @@
   "universe": {
     "source_file": "nikkei225_bonus_survey_2024_en.yaml",
     "mutation_policy": "frozen",
-    "tracked_companies": 30
+    "tracked_companies": 30,
+    "covered_companies": 30,
+    "coverage_ratio": 1.0
   },
   "methodology": {
     "subject": "従業員賞与のみ。役員報酬は除外する。",
@@ -15,21 +17,22 @@
     "unknown_policy": "一次資料で確認できない項目は null とする。"
   },
   "hypothesis_methodology": {
-    "purpose": "一次情報で確定できない賞与月数について、検証可能な仮説レンジを提示する。",
+    "purpose": "固定Universe 30社すべてについて、一次情報で確定できない賞与月数を検証可能な仮説レンジとして提示する。",
     "separation_policy": "確認事実と仮説推定を別レイヤーで保持し、推定値をverified集計へ混入させない。",
     "interval_policy": "単一点ではなく下限・中心値・上限を示し、前提と反証条件を必須とする。",
-    "confidence_policy": "confidence.scoreは0から1。一次情報の直接性、旧調査との整合性、制度変更リスクを反映する。",
+    "confidence_policy": "confidence.scoreは0から1。一次情報の直接性、旧調査との整合性、制度変更リスク、記述曖昧性を反映する。",
     "aggregation_policy": "仮説中心値の平均は参考指標であり、確認済み月数平均とは別に表示する。"
   },
   "summary": {
-    "record_count": 5,
+    "record_count": 30,
+    "verified_record_count": 5,
     "confirmed_or_partial_count": 4,
-    "hypothesis_count": 5,
-    "hypothesis_central_months_average": 5.8,
+    "hypothesis_count": 30,
+    "hypothesis_central_months_average": 5.46,
     "evidence_status_counts": {
       "confirmed": 3,
       "partially_confirmed": 1,
-      "unknown": 1
+      "unknown": 26
     },
     "classification_counts": {
       "hybrid": 2,
@@ -39,6 +42,281 @@
     "explicit_point_months_average": null
   },
   "records": [
+    {
+      "stock_code": "4063",
+      "company_name_ja": "信越化学工業",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "4063",
+        "company_name_ja": "信越化学工業",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.5,
+          "central": 5.75,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "base_salary_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.48
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の安定的な5.5〜6か月を事前レンジとして採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4063"
+          }
+        ],
+        "assumptions": [
+          "安定的な年2回支給慣行が継続する。",
+          "基本給連動係数の大幅変更がない。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "業績連動比率が大幅に拡大する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "4307",
+      "company_name_ja": "野村総合研究所",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "4307",
+        "company_name_ja": "野村総合研究所",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 6.0,
+          "central": 7.0,
+          "maximum": 8.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.38
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の各回3〜4か月・年2回という記述を年間換算し制度改革リスクを織り込む。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4307"
+          }
+        ],
+        "assumptions": [
+          "各回月数という旧記述の解釈が正しい。",
+          "月給比率引上げ後も賞与が大幅縮小していない。"
+        ],
+        "falsifiers": [
+          "旧記述が年間合計3〜4か月だったと判明する。",
+          "制度改革後の公式値がレンジ外となる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "4502",
+      "company_name_ja": "武田薬品工業",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "4502",
+        "company_name_ja": "武田薬品工業",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.5,
+          "central": 5.25,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.44
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "製薬大手の標準的な年2回賞与と旧調査5〜6か月を基礎とする。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4502"
+          }
+        ],
+        "assumptions": [
+          "グローバル評価制度が国内従業員にも概ね適用される。",
+          "賞与比率の急激な縮小がない。"
+        ],
+        "falsifiers": [
+          "公式採用・報酬資料の標準値がレンジ外となる。",
+          "年俸制への移行で月数換算が不適切になる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "4543",
+      "company_name_ja": "テルモ",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "4543",
+        "company_name_ja": "テルモ",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.3,
+          "central": 5.8,
+          "maximum": 6.3,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.45
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の5.8か月を中心に医療機器業績の変動幅を付加。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4543"
+          }
+        ],
+        "assumptions": [
+          "医療機器需要と個人評価が賞与へ反映される。",
+          "年2回制度が継続する。"
+        ],
+        "falsifiers": [
+          "公式値がレンジ外となる。",
+          "固定額賞与へ変更される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "6098",
+      "company_name_ja": "リクルートホールディングス",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6098",
+        "company_name_ja": "リクルートホールディングス",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 4.5,
+          "maximum": 5.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.45
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "事業部門業績連動と旧調査4〜5か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6098"
+          }
+        ],
+        "assumptions": [
+          "事業部門業績連動が継続する。",
+          "年俸制への全面移行がない。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "月数換算不能な報酬体系へ変更される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
     {
       "stock_code": "6146",
       "company_name_ja": "ディスコ",
@@ -60,6 +338,7 @@
       },
       "hypothesis": {
         "stock_code": "6146",
+        "company_name_ja": "ディスコ",
         "target": "annual_bonus_months",
         "estimate": {
           "minimum": 9.0,
@@ -73,26 +352,26 @@
           "level": "medium",
           "score": 0.58
         },
-        "method": "verified_floor_plus_legacy_prior",
+        "method": "verified_and_legacy_prior",
         "basis": [
           {
             "type": "verified_fact",
-            "statement": "公式情報で年4回、年間最低4.0か月、会社業績連動テーブルとWill配分を確認。",
+            "statement": "公式情報で年4回・年間最低4か月・会社業績連動テーブルを確認。",
             "reference": "data/verified_bonus_facts_2026-08-02.yaml#6146"
           },
           {
             "type": "legacy_prior",
-            "statement": "旧調査には年間9〜12か月という事前分布があるが、一次情報で月数を再確認できていない。",
+            "statement": "旧調査の年間9〜12か月を事前分布として使用。",
             "reference": "nikkei225_bonus_survey_2024_en.yaml#6146"
           }
         ],
         "assumptions": [
-          "好業績時の業績連動部分が最低保証4.0か月を大きく上回る。",
-          "旧調査時点から賞与原資テーブルの構造が大幅には縮小していない。"
+          "好業績時の業績連動部分が最低保証を大きく上回る。",
+          "賞与原資テーブルが大幅縮小していない。"
         ],
         "falsifiers": [
-          "公式採用情報または報酬資料で年間上限が9か月未満と示される。",
-          "月給への恒久的な振替により賞与比率が大幅に低下する。"
+          "公式上限が9か月未満と示される。",
+          "月給への恒久移管で賞与比率が大幅低下する。"
         ],
         "not_for_verified_aggregate": true
       },
@@ -128,6 +407,171 @@
       ]
     },
     {
+      "stock_code": "6273",
+      "company_name_ja": "SMC",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6273",
+        "company_name_ja": "SMC",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 2.0,
+          "central": 6.0,
+          "maximum": 10.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.32
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の2〜10か月を広い不確実性レンジとして維持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6273"
+          }
+        ],
+        "assumptions": [
+          "会社・個人業績による大幅変動がある。",
+          "年2回支給が標準である。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "変動賞与制度が廃止される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "6367",
+      "company_name_ja": "ダイキン工業",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6367",
+        "company_name_ja": "ダイキン工業",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 5.0,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.43
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の労使妥結レンジ4〜6か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6367"
+          }
+        ],
+        "assumptions": [
+          "グローバル空調業績が賞与へ反映される。",
+          "年2回制度が継続する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "算定方式が固定額中心へ変わる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "6501",
+      "company_name_ja": "日立製作所",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6501",
+        "company_name_ja": "日立製作所",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.5,
+          "central": 5.5,
+          "maximum": 6.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.3
+        },
+        "method": "sector_prior_low_confidence",
+        "basis": [
+          {
+            "type": "sector_prior",
+            "statement": "旧調査に数値がないため総合電機・重電大手のセクター事前分布を低確度で設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6501"
+          }
+        ],
+        "assumptions": [
+          "同業重電大手の年2回・5〜6か月前後の制度が参考になる。",
+          "事業部門業績連動が維持される。"
+        ],
+        "falsifiers": [
+          "公式労使資料が異なる月数を示す。",
+          "報酬制度が年俸制中心で月数換算不能となる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
       "stock_code": "6503",
       "company_name_ja": "三菱電機",
       "subject": "employees",
@@ -144,6 +588,7 @@
       },
       "hypothesis": {
         "stock_code": "6503",
+        "company_name_ja": "三菱電機",
         "target": "annual_bonus_months",
         "estimate": {
           "minimum": 5.0,
@@ -157,7 +602,7 @@
           "level": "medium",
           "score": 0.54
         },
-        "method": "legacy_range_adjusted_for_new_performance_system",
+        "method": "verified_and_legacy_prior",
         "basis": [
           {
             "type": "verified_fact",
@@ -166,17 +611,17 @@
           },
           {
             "type": "legacy_prior",
-            "statement": "旧調査では年2回、年間5〜6か月を想定していた。",
+            "statement": "旧調査では年2回・年間5〜6か月を想定。",
             "reference": "nikkei225_bonus_survey_2024_en.yaml#6503"
           }
         ],
         "assumptions": [
-          "制度刷新は配分差を拡大するが、標準評価者の年間総額を急減させない。",
-          "重電大手の労使慣行として年2回支給が維持される。"
+          "制度刷新は配分差を拡大するが標準評価者の総額を急減させない。",
+          "年2回支給が維持される。"
         ],
         "falsifiers": [
-          "労使交渉資料で標準者の年間一時金がレンジ外と判明する。",
-          "評価連動分を月例賃金へ移す追加改定が公表される。"
+          "労使資料で標準者の年間一時金がレンジ外と判明する。",
+          "評価連動分が月例賃金へ移管される。"
         ],
         "not_for_verified_aggregate": true
       },
@@ -220,6 +665,7 @@
       },
       "hypothesis": {
         "stock_code": "6758",
+        "company_name_ja": "ソニーグループ",
         "target": "annual_bonus_months",
         "estimate": {
           "minimum": 0.5,
@@ -233,7 +679,7 @@
           "level": "low",
           "score": 0.42
         },
-        "method": "post_reform_residual_bonus_prior",
+        "method": "verified_and_legacy_prior",
         "basis": [
           {
             "type": "verified_fact",
@@ -242,17 +688,17 @@
           },
           {
             "type": "legacy_prior",
-            "statement": "旧調査では冬季分を月給へ振替後、夏季に約1か月を残す仮説が記録されていた。",
+            "statement": "冬季賞与の月給移管後に残る夏季業績給を約1か月とする旧仮説。",
             "reference": "nikkei225_bonus_survey_2024_en.yaml#6758"
           }
         ],
         "assumptions": [
-          "月給へ移管された部分を除く残存業績給が基本給0.5〜1.5か月相当になる。",
-          "新卒募集要項の年1回制度が主要対象会社の標準的な設計を反映する。"
+          "年1回の業績給が主要対象会社の標準設計を反映する。",
+          "月給移管後も残存賞与が維持される。"
         ],
         "falsifiers": [
-          "公式報酬資料で業績給が固定額方式で月数換算不能と判明する。",
-          "対象会社ごとに制度が大きく異なり、共通レンジが成立しない。"
+          "業績給が固定額方式で月数換算不能と判明する。",
+          "対象会社ごとに制度が大きく異なる。"
         ],
         "not_for_verified_aggregate": true
       },
@@ -272,6 +718,61 @@
       ]
     },
     {
+      "stock_code": "6857",
+      "company_name_ja": "アドバンテスト",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6857",
+        "company_name_ja": "アドバンテスト",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 3.0,
+          "central": 5.5,
+          "maximum": 8.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.38
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半導体サイクルの大きな変動を反映し旧調査の通常値と上振れを包含。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6857"
+          }
+        ],
+        "assumptions": [
+          "半導体テスト需要と利益が賞与へ強く連動する。",
+          "年2回支給が維持される。"
+        ],
+        "falsifiers": [
+          "公式月数がレンジ外となる。",
+          "固定給中心への制度改定が行われる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
       "stock_code": "6861",
       "company_name_ja": "キーエンス",
       "subject": "employees",
@@ -288,6 +789,7 @@
       },
       "hypothesis": {
         "stock_code": "6861",
+        "company_name_ja": "キーエンス",
         "target": "annual_bonus_months",
         "estimate": {
           "minimum": 6.0,
@@ -301,26 +803,26 @@
           "level": "low",
           "score": 0.4
         },
-        "method": "legacy_prior_with_high_uncertainty",
+        "method": "verified_and_legacy_prior",
         "basis": [
           {
             "type": "verified_fact",
-            "statement": "最新法定開示は確認したが、従業員賞与の原資・月数・配分式は公式資料で確定できていない。",
+            "statement": "一次情報監査済みレコードがあり、確認できた制度構造または未確認範囲を仮説の境界条件に用いる。",
             "reference": "data/verified_bonus_facts_2026-08-02.yaml#6861"
           },
           {
             "type": "legacy_prior",
-            "statement": "旧調査では年4回、基本給6〜8か月相当、業績連動という仮説が記録されていた。",
+            "statement": "旧調査では年4回・6〜8か月相当。高年収構造から賞与比率が高いという事前分布を置く。",
             "reference": "nikkei225_bonus_survey_2024_en.yaml#6861"
           }
         ],
         "assumptions": [
-          "高い平均年収の一部が四半期業績給として維持されている。",
-          "営業利益連動という旧仮説は方向性としては有効だが、10%という係数は採用しない。"
+          "旧調査で観測された制度構造または同業慣行が基準日時点でも方向性として有効である。",
+          "月例給与・株式報酬への大規模な恒久移管が行われていない。"
         ],
         "falsifiers": [
-          "公式採用・報酬資料で支給回数または標準月数がレンジ外と示される。",
-          "高年収の主因が賞与ではなく月例給与・株式報酬であると判明する。"
+          "会社公式・労働組合公式・法定開示で標準的な年間賞与月数が推定レンジ外と示される。",
+          "支給回数・算定基礎・対象従業員の制度が仮説と異なることが公式資料で確認される。"
         ],
         "not_for_verified_aggregate": true
       },
@@ -340,6 +842,776 @@
       ]
     },
     {
+      "stock_code": "6954",
+      "company_name_ja": "ファナック",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6954",
+        "company_name_ja": "ファナック",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 8.0,
+          "maximum": 12.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.34
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の4〜12か月という高変動レンジを維持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6954"
+          }
+        ],
+        "assumptions": [
+          "FA需要と個人評価による大きな倍率変動が存在する。",
+          "年2回支給が維持される。"
+        ],
+        "falsifiers": [
+          "公式制度が狭い固定レンジを示す。",
+          "株式報酬中心へ移行する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "6981",
+      "company_name_ja": "村田製作所",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "6981",
+        "company_name_ja": "村田製作所",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.0,
+          "central": 5.5,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.45
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "電子部品需要連動という旧調査と5〜6か月レンジを採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6981"
+          }
+        ],
+        "assumptions": [
+          "スマートフォン・車載需要が賞与へ反映される。",
+          "年2回制度が継続する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "業績非連動の固定制度へ変更される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "7203",
+      "company_name_ja": "トヨタ自動車",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "7203",
+        "company_name_ja": "トヨタ自動車",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 6.8,
+          "central": 7.3,
+          "maximum": 7.8,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.5
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の春闘要求7.6か月を中心に要求と妥結の差を考慮したレンジ。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7203"
+          }
+        ],
+        "assumptions": [
+          "春闘要求値と実際の妥結値の差がレンジ内に収まる。",
+          "年間一時金制度が継続している。"
+        ],
+        "falsifiers": [
+          "公式労使資料の年間一時金がレンジ外となる。",
+          "一時金制度の算定基礎が大幅変更される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "7733",
+      "company_name_ja": "オリンパス",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "7733",
+        "company_name_ja": "オリンパス",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.5,
+          "central": 6.0,
+          "maximum": 6.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.48
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の6か月を中心に評価差をレンジ化。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7733"
+          }
+        ],
+        "assumptions": [
+          "グレード・成果評価が月数差へ反映される。",
+          "年2回制度が継続する。"
+        ],
+        "falsifiers": [
+          "公式標準値がレンジ外となる。",
+          "報酬制度の大幅変更が行われる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "7741",
+      "company_name_ja": "HOYA",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "7741",
+        "company_name_ja": "HOYA",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 4.5,
+          "maximum": 5.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.44
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の医療・光学事業連動4〜5か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7741"
+          }
+        ],
+        "assumptions": [
+          "医療・光学事業業績が賞与へ反映される。",
+          "年2回制度が継続する。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "年俸制中心へ変更される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "8035",
+      "company_name_ja": "東京エレクトロン",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "8035",
+        "company_name_ja": "東京エレクトロン",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.0,
+          "central": 6.0,
+          "maximum": 7.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.48
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半導体サイクル連動を前提に旧調査5〜7か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8035"
+          }
+        ],
+        "assumptions": [
+          "半導体市場業績が賞与へ反映される。",
+          "年2回支給構造が維持される。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "報酬の株式化で現金賞与が縮小する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "8306",
+      "company_name_ja": "三菱UFJフィナンシャル・グループ",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "8306",
+        "company_name_ja": "三菱UFJフィナンシャル・グループ",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.5,
+          "central": 5.0,
+          "maximum": 5.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "hybrid",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.5
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "メガバンクの基本給連動部分と業績連動部分を合わせた旧調査中心値。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8306"
+          }
+        ],
+        "assumptions": [
+          "大手銀行の安定的な年2回制度が継続する。",
+          "業績連動部分の変動は限定的である。"
+        ],
+        "falsifiers": [
+          "公式労使資料の年間月数がレンジ外となる。",
+          "報酬制度が年俸制中心へ移行する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "8601",
+      "company_name_ja": "大和証券グループ本社",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "8601",
+        "company_name_ja": "大和証券グループ本社",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 5.0,
+          "maximum": 6.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.38
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "市況連動の旧調査4〜6か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8601"
+          }
+        ],
+        "assumptions": [
+          "市場業績と顧客資産成長が賞与原資へ反映される。",
+          "年2回支給が維持される。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "年俸・株式報酬中心へ移行する。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "8604",
+      "company_name_ja": "野村ホールディングス",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "8604",
+        "company_name_ja": "野村ホールディングス",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 6.0,
+          "central": 7.0,
+          "maximum": 8.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 1,
+        "confidence": {
+          "level": "low",
+          "score": 0.38
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "投資銀行・トレーディング業績連動の旧調査6〜8か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8604"
+          }
+        ],
+        "assumptions": [
+          "コア人材の裁量ボーナス構造が維持される。",
+          "期末年1回支給が標準である。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "現金賞与が株式報酬へ大幅移管される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9020",
+      "company_name_ja": "JR東日本",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9020",
+        "company_name_ja": "JR東日本",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 4.5,
+          "maximum": 5.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "base_salary_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.5
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の労使妥結約4.5か月を中心値に設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9020"
+          }
+        ],
+        "assumptions": [
+          "公共交通の安定的な労使慣行が継続する。",
+          "安全指標加算の影響は限定的である。"
+        ],
+        "falsifiers": [
+          "公式妥結月数がレンジ外となる。",
+          "基本給連動制度が廃止される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9022",
+      "company_name_ja": "JR東海",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9022",
+        "company_name_ja": "JR東海",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 2.5,
+          "central": 3.0,
+          "maximum": 3.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "base_salary_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.46
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の年間約3か月という解釈を採用し記述曖昧性をレンジで表現。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9022"
+          }
+        ],
+        "assumptions": [
+          "旧調査の3か月は年間合計を意味する。",
+          "年2回の季節支給が継続する。"
+        ],
+        "falsifiers": [
+          "3か月が各回値で年間6か月相当と判明する。",
+          "公式妥結値がレンジ外となる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9201",
+      "company_name_ja": "日本航空",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9201",
+        "company_name_ja": "日本航空",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 2.5,
+          "central": 3.0,
+          "maximum": 3.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.4
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の回復後約3か月を中心に設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9201"
+          }
+        ],
+        "assumptions": [
+          "国際旅行需要の回復が継続する。",
+          "年2回制度が維持される。"
+        ],
+        "falsifiers": [
+          "公式支給月数がレンジ外となる。",
+          "大幅な業績悪化で一時金が停止される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9202",
+      "company_name_ja": "ANAホールディングス",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9202",
+        "company_name_ja": "ANAホールディングス",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 3.5,
+          "central": 4.0,
+          "maximum": 4.5,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.46
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の通常4か月を中心に航空需要変動を反映。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9202"
+          }
+        ],
+        "assumptions": [
+          "旅行需要回復が維持される。",
+          "グループ業績一時金が継続する。"
+        ],
+        "falsifiers": [
+          "公式支給月数がレンジ外となる。",
+          "航空需要悪化で一時金が停止される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9432",
+      "company_name_ja": "日本電信電話",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9432",
+        "company_name_ja": "日本電信電話",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 4.0,
+          "central": 4.5,
+          "maximum": 5.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "discretionary",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "medium",
+          "score": 0.52
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の4か月＋αをレンジ化。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9432"
+          }
+        ],
+        "assumptions": [
+          "半期評価と組織業績の連動が継続する。",
+          "年2回支給が維持される。"
+        ],
+        "falsifiers": [
+          "公式年間月数がレンジ外となる。",
+          "評価制度の大幅改定が行われる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
       "stock_code": "9433",
       "company_name_ja": "KDDI",
       "subject": "employees",
@@ -356,6 +1628,7 @@
       },
       "hypothesis": {
         "stock_code": "9433",
+        "company_name_ja": "KDDI",
         "target": "annual_bonus_months",
         "estimate": {
           "minimum": 4.5,
@@ -369,7 +1642,7 @@
           "level": "medium",
           "score": 0.55
         },
-        "method": "stable_sector_prior_bounded_by_legacy_value",
+        "method": "verified_and_legacy_prior",
         "basis": [
           {
             "type": "verified_fact",
@@ -378,17 +1651,17 @@
           },
           {
             "type": "legacy_prior",
-            "statement": "旧調査では年2回、年間約5か月を中心値としていた。",
+            "statement": "旧調査では年2回・年間約5か月を中心値としていた。",
             "reference": "nikkei225_bonus_survey_2024_en.yaml#9433"
           }
         ],
         "assumptions": [
-          "通信大手の安定収益構造により、年間月数の変動幅は比較的小さい。",
-          "基本給引上げ後も賞与係数が急激には切り下がっていない。"
+          "通信大手の安定収益により変動幅は比較的小さい。",
+          "基本給引上げ後も賞与係数が急減していない。"
         ],
         "falsifiers": [
-          "公式労使資料で年間一時金が4.5か月未満または5.5か月超と示される。",
-          "賞与の大部分が月給へ移管される制度改定が行われる。"
+          "公式労使資料がレンジ外を示す。",
+          "賞与の大部分が月給へ移管される。"
         ],
         "not_for_verified_aggregate": true
       },
@@ -413,6 +1686,116 @@
           "page_or_section": "サステナビリティ推進体制"
         }
       ]
+    },
+    {
+      "stock_code": "9983",
+      "company_name_ja": "ファーストリテイリング",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9983",
+        "company_name_ja": "ファーストリテイリング",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 5.5,
+          "central": 6.25,
+          "maximum": 7.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 3,
+        "confidence": {
+          "level": "low",
+          "score": 0.45
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半期賞与2回と決算賞与を合算した旧調査6〜7か月を基礎とする。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9983"
+          }
+        ],
+        "assumptions": [
+          "決算賞与を含む支給構造が維持される。",
+          "店舗・全社業績が賞与へ連動する。"
+        ],
+        "falsifiers": [
+          "決算賞与が廃止される。",
+          "公式標準月数がレンジ外となる。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
+    },
+    {
+      "stock_code": "9984",
+      "company_name_ja": "ソフトバンクグループ",
+      "subject": "employees",
+      "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+      "classification": null,
+      "evidence_status": "unknown",
+      "as_of": "2026-08-02",
+      "bonus": {
+        "frequency_per_year": null,
+        "annual_months": null,
+        "pool_basis": null,
+        "allocation_logic": null,
+        "base_salary_link": null
+      },
+      "hypothesis": {
+        "stock_code": "9984",
+        "company_name_ja": "ソフトバンクグループ",
+        "target": "annual_bonus_months",
+        "estimate": {
+          "minimum": 3.0,
+          "central": 5.0,
+          "maximum": 7.0,
+          "unit": "base_salary_months"
+        },
+        "classification_hypothesis": "performance_linked",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {
+          "level": "low",
+          "score": 0.36
+        },
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "投資事業の変動性を踏まえ旧調査の5か月を広いレンジで保持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9984"
+          }
+        ],
+        "assumptions": [
+          "投資成果が賞与原資へ反映される。",
+          "株式報酬への全面移行はない。"
+        ],
+        "falsifiers": [
+          "公式制度で標準月数がレンジ外と示される。",
+          "現金賞与が株式報酬へ大幅移管される。"
+        ],
+        "not_for_verified_aggregate": true
+      },
+      "notes": [
+        "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+        "仮説は確認済み集計へ含めない。"
+      ],
+      "sources": []
     }
   ]
 }
