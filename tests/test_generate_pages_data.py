@@ -135,12 +135,12 @@ def model(codes):
         "as_of": "2026-08-02",
         "methodology": {
             "purpose": "quantify",
-            "model_type": "empirical_bayes_shrinkage",
-            "central_formula": "weighted",
+            "model_type": "empirical_bayes_shrinkage_with_mechanism_upside",
+            "central_formula": "weighted plus mechanism",
             "weight_formula": "confidence",
-            "interval_formula": "weighted interval",
-            "amount_formula": "sector amount per month",
-            "verified_override_policy": "verified floor",
+            "interval_formula": "weighted interval plus mechanism",
+            "amount_formula": "sector or company-base projection",
+            "verified_override_policy": "verified values override model",
             "disclosure_policy": "show assumptions",
         },
         "parameters": {
@@ -152,6 +152,60 @@ def model(codes):
             "maximum_company_weight": 0.90,
             "minimum_sector_band_months": 0.35,
         },
+        "mechanisms": {
+            "formula_linked_performance": {
+                "label_ja": "算式明示型・業績連動",
+                "broad_classification": "performance_linked",
+                "upside_profile": "very_high",
+                "upside_score": 1.0,
+                "minimum_adjustment_months": 0.0,
+                "central_adjustment_months": 0.35,
+                "maximum_adjustment_months": 1.3,
+            },
+            "nonformula_performance": {
+                "label_ja": "算式非開示型・業績連動",
+                "broad_classification": "performance_linked",
+                "upside_profile": "high",
+                "upside_score": 0.8,
+                "minimum_adjustment_months": 0.0,
+                "central_adjustment_months": 0.2,
+                "maximum_adjustment_months": 0.8,
+            },
+            "hybrid": {
+                "label_ja": "固定＋業績連動ハイブリッド",
+                "broad_classification": "hybrid",
+                "upside_profile": "medium",
+                "upside_score": 0.55,
+                "minimum_adjustment_months": 0.0,
+                "central_adjustment_months": 0.05,
+                "maximum_adjustment_months": 0.3,
+            },
+            "discretionary": {
+                "label_ja": "労使妥結・総合判断",
+                "broad_classification": "discretionary",
+                "upside_profile": "low",
+                "upside_score": 0.25,
+                "minimum_adjustment_months": 0.0,
+                "central_adjustment_months": 0.0,
+                "maximum_adjustment_months": -0.2,
+            },
+            "base_salary_linked": {
+                "label_ja": "固定・基本給連動",
+                "broad_classification": "base_salary_linked",
+                "upside_profile": "low",
+                "upside_score": 0.15,
+                "minimum_adjustment_months": 0.0,
+                "central_adjustment_months": 0.0,
+                "maximum_adjustment_months": -0.3,
+            },
+        },
+        "default_mechanism_by_classification": {
+            "performance_linked": "nonformula_performance",
+            "hybrid": "hybrid",
+            "discretionary": "discretionary",
+            "base_salary_linked": "base_salary_linked",
+        },
+        "company_overrides": {},
         "sectors": {
             "manufacturing": {
                 "name_ja": "製造業",
@@ -214,6 +268,7 @@ class PagesTests(unittest.TestCase):
         first = payload["records"][0]
         self.assertIn("estimate", first)
         self.assertGreater(first["estimate"]["months"]["central"], 5.44)
+        self.assertIn("mechanism", first["estimate"])
         queued = payload["records"][1]
         self.assertEqual(queued["survey"]["stage"], "queued")
         self.assertGreater(queued["estimate"]["amount_yen"]["central"], 0)
