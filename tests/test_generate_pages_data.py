@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from company_estimates import validate_company_estimation_model  # noqa: E402
 from generate_pages_data import build_public_payload, render_json  # noqa: E402
 
 
@@ -106,7 +107,75 @@ def record(code: str):
     }
 
 
+def hypothesis(code: str, central: float):
+    return {
+        "stock_code": code,
+        "company_name_ja": f"会社{code}",
+        "target": "annual_bonus_months",
+        "estimate": {
+            "minimum": central - 0.5,
+            "central": central,
+            "maximum": central + 0.5,
+            "unit": "base_salary_months",
+        },
+        "classification_hypothesis": "hybrid",
+        "frequency_per_year_hypothesis": 2,
+        "confidence": {"level": "medium", "score": 0.5},
+        "method": "legacy_prior_with_uncertainty",
+        "basis": [{"type": "legacy_prior", "statement": "prior", "reference": f"data#{code}"}],
+        "assumptions": ["assumption"],
+        "falsifiers": ["falsifier"],
+        "not_for_verified_aggregate": True,
+    }
+
+
+def model(codes):
+    payload = {
+        "schema_version": 1,
+        "as_of": "2026-08-02",
+        "methodology": {
+            "purpose": "quantify",
+            "model_type": "empirical_bayes_shrinkage",
+            "central_formula": "weighted",
+            "weight_formula": "confidence",
+            "interval_formula": "weighted interval",
+            "amount_formula": "sector amount per month",
+            "verified_override_policy": "verified floor",
+            "disclosure_policy": "show assumptions",
+        },
+        "parameters": {
+            "base_company_weight": 0.45,
+            "confidence_multiplier": 0.50,
+            "verified_evidence_bonus": 0.15,
+            "sector_only_penalty": 0.05,
+            "minimum_company_weight": 0.55,
+            "maximum_company_weight": 0.90,
+            "minimum_sector_band_months": 0.35,
+        },
+        "sectors": {
+            "manufacturing": {
+                "name_ja": "製造業",
+                "response_months": 5.44,
+                "demand_months": 5.62,
+                "previous_months": 5.45,
+                "response_amount_yen": 1854847,
+                "previous_amount_yen": 1739443,
+                "sample_months": {"organizations": 1928, "workers": 1449045},
+                "sample_amount": {"organizations": 1003, "workers": 739115},
+                "source_url": "https://example.com/rengo.pdf",
+                "company_codes": list(codes),
+            }
+        },
+    }
+    return validate_company_estimation_model(payload, set(codes))
+
+
 def build(snapshot, records, companies):
+    codes = set(companies)
+    hypotheses = {
+        code: hypothesis(code, 8.0 if code == "6146" else 6.0)
+        for code in codes
+    }
     return build_public_payload(
         snapshot,
         records,
@@ -116,11 +185,15 @@ def build(snapshot, records, companies):
         ROOT / "data" / "source_survey_2026-08-02.yaml",
         quantitative(),
         ROOT / "data" / "quantitative_benchmarks_2026-08-02.yaml",
+        hypotheses,
+        ROOT / "data" / "bonus_hypotheses_2026-08-02.yaml",
+        model(codes),
+        ROOT / "data" / "company_estimation_model_2026-08-02.yaml",
     )
 
 
 class PagesTests(unittest.TestCase):
-    def test_source_first_projection_includes_quantitative_layer(self):
+    def test_projection_quantifies_every_company(self):
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -133,22 +206,20 @@ class PagesTests(unittest.TestCase):
             [record("6146")],
             {"6146": "ディスコ", "7203": "トヨタ"},
         )
-        self.assertEqual(payload["schema_version"], 3)
+        self.assertEqual(payload["schema_version"], 4)
         self.assertEqual(payload["summary"]["record_count"], 2)
-        self.assertEqual(payload["summary"]["source_channel_count"], 6)
+        self.assertEqual(payload["summary"]["quantified_company_count"], 2)
         self.assertEqual(payload["summary"]["quantitative_benchmark_count"], 2)
-        self.assertEqual(payload["summary"]["quantitative_final_count"], 1)
-        self.assertEqual(payload["summary"]["quantitative_provisional_count"], 1)
-        self.assertEqual(len(payload["quantitative_benchmarks"]), 2)
+        self.assertEqual(len(payload["sector_anchors"]), 1)
         first = payload["records"][0]
-        self.assertNotIn("hypothesis", first)
-        self.assertEqual(first["survey"]["reviewed_required_count"], 1)
-        self.assertEqual(first["survey"]["next_channel_id"], "labor_union_official")
+        self.assertIn("estimate", first)
+        self.assertGreater(first["estimate"]["months"]["central"], 5.44)
         queued = payload["records"][1]
         self.assertEqual(queued["survey"]["stage"], "queued")
+        self.assertGreater(queued["estimate"]["amount_yen"]["central"], 0)
         self.assertTrue(render_json(payload).endswith("\n"))
 
-    def test_benchmark_not_counted_as_required_channel(self):
+    def test_research_coverage_remains_separate_from_quantification(self):
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -159,7 +230,7 @@ class PagesTests(unittest.TestCase):
         payload = build(snapshot, [], {"7203": "トヨタ"})
         self.assertEqual(payload["summary"]["required_channel_count"], 4)
         self.assertEqual(payload["summary"]["research_coverage_ratio"], 0)
-        self.assertEqual(payload["summary"]["quantitative_benchmark_count"], 2)
+        self.assertEqual(payload["summary"]["quantified_company_count"], 1)
 
 
 if __name__ == "__main__":
