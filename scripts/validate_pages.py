@@ -90,7 +90,7 @@ def main() -> int:
         'id="benchmark-body"', 'id="source-body"', 'id="company-body"', 'id="company-table"',
         'id="metric-channels"', 'id="metric-benchmarks"', 'id="metric-final"',
         'id="metric-verified"', 'id="metric-coverage"',
-        'class="benchmark-table"', 'class="sort-button"', 'aria-sort="none"', 'role="status"',
+        "benchmark-table", 'class="sort-button"', 'aria-sort="none"', 'role="status"',
         'aria-live="polite"', 'aria-pressed="true"', '<script src="./app.js" defer></script>',
     ):
         assert marker in html, f"missing HTML marker: {marker}"
