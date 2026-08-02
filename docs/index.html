@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="主要30社の賞与を、個社事前分布と2026年の業種別実測値から根拠付きで定量推定する比較ダッシュボード">
+  <meta name="description" content="日経225全社の賞与を、個社一次資料と2026年の業種別実測値から根拠付きで定量推定する比較ダッシュボード">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="quantified-v7">
-  <title>主要30社 賞与定量モデル</title>
+  <meta name="bonus-build" content="nikkei225-v1">
+  <title>日経225 賞与定量モデル</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -14,95 +14,39 @@
   <header class="site-header">
     <a class="brand" href="#top"><span class="brand-mark">量</span><span>賞与定量モデル</span></a>
     <nav aria-label="主要ナビゲーション">
-      <a href="#companies">企業別推定</a>
-      <a href="#benchmarks">実測値</a>
-      <a href="#sources">参照サイト</a>
-      <a href="#rules">推定ロジック</a>
-      <a href="https://github.com/KAFKA2306/bonus">GitHub ↗</a>
+      <a href="#companies">企業別推定</a><a href="#benchmarks">実測値</a><a href="#sources">参照サイト</a><a href="#rules">推定ロジック</a><a href="https://github.com/KAFKA2306/bonus">GitHub ↗</a>
     </nav>
   </header>
-
   <main id="top">
     <section class="hero shell">
-      <div class="eyebrow">QUANTIFIED BONUS ESTIMATION</div>
-      <h1>30社すべてに、<br>根拠付きの数値を出す。</h1>
-      <p class="lead">個社の明示値がない場合は空欄にせず、旧個社調査を会社事前分布、連合2026年最終集計の業種別年間一時金を実測アンカーとして合成します。推定月数、レンジ、参考換算額、信頼度、計算入力を同時に公開します。</p>
-      <div class="meta-line"><span id="as-of">基準日 —</span><span>固定Universe 30社</span><span>確認事実と推定を分離</span><span>推定式・重み・反証条件を公開</span></div>
+      <div class="eyebrow">NIKKEI 225 QUANTIFIED BONUS ESTIMATION</div>
+      <h1>日経225全社に、<br>根拠付きの数値を出す。</h1>
+      <p class="lead">個社一次資料がある会社は公式値を優先し、未確認会社は日経公式業種と連合2026年最終集計を実測アンカーとして定量化します。制度類型によりアップサイドを分け、推定月数、レンジ、参考換算額、信頼度を同時表示します。</p>
+      <div class="meta-line"><span id="as-of">基準日 —</span><span>公式Universe 225社</span><span>個社推定30社＋業種初期推定195社</span><span>確認事実と推定を分離</span></div>
     </section>
-
     <section class="shell metrics" aria-label="定量モデル概要">
-      <article><span>定量化済み</span><strong id="metric-quantified">—</strong><small>全30社に月数レンジ</small></article>
+      <article><span>定量化済み</span><strong id="metric-quantified">—</strong><small>全225社に月数レンジ</small></article>
       <article><span>推定中央値</span><strong id="metric-median-months">—</strong><small>年間基本給月数</small></article>
       <article><span>参考換算中央値</span><strong id="metric-median-amount">—</strong><small>業種平均基本月額を仮定</small></article>
       <article><span>平均信頼度</span><strong id="metric-confidence">—</strong><small>0–100%</small></article>
       <article><span>個社一次資料あり</span><strong id="metric-verified">—</strong><small>制度・回数・下限等</small></article>
     </section>
-
     <section id="companies" class="shell section-block">
-      <div class="section-heading"><div><span class="kicker">COMPANY ESTIMATES</span><h2>企業別の定量比較</h2></div><p>中心値だけでなくレンジを主値とします。参考換算額は業種平均の基本月額を用いたモデル値であり、個社の実支給額ではありません。</p></div>
-      <div class="model-note"><strong>推定式:</strong> 会社重み × 旧個社推定 ＋ 業種重み × 連合2026年業種別実測。一次資料がある会社は会社重みを高め、明示された最低月数・回数・算定方式を優先します。</div>
+      <div class="section-heading"><div><span class="kicker">COMPANY ESTIMATES</span><h2>日経225企業別の定量比較</h2></div><p>参考換算額は個社実額ではありません。低信頼度の業種初期推定は、会社・労組一次資料の取得時に置換されます。</p></div>
+      <div class="model-note"><strong>推定式:</strong> 個社資料・個社事前分布を優先し、未確認会社は日経業種→連合2026業種別実測へ接続。業績連動は上側レンジを拡張し、総合判断型はアップサイドを抑制します。</div>
       <div class="toolbar">
         <label class="search" for="search"><span>検索</span><input id="search" type="search" placeholder="会社名・証券コード・業種・算定方式" autocomplete="off"></label>
-        <div class="filters" role="group" aria-label="推定信頼度フィルター">
-          <button class="filter active" data-confidence="all" aria-pressed="true" aria-controls="company-table">全社</button>
-          <button class="filter" data-confidence="high" aria-pressed="false" aria-controls="company-table">高</button>
-          <button class="filter" data-confidence="medium" aria-pressed="false" aria-controls="company-table">中</button>
-          <button class="filter" data-confidence="low" aria-pressed="false" aria-controls="company-table">低</button>
-        </div>
+        <div class="filters" role="group" aria-label="推定信頼度フィルター"><button class="filter active" data-confidence="all" aria-pressed="true" aria-controls="company-table">全社</button><button class="filter" data-confidence="high" aria-pressed="false" aria-controls="company-table">高</button><button class="filter" data-confidence="medium" aria-pressed="false" aria-controls="company-table">中</button><button class="filter" data-confidence="low" aria-pressed="false" aria-controls="company-table">低</button></div>
       </div>
       <p id="result-count" class="result-count" role="status" aria-live="polite">読み込み中</p>
-      <div class="table-wrap company-wrap" tabindex="0">
-        <table id="company-table" class="comparison-table company-table">
-          <caption>主要30社の賞与推定月数・参考換算額・根拠</caption>
-          <thead><tr>
-            <th data-column="company" aria-sort="none"><button class="sort-button" data-sort="company">会社</button></th>
-            <th data-column="months" aria-sort="none"><button class="sort-button" data-sort="months">年間賞与月数</button></th>
-            <th data-column="amount" aria-sort="none"><button class="sort-button" data-sort="amount">参考換算額</button></th>
-            <th data-column="sector" aria-sort="none"><button class="sort-button" data-sort="sector">業種実測アンカー</button></th>
-            <th>方式・回数</th>
-            <th data-column="confidence" aria-sort="none"><button class="sort-button" data-sort="confidence">信頼度</button></th>
-            <th>根拠</th>
-          </tr></thead>
-          <tbody id="company-body"></tbody>
-        </table>
-      </div>
+      <div class="table-wrap company-wrap" tabindex="0"><table id="company-table" class="comparison-table company-table"><caption>日経225全社の賞与推定月数・参考換算額・根拠</caption><thead><tr><th data-column="company" aria-sort="none"><button class="sort-button" data-sort="company">会社</button></th><th data-column="months" aria-sort="none"><button class="sort-button" data-sort="months">年間賞与月数</button></th><th data-column="amount" aria-sort="none"><button class="sort-button" data-sort="amount">参考換算額</button></th><th data-column="sector" aria-sort="none"><button class="sort-button" data-sort="sector">業種実測アンカー</button></th><th>方式・回数</th><th data-column="confidence" aria-sort="none"><button class="sort-button" data-sort="confidence">信頼度</button></th><th>根拠</th></tr></thead><tbody id="company-body"></tbody></table></div>
       <p id="empty" class="empty" hidden>条件に一致する企業はありません。</p>
     </section>
-
-    <section id="benchmarks" class="shell section-block">
-      <div class="section-heading"><div><span class="kicker">ACTUAL BENCHMARKS</span><h2>推定を支える実測値</h2></div><p>連合、経団連、厚生労働省の一次資料を、対象範囲・集計方法・標本数・公表段階とともに収録します。</p></div>
-      <div class="benchmark-note"><strong>比較上の注意:</strong> 連合は労働者加重平均、経団連も組合員数による加重平均、厚生労働省の民間主要企業集計は企業平均です。異なる母集団を単純なランキングとして扱いません。</div>
-      <div class="table-wrap benchmark-wrap" tabindex="0">
-        <table class="comparison-table benchmark-table">
-          <caption>公式資料から抽出した賞与・一時金の定量情報</caption>
-          <thead><tr><th>公表主体・対象</th><th>公表段階</th><th>値</th><th>前年値</th><th>増減</th><th>標本</th><th>対象範囲・注意</th><th>一次資料</th></tr></thead>
-          <tbody id="benchmark-body"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="sources" class="shell section-block">
-      <div class="section-heading"><div><span class="kicker">SOURCE MAP</span><h2>参照サイトの役割</h2></div><p>一次資料は推定の置換・補正に使い、公的集計は業種アンカーに使います。口コミ値を確認事実として扱いません。</p></div>
-      <div class="table-wrap source-wrap" tabindex="0">
-        <table class="comparison-table source-table">
-          <caption>賞与調査に利用する参照チャネル</caption>
-          <thead><tr><th>優先</th><th>参照先</th><th>区分</th><th>確認できること</th><th>限界</th><th>リンク</th></tr></thead>
-          <tbody id="source-body"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="rules" class="shell section-block method-grid">
-      <div><span class="kicker">MODEL CONTRACT</span><h2>推定ロジック</h2></div>
-      <div class="rules">
-        <article><b>01</b><div><h3>実測アンカー</h3><p>連合2026最終集計の業種別年間月数・金額を基準にします。</p></div></article>
-        <article><b>02</b><div><h3>個社事前分布</h3><p>旧調査の中心値とレンジを残し、信頼度に応じて業種実測へ縮約します。</p></div></article>
-        <article><b>03</b><div><h3>一次資料優先</h3><p>確認済みの回数・方式・最低月数はモデル値より優先します。</p></div></article>
-        <article><b>04</b><div><h3>不確実性表示</h3><p>単一点ではなく下限・中心・上限、重み、前提、反証条件を公開します。</p></div></article>
-      </div>
-    </section>
+    <section id="benchmarks" class="shell section-block"><div class="section-heading"><div><span class="kicker">ACTUAL BENCHMARKS</span><h2>推定を支える実測値</h2></div><p>連合、経団連、厚生労働省の一次資料を、対象範囲・集計方法・標本数・公表段階とともに収録します。</p></div><div class="benchmark-note"><strong>比較上の注意:</strong> 異なる母集団の集計を単純なランキングとして扱いません。</div><div class="table-wrap benchmark-wrap" tabindex="0"><table class="comparison-table benchmark-table"><caption>公式資料から抽出した賞与・一時金の定量情報</caption><thead><tr><th>公表主体・対象</th><th>公表段階</th><th>値</th><th>前年値</th><th>増減</th><th>標本</th><th>対象範囲・注意</th><th>一次資料</th></tr></thead><tbody id="benchmark-body"></tbody></table></div></section>
+    <section id="sources" class="shell section-block"><div class="section-heading"><div><span class="kicker">SOURCE MAP</span><h2>参照サイトの役割</h2></div><p>一次資料は推定の置換・補正に使い、公的集計は業種アンカーに使います。</p></div><div class="table-wrap source-wrap" tabindex="0"><table class="comparison-table source-table"><caption>賞与調査に利用する参照チャネル</caption><thead><tr><th>優先</th><th>参照先</th><th>区分</th><th>確認できること</th><th>限界</th><th>リンク</th></tr></thead><tbody id="source-body"></tbody></table></div></section>
+    <section id="rules" class="shell section-block method-grid"><div><span class="kicker">MODEL CONTRACT</span><h2>推定ロジック</h2></div><div class="rules"><article><b>01</b><div><h3>公式Universe</h3><p>日経平均公式構成銘柄ページから225社と日経業種を取得します。</p></div></article><article><b>02</b><div><h3>個社優先</h3><p>既存30社と一次資料確認済み会社は業種初期推定より優先します。</p></div></article><article><b>03</b><div><h3>制度アップサイド</h3><p>業績連動は上側分布を広げ、総合判断・固定型は上側を抑えます。</p></div></article><article><b>04</b><div><h3>不確実性表示</h3><p>下限・中心・上限、信頼度、前提、反証条件を公開します。</p></div></article></div></section>
   </main>
-  <footer class="shell"><span>主要30社 賞与定量モデル</span><a href="https://github.com/KAFKA2306/bonus">Data and code: KAFKA2306/bonus</a></footer>
+  <footer class="shell"><span>日経225 賞与定量モデル</span><a href="https://github.com/KAFKA2306/bonus">Data and code: KAFKA2306/bonus</a></footer>
   <script src="./app.js" defer></script>
 </body>
 </html>
