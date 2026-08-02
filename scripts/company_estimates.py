@@ -35,6 +35,18 @@ REQUIRED_PARAMETER_KEYS = (
     "maximum_company_weight",
     "minimum_sector_band_months",
 )
+REQUIRED_MECHANISM_KEYS = (
+    "label_ja",
+    "broad_classification",
+    "upside_profile",
+    "upside_score",
+    "minimum_adjustment_months",
+    "central_adjustment_months",
+    "maximum_adjustment_months",
+)
+ALLOWED_UPSIDE_PROFILES = {"very_high", "high", "medium", "low"}
+ALLOWED_FORMULA_DISCLOSURE = {"explicit", "not_disclosed", "not_applicable", "unknown"}
+ALLOWED_AMOUNT_POLICIES = {"sector_implied", "project_from_official_seasonal_base"}
 
 
 def latest_company_estimation_model(data_dir: Path = DATA_DIR) -> Path:
@@ -71,6 +83,52 @@ def _positive_sample(value: Any, field_name: str) -> dict[str, int]:
     return result
 
 
+def _validate_official_months(value: Any, field_name: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValidationError(f"{field_name} must be an object")
+    period = _required_text(value.get("period"), f"{field_name}.period")
+    months = _number(value.get("value"), f"{field_name}.value", positive=True)
+    if months > 24:
+        raise ValidationError(f"{field_name}.value must be within (0, 24]")
+    source_url = value.get("source_url")
+    if not is_https_url(source_url):
+        raise ValidationError(f"{field_name}.source_url must be https")
+    note = _required_text(value.get("note"), f"{field_name}.note")
+    return {
+        **value,
+        "period": period,
+        "value": months,
+        "source_url": source_url,
+        "note": note,
+    }
+
+
+def _validate_seasonal_observation(value: Any, field_name: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValidationError(f"{field_name} must be an object")
+    period = _required_text(value.get("period"), f"{field_name}.period")
+    months = _number(value.get("months"), f"{field_name}.months", positive=True)
+    amount_yen = _number(value.get("amount_yen"), f"{field_name}.amount_yen", positive=True)
+    model_age = value.get("model_age")
+    if model_age is not None and (
+        not isinstance(model_age, int) or isinstance(model_age, bool) or model_age < 18
+    ):
+        raise ValidationError(f"{field_name}.model_age must be null or an adult age")
+    source_url = value.get("source_url")
+    if not is_https_url(source_url):
+        raise ValidationError(f"{field_name}.source_url must be https")
+    note = _required_text(value.get("note"), f"{field_name}.note")
+    return {
+        **value,
+        "period": period,
+        "months": months,
+        "amount_yen": int(amount_yen),
+        "model_age": model_age,
+        "source_url": source_url,
+        "note": note,
+    }
+
+
 def validate_company_estimation_model(
     payload: Any, universe_codes: set[str]
 ) -> dict[str, Any]:
@@ -104,6 +162,49 @@ def validate_company_estimation_model(
         raise ValidationError("minimum_company_weight cannot exceed maximum_company_weight")
     if validated_parameters["minimum_sector_band_months"] <= 0:
         raise ValidationError("minimum_sector_band_months must be positive")
+
+    mechanisms = payload.get("mechanisms")
+    if not isinstance(mechanisms, dict) or not mechanisms:
+        raise ValidationError("company_estimation_model.mechanisms must be a non-empty object")
+    validated_mechanisms: dict[str, dict[str, Any]] = {}
+    for mechanism_id, item in mechanisms.items():
+        prefix = f"company_estimation_model.mechanisms.{mechanism_id}"
+        if not isinstance(item, dict):
+            raise ValidationError(f"{prefix} must be an object")
+        for key in REQUIRED_MECHANISM_KEYS:
+            if key in {"upside_score", "minimum_adjustment_months", "central_adjustment_months", "maximum_adjustment_months"}:
+                continue
+            _required_text(item.get(key), f"{prefix}.{key}")
+        if item.get("upside_profile") not in ALLOWED_UPSIDE_PROFILES:
+            raise ValidationError(f"{prefix}.upside_profile is invalid")
+        upside_score = _number(item.get("upside_score"), f"{prefix}.upside_score")
+        if not 0 <= upside_score <= 1:
+            raise ValidationError(f"{prefix}.upside_score must be within [0, 1]")
+        validated_mechanisms[mechanism_id] = {
+            **item,
+            "upside_score": upside_score,
+            "minimum_adjustment_months": _number(
+                item.get("minimum_adjustment_months"),
+                f"{prefix}.minimum_adjustment_months",
+            ),
+            "central_adjustment_months": _number(
+                item.get("central_adjustment_months"),
+                f"{prefix}.central_adjustment_months",
+            ),
+            "maximum_adjustment_months": _number(
+                item.get("maximum_adjustment_months"),
+                f"{prefix}.maximum_adjustment_months",
+            ),
+        }
+
+    defaults = payload.get("default_mechanism_by_classification")
+    if not isinstance(defaults, dict) or not defaults:
+        raise ValidationError("default_mechanism_by_classification is required")
+    for classification, mechanism_id in defaults.items():
+        if mechanism_id not in validated_mechanisms:
+            raise ValidationError(
+                f"default mechanism for {classification} references unknown mechanism {mechanism_id}"
+            )
 
     sectors = payload.get("sectors")
     if not isinstance(sectors, dict) or not sectors:
@@ -163,12 +264,63 @@ def validate_company_estimation_model(
             f"missing={missing}, extras={extras}"
         )
 
+    overrides = payload.get("company_overrides", {})
+    if not isinstance(overrides, dict):
+        raise ValidationError("company_overrides must be an object")
+    validated_overrides: dict[str, dict[str, Any]] = {}
+    for raw_code, item in overrides.items():
+        code = normalise_code(raw_code)
+        prefix = f"company_estimation_model.company_overrides.{code}"
+        if code not in universe_codes:
+            raise ValidationError(f"{prefix} is outside the frozen universe")
+        if not isinstance(item, dict):
+            raise ValidationError(f"{prefix} must be an object")
+        mechanism_id = item.get("mechanism")
+        if mechanism_id not in validated_mechanisms:
+            raise ValidationError(f"{prefix}.mechanism references unknown mechanism")
+        formula_disclosure = item.get("formula_disclosure", "unknown")
+        if formula_disclosure not in ALLOWED_FORMULA_DISCLOSURE:
+            raise ValidationError(f"{prefix}.formula_disclosure is invalid")
+        amount_policy = item.get("amount_policy", "sector_implied")
+        if amount_policy not in ALLOWED_AMOUNT_POLICIES:
+            raise ValidationError(f"{prefix}.amount_policy is invalid")
+        source_url = item.get("source_url")
+        if source_url is not None and not is_https_url(source_url):
+            raise ValidationError(f"{prefix}.source_url must be https or null")
+        annual = item.get("official_annual_months")
+        seasonal = item.get("latest_seasonal")
+        validated_overrides[code] = {
+            **item,
+            "mechanism": mechanism_id,
+            "formula_disclosure": formula_disclosure,
+            "amount_policy": amount_policy,
+            "official_annual_months": (
+                _validate_official_months(annual, f"{prefix}.official_annual_months")
+                if annual is not None
+                else None
+            ),
+            "latest_seasonal": (
+                _validate_seasonal_observation(seasonal, f"{prefix}.latest_seasonal")
+                if seasonal is not None
+                else None
+            ),
+        }
+        if amount_policy == "project_from_official_seasonal_base" and (
+            annual is None or seasonal is None
+        ):
+            raise ValidationError(
+                f"{prefix} requires official_annual_months and latest_seasonal for amount projection"
+            )
+
     return {
         **payload,
         "methodology": dict(methodology),
         "parameters": validated_parameters,
+        "mechanisms": validated_mechanisms,
+        "default_mechanism_by_classification": dict(defaults),
         "sectors": validated_sectors,
         "code_to_sector": code_to_sector,
+        "company_overrides": validated_overrides,
     }
 
 
@@ -206,13 +358,72 @@ def _verified_numeric_override(
         result["central"] = min(result["central"], result["maximum"])
         result["minimum"] = min(result["minimum"], result["central"])
         return result, f"一次資料の最大{ceiling:g}か月を上限へ適用"
-    if kind == "range" and all(isinstance(annual.get(key), (int, float)) for key in ("minimum", "maximum")):
+    if kind == "range" and all(
+        isinstance(annual.get(key), (int, float)) for key in ("minimum", "maximum")
+    ):
         low, high = float(annual["minimum"]), float(annual["maximum"])
-        return {"minimum": low, "central": round((low + high) / 2, 2), "maximum": high}, "一次資料の明示レンジを優先"
-    if kind == "exact" and isinstance(annual.get("value"), (int, float)):
+        return {
+            "minimum": low,
+            "central": round((low + high) / 2, 2),
+            "maximum": high,
+        }, "一次資料の明示レンジを優先"
+    if kind in {"point", "exact"} and isinstance(annual.get("value"), (int, float)):
         value = float(annual["value"])
-        return {"minimum": value, "central": value, "maximum": value}, "一次資料の明示値を優先"
+        return {
+            "minimum": value,
+            "central": value,
+            "maximum": value,
+        }, "一次資料の明示値を優先"
     return estimate, None
+
+
+def _apply_model_override(
+    estimate: dict[str, float], override: dict[str, Any]
+) -> tuple[dict[str, float], str | None]:
+    annual = override.get("official_annual_months")
+    if not annual:
+        return estimate, None
+    value = float(annual["value"])
+    return {
+        "minimum": value,
+        "central": value,
+        "maximum": value,
+    }, f"{annual['period']}の会社公式年間{value:g}か月を優先"
+
+
+def _amount_from_sector(
+    estimate: dict[str, float], sector: dict[str, Any]
+) -> tuple[dict[str, int], str, str]:
+    implied_monthly_base = sector["response_amount_yen"] / sector["response_months"]
+    amount = {
+        key: int(round(implied_monthly_base * estimate[key] / 1000) * 1000)
+        for key in ("minimum", "central", "maximum")
+    }
+    return (
+        amount,
+        "sector_implied",
+        "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。",
+    )
+
+
+def _amount_from_official_seasonal_base(
+    annual_months: dict[str, float], seasonal: dict[str, Any]
+) -> tuple[dict[str, int], str, str]:
+    monthly_base = seasonal["amount_yen"] / seasonal["months"]
+    central = monthly_base * annual_months["central"]
+    uncertainty_rate = 0.05
+    return (
+        {
+            "minimum": int(round(central * (1 - uncertainty_rate) / 1000) * 1000),
+            "central": int(round(central / 1000) * 1000),
+            "maximum": int(round(central * (1 + uncertainty_rate) / 1000) * 1000),
+        },
+        "official_company_base_projection",
+        (
+            f"{seasonal['period']}の会社公式モデル額÷月数で基礎月額を推定し、別期間の公式年間月数を乗じた参考値。"
+            "期間差を含むため実支給額ではない。"
+        ),
+    )
 
 
 def build_company_estimates(
@@ -231,6 +442,23 @@ def build_company_estimates(
         prior_score = float(hypothesis["confidence"]["score"])
         verified_structure = hypothesis["method"] == "verified_and_legacy_prior"
         sector_only = hypothesis["method"] == "sector_prior_low_confidence"
+        record = records_by_code.get(code)
+        override = model["company_overrides"].get(code, {})
+
+        classification = (
+            override.get("classification")
+            or (record.get("classification") if record else None)
+            or hypothesis["classification_hypothesis"]
+        )
+        mechanism_id = override.get("mechanism") or model[
+            "default_mechanism_by_classification"
+        ].get(classification)
+        if mechanism_id not in model["mechanisms"]:
+            raise ValidationError(
+                f"no valid mechanism for company {code} classification {classification}"
+            )
+        mechanism = model["mechanisms"][mechanism_id]
+
         weight = (
             parameters["base_company_weight"]
             + parameters["confidence_multiplier"] * prior_score
@@ -249,62 +477,79 @@ def build_company_estimates(
         estimate = {
             "minimum": round(
                 weight * float(prior["minimum"])
-                + (1 - weight) * (sector["response_months"] - sector_band),
+                + (1 - weight) * (sector["response_months"] - sector_band)
+                + mechanism["minimum_adjustment_months"],
                 2,
             ),
             "central": round(
                 weight * float(prior["central"])
-                + (1 - weight) * sector["response_months"],
+                + (1 - weight) * sector["response_months"]
+                + mechanism["central_adjustment_months"],
                 2,
             ),
             "maximum": round(
                 weight * float(prior["maximum"])
-                + (1 - weight) * (sector["response_months"] + sector_band),
+                + (1 - weight) * (sector["response_months"] + sector_band)
+                + mechanism["maximum_adjustment_months"],
                 2,
             ),
         }
-        estimate, override_note = _verified_numeric_override(estimate, records_by_code.get(code))
+        estimate, verified_note = _verified_numeric_override(estimate, record)
+        estimate, model_note = _apply_model_override(estimate, override)
+        override_note = model_note or verified_note
         estimate = {key: round(max(0.1, value), 2) for key, value in estimate.items()}
 
-        implied_monthly_base = sector["response_amount_yen"] / sector["response_months"]
-        amount = {
-            key: int(round(implied_monthly_base * estimate[key] / 1000) * 1000)
-            for key in ("minimum", "central", "maximum")
-        }
-        record = records_by_code.get(code)
-        verified_record = bool(record and record.get("evidence_status") in {"confirmed", "partially_confirmed"})
+        if override.get("amount_policy") == "project_from_official_seasonal_base":
+            amount, amount_method, amount_caution = _amount_from_official_seasonal_base(
+                estimate, override["latest_seasonal"]
+            )
+        else:
+            amount, amount_method, amount_caution = _amount_from_sector(estimate, sector)
+
+        verified_record = bool(
+            record
+            and record.get("evidence_status") in {"confirmed", "partially_confirmed"}
+        )
         confidence_score = prior_score * 0.75 + 0.20
         if verified_structure or verified_record:
             confidence_score += 0.10
         if sector_only:
             confidence_score -= 0.05
-        confidence_score = round(_clamp(confidence_score, 0.25, 0.82), 2)
+        if override.get("source_url"):
+            confidence_score += 0.05
+        if override.get("official_annual_months"):
+            confidence_score = max(confidence_score, 0.82)
+        confidence_score = round(_clamp(confidence_score, 0.25, 0.90), 2)
+
         amount_score = confidence_score - 0.15
-        if sector["sample_amount"]["organizations"] < 10:
-            amount_score -= 0.12
-        elif sector["sample_amount"]["organizations"] < 50:
-            amount_score -= 0.05
-        amount_score = round(_clamp(amount_score, 0.15, 0.75), 2)
+        if amount_method == "sector_implied":
+            if sector["sample_amount"]["organizations"] < 10:
+                amount_score -= 0.12
+            elif sector["sample_amount"]["organizations"] < 50:
+                amount_score -= 0.05
+        else:
+            amount_score = max(amount_score, 0.65)
+        amount_score = round(_clamp(amount_score, 0.15, 0.82), 2)
 
         status = "estimated"
-        if override_note and "明示値" in override_note:
+        if override.get("official_annual_months") or (
+            override_note and "明示値" in override_note
+        ):
             status = "verified_numeric"
         elif override_note:
             status = "estimated_with_verified_bound"
-        elif verified_record:
+        elif verified_record or override.get("source_url"):
             status = "estimated_with_verified_structure"
 
-        classification = (
-            record.get("classification")
-            if record and record.get("classification")
-            else hypothesis["classification_hypothesis"]
+        verified_frequency = (
+            (record.get("bonus") or {}).get("frequency_per_year") if record else None
         )
-        verified_frequency = (record.get("bonus") or {}).get("frequency_per_year") if record else None
         frequency = (
-            verified_frequency
-            if verified_frequency is not None
-            else hypothesis["frequency_per_year_hypothesis"]
+            override.get("frequency_per_year")
+            or verified_frequency
+            or hypothesis["frequency_per_year_hypothesis"]
         )
+
         basis = list(hypothesis["basis"])
         basis.append(
             {
@@ -316,9 +561,40 @@ def build_company_estimates(
                 "reference": sector["source_url"],
             }
         )
+        if override.get("source_url"):
+            basis.append(
+                {
+                    "type": "company_mechanism",
+                    "statement": override.get("source_note")
+                    or f"会社公式資料で{mechanism['label_ja']}の制度構造を確認。",
+                    "reference": override["source_url"],
+                }
+            )
+        if override.get("official_annual_months"):
+            annual = override["official_annual_months"]
+            basis.append(
+                {
+                    "type": "company_official_numeric",
+                    "statement": annual["note"],
+                    "reference": annual["source_url"],
+                }
+            )
+        if override.get("latest_seasonal"):
+            seasonal = override["latest_seasonal"]
+            basis.append(
+                {
+                    "type": "company_official_numeric",
+                    "statement": seasonal["note"],
+                    "reference": seasonal["source_url"],
+                }
+            )
+
         assumptions = list(hypothesis["assumptions"])
         assumptions.append("旧個社調査の相対的な高低が2026年にも一定程度残る。")
-        assumptions.append("参考換算額では個社の基本月額を業種平均と同じと仮定する。")
+        if amount_method == "sector_implied":
+            assumptions.append("参考換算額では個社の基本月額を業種平均と同じと仮定する。")
+        else:
+            assumptions.append("会社公式の季別モデル基礎額が年間換算にも近似利用できる。")
         falsifiers = list(hypothesis["falsifiers"])
         falsifiers.append("会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。")
 
@@ -329,8 +605,22 @@ def build_company_estimates(
             "sector_name_ja": sector["name_ja"],
             "months": estimate,
             "amount_yen": amount,
+            "amount_method": amount_method,
             "frequency_per_year": frequency,
             "classification": classification,
+            "mechanism": {
+                "id": mechanism_id,
+                "label_ja": mechanism["label_ja"],
+                "upside_profile": mechanism["upside_profile"],
+                "upside_score": mechanism["upside_score"],
+                "formula_disclosure": override.get("formula_disclosure", "unknown"),
+                "source_url": override.get("source_url"),
+                "source_note": override.get("source_note"),
+            },
+            "official_observations": {
+                "annual_months": override.get("official_annual_months"),
+                "latest_seasonal": override.get("latest_seasonal"),
+            },
             "confidence": {
                 "score": confidence_score,
                 "level": _confidence_level(confidence_score),
@@ -350,7 +640,9 @@ def build_company_estimates(
                 "sector_demand_months": sector["demand_months"],
                 "sector_previous_months": sector["previous_months"],
                 "sector_actual_amount_yen": int(sector["response_amount_yen"]),
-                "sector_implied_monthly_base_yen": int(round(implied_monthly_base)),
+                "sector_implied_monthly_base_yen": int(
+                    round(sector["response_amount_yen"] / sector["response_months"])
+                ),
                 "sector_sample_months": sector["sample_months"],
                 "sector_sample_amount": sector["sample_amount"],
                 "source_url": sector["source_url"],
@@ -359,7 +651,7 @@ def build_company_estimates(
             "basis": basis,
             "assumptions": assumptions,
             "falsifiers": falsifiers,
-            "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。",
+            "amount_caution": amount_caution,
         }
 
     return result
