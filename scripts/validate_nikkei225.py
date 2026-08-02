@@ -39,7 +39,13 @@ def main() -> int:
         assert estimate["basis"] and estimate["assumptions"] and estimate["falsifiers"]
     assert any(row["stock_code"] == "285A" for row in records), "Kioxia must be in the current official universe"
     assert any(row["stock_code"] == "9022" and row["estimate"]["months"]["central"] == 6.15 for row in records)
-    assert any(row["stock_code"] == "8035" and row["estimate"]["mechanism"]["id"] == "performance_nonformula" for row in records)
+    assert any(
+        row["stock_code"] == "8035"
+        and row["estimate"]["classification"] == "performance_linked"
+        and row["estimate"]["mechanism"]["upside_profile"] == "high"
+        and row["estimate"]["mechanism"]["formula_disclosure"] == "not_disclosed"
+        for row in records
+    )
     print(f"PASS: official Nikkei 225 expansion covers {len(records)} companies; sector priors={status_counts['sector_prior']}")
     return 0
 
