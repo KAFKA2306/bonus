@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the expanded Nikkei 225 public payload."""
+"""Validate the expanded Nikkei 225 public payload and responsive layout contract."""
 from __future__ import annotations
 
 import json
@@ -8,7 +8,35 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAYLOAD = ROOT / "docs" / "data" / "bonus.json"
+STYLES = ROOT / "docs" / "styles.css"
 SOURCE_URL = "https://indexes.nikkei.co.jp/nkave/index/component?idx=nk225"
+
+
+def validate_no_horizontal_scroll() -> None:
+    css = STYLES.read_text(encoding="utf-8")
+    required = (
+        "html { scroll-behavior: smooth; overflow-x: hidden; }",
+        "body { margin: 0; overflow-x: hidden;",
+        ".table-wrap { max-width: 100%;",
+        "overflow-x: hidden; overflow-y: auto;",
+        ".comparison-table { width: 100%; table-layout: fixed;",
+        "@media (max-width: 1120px)",
+        ".comparison-table tbody tr { display: grid; grid-template-columns: repeat(2,minmax(0,1fr));",
+        "@media (max-width: 680px)",
+        ".comparison-table tbody tr { grid-template-columns: 1fr; }",
+    )
+    for marker in required:
+        assert marker in css, f"missing no-horizontal-scroll contract: {marker}"
+
+    forbidden = (
+        "overflow-x: auto",
+        "min-width: 1060px",
+        "min-width: 1510px",
+        "min-width: 1240px",
+        "min-width: 1460px",
+    )
+    for marker in forbidden:
+        assert marker not in css, f"horizontal-scroll layout returned: {marker}"
 
 
 def main() -> int:
@@ -46,7 +74,11 @@ def main() -> int:
         and row["estimate"]["mechanism"]["formula_disclosure"] == "not_disclosed"
         for row in records
     )
-    print(f"PASS: official Nikkei 225 expansion covers {len(records)} companies; sector priors={status_counts['sector_prior']}")
+    validate_no_horizontal_scroll()
+    print(
+        f"PASS: official Nikkei 225 expansion covers {len(records)} companies; "
+        f"sector priors={status_counts['sector_prior']}; horizontal scrolling disabled"
+    )
     return 0
 
 
