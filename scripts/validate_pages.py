@@ -9,6 +9,7 @@ from pathlib import Path
 
 from generate_pages_data import DEFAULT_OUTPUT, build_public_payload, load_universe_companies, render_json
 from generate_verified_bonus_summary import DATA_DIR, UNIVERSE_FILE, latest_snapshot, load_universe_codes, load_yaml, validate_snapshot
+from quantitative_benchmarks import latest_quantitative_benchmarks, validate_quantitative_benchmarks
 from source_survey import latest_source_survey, validate_source_survey
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -37,39 +38,59 @@ def css_variable(css: str, name: str) -> str:
 def main() -> int:
     input_path = latest_snapshot(DATA_DIR)
     survey_path = latest_source_survey(DATA_DIR)
+    quantitative_path = latest_quantitative_benchmarks(DATA_DIR)
     snapshot = load_yaml(input_path)
     source_survey = validate_source_survey(load_yaml(survey_path))
+    source_ids = {item["id"] for item in source_survey["source_registry"]}
+    quantitative = validate_quantitative_benchmarks(load_yaml(quantitative_path), source_ids)
     universe_codes = load_universe_codes(UNIVERSE_FILE)
     universe_companies = load_universe_companies(UNIVERSE_FILE)
     assert set(universe_companies) == universe_codes
     records = validate_snapshot(snapshot, universe_codes)
-    expected = render_json(build_public_payload(snapshot, records, input_path, universe_companies, source_survey, survey_path))
+    expected = render_json(
+        build_public_payload(
+            snapshot,
+            records,
+            input_path,
+            universe_companies,
+            source_survey,
+            survey_path,
+            quantitative,
+            quantitative_path,
+        )
+    )
     assert DEFAULT_OUTPUT.exists(), "generated Pages JSON is missing"
     actual = DEFAULT_OUTPUT.read_text(encoding="utf-8")
     assert actual == expected, "Pages JSON is stale; run python scripts/generate_pages_data.py"
     public = json.loads(actual)
-    assert public["schema_version"] == 2
+    assert public["schema_version"] == 3
     assert public["generated_from"] == str(input_path.relative_to(ROOT))
     assert public["source_survey_generated_from"] == str(survey_path.relative_to(ROOT))
+    assert public["quantitative_benchmarks_generated_from"] == str(quantitative_path.relative_to(ROOT))
     assert public["summary"]["record_count"] == len(universe_codes)
     assert public["summary"]["source_channel_count"] == len(source_survey["source_registry"])
     assert public["summary"]["required_channel_count"] == len(source_survey["required_channels"])
+    assert public["summary"]["quantitative_benchmark_count"] == len(quantitative["benchmarks"])
+    assert public["summary"]["quantitative_final_count"] > 0
+    assert public["summary"]["quantitative_provisional_count"] > 0
     assert public["universe"]["coverage_ratio"] == 1.0
     assert {item["stock_code"] for item in public["records"]} == universe_codes
     assert all("hypothesis" not in item for item in public["records"])
     assert all("survey" in item for item in public["records"])
+    assert all(item["source_url"].startswith("https://") for item in public["quantitative_benchmarks"])
 
     html = (DOCS / "index.html").read_text(encoding="utf-8")
     app = (DOCS / "app.js").read_text(encoding="utf-8")
     css = (DOCS / "styles.css").read_text(encoding="utf-8")
 
     for marker in (
-        'name="bonus-build" content="source-survey-v5"',
+        'name="bonus-build" content="source-survey-v6"',
         "<title>主要30社 賞与ソース・メタサーベイ</title>",
-        'id="sources"', 'id="companies"', 'id="rules"',
-        'id="source-body"', 'id="company-body"', 'id="company-table"',
-        'id="metric-channels"', 'id="metric-primary"', 'id="metric-coverage"',
-        'class="sort-button"', 'aria-sort="none"', 'role="status"',
+        'id="benchmarks"', 'id="sources"', 'id="companies"', 'id="rules"',
+        'id="benchmark-body"', 'id="source-body"', 'id="company-body"', 'id="company-table"',
+        'id="metric-channels"', 'id="metric-benchmarks"', 'id="metric-final"',
+        'id="metric-verified"', 'id="metric-coverage"',
+        "benchmark-table", 'class="sort-button"', 'aria-sort="none"', 'role="status"',
         'aria-live="polite"', 'aria-pressed="true"', '<script src="./app.js" defer></script>',
     ):
         assert marker in html, f"missing HTML marker: {marker}"
@@ -77,9 +98,11 @@ def main() -> int:
         assert forbidden not in html, f"legacy estimate UI must be removed: {forbidden}"
 
     for marker in (
-        "./data/bonus.json", "source_registry", "function sourceRow", "function companyRow",
-        "record.survey", "next_channel_name_ja", "research_coverage_ratio",
-        "setAttribute('aria-sort'", "setAttribute('aria-pressed'", "#source-body", "#company-body",
+        "./data/bonus.json", "quantitative_benchmarks", "function benchmarkRow",
+        "function sourceRow", "function companyRow", "record.survey", "next_channel_name_ja",
+        "quantitative_benchmark_count", "quantitative_final_count", "research_coverage_ratio",
+        "setAttribute('aria-sort'", "setAttribute('aria-pressed'", "#benchmark-body",
+        "#source-body", "#company-body",
     ):
         assert marker in app, f"missing app behavior: {marker}"
     for forbidden in ("hypothesisRange", "confidenceScore", "record.hypothesis"):
@@ -87,7 +110,8 @@ def main() -> int:
 
     for marker in (
         ":focus-visible", "scroll-margin-top", "@media (prefers-reduced-motion: reduce)",
-        ".table-wrap", ".comparison-table", ".company-cell", ".sort-button",
+        ".benchmark-note", ".benchmark-wrap", ".benchmark-table", ".release-first", ".release-final",
+        ".numeric", ".table-wrap", ".comparison-table", ".company-cell", ".sort-button",
         "position: sticky", 'th[aria-sort="ascending"]', ".row-details", ".detail-panel",
         ".tier-primary_company", ".tier-official_benchmark", ".status-evidence_found",
         "@media (max-width: 920px)",
@@ -99,7 +123,11 @@ def main() -> int:
         ratio = contrast_ratio(css_variable(css, name), background)
         assert ratio >= 4.5, f"--{name} contrast is only {ratio:.2f}:1"
 
-    print(f"PASS: source survey covers {len(universe_codes)} companies, {len(source_survey['source_registry'])} channels, {len(records)} verified records")
+    print(
+        f"PASS: source survey covers {len(universe_codes)} companies, "
+        f"{len(source_survey['source_registry'])} channels, {len(records)} verified records, "
+        f"and {len(quantitative['benchmarks'])} quantitative benchmarks"
+    )
     return 0
 
 

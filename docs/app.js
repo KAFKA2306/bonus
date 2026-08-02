@@ -18,6 +18,7 @@ const classificationLabels = {
   discretionary: '総合判断',
   hybrid: 'ハイブリッド'
 };
+const releaseLabels = { first: '第1回・暫定', final: '最終' };
 const stageOrder = { evidence_found: 0, source_reviewed: 1, queued: 2 };
 
 function escapeHtml(value = '') {
@@ -27,6 +28,45 @@ function normalize(value = '') { return String(value).normalize('NFKC').toLocale
 function list(items = []) { return items.length ? items.map(item => `<li>${escapeHtml(item)}</li>`).join('') : '<li>なし</li>'; }
 function channelName(id) {
   return state.data?.source_registry.find(item => item.id === id)?.name_ja || id || '必須チャネル確認済み';
+}
+function number(value) { return Number(value).toLocaleString('ja-JP'); }
+function valueLabel(value, unit) {
+  if (unit === 'yen') return `¥${number(value)}`;
+  if (unit === 'months') return `${Number(value).toFixed(2)}か月`;
+  return `${value}`;
+}
+function changeLabel(value, unit) {
+  const numeric = Number(value);
+  const sign = numeric > 0 ? '+' : '';
+  if (unit === 'percent') return `${sign}${numeric.toFixed(2)}%`;
+  if (unit === 'yen') return `${sign}¥${number(numeric)}`;
+  if (unit === 'months') return `${sign}${numeric.toFixed(2)}か月`;
+  return `${sign}${numeric}`;
+}
+function sampleLabel(sample = {}) {
+  const organizations = sample.organizations == null ? '—' : `${number(sample.organizations)}組織`;
+  return sample.workers == null ? organizations : `${organizations} / ${number(sample.workers)}人`;
+}
+function aggregationLabel(value) {
+  return value === 'worker_weighted_average' ? '労働者加重平均' : value === 'company_average' ? '企業平均' : value;
+}
+function periodLabel(value) {
+  return String(value).replace('-summer', ' 夏季').replace('-yearend', ' 年末');
+}
+function benchmarkRow(item) {
+  return `<tr>
+    <th scope="row" class="benchmark-title">
+      <strong>${escapeHtml(item.title)}</strong>
+      <small>${escapeHtml(item.publisher)} / ${escapeHtml(periodLabel(item.period))} / 公表 ${escapeHtml(item.published_at)}</small>
+    </th>
+    <td><span class="release release-${escapeHtml(item.release_status)}">${escapeHtml(releaseLabels[item.release_status] || item.release_status)}</span><small>${escapeHtml(aggregationLabel(item.aggregation))}</small></td>
+    <td class="numeric"><strong>${escapeHtml(valueLabel(item.value, item.unit))}</strong></td>
+    <td class="numeric">${escapeHtml(valueLabel(item.previous_value, item.unit))}</td>
+    <td class="numeric change-positive">${escapeHtml(changeLabel(item.change_value, item.change_unit))}</td>
+    <td class="numeric">${escapeHtml(sampleLabel(item.sample))}</td>
+    <td><strong>${escapeHtml(item.scope)}</strong><small>${escapeHtml(item.note)}</small></td>
+    <td><a class="evidence-link" href="${escapeHtml(item.source_url)}" target="_blank" rel="noopener noreferrer">一次資料 ↗</a></td>
+  </tr>`;
 }
 function verifiedFacts(record) {
   const facts = [];
@@ -119,7 +159,8 @@ function renderCompanies() {
 function setMetrics(data) {
   document.querySelector('#as-of').textContent = `基準日 ${data.as_of}`;
   document.querySelector('#metric-channels').textContent = data.summary.source_channel_count;
-  document.querySelector('#metric-primary').textContent = data.summary.primary_channel_count;
+  document.querySelector('#metric-benchmarks').textContent = data.summary.quantitative_benchmark_count;
+  document.querySelector('#metric-final').textContent = data.summary.quantitative_final_count;
   document.querySelector('#metric-verified').textContent = data.summary.verified_record_count;
   document.querySelector('#metric-coverage').textContent = `${Math.round(data.summary.research_coverage_ratio * 100)}%`;
 }
@@ -128,10 +169,12 @@ async function init() {
     const response = await fetch('./data/bonus.json', {cache:'no-store'});
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     state.data = await response.json();
+    document.querySelector('#benchmark-body').innerHTML = state.data.quantitative_benchmarks.map(benchmarkRow).join('');
     document.querySelector('#source-body').innerHTML = state.data.source_registry.map(sourceRow).join('');
     setMetrics(state.data);
     renderCompanies();
   } catch (error) {
+    document.querySelector('#benchmark-body').innerHTML = `<tr><td colspan="8" class="load-error">データを読み込めませんでした: ${escapeHtml(error.message)}</td></tr>`;
     document.querySelector('#company-body').innerHTML = `<tr><td colspan="6" class="load-error">データを読み込めませんでした: ${escapeHtml(error.message)}</td></tr>`;
     document.querySelector('#result-count').textContent = '読み込み失敗';
   }

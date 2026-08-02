@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="主要30社の賞与調査で、参照すべき一次資料と公的統計を先に選定するメタサーベイ">
+  <meta name="description" content="主要30社の賞与調査で、参照すべき一次資料と最新の公的定量情報を対象範囲付きで整理するメタサーベイ">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="source-survey-v5">
+  <meta name="bonus-build" content="source-survey-v6">
   <title>主要30社 賞与ソース・メタサーベイ</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#companies">企業別調査表へ移動</a>
+  <a class="skip-link" href="#benchmarks">定量スナップショットへ移動</a>
   <header class="site-header">
     <a class="brand" href="#top"><span class="brand-mark">源</span><span>賞与ソース・メタサーベイ</span></a>
     <nav aria-label="主要ナビゲーション">
+      <a href="#benchmarks">定量情報</a>
       <a href="#sources">参照サイト</a>
       <a href="#companies">企業別キュー</a>
       <a href="#rules">採用ルール</a>
@@ -24,16 +25,29 @@
   <main id="top">
     <section class="hero shell">
       <div class="eyebrow">SOURCE-FIRST BONUS RESEARCH</div>
-      <h1>値を推定する前に、<br>見るべきサイトを決める。</h1>
-      <p class="lead">会社公式、労組公式、EDINET、TDnet、連合、経団連、厚生労働省・e-Statを役割別に格付けします。個社の賞与値は、対象会社または労組の一次資料に明記された場合だけ確認済みへ昇格します。</p>
-      <div class="meta-line"><span id="as-of">基準日 —</span><span>固定Universe 30社</span><span>推定月数を非表示</span><span>集計値の個社転用を禁止</span></div>
+      <h1>値を集める。<br>母集団は混ぜない。</h1>
+      <p class="lead">会社公式、労組公式、EDINET、TDnetを個社確認に使い、連合・経団連・厚生労働省の最新集計を比較用の定量スナップショットとして分離します。金額、月数、季別、年間、要求、妥結を同じ指標として扱いません。</p>
+      <div class="meta-line"><span id="as-of">基準日 —</span><span>固定Universe 30社</span><span>一次資料の明示値のみ</span><span>集計値の個社転用を禁止</span></div>
     </section>
 
     <section class="shell metrics" aria-label="調査概要">
       <article><span>参照チャネル</span><strong id="metric-channels">—</strong><small>用途・限界を定義</small></article>
-      <article><span>一次・公式</span><strong id="metric-primary">—</strong><small>個社検証に優先</small></article>
-      <article><span>一次資料監査済み</span><strong id="metric-verified">—</strong><small>確認レコード数</small></article>
+      <article><span>定量指標</span><strong id="metric-benchmarks">—</strong><small>一次資料から抽出</small></article>
+      <article><span>最終集計</span><strong id="metric-final">—</strong><small>暫定値と分離</small></article>
+      <article><span>一次資料監査済み</span><strong id="metric-verified">—</strong><small>個社確認レコード</small></article>
       <article><span>必須チャネル確認率</span><strong id="metric-coverage">—</strong><small>全社×4チャネル</small></article>
+    </section>
+
+    <section id="benchmarks" class="shell section-block">
+      <div class="section-heading"><div><span class="kicker">QUANTITATIVE SNAPSHOT</span><h2>最新の定量情報</h2></div><p>連合、経団連、厚生労働省の一次資料を、対象範囲・集計方法・標本数・公表段階とともに収録します。異なる母集団の単純比較は禁止です。</p></div>
+      <div class="benchmark-note"><strong>読み方:</strong> 連合は組合員数による加重平均、経団連も組合員数による加重平均、厚生労働省の民間主要企業集計は企業平均です。月数と金額の集計対象も一致しない場合があります。</div>
+      <div class="table-wrap benchmark-wrap" tabindex="0">
+        <table class="comparison-table benchmark-table">
+          <caption>公式資料から抽出した賞与・一時金の定量情報</caption>
+          <thead><tr><th>公表主体・対象</th><th>公表段階</th><th>値</th><th>前年値</th><th>増減</th><th>標本</th><th>対象範囲・注意</th><th>一次資料</th></tr></thead>
+          <tbody id="benchmark-body"></tbody>
+        </table>
+      </div>
     </section>
 
     <section id="sources" class="shell section-block">
@@ -80,7 +94,7 @@
         <article><b>01</b><div><h3>発行主体</h3><p>会社、労組、金融庁、取引所、行政統計の公式資料かを確認します。</p></div></article>
         <article><b>02</b><div><h3>対象範囲</h3><p>全社員、新卒、組合員、単体、グループのどれかを固定します。</p></div></article>
         <article><b>03</b><div><h3>明示値のみ</h3><p>月数・回数は資料に明記された値だけを保存し、平均給与から逆算しません。</p></div></article>
-        <article><b>04</b><div><h3>ベンチマーク分離</h3><p>連合・経団連・厚労省の集計は比較用で、個社の確認値にはしません。</p></div></article>
+        <article><b>04</b><div><h3>比較可能性</h3><p>金額・月数、要求・妥結、年間・季別、加重平均・企業平均を別系列として扱います。</p></div></article>
       </div>
     </section>
   </main>

@@ -19,6 +19,11 @@ from generate_verified_bonus_summary import (
     normalise_code,
     validate_snapshot,
 )
+from quantitative_benchmarks import (
+    latest_quantitative_benchmarks,
+    relative_path as quantitative_relative_path,
+    validate_quantitative_benchmarks,
+)
 from source_survey import latest_source_survey, relative_path, validate_source_survey
 
 DEFAULT_OUTPUT = BASE_DIR / "docs" / "data" / "bonus.json"
@@ -139,6 +144,8 @@ def build_public_payload(
     universe_companies: dict[str, str],
     source_survey: dict[str, Any],
     source_survey_path: Path,
+    quantitative: dict[str, Any],
+    quantitative_path: Path,
 ) -> dict[str, Any]:
     verified_by_code = {item["stock_code"]: item for item in records}
     registry = source_survey["source_registry"]
@@ -169,6 +176,7 @@ def build_public_payload(
 
     status_counts = Counter(item["evidence_status"] for item in public_records)
     stage_counts = Counter(item["survey"]["stage"] for item in public_records)
+    release_counts = Counter(item["release_status"] for item in quantitative["benchmarks"])
     primary_tiers = {"primary_company", "primary_collective", "official_disclosure"}
     total_reviewed_required = sum(
         item["survey"]["reviewed_required_count"] for item in public_records
@@ -176,10 +184,11 @@ def build_public_payload(
     total_required = len(public_records) * len(required_channels)
 
     return {
-        "schema_version": 2,
-        "as_of": source_survey["as_of"],
+        "schema_version": 3,
+        "as_of": max(source_survey["as_of"], quantitative["as_of"]),
         "generated_from": relative_path(input_path),
         "source_survey_generated_from": relative_path(source_survey_path),
+        "quantitative_benchmarks_generated_from": quantitative_relative_path(quantitative_path),
         "universe": {
             "source_file": snapshot["universe"]["source_file"],
             "mutation_policy": snapshot["universe"]["mutation_policy"],
@@ -188,11 +197,13 @@ def build_public_payload(
             "coverage_ratio": round(len(public_records) / len(universe_companies), 4),
         },
         "methodology": source_survey["methodology"],
+        "quantitative_methodology": quantitative["methodology"],
         "research_pipeline": source_survey["research_pipeline"],
         "required_channels": required_channels,
         "benchmark_channels": source_survey["benchmark_channels"],
         "discovery_channels": source_survey["discovery_channels"],
         "source_registry": registry,
+        "quantitative_benchmarks": quantitative["benchmarks"],
         "summary": {
             "record_count": len(public_records),
             "verified_record_count": len(records),
@@ -211,6 +222,9 @@ def build_public_payload(
                 if total_required
                 else 1.0
             ),
+            "quantitative_benchmark_count": len(quantitative["benchmarks"]),
+            "quantitative_final_count": release_counts["final"],
+            "quantitative_provisional_count": release_counts["first"],
             "evidence_status_counts": dict(sorted(status_counts.items())),
             "research_stage_counts": dict(sorted(stage_counts.items())),
         },
@@ -226,6 +240,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, help="verified fact snapshot YAML")
     parser.add_argument("--source-survey", type=Path, help="source meta-survey YAML")
+    parser.add_argument("--quantitative", type=Path, help="quantitative benchmark YAML")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--universe", type=Path, default=UNIVERSE_FILE)
     parser.add_argument(
@@ -240,8 +255,13 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     input_path = args.input or latest_snapshot(DATA_DIR)
     source_survey_path = args.source_survey or latest_source_survey(DATA_DIR)
+    quantitative_path = args.quantitative or latest_quantitative_benchmarks(DATA_DIR)
     snapshot = load_yaml(input_path)
     survey_payload = validate_source_survey(load_yaml(source_survey_path))
+    registry_ids = {item["id"] for item in survey_payload["source_registry"]}
+    quantitative_payload = validate_quantitative_benchmarks(
+        load_yaml(quantitative_path), registry_ids
+    )
     universe_codes = load_universe_codes(args.universe)
     universe_companies = load_universe_companies(args.universe)
     if set(universe_companies) != universe_codes:
@@ -255,6 +275,8 @@ def main(argv: list[str] | None = None) -> int:
             universe_companies,
             survey_payload,
             source_survey_path,
+            quantitative_payload,
+            quantitative_path,
         )
     )
 
@@ -266,8 +288,9 @@ def main(argv: list[str] | None = None) -> int:
                 "Pages JSON is stale. Run: python scripts/generate_pages_data.py"
             )
         print(
-            f"PASS: source-first Pages JSON covers {len(universe_companies)} companies "
-            f"with {len(survey_payload['source_registry'])} source channels"
+            f"PASS: source-first Pages JSON covers {len(universe_companies)} companies, "
+            f"{len(survey_payload['source_registry'])} source channels, and "
+            f"{len(quantitative_payload['benchmarks'])} quantitative benchmarks"
         )
         return 0
 
@@ -276,7 +299,8 @@ def main(argv: list[str] | None = None) -> int:
     print(
         f"Wrote source-first Pages JSON: {len(universe_companies)} companies, "
         f"{len(records)} verified records, "
-        f"{len(survey_payload['source_registry'])} source channels"
+        f"{len(survey_payload['source_registry'])} source channels, "
+        f"{len(quantitative_payload['benchmarks'])} quantitative benchmarks"
     )
     return 0
 
