@@ -19,7 +19,8 @@ from generate_verified_bonus_summary import DATA_DIR, latest_snapshot
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DEFAULT_URL = "https://kafka2306.github.io/bonus/"
-BUILD_MARKER = b'name="bonus-build" content="verified-pages-v3"'
+BUILD_MARKER = b'name="bonus-build" content="verified-pages-v4"'
+EXPECTED_TITLE = "主要30社 賞与制度・推定比較表".encode("utf-8")
 
 
 def fetch_once(url: str) -> bytes:
@@ -120,14 +121,16 @@ def main(argv: list[str] | None = None) -> int:
 
     index = fetch_until(
         base,
-        lambda body: BUILD_MARKER in body and b"Bonus Evidence Atlas" in body,
+        lambda body: BUILD_MARKER in body and EXPECTED_TITLE in body,
         args.attempts,
         args.delay,
         token,
-        "verified-pages-v3 marker and title",
+        "verified-pages-v4 marker and Japanese comparison-table title",
     )
     if BUILD_MARKER not in index:
-        raise SystemExit("live index.html is missing the v3 build marker")
+        raise SystemExit("live index.html is missing the v4 build marker")
+    if EXPECTED_TITLE not in index:
+        raise SystemExit("live index.html is missing the expected Japanese title")
 
     for relative_url, local_path in expected_paths.items():
         if not local_path.exists():
@@ -160,12 +163,16 @@ def main(argv: list[str] | None = None) -> int:
             f"expected={expected_hypotheses!r} "
             f"actual={public.get('hypotheses_generated_from')!r}"
         )
-    if public.get("summary", {}).get("hypothesis_count", 0) < 1:
-        raise SystemExit("public JSON contains no hypotheses")
+    summary = public.get("summary", {})
+    universe = public.get("universe", {})
+    if summary.get("record_count") != 30 or summary.get("hypothesis_count") != 30:
+        raise SystemExit("public JSON does not contain all 30 companies")
+    if universe.get("coverage_ratio") != 1.0:
+        raise SystemExit("public JSON coverage is not 100%")
 
     print(
-        "PASS: live Pages returned HTTP 200 and index/CSS/JS/JSON exactly match "
-        "the verified facts plus hypothesis build"
+        "PASS: live comparison table returned HTTP 200 and index/CSS/JS/JSON "
+        "exactly match the 30-company fact and hypothesis build"
     )
     return 0
 

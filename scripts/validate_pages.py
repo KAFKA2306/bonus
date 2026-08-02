@@ -90,52 +90,75 @@ def main() -> int:
     css = (DOCS / "styles.css").read_text(encoding="utf-8")
 
     html_markers = (
-        'name="bonus-build" content="verified-pages-v3"',
-        'id="companies"',
+        'name="bonus-build" content="verified-pages-v4"',
+        "<title>主要30社 賞与制度・推定比較表</title>",
+        'id="comparison"',
         'id="method"',
-        'id="metric-hypotheses"',
-        'data-status="estimated"',
+        'id="metric-verified"',
+        'id="metric-coverage"',
+        'id="bonus-table"',
+        'id="table-body"',
+        'class="comparison-table"',
+        'class="sort-button"',
+        'aria-sort="none"',
+        'data-status="unknown"',
         'id="result-count"',
         'role="status"',
         'aria-live="polite"',
         'aria-pressed="true"',
-        'aria-controls="cards"',
+        'aria-controls="bonus-table"',
         "<noscript>",
         "./app.js",
         "./styles.css",
     )
     for marker in html_markers:
         assert marker in html, f"missing HTML marker: {marker}"
-    assert 'id="cards" class="cards" aria-live=' not in html
+    for forbidden in ('id="cards"', 'class="cards"', 'class="card"'):
+        assert forbidden not in html, f"card UI must be removed: {forbidden}"
 
     app_markers = (
         "./data/bonus.json",
         "function searchText",
-        "function hypothesisPanel",
-        "function statusMatch",
+        "function tableRow",
+        "function sortRecords",
+        "function updateSortHeaders",
+        "function detailsCell",
         "record.hypothesis",
         "hypothesis.falsifiers",
+        "'aria-sort'",
         "setAttribute('aria-pressed'",
+        "#table-body",
         "#result-count",
-        "#metric-hypotheses",
+        "#metric-verified",
+        "#metric-coverage",
     )
     for marker in app_markers:
         assert marker in app, f"missing app behavior: {marker}"
+    for forbidden in ("function card(", "#cards", "hypothesisPanel"):
+        assert forbidden not in app, f"legacy card behavior must be removed: {forbidden}"
 
     css_markers = (
         ":focus-visible",
         "scroll-margin-top",
         "@media (prefers-reduced-motion: reduce)",
+        ".table-wrap",
+        ".comparison-table",
+        ".company-cell",
+        ".sort-button",
+        "position: sticky",
+        'th[aria-sort="ascending"]',
+        ".row-details",
+        ".detail-panel",
         ".status-confirmed",
         ".status-partially_confirmed",
         ".status-unknown",
-        ".status-estimated",
-        ".hypothesis",
         ".confidence-low",
-        "@media (max-width: 820px)",
+        "@media (max-width: 920px)",
     )
     for marker in css_markers:
         assert marker in css, f"missing CSS behavior: {marker}"
+    for forbidden in (".cards {", ".card {"):
+        assert forbidden not in css, f"legacy card CSS must be removed: {forbidden}"
 
     background = css_variable(css, "bg")
     for name in ("muted", "link"):
@@ -143,7 +166,7 @@ def main() -> int:
         assert ratio >= 4.5, f"--{name} contrast is only {ratio:.2f}:1"
 
     print(
-        f"PASS: all {len(universe_codes)} companies covered; "
+        f"PASS: table view covers all {len(universe_codes)} companies; "
         f"{len(records)} verified facts and {len(hypotheses)} hypotheses"
     )
     return 0
