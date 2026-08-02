@@ -16,7 +16,7 @@ from generate_verified_bonus_summary import (
 )
 
 DEFAULT_PATTERN = "company_estimation_model_*.yaml"
-REQUIRED_METHOD_KEYS = {
+REQUIRED_METHOD_KEYS = (
     "purpose",
     "model_type",
     "central_formula",
@@ -25,8 +25,8 @@ REQUIRED_METHOD_KEYS = {
     "amount_formula",
     "verified_override_policy",
     "disclosure_policy",
-}
-REQUIRED_PARAMETER_KEYS = {
+)
+REQUIRED_PARAMETER_KEYS = (
     "base_company_weight",
     "confidence_multiplier",
     "verified_evidence_bonus",
@@ -34,7 +34,7 @@ REQUIRED_PARAMETER_KEYS = {
     "minimum_company_weight",
     "maximum_company_weight",
     "minimum_sector_band_months",
-}
+)
 
 
 def latest_company_estimation_model(data_dir: Path = DATA_DIR) -> Path:
@@ -89,7 +89,7 @@ def validate_company_estimation_model(
     parameters = payload.get("parameters")
     if not isinstance(parameters, dict):
         raise ValidationError("company_estimation_model.parameters is required")
-    missing_parameters = REQUIRED_PARAMETER_KEYS - set(parameters)
+    missing_parameters = set(REQUIRED_PARAMETER_KEYS) - set(parameters)
     if missing_parameters:
         raise ValidationError(f"missing company estimation parameters: {sorted(missing_parameters)}")
     validated_parameters = {
@@ -279,6 +279,12 @@ def build_company_estimates(
         if sector_only:
             confidence_score -= 0.05
         confidence_score = round(_clamp(confidence_score, 0.25, 0.82), 2)
+        amount_score = confidence_score - 0.15
+        if sector["sample_amount"]["organizations"] < 10:
+            amount_score -= 0.12
+        elif sector["sample_amount"]["organizations"] < 50:
+            amount_score -= 0.05
+        amount_score = round(_clamp(amount_score, 0.15, 0.75), 2)
 
         status = "estimated"
         if override_note and "明示値" in override_note:
@@ -328,7 +334,7 @@ def build_company_estimates(
             "confidence": {
                 "score": confidence_score,
                 "level": _confidence_level(confidence_score),
-                "amount_score": round(max(0.15, confidence_score - 0.15), 2),
+                "amount_score": amount_score,
             },
             "weights": {
                 "company_prior": round(weight, 3),
@@ -353,7 +359,7 @@ def build_company_estimates(
             "basis": basis,
             "assumptions": assumptions,
             "falsifiers": falsifiers,
-            "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。",
+            "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。",
         }
 
     return result
