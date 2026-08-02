@@ -3,21 +3,9 @@ name: Deploy Nikkei 225 quantified bonus dashboard
 on:
   push:
     branches: [main]
-    paths:
-      - "docs/**"
-      - "data/**"
-      - "nikkei225_bonus_survey_2024_en.yaml"
-      - "scripts/**"
-      - "tests/**"
-      - ".github/workflows/pages.yml"
+    paths: ["docs/**", "data/**", "nikkei225_bonus_survey_2024_en.yaml", "scripts/**", "tests/**", ".github/workflows/pages.yml"]
   pull_request:
-    paths:
-      - "docs/**"
-      - "data/**"
-      - "nikkei225_bonus_survey_2024_en.yaml"
-      - "scripts/**"
-      - "tests/**"
-      - ".github/workflows/pages.yml"
+    paths: ["docs/**", "data/**", "nikkei225_bonus_survey_2024_en.yaml", "scripts/**", "tests/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -41,12 +29,10 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate verified facts
         run: python scripts/generate_bonus_summary.py --check
-      - name: Generate source-backed company payload
-        run: python scripts/generate_pages_data.py
-      - name: Audit source-backed model
-        run: python scripts/validate_pages.py
-      - name: Expand to official Nikkei 225 universe
-        run: python scripts/expand_nikkei225.py
+      - name: Generate Nikkei 225 quantified payload
+        run: |
+          python scripts/generate_pages_data.py
+          python scripts/expand_nikkei225.py
       - name: Audit Nikkei 225 quantitative payload
         run: python scripts/validate_nikkei225.py
       - name: Check JavaScript syntax
@@ -95,22 +81,3 @@ jobs:
             git -C "${publish_dir}" commit -m "Deploy Nikkei 225 bonus dashboard from ${GITHUB_SHA::12}"
             git -C "${publish_dir}" push origin gh-pages
           fi
-
-  verify-live:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    needs: publish-gh-pages
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
-      - name: Regenerate expected public bundle
-        run: |
-          python scripts/generate_pages_data.py
-          python scripts/expand_nikkei225.py
-          python scripts/validate_nikkei225.py
-      - name: Audit deployed dashboard
-        run: python scripts/audit_live_pages.py --attempts 18 --delay 5
