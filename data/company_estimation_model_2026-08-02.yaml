@@ -5,7 +5,7 @@ methodology:
   model_type: empirical_bayes_shrinkage_with_mechanism_upside
   central_formula: 推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数 + 制度類型補正。
   weight_formula: 会社重み = clamp(基礎重み + 信頼度係数 × 旧信頼度 + 一次資料加点 - セクター推定減点, 下限, 上限)。
-  interval_formula: 下限・上限も会社事前レンジと業種実測値±業種不確実幅を合成し、業績連動制度は上側、総合判断・固定制度は上側を抑制する。
+  interval_formula: 下限・上限も会社事前レンジと業種実測値±業種不確実幅を合成し、業績連動制度だけ上側レンジを追加拡張する。総合判断・固定制度には上側プレミアムを付与しない。
   amount_formula: 原則は業種実測年間金額 ÷ 業種実測年間月数 × 個社推定月数。会社公式の季別月数とモデル額がある場合は、会社基礎月額を優先した参考投影へ切り替える。
   verified_override_policy: 一次資料で支給回数・算定方式・年間月数・季別モデル額を確認できた場合は、その値をモデルより優先する。
   disclosure_policy: 推定値、実測アンカー、制度類型、アップサイド、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。
@@ -49,7 +49,7 @@ mechanisms:
     upside_score: 0.25
     minimum_adjustment_months: 0.00
     central_adjustment_months: 0.00
-    maximum_adjustment_months: -0.20
+    maximum_adjustment_months: 0.00
   base_salary_linked:
     label_ja: 固定・基本給連動
     broad_classification: base_salary_linked
@@ -57,7 +57,7 @@ mechanisms:
     upside_score: 0.15
     minimum_adjustment_months: 0.00
     central_adjustment_months: 0.00
-    maximum_adjustment_months: -0.30
+    maximum_adjustment_months: 0.00
 default_mechanism_by_classification:
   performance_linked: nonformula_performance
   hybrid: hybrid
