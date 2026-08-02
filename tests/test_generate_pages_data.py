@@ -34,6 +34,55 @@ def survey():
     }
 
 
+def quantitative():
+    return {
+        "as_of": "2026-08-02",
+        "methodology": {"comparability_policy": "separate populations"},
+        "benchmarks": [
+            {
+                "id": "benchmark-final",
+                "source_id": "benchmark",
+                "publisher": "公的機関",
+                "title": "最終集計",
+                "period": "2026-summer",
+                "published_at": "2026-07-01",
+                "release_status": "final",
+                "aggregation": "company_average",
+                "scope": "対象企業",
+                "metric": "settlement_amount",
+                "value": 100,
+                "unit": "yen",
+                "previous_value": 90,
+                "change_value": 11.11,
+                "change_unit": "percent",
+                "sample": {"organizations": 10, "workers": None},
+                "source_url": "https://example.com/final",
+                "note": "final",
+            },
+            {
+                "id": "benchmark-first",
+                "source_id": "benchmark",
+                "publisher": "公的機関",
+                "title": "第1回集計",
+                "period": "2026-summer",
+                "published_at": "2026-06-01",
+                "release_status": "first",
+                "aggregation": "worker_weighted_average",
+                "scope": "対象企業",
+                "metric": "settlement_amount",
+                "value": 95,
+                "unit": "yen",
+                "previous_value": 90,
+                "change_value": 5.56,
+                "change_unit": "percent",
+                "sample": {"organizations": 5, "workers": 1000},
+                "source_url": "https://example.com/first",
+                "note": "first",
+            },
+        ],
+    }
+
+
 def record(code: str):
     return {
         "stock_code": code,
@@ -57,8 +106,21 @@ def record(code: str):
     }
 
 
+def build(snapshot, records, companies):
+    return build_public_payload(
+        snapshot,
+        records,
+        ROOT / "data" / "verified_bonus_facts_2026-08-02.yaml",
+        companies,
+        survey(),
+        ROOT / "data" / "source_survey_2026-08-02.yaml",
+        quantitative(),
+        ROOT / "data" / "quantitative_benchmarks_2026-08-02.yaml",
+    )
+
+
 class PagesTests(unittest.TestCase):
-    def test_source_first_projection(self):
+    def test_source_first_projection_includes_quantitative_layer(self):
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -66,17 +128,18 @@ class PagesTests(unittest.TestCase):
                 "mutation_policy": "frozen",
             },
         }
-        payload = build_public_payload(
+        payload = build(
             snapshot,
             [record("6146")],
-            ROOT / "data" / "verified_bonus_facts_2026-08-02.yaml",
             {"6146": "ディスコ", "7203": "トヨタ"},
-            survey(),
-            ROOT / "data" / "source_survey_2026-08-02.yaml",
         )
-        self.assertEqual(payload["schema_version"], 2)
+        self.assertEqual(payload["schema_version"], 3)
         self.assertEqual(payload["summary"]["record_count"], 2)
         self.assertEqual(payload["summary"]["source_channel_count"], 6)
+        self.assertEqual(payload["summary"]["quantitative_benchmark_count"], 2)
+        self.assertEqual(payload["summary"]["quantitative_final_count"], 1)
+        self.assertEqual(payload["summary"]["quantitative_provisional_count"], 1)
+        self.assertEqual(len(payload["quantitative_benchmarks"]), 2)
         first = payload["records"][0]
         self.assertNotIn("hypothesis", first)
         self.assertEqual(first["survey"]["reviewed_required_count"], 1)
@@ -85,7 +148,7 @@ class PagesTests(unittest.TestCase):
         self.assertEqual(queued["survey"]["stage"], "queued")
         self.assertTrue(render_json(payload).endswith("\n"))
 
-    def test_benchmark_not_counted_as_required(self):
+    def test_benchmark_not_counted_as_required_channel(self):
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -93,16 +156,10 @@ class PagesTests(unittest.TestCase):
                 "mutation_policy": "frozen",
             },
         }
-        payload = build_public_payload(
-            snapshot,
-            [],
-            Path("/tmp/facts.yaml"),
-            {"7203": "トヨタ"},
-            survey(),
-            Path("/tmp/source_survey.yaml"),
-        )
+        payload = build(snapshot, [], {"7203": "トヨタ"})
         self.assertEqual(payload["summary"]["required_channel_count"], 4)
         self.assertEqual(payload["summary"]["research_coverage_ratio"], 0)
+        self.assertEqual(payload["summary"]["quantitative_benchmark_count"], 2)
 
 
 if __name__ == "__main__":
