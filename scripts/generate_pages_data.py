@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build public Pages JSON from verified facts and a separate hypothesis layer."""
+"""Build public GitHub Pages JSON from verified facts and full-universe hypotheses."""
 
 from __future__ import annotations
 
@@ -25,32 +25,50 @@ from generate_verified_bonus_summary import (
 DEFAULT_OUTPUT = BASE_DIR / "docs" / "data" / "bonus.json"
 
 
+def _placeholder_record(code: str, hypothesis: dict[str, Any], as_of: str) -> dict[str, Any]:
+    return {
+        "stock_code": code,
+        "company_name_ja": hypothesis["company_name_ja"],
+        "subject": "employees",
+        "employee_scope": "固定Universe対象企業。一次情報による制度詳細は未監査で、以下は仮説推定。",
+        "classification": None,
+        "evidence_status": "unknown",
+        "as_of": as_of,
+        "bonus": {
+            "frequency_per_year": None,
+            "annual_months": None,
+            "pool_basis": None,
+            "allocation_logic": None,
+            "base_salary_link": None,
+        },
+        "notes": [
+            "一次情報の確認レコードは未整備。仮説値は旧調査またはセクター事前分布に基づく。",
+            "仮説は確認済み集計へ含めない。",
+        ],
+        "sources": [],
+    }
+
+
 def build_public_payload(
     snapshot: dict[str, Any],
     records: list[dict[str, Any]],
     input_path: Path,
     tracked_companies: int,
-    hypotheses: dict[str, dict[str, Any]] | None = None,
-    hypothesis_snapshot: dict[str, Any] | None = None,
-    hypothesis_path: Path | None = None,
+    hypotheses: dict[str, dict[str, Any]],
+    hypothesis_snapshot: dict[str, Any],
+    hypothesis_path: Path,
 ) -> dict[str, Any]:
-    hypotheses = hypotheses or {}
-    status_counts = Counter(item["evidence_status"] for item in records)
-    classification_counts = Counter(
-        item["classification"]
-        for item in records
-        if item.get("classification") is not None
-    )
-    point_values = point_month_values(records)
-    hypothesis_central_values = [
-        float(item["estimate"]["central"]) for item in hypotheses.values()
-    ]
-
+    verified_by_code = {item["stock_code"]: item for item in records}
     public_records = []
-    for item in sorted(records, key=lambda record: record["stock_code"]):
+
+    for code in sorted(hypotheses):
+        hypothesis = hypotheses[code]
+        item = verified_by_code.get(code) or _placeholder_record(
+            code, hypothesis, snapshot["as_of"]
+        )
         public_records.append(
             {
-                "stock_code": item["stock_code"],
+                "stock_code": code,
                 "company_name_ja": item["company_name_ja"],
                 "subject": item["subject"],
                 "employee_scope": item["employee_scope"],
@@ -58,41 +76,47 @@ def build_public_payload(
                 "evidence_status": item["evidence_status"],
                 "as_of": item["as_of"],
                 "bonus": item["bonus"],
-                "hypothesis": hypotheses.get(item["stock_code"]),
+                "hypothesis": hypothesis,
                 "notes": item.get("notes", []),
-                "sources": item["sources"],
+                "sources": item.get("sources", []),
             }
         )
+
+    status_counts = Counter(item["evidence_status"] for item in public_records)
+    classification_counts = Counter(
+        item["classification"]
+        for item in public_records
+        if item.get("classification") is not None
+    )
+    point_values = point_month_values(records)
+    hypothesis_values = [
+        float(item["estimate"]["central"]) for item in hypotheses.values()
+    ]
 
     return {
         "schema_version": 1,
         "as_of": snapshot["as_of"],
         "generated_from": relative_path(input_path),
-        "hypotheses_generated_from": (
-            relative_path(hypothesis_path) if hypothesis_path is not None else None
-        ),
+        "hypotheses_generated_from": relative_path(hypothesis_path),
         "universe": {
             "source_file": snapshot["universe"]["source_file"],
             "mutation_policy": snapshot["universe"]["mutation_policy"],
             "tracked_companies": tracked_companies,
+            "covered_companies": len(public_records),
+            "coverage_ratio": round(len(public_records) / tracked_companies, 4),
         },
         "methodology": snapshot.get("methodology", {}),
-        "hypothesis_methodology": (
-            hypothesis_snapshot.get("methodology", {})
-            if hypothesis_snapshot is not None
-            else {}
-        ),
+        "hypothesis_methodology": hypothesis_snapshot.get("methodology", {}),
         "summary": {
-            "record_count": len(records),
+            "record_count": len(public_records),
+            "verified_record_count": len(records),
             "confirmed_or_partial_count": sum(
                 status_counts[name]
                 for name in ("confirmed", "partially_confirmed")
             ),
             "hypothesis_count": len(hypotheses),
-            "hypothesis_central_months_average": (
-                round(statistics.mean(hypothesis_central_values), 2)
-                if hypothesis_central_values
-                else None
+            "hypothesis_central_months_average": round(
+                statistics.mean(hypothesis_values), 2
             ),
             "evidence_status_counts": dict(sorted(status_counts.items())),
             "classification_counts": dict(sorted(classification_counts.items())),
@@ -153,16 +177,16 @@ def main(argv: list[str] | None = None) -> int:
                 "Pages JSON is stale. Run: python scripts/generate_pages_data.py"
             )
         print(
-            f"PASS: Pages JSON matches {input_path.name} and "
-            f"{hypothesis_path.name} ({len(records)} records)"
+            f"PASS: Pages JSON covers all {len(universe_codes)} companies "
+            f"with {len(records)} verified records and {len(hypotheses)} hypotheses"
         )
         return 0
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(expected, encoding="utf-8")
     print(
-        f"Wrote Pages JSON from {input_path.name} and {hypothesis_path.name}: "
-        f"{args.output} ({len(records)} records, {len(hypotheses)} hypotheses)"
+        f"Wrote Pages JSON: {len(universe_codes)} covered, "
+        f"{len(records)} verified, {len(hypotheses)} hypotheses"
     )
     return 0
 
