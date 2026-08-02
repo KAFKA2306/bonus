@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
-"""Build the public source-first bonus research dashboard JSON."""
+"""Build the public quantified bonus research dashboard JSON."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import statistics
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from bonus_hypotheses import latest_hypothesis, validate_hypotheses
+from company_estimates import (
+    build_company_estimates,
+    latest_company_estimation_model,
+    relative_path as estimate_relative_path,
+    validate_company_estimation_model,
+)
 from generate_verified_bonus_summary import (
     BASE_DIR,
     DATA_DIR,
@@ -71,12 +79,12 @@ def _placeholder_record(code: str, company_name: str, as_of: str) -> dict[str, A
         "stock_code": code,
         "company_name_ja": company_name,
         "subject": "employees",
-        "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+        "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
         "classification": None,
         "evidence_status": "unknown",
         "as_of": as_of,
         "bonus": _empty_bonus(),
-        "notes": ["一次情報レコードは未整備。推定値は公開しない。"],
+        "notes": ["確認済み事実とモデル推定を分離して表示する。"],
         "sources": [],
     }
 
@@ -98,7 +106,7 @@ def _open_questions(record: dict[str, Any]) -> list[str]:
     if bonus.get("frequency_per_year") is None:
         questions.append("年間の支給回数・支給時期を確認する")
     if bonus.get("annual_months") is None:
-        questions.append("標準者の年間月数または妥結額が明記されているか確認する")
+        questions.append("標準者の年間月数または妥結額を確認し、モデル推定を置換する")
     if not bonus.get("pool_basis"):
         questions.append("原資の決定式または業績連動条件を確認する")
     return questions
@@ -137,6 +145,27 @@ def _survey_state(
     }
 
 
+def _public_sector_anchors(model: dict[str, Any]) -> list[dict[str, Any]]:
+    result: list[dict[str, Any]] = []
+    for sector_id, item in model["sectors"].items():
+        result.append(
+            {
+                "id": sector_id,
+                "name_ja": item["name_ja"],
+                "response_months": item["response_months"],
+                "demand_months": item["demand_months"],
+                "previous_months": item["previous_months"],
+                "response_amount_yen": int(item["response_amount_yen"]),
+                "previous_amount_yen": int(item["previous_amount_yen"]),
+                "sample_months": item["sample_months"],
+                "sample_amount": item["sample_amount"],
+                "company_count": len(item["company_codes"]),
+                "source_url": item["source_url"],
+            }
+        )
+    return result
+
+
 def build_public_payload(
     snapshot: dict[str, Any],
     records: list[dict[str, Any]],
@@ -146,11 +175,18 @@ def build_public_payload(
     source_survey_path: Path,
     quantitative: dict[str, Any],
     quantitative_path: Path,
+    hypotheses_by_code: dict[str, dict[str, Any]],
+    hypothesis_path: Path,
+    company_model: dict[str, Any],
+    company_model_path: Path,
 ) -> dict[str, Any]:
     verified_by_code = {item["stock_code"]: item for item in records}
     registry = source_survey["source_registry"]
     registry_by_id = {item["id"]: item for item in registry}
     required_channels = source_survey["required_channels"]
+    estimates_by_code = build_company_estimates(
+        hypotheses_by_code, records, company_model
+    )
     public_records: list[dict[str, Any]] = []
 
     for code, company_name in sorted(universe_companies.items()):
@@ -168,6 +204,7 @@ def build_public_payload(
                 "evidence_status": item["evidence_status"],
                 "as_of": item["as_of"],
                 "bonus": item["bonus"],
+                "estimate": estimates_by_code[code],
                 "notes": item.get("notes", []),
                 "sources": item.get("sources", []),
                 "survey": survey,
@@ -177,18 +214,25 @@ def build_public_payload(
     status_counts = Counter(item["evidence_status"] for item in public_records)
     stage_counts = Counter(item["survey"]["stage"] for item in public_records)
     release_counts = Counter(item["release_status"] for item in quantitative["benchmarks"])
+    estimate_status_counts = Counter(item["estimate"]["status"] for item in public_records)
+    confidence_counts = Counter(item["estimate"]["confidence"]["level"] for item in public_records)
     primary_tiers = {"primary_company", "primary_collective", "official_disclosure"}
     total_reviewed_required = sum(
         item["survey"]["reviewed_required_count"] for item in public_records
     )
     total_required = len(public_records) * len(required_channels)
+    central_months = [item["estimate"]["months"]["central"] for item in public_records]
+    central_amounts = [item["estimate"]["amount_yen"]["central"] for item in public_records]
+    confidence_scores = [item["estimate"]["confidence"]["score"] for item in public_records]
 
     return {
-        "schema_version": 3,
-        "as_of": max(source_survey["as_of"], quantitative["as_of"]),
+        "schema_version": 4,
+        "as_of": max(source_survey["as_of"], quantitative["as_of"], company_model["as_of"]),
         "generated_from": relative_path(input_path),
         "source_survey_generated_from": relative_path(source_survey_path),
         "quantitative_benchmarks_generated_from": quantitative_relative_path(quantitative_path),
+        "hypotheses_generated_from": relative_path(hypothesis_path),
+        "company_estimation_model_generated_from": estimate_relative_path(company_model_path),
         "universe": {
             "source_file": snapshot["universe"]["source_file"],
             "mutation_policy": snapshot["universe"]["mutation_policy"],
@@ -198,12 +242,15 @@ def build_public_payload(
         },
         "methodology": source_survey["methodology"],
         "quantitative_methodology": quantitative["methodology"],
+        "estimation_methodology": company_model["methodology"],
+        "estimation_parameters": company_model["parameters"],
         "research_pipeline": source_survey["research_pipeline"],
         "required_channels": required_channels,
         "benchmark_channels": source_survey["benchmark_channels"],
         "discovery_channels": source_survey["discovery_channels"],
         "source_registry": registry,
         "quantitative_benchmarks": quantitative["benchmarks"],
+        "sector_anchors": _public_sector_anchors(company_model),
         "summary": {
             "record_count": len(public_records),
             "verified_record_count": len(records),
@@ -225,8 +272,14 @@ def build_public_payload(
             "quantitative_benchmark_count": len(quantitative["benchmarks"]),
             "quantitative_final_count": release_counts["final"],
             "quantitative_provisional_count": release_counts["first"],
+            "quantified_company_count": len(estimates_by_code),
+            "median_estimated_months": round(statistics.median(central_months), 2),
+            "median_estimated_amount_yen": int(statistics.median(central_amounts)),
+            "average_estimate_confidence": round(statistics.mean(confidence_scores), 2),
             "evidence_status_counts": dict(sorted(status_counts.items())),
             "research_stage_counts": dict(sorted(stage_counts.items())),
+            "estimate_status_counts": dict(sorted(estimate_status_counts.items())),
+            "estimate_confidence_counts": dict(sorted(confidence_counts.items())),
         },
         "records": public_records,
     }
@@ -241,6 +294,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--input", type=Path, help="verified fact snapshot YAML")
     parser.add_argument("--source-survey", type=Path, help="source meta-survey YAML")
     parser.add_argument("--quantitative", type=Path, help="quantitative benchmark YAML")
+    parser.add_argument("--hypotheses", type=Path, help="company prior hypothesis YAML")
+    parser.add_argument("--company-model", type=Path, help="company estimation model YAML")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--universe", type=Path, default=UNIVERSE_FILE)
     parser.add_argument(
@@ -256,6 +311,8 @@ def main(argv: list[str] | None = None) -> int:
     input_path = args.input or latest_snapshot(DATA_DIR)
     source_survey_path = args.source_survey or latest_source_survey(DATA_DIR)
     quantitative_path = args.quantitative or latest_quantitative_benchmarks(DATA_DIR)
+    hypothesis_path = args.hypotheses or latest_hypothesis(DATA_DIR)
+    company_model_path = args.company_model or latest_company_estimation_model(DATA_DIR)
     snapshot = load_yaml(input_path)
     survey_payload = validate_source_survey(load_yaml(source_survey_path))
     registry_ids = {item["id"] for item in survey_payload["source_registry"]}
@@ -267,6 +324,10 @@ def main(argv: list[str] | None = None) -> int:
     if set(universe_companies) != universe_codes:
         raise SystemExit("named universe differs from the frozen code universe")
     records = validate_snapshot(snapshot, universe_codes)
+    hypotheses_by_code = validate_hypotheses(load_yaml(hypothesis_path), universe_codes)
+    company_model = validate_company_estimation_model(
+        load_yaml(company_model_path), universe_codes
+    )
     expected = render_json(
         build_public_payload(
             snapshot,
@@ -277,6 +338,10 @@ def main(argv: list[str] | None = None) -> int:
             source_survey_path,
             quantitative_payload,
             quantitative_path,
+            hypotheses_by_code,
+            hypothesis_path,
+            company_model,
+            company_model_path,
         )
     )
 
@@ -288,19 +353,19 @@ def main(argv: list[str] | None = None) -> int:
                 "Pages JSON is stale. Run: python scripts/generate_pages_data.py"
             )
         print(
-            f"PASS: source-first Pages JSON covers {len(universe_companies)} companies, "
+            f"PASS: quantified Pages JSON covers {len(universe_companies)} companies, "
             f"{len(survey_payload['source_registry'])} source channels, and "
-            f"{len(quantitative_payload['benchmarks'])} quantitative benchmarks"
+            f"{len(quantitative_payload['benchmarks'])} public benchmarks"
         )
         return 0
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(expected, encoding="utf-8")
     print(
-        f"Wrote source-first Pages JSON: {len(universe_companies)} companies, "
+        f"Wrote quantified Pages JSON: {len(universe_companies)} companies, "
         f"{len(records)} verified records, "
-        f"{len(survey_payload['source_registry'])} source channels, "
-        f"{len(quantitative_payload['benchmarks'])} quantitative benchmarks"
+        f"{len(estimates_by_code) if False else len(hypotheses_by_code)} company estimates, "
+        f"{len(quantitative_payload['benchmarks'])} public benchmarks"
     )
     return 0
 
