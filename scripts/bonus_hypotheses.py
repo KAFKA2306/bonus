@@ -41,10 +41,7 @@ def _required_text(value: Any, field_name: str) -> str:
 def _text_list(value: Any, field_name: str) -> list[str]:
     if not isinstance(value, list) or not value:
         raise ValidationError(f"{field_name} must be a non-empty list")
-    result = []
-    for index, item in enumerate(value):
-        result.append(_required_text(item, f"{field_name}[{index}]"))
-    return result
+    return [_required_text(item, f"{field_name}[{index}]") for index, item in enumerate(value)]
 
 
 def validate_hypotheses(
@@ -83,6 +80,7 @@ def validate_hypotheses(
             raise ValidationError(f"{prefix}.stock_code {code} is outside the frozen universe")
         if code in validated:
             raise ValidationError(f"duplicate hypothesis stock_code: {code}")
+        company_name = _required_text(item.get("company_name_ja"), f"{prefix}.company_name_ja")
         if item.get("target") != "annual_bonus_months":
             raise ValidationError(f"{prefix}.target must be annual_bonus_months")
 
@@ -147,8 +145,16 @@ def validate_hypotheses(
 
         result = dict(item)
         result["stock_code"] = code
+        result["company_name_ja"] = company_name
         validated[code] = result
 
+    missing = sorted(universe_codes - set(validated))
+    extras = sorted(set(validated) - universe_codes)
+    if missing or extras:
+        raise ValidationError(
+            "hypothesis coverage must exactly match frozen universe; "
+            f"missing={missing}, extras={extras}"
+        )
     return validated
 
 
