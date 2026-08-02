@@ -1,0 +1,100 @@
+schema_version: 1
+as_of: '2026-08-02'
+methodology:
+  purpose: 賞与値を先に推定せず、各主張を検証できる参照先を先に選定・格付けする。
+  source_first_policy: 会社ごとに会社公式、労組公式、法定開示、適時開示の順で確認し、得られた明示値だけを確認事実へ昇格する。
+  verification_policy: 個社の月数・回数・算定方式は、当該会社または労組の一次資料に明記された場合のみ確認済みとする。
+  benchmark_policy: 経団連、連合、厚生労働省、e-Statの集計は比較基準に限定し、個社の確定値へ転用しない。
+  discovery_policy: 報道、転職、口コミ、給与集計サイトは探索語と候補URLの発見だけに使い、確認事実や数値の根拠には使わない。
+  freshness_policy: 制度ページは更新日を記録し、春闘・賞与集計は対象年を一致させ、制度改定後の旧資料を失効扱いにする。
+research_pipeline:
+  - 候補ソース発見
+  - 発行主体と対象範囲の適格性判定
+  - 明示された主張だけを抽出
+  - 別の一次資料で制度変更・対象範囲を照合
+  - 確認事実として公開
+source_registry:
+  - id: company_official
+    name_ja: 会社公式（IR・人事・採用）
+    tier: primary_company
+    scope: company_specific
+    priority: 1
+    url: null
+    verifies: [employee_scope, classification, frequency_per_year, payment_timing, annual_months, pool_basis, allocation_logic, base_salary_link]
+    use_when: 当該会社の制度、採用条件、人事制度改定、賞与算定の明示を探す。
+    limitations: 採用要項は新卒・特定会社だけを対象とする場合があり、全従業員へ一般化できない。
+  - id: labor_union_official
+    name_ja: 会社・産業別労働組合公式
+    tier: primary_collective
+    scope: collective_bargaining
+    priority: 2
+    url: null
+    verifies: [employee_scope, annual_months, settlement_amount, payment_timing]
+    use_when: 春闘要求・妥結、一時金月数、対象組合員、支給条件を確認する。
+    limitations: 組合員のみが対象で、管理職・非組合員・グループ会社へ一般化できない。
+  - id: edinet
+    name_ja: 金融庁 EDINET
+    tier: official_disclosure
+    scope: legal_disclosure
+    priority: 3
+    url: https://disclosure2.edinet-fsa.go.jp/WEEK0010.aspx
+    verifies: [employee_scope, classification, pool_basis, base_salary_link]
+    use_when: 有価証券報告書、臨時報告書、法定開示の人事・報酬制度記述を確認する。
+    limitations: 平均給与や賞与引当金から標準的な従業員賞与月数を逆算してはならない。
+  - id: jpx_tdnet
+    name_ja: JPX TDnet・上場会社情報
+    tier: official_disclosure
+    scope: timely_disclosure
+    priority: 4
+    url: https://www.jpx.co.jp/equities/listing/disclosure/tdnet/index.html
+    verifies: [classification, pool_basis, base_salary_link]
+    use_when: 賃上げ、人事制度改定、報酬制度変更などの適時開示・PR資料を確認する。
+    limitations: 賞与月数の定例開示場所ではなく、資料が存在しないことは制度不存在を意味しない。
+  - id: rengo_shunto
+    name_ja: 連合 春季生活闘争集計
+    tier: primary_collective
+    scope: collective_bargaining
+    priority: 5
+    url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/index.html
+    verifies: [annual_months, settlement_amount, sector_context]
+    use_when: 企業・組合名が識別できる個別表、または業種別の交渉水準を確認する。
+    limitations: 集計平均は個社値ではない。個別表でも対象組合員と集計時点を確認する必要がある。
+  - id: keidanren_bonus
+    name_ja: 経団連 賞与・一時金妥結状況
+    tier: official_benchmark
+    scope: industry_benchmark
+    priority: 6
+    url: https://www.keidanren.or.jp/policy/2026/037.pdf
+    verifies: [sector_context]
+    use_when: 大手企業の季節賞与水準と前年比をベンチマークする。
+    limitations: 加重平均の集計値であり、収録企業の個社賞与や年間月数を確定できない。
+  - id: mhlw_bonus
+    name_ja: 厚生労働省 毎月勤労統計（賞与）
+    tier: official_benchmark
+    scope: national_benchmark
+    priority: 7
+    url: https://www.mhlw.go.jp/toukei/list/30-1a.html
+    verifies: [national_context]
+    use_when: 産業・事業所規模別の夏季・年末賞与の全国水準を比較する。
+    limitations: 一人平均額の統計であり、企業別制度、基本給月数、標準者の支給額を示さない。
+  - id: estat_bonus
+    name_ja: e-Stat 毎月勤労統計 賞与長期系列
+    tier: official_benchmark
+    scope: national_benchmark
+    priority: 8
+    url: https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00450071&tstat=000001011791
+    verifies: [national_context]
+    use_when: 賞与の長期時系列、産業別・規模別の変化を機械可読データで確認する。
+    limitations: 個社を識別しない集計統計であり、個社の確認事実には使えない。
+  - id: secondary_discovery
+    name_ja: 報道・転職・口コミ等（探索専用）
+    tier: discovery_only
+    scope: discovery
+    priority: 9
+    url: null
+    verifies: [discovery_lead]
+    use_when: 一次資料の名称、制度改定時期、労組名、検索語の候補を得る。
+    limitations: 数値・制度・対象範囲の確認根拠として公開データへ採用しない。
+required_channels: [company_official, labor_union_official, edinet, jpx_tdnet]
+benchmark_channels: [rengo_shunto, keidanren_bonus, mhlw_bonus, estat_bonus]
+discovery_channels: [secondary_discovery]
