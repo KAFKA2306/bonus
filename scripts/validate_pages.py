@@ -25,9 +25,7 @@ DOCS = ROOT / "docs"
 def relative_luminance(hex_color: str) -> float:
     channels = [int(hex_color[index : index + 2], 16) / 255 for index in (1, 3, 5)]
     linear = [
-        channel / 12.92
-        if channel <= 0.04045
-        else ((channel + 0.055) / 1.055) ** 2.4
+        channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
         for channel in channels
     ]
     return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
@@ -75,11 +73,13 @@ def main() -> int:
     public = json.loads(actual)
     assert public["generated_from"] == str(input_path.relative_to(ROOT))
     assert public["hypotheses_generated_from"] == str(hypothesis_path.relative_to(ROOT))
-    assert public["summary"]["record_count"] == len(records)
-    assert public["summary"]["hypothesis_count"] == len(hypotheses)
-    assert all(item["hypothesis"] is not None for item in public["records"]), (
-        "every currently published company must have a falsifiable hypothesis"
-    )
+    assert public["summary"]["record_count"] == len(universe_codes)
+    assert public["summary"]["verified_record_count"] == len(records)
+    assert public["summary"]["hypothesis_count"] == len(universe_codes)
+    assert public["universe"]["covered_companies"] == len(universe_codes)
+    assert public["universe"]["coverage_ratio"] == 1.0
+    assert {item["stock_code"] for item in public["records"]} == universe_codes
+    assert all(item["hypothesis"] is not None for item in public["records"])
     assert all(
         item["hypothesis"]["not_for_verified_aggregate"] is True
         for item in public["records"]
@@ -106,9 +106,7 @@ def main() -> int:
     )
     for marker in html_markers:
         assert marker in html, f"missing HTML marker: {marker}"
-    assert 'id="cards" class="cards" aria-live=' not in html, (
-        "cards grid must not announce its full contents on every keystroke"
-    )
+    assert 'id="cards" class="cards" aria-live=' not in html
 
     app_markers = (
         "./data/bonus.json",
@@ -145,8 +143,8 @@ def main() -> int:
         assert ratio >= 4.5, f"--{name} contrast is only {ratio:.2f}:1"
 
     print(
-        f"PASS: Pages v3 matches {input_path.name} and {hypothesis_path.name}; "
-        f"{len(records)} facts, {len(hypotheses)} hypotheses; accessibility gates passed"
+        f"PASS: all {len(universe_codes)} companies covered; "
+        f"{len(records)} verified facts and {len(hypotheses)} hypotheses"
     )
     return 0
 
