@@ -46,6 +46,7 @@ def record(code: str, *, status: str = "confirmed", months=None):
 def hypothesis(code: str, central: float = 5.0):
     return {
         "stock_code": code,
+        "company_name_ja": f"会社{code}",
         "target": "annual_bonus_months",
         "estimate": {
             "minimum": central - 0.5,
@@ -64,6 +65,18 @@ def hypothesis(code: str, central: float = 5.0):
         "falsifiers": ["反証"],
         "not_for_verified_aggregate": True,
     }
+
+
+def build(snapshot, records, hypotheses):
+    return build_public_payload(
+        snapshot,
+        records,
+        ROOT / "data" / "verified_bonus_facts_2026-08-02.yaml",
+        tracked_companies=len(hypotheses),
+        hypotheses=hypotheses,
+        hypothesis_snapshot={"methodology": {"separation_policy": "分離"}},
+        hypothesis_path=ROOT / "data" / "bonus_hypotheses_2026-08-02.yaml",
+    )
 
 
 class PagesDataTests(unittest.TestCase):
@@ -85,57 +98,43 @@ class PagesDataTests(unittest.TestCase):
             },
             "methodology": {"primary_sources_only": True},
         }
-        hypothesis_snapshot = {
-            "methodology": {"separation_policy": "事実と推定を分離"}
-        }
         item = record("6146")
         estimate = hypothesis("6146", 10.5)
-        payload = build_public_payload(
-            snapshot,
-            [item],
-            ROOT / "data" / "verified_bonus_facts_2026-08-02.yaml",
-            tracked_companies=30,
-            hypotheses={"6146": estimate},
-            hypothesis_snapshot=hypothesis_snapshot,
-            hypothesis_path=ROOT / "data" / "bonus_hypotheses_2026-08-02.yaml",
-        )
+        payload = build(snapshot, [item], {"6146": estimate})
         public = payload["records"][0]
         self.assertEqual(public["employee_scope"], item["employee_scope"])
         self.assertEqual(public["bonus"], item["bonus"])
         self.assertEqual(public["hypothesis"], estimate)
-        self.assertEqual(public["notes"], item["notes"])
-        self.assertEqual(public["sources"], item["sources"])
-        self.assertEqual(
-            payload["generated_from"],
-            "data/verified_bonus_facts_2026-08-02.yaml",
-        )
-        self.assertEqual(
-            payload["hypotheses_generated_from"],
-            "data/bonus_hypotheses_2026-08-02.yaml",
-        )
-        self.assertEqual(payload["summary"]["hypothesis_count"], 1)
-        self.assertEqual(payload["summary"]["hypothesis_central_months_average"], 10.5)
-        self.assertEqual(payload["universe"]["tracked_companies"], 30)
+        self.assertEqual(payload["summary"]["record_count"], 1)
+        self.assertEqual(payload["summary"]["verified_record_count"], 1)
+        self.assertEqual(payload["universe"]["coverage_ratio"], 1.0)
         self.assertTrue(render_json(payload).endswith("\n"))
+
+    def test_hypothesis_only_company_is_published_as_unknown(self):
+        snapshot = {
+            "as_of": "2026-08-02",
+            "universe": {
+                "source_file": "nikkei225_bonus_survey_2024_en.yaml",
+                "mutation_policy": "frozen",
+            },
+        }
+        payload = build(snapshot, [], {"7203": hypothesis("7203", 7.3)})
+        public = payload["records"][0]
+        self.assertEqual(public["stock_code"], "7203")
+        self.assertEqual(public["evidence_status"], "unknown")
+        self.assertEqual(public["company_name_ja"], "会社7203")
+        self.assertEqual(public["sources"], [])
+        self.assertEqual(public["hypothesis"]["estimate"]["central"], 7.3)
 
     def test_verified_average_excludes_hypotheses_and_minimums(self):
         point = record(
             "6146",
-            months={
-                "kind": "point",
-                "value": 6.0,
-                "basis": "explicit_source_value",
-            },
+            months={"kind": "point", "value": 6.0, "basis": "explicit_source_value"},
         )
         minimum = record(
             "6503",
-            months={
-                "kind": "minimum",
-                "value": 4.0,
-                "basis": "explicit_source_value",
-            },
+            months={"kind": "minimum", "value": 4.0, "basis": "explicit_source_value"},
         )
-        partial = record("6758", status="partially_confirmed", months=None)
         snapshot = {
             "as_of": "2026-08-02",
             "universe": {
@@ -147,16 +146,8 @@ class PagesDataTests(unittest.TestCase):
             "6146": hypothesis("6146", 10.0),
             "6503": hypothesis("6503", 5.5),
         }
-        payload = build_public_payload(
-            snapshot,
-            [point, minimum, partial],
-            ROOT / "data" / "x.yaml",
-            tracked_companies=30,
-            hypotheses=hypotheses,
-        )
-        self.assertEqual(payload["summary"]["explicit_point_months_count"], 1)
+        payload = build(snapshot, [point, minimum], hypotheses)
         self.assertEqual(payload["summary"]["explicit_point_months_average"], 6.0)
-        self.assertEqual(payload["summary"]["hypothesis_count"], 2)
         self.assertEqual(payload["summary"]["hypothesis_central_months_average"], 7.75)
 
 

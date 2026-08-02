@@ -27,6 +27,7 @@ def payload():
         "estimates": [
             {
                 "stock_code": "6861",
+                "company_name_ja": "キーエンス",
                 "target": "annual_bonus_months",
                 "estimate": {
                     "minimum": 6.0,
@@ -57,6 +58,7 @@ class HypothesisTests(unittest.TestCase):
     def test_valid_hypothesis_is_indexed_by_code(self):
         result = validate_hypotheses(payload(), {"6861"})
         self.assertEqual(result["6861"]["estimate"]["central"], 7.0)
+        self.assertEqual(result["6861"]["company_name_ja"], "キーエンス")
 
     def test_rejects_inverted_range(self):
         data = copy.deepcopy(payload())
@@ -73,6 +75,10 @@ class HypothesisTests(unittest.TestCase):
     def test_rejects_code_outside_universe(self):
         with self.assertRaises(ValidationError):
             validate_hypotheses(payload(), {"6146"})
+
+    def test_rejects_incomplete_universe_coverage(self):
+        with self.assertRaises(ValidationError):
+            validate_hypotheses(payload(), {"6861", "6146"})
 
     def test_latest_hypothesis_selects_newest_filename(self):
         with tempfile.TemporaryDirectory() as tmp:
