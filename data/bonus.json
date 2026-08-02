@@ -1,8 +1,9 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "as_of": "2026-08-02",
   "generated_from": "data/verified_bonus_facts_2026-08-02.yaml",
   "source_survey_generated_from": "data/source_survey_2026-08-02.yaml",
+  "quantitative_benchmarks_generated_from": "data/quantitative_benchmarks_2026-08-02.yaml",
   "universe": {
     "source_file": "nikkei225_bonus_survey_2024_en.yaml",
     "mutation_policy": "frozen",
@@ -17,6 +18,12 @@
     "benchmark_policy": "経団連、連合、厚生労働省、e-Statの集計は比較基準に限定し、個社の確定値へ転用しない。",
     "discovery_policy": "報道、転職、口コミ、給与集計サイトは探索語と候補URLの発見だけに使い、確認事実や数値の根拠には使わない。",
     "freshness_policy": "制度ページは更新日を記録し、春闘・賞与集計は対象年を一致させ、制度改定後の旧資料を失効扱いにする。"
+  },
+  "quantitative_methodology": {
+    "purpose": "一次資料に明示された最新の賞与・一時金集計を、対象範囲と集計方法を保持したまま比較する。",
+    "comparability_policy": "集計主体、対象企業・組合、季別・年間、金額・月数が異なるため、異なる行を同一母集団のランキングとして扱わない。",
+    "company_policy": "集計値は個社の確認値へ転用せず、個社値は当該会社または労組の一次資料に明示された場合のみ採用する。",
+    "revision_policy": "第1回集計は暫定値として保持し、最終集計公表後に置換または履歴化する。"
   },
   "research_pipeline": [
     "候補ソース発見",
@@ -176,6 +183,261 @@
       "limitations": "数値・制度・対象範囲の確認根拠として公開データへ採用しない。"
     }
   ],
+  "quantitative_benchmarks": [
+    {
+      "id": "rengo_2026_annual_months_fulltime",
+      "source_id": "rengo_shunto",
+      "publisher": "日本労働組合総連合会",
+      "title": "2026春季生活闘争 フルタイム組合員 年間一時金月数",
+      "period": "2026",
+      "published_at": "2026-07-03",
+      "release_status": "final",
+      "aggregation": "worker_weighted_average",
+      "scope": "回答を得たフルタイム組合員。年間一時金の月数回答を集計。",
+      "metric": "annual_bonus_months",
+      "value": 5.13,
+      "unit": "months",
+      "previous_value": 5.11,
+      "change_value": 0.02,
+      "change_unit": "months",
+      "sample": {
+        "organizations": 2512,
+        "workers": 2030429
+      },
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
+      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。"
+    },
+    {
+      "id": "rengo_2026_annual_amount_fulltime",
+      "source_id": "rengo_shunto",
+      "publisher": "日本労働組合総連合会",
+      "title": "2026春季生活闘争 フルタイム組合員 年間一時金額",
+      "period": "2026",
+      "published_at": "2026-07-03",
+      "release_status": "final",
+      "aggregation": "worker_weighted_average",
+      "scope": "回答を得たフルタイム組合員。年間一時金の金額回答を集計。",
+      "metric": "annual_bonus_amount",
+      "value": 1776402,
+      "unit": "yen",
+      "previous_value": 1650685,
+      "change_value": 125717,
+      "change_unit": "yen",
+      "sample": {
+        "organizations": 1314,
+        "workers": 1088787
+      },
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
+      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。"
+    },
+    {
+      "id": "rengo_2026_seasonal_months_fulltime",
+      "source_id": "rengo_shunto",
+      "publisher": "日本労働組合総連合会",
+      "title": "2026春季生活闘争 フルタイム組合員 季別一時金月数",
+      "period": "2026",
+      "published_at": "2026-07-03",
+      "release_status": "final",
+      "aggregation": "worker_weighted_average",
+      "scope": "回答を得たフルタイム組合員。季別一時金の月数回答を集計。",
+      "metric": "seasonal_bonus_months",
+      "value": 2.54,
+      "unit": "months",
+      "previous_value": 2.5,
+      "change_value": 0.04,
+      "change_unit": "months",
+      "sample": {
+        "organizations": 2870,
+        "workers": 1921390
+      },
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
+      "note": "年間一時金とは集計対象組合が異なる。"
+    },
+    {
+      "id": "rengo_2026_seasonal_amount_fulltime",
+      "source_id": "rengo_shunto",
+      "publisher": "日本労働組合総連合会",
+      "title": "2026春季生活闘争 フルタイム組合員 季別一時金額",
+      "period": "2026",
+      "published_at": "2026-07-03",
+      "release_status": "final",
+      "aggregation": "worker_weighted_average",
+      "scope": "回答を得たフルタイム組合員。季別一時金の金額回答を集計。",
+      "metric": "seasonal_bonus_amount",
+      "value": 816090,
+      "unit": "yen",
+      "previous_value": 772523,
+      "change_value": 43567,
+      "change_unit": "yen",
+      "sample": {
+        "organizations": 1800,
+        "workers": 1004495
+      },
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
+      "note": "年間一時金とは集計対象組合が異なる。"
+    },
+    {
+      "id": "keidanren_2026_summer_total",
+      "source_id": "keidanren_bonus",
+      "publisher": "日本経済団体連合会",
+      "title": "2026年夏季賞与・一時金 大手企業総平均",
+      "period": "2026-summer",
+      "published_at": "2026-07-02",
+      "release_status": "first",
+      "aggregation": "worker_weighted_average",
+      "scope": "原則従業員500人以上の主要23業種大手248社のうち、集計可能な19業種112社。",
+      "metric": "settlement_amount",
+      "value": 1008706,
+      "unit": "yen",
+      "previous_value": 990063,
+      "change_value": 1.88,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 112,
+        "workers": 671000
+      },
+      "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
+      "note": "第1回集計。最終集計公表後に更新する。"
+    },
+    {
+      "id": "keidanren_2026_summer_manufacturing",
+      "source_id": "keidanren_bonus",
+      "publisher": "日本経済団体連合会",
+      "title": "2026年夏季賞与・一時金 製造業平均",
+      "period": "2026-summer",
+      "published_at": "2026-07-02",
+      "release_status": "first",
+      "aggregation": "worker_weighted_average",
+      "scope": "第1回集計の製造業13業種99社。",
+      "metric": "settlement_amount",
+      "value": 1060434,
+      "unit": "yen",
+      "previous_value": 1043464,
+      "change_value": 1.63,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 99,
+        "workers": null
+      },
+      "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
+      "note": "第1回集計。最終集計公表後に更新する。"
+    },
+    {
+      "id": "keidanren_2026_summer_nonmanufacturing",
+      "source_id": "keidanren_bonus",
+      "publisher": "日本経済団体連合会",
+      "title": "2026年夏季賞与・一時金 非製造業平均",
+      "period": "2026-summer",
+      "published_at": "2026-07-02",
+      "release_status": "first",
+      "aggregation": "worker_weighted_average",
+      "scope": "第1回集計の非製造業6業種13社。",
+      "metric": "settlement_amount",
+      "value": 864712,
+      "unit": "yen",
+      "previous_value": 831360,
+      "change_value": 4.01,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 13,
+        "workers": null
+      },
+      "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
+      "note": "第1回集計。最終集計公表後に更新する。"
+    },
+    {
+      "id": "mhlw_2025_summer_settlement",
+      "source_id": "mhlw_bonus",
+      "publisher": "厚生労働省",
+      "title": "2025年 民間主要企業夏季一時金 平均妥結額",
+      "period": "2025-summer",
+      "published_at": "2025-09-12",
+      "release_status": "final",
+      "aggregation": "company_average",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業のうち妥結額を把握できた342社。",
+      "metric": "settlement_amount",
+      "value": 946469,
+      "unit": "yen",
+      "previous_value": 898754,
+      "change_value": 5.31,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 342,
+        "workers": null
+      },
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_62643.html",
+      "note": "前年差47,715円。民間主要企業の集計であり全事業所平均ではない。"
+    },
+    {
+      "id": "mhlw_2025_summer_request",
+      "source_id": "mhlw_bonus",
+      "publisher": "厚生労働省",
+      "title": "2025年 民間主要企業夏季一時金 平均要求額",
+      "period": "2025-summer",
+      "published_at": "2025-09-12",
+      "release_status": "final",
+      "aggregation": "company_average",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。",
+      "metric": "request_amount",
+      "value": 997430,
+      "unit": "yen",
+      "previous_value": 937922,
+      "change_value": 6.34,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 342,
+        "workers": null
+      },
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_62643.html",
+      "note": "前年差59,508円。要求額と妥結額を混同しない。"
+    },
+    {
+      "id": "mhlw_2025_yearend_settlement",
+      "source_id": "mhlw_bonus",
+      "publisher": "厚生労働省",
+      "title": "2025年 民間主要企業年末一時金 平均妥結額",
+      "period": "2025-yearend",
+      "published_at": "2026-01-09",
+      "release_status": "final",
+      "aggregation": "company_average",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業のうち妥結額を把握できた330社。",
+      "metric": "settlement_amount",
+      "value": 957184,
+      "unit": "yen",
+      "previous_value": 891460,
+      "change_value": 7.37,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 330,
+        "workers": null
+      },
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_68123.html",
+      "note": "前年差65,724円。民間主要企業の集計であり全事業所平均ではない。"
+    },
+    {
+      "id": "mhlw_2025_yearend_request",
+      "source_id": "mhlw_bonus",
+      "publisher": "厚生労働省",
+      "title": "2025年 民間主要企業年末一時金 平均要求額",
+      "period": "2025-yearend",
+      "published_at": "2026-01-09",
+      "release_status": "final",
+      "aggregation": "company_average",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。",
+      "metric": "request_amount",
+      "value": 1008354,
+      "unit": "yen",
+      "previous_value": 933804,
+      "change_value": 7.98,
+      "change_unit": "percent",
+      "sample": {
+        "organizations": 330,
+        "workers": null
+      },
+      "source_url": "https://www.mhlw.go.jp/stf/newpage_68123.html",
+      "note": "前年差74,550円。要求額と妥結額を混同しない。"
+    }
+  ],
   "summary": {
     "record_count": 30,
     "verified_record_count": 5,
@@ -185,6 +447,9 @@
     "required_channel_count": 4,
     "reviewed_required_channel_count": 5,
     "research_coverage_ratio": 0.0417,
+    "quantitative_benchmark_count": 11,
+    "quantitative_final_count": 8,
+    "quantitative_provisional_count": 3,
     "evidence_status_counts": {
       "confirmed": 3,
       "partially_confirmed": 1,
