@@ -3,55 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="一次情報の確認事実と、反証可能な賞与仮説を分離して閲覧するダッシュボード">
+  <meta name="description" content="主要30社の従業員賞与制度について、一次情報の確認事実と仮説推定を比較する一覧表">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="verified-pages-v3">
-  <title>Bonus Evidence Atlas</title>
+  <meta name="bonus-build" content="verified-pages-v4">
+  <title>主要30社 賞与制度・推定比較表</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#companies">企業データへ移動</a>
-  <div class="ambient ambient-a" aria-hidden="true"></div>
-  <div class="ambient ambient-b" aria-hidden="true"></div>
+  <a class="skip-link" href="#comparison">比較表へ移動</a>
 
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="トップへ">
-      <span class="brand-mark" aria-hidden="true">B</span>
-      <span>Bonus Evidence Atlas</span>
+    <a class="brand" href="#top" aria-label="ページ上部へ">
+      <span class="brand-mark" aria-hidden="true">賞</span>
+      <span>主要30社 賞与比較表</span>
     </a>
     <nav aria-label="主要ナビゲーション">
-      <a href="#companies">企業</a>
-      <a href="#method">推定方法</a>
+      <a href="#comparison">比較表</a>
+      <a href="#method">推定ルール</a>
       <a href="https://github.com/KAFKA2306/bonus">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero shell">
-      <div class="eyebrow">VERIFIED FACTS × FALSIFIABLE HYPOTHESES</div>
-      <h1>未確認で止めず、<br><span>仮説として推定する。</span></h1>
-      <p class="lead">一次情報で確認できた事実と、旧調査・制度構造から推定したレンジを分離表示します。推定には確度、前提、反証条件を必ず付けます。</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#companies">推定を見る</a>
-        <a class="button secondary" href="#method">推定ルール</a>
-      </div>
+      <div class="eyebrow">EMPLOYEE BONUS COMPARISON</div>
+      <h1>主要30社<br>賞与制度・推定比較表</h1>
+      <p class="lead">一次情報で確認できた制度と、未確認部分に対する仮説レンジを分けて一覧化します。推定値には確度、前提、反証条件を付け、確認済み数値とは別に扱います。</p>
       <div class="meta-line">
         <span id="as-of">基準日 —</span>
-        <span>既存銘柄集合を固定</span>
+        <span>固定Universe 30社</span>
+        <span>従業員賞与のみ</span>
         <span>事実と推定を分離</span>
       </div>
     </section>
 
     <section class="shell metrics" aria-label="集計概要">
       <article>
-        <span class="metric-label">掲載</span>
+        <span class="metric-label">比較対象</span>
         <strong id="metric-records">—</strong>
-        <small>一次情報を再監査した企業</small>
+        <small>固定Universeの企業数</small>
       </article>
       <article>
-        <span class="metric-label">確認済み</span>
-        <strong id="metric-confirmed">—</strong>
-        <small>confirmed / partial</small>
+        <span class="metric-label">一次情報監査</span>
+        <strong id="metric-verified">—</strong>
+        <small>制度事実を再確認した企業</small>
       </article>
       <article>
         <span class="metric-label">仮説推定</span>
@@ -59,59 +54,77 @@
         <small>レンジ・確度・反証条件付き</small>
       </article>
       <article>
-        <span class="metric-label">固定Universe</span>
-        <strong id="metric-universe">—</strong>
-        <small>銘柄追加・削除なし</small>
+        <span class="metric-label">カバレッジ</span>
+        <strong id="metric-coverage">—</strong>
+        <small>固定Universeに対する収載率</small>
       </article>
     </section>
 
-    <section id="companies" class="shell section-block">
+    <section id="comparison" class="shell section-block">
       <div class="section-heading">
         <div>
-          <span class="kicker">FACTS AND ESTIMATES</span>
-          <h2>企業別の確認事実と仮説</h2>
+          <span class="kicker">COMPARISON TABLE</span>
+          <h2>企業別一覧</h2>
         </div>
-        <p>会社名、証券コード、制度分類、仮説根拠まで検索できます。</p>
+        <p>列見出しを押すと並べ替えできます。詳細列では根拠、前提、反証条件、一次資料を確認できます。</p>
       </div>
 
       <div class="toolbar">
         <label class="search" for="search">
           <span>検索</span>
-          <input id="search" type="search" placeholder="会社名・証券コード・制度・仮説根拠" autocomplete="off">
+          <input id="search" type="search" placeholder="会社名・証券コード・制度・根拠" autocomplete="off">
         </label>
-        <div class="filters" role="group" aria-label="表示フィルター">
-          <button type="button" class="filter active" data-status="all" aria-pressed="true" aria-controls="cards">すべて</button>
-          <button type="button" class="filter" data-status="confirmed" aria-pressed="false" aria-controls="cards">確認済み</button>
-          <button type="button" class="filter" data-status="partially_confirmed" aria-pressed="false" aria-controls="cards">一部確認</button>
-          <button type="button" class="filter" data-status="estimated" aria-pressed="false" aria-controls="cards">仮説あり</button>
+        <div class="filters" role="group" aria-label="確認状態フィルター">
+          <button type="button" class="filter active" data-status="all" aria-pressed="true" aria-controls="bonus-table">全30社</button>
+          <button type="button" class="filter" data-status="confirmed" aria-pressed="false" aria-controls="bonus-table">確認済み</button>
+          <button type="button" class="filter" data-status="partially_confirmed" aria-pressed="false" aria-controls="bonus-table">一部確認</button>
+          <button type="button" class="filter" data-status="unknown" aria-pressed="false" aria-controls="bonus-table">未確認</button>
         </div>
       </div>
 
       <p id="result-count" class="result-count" role="status" aria-live="polite">読み込み中</p>
-      <div id="cards" class="cards"></div>
+
+      <div class="table-wrap" tabindex="0" aria-label="主要30社の賞与制度・推定比較表。横方向にスクロールできます。">
+        <table id="bonus-table" class="comparison-table">
+          <caption>主要30社の従業員賞与制度に関する確認事実と仮説推定</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-column="company" aria-sort="none"><button class="sort-button" data-sort="company">会社</button></th>
+              <th scope="col" data-column="status" aria-sort="none"><button class="sort-button" data-sort="status">確認状態</button></th>
+              <th scope="col" data-column="classification" aria-sort="none"><button class="sort-button" data-sort="classification">制度分類</button></th>
+              <th scope="col" data-column="verified" aria-sort="none"><button class="sort-button" data-sort="verified">確認月数</button></th>
+              <th scope="col" data-column="central" aria-sort="none"><button class="sort-button" data-sort="central">推定レンジ</button></th>
+              <th scope="col" data-column="frequency" aria-sort="none"><button class="sort-button" data-sort="frequency">支給回数</button></th>
+              <th scope="col" data-column="confidence" aria-sort="none"><button class="sort-button" data-sort="confidence">確度</button></th>
+              <th scope="col">詳細</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
       <p id="empty" class="empty" hidden>条件に一致する企業はありません。</p>
 
       <noscript>
-        <p class="noscript">このビューの検索とカード表示にはJavaScriptが必要です。正規データはGitHubリポジトリの <a href="https://github.com/KAFKA2306/bonus/tree/main/data">dataディレクトリ</a> で確認できます。</p>
+        <p class="noscript">比較表の検索・並べ替え・展開にはJavaScriptが必要です。正規データはGitHubリポジトリの <a href="https://github.com/KAFKA2306/bonus/tree/main/data">dataディレクトリ</a> で確認できます。</p>
       </noscript>
     </section>
 
     <section id="method" class="shell section-block method-grid">
       <div>
-        <span class="kicker">HYPOTHESIS CONTRACT</span>
-        <h2>推定を断定に<br>変えない。</h2>
+        <span class="kicker">READING GUIDE</span>
+        <h2>表の読み方</h2>
       </div>
       <div class="rules">
-        <article><b aria-hidden="true">01</b><div><h3>確認事実を固定</h3><p>会社公式・労働組合公式・法定開示で確認した内容はverifiedレイヤーに保存します。</p></div></article>
-        <article><b aria-hidden="true">02</b><div><h3>仮説は別レイヤー</h3><p>旧調査値や業界構造からの推定は、事実の月数や平均へ混入させません。</p></div></article>
-        <article><b aria-hidden="true">03</b><div><h3>レンジと確度</h3><p>中心値だけでなく下限・上限と確度スコアを示し、偽の精密さを避けます。</p></div></article>
-        <article><b aria-hidden="true">04</b><div><h3>反証条件を持つ</h3><p>どの公式情報が出れば仮説を棄却・更新するかを企業ごとに明記します。</p></div></article>
+        <article><b aria-hidden="true">01</b><div><h3>確認月数</h3><p>会社公式、労働組合公式、法定開示に明記された値だけを表示します。</p></div></article>
+        <article><b aria-hidden="true">02</b><div><h3>推定レンジ</h3><p>旧調査や制度構造から置いた仮説です。確認済み数値の平均には含めません。</p></div></article>
+        <article><b aria-hidden="true">03</b><div><h3>確度</h3><p>根拠の直接性、制度変更リスク、旧調査との整合性を0〜100%で示します。</p></div></article>
+        <article><b aria-hidden="true">04</b><div><h3>詳細</h3><p>推定根拠、成立前提、反証条件、一次資料へのリンクを行ごとに展開できます。</p></div></article>
       </div>
     </section>
   </main>
 
   <footer class="shell">
-    <span>Bonus Evidence Atlas</span>
+    <span>主要30社 賞与制度・推定比較表</span>
     <span><a href="https://github.com/KAFKA2306/bonus">Data and code: KAFKA2306/bonus</a></span>
   </footer>
   <script src="./app.js" defer></script>
