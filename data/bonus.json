@@ -29,13 +29,13 @@
   },
   "estimation_methodology": {
     "purpose": "個社一次資料で年間賞与月数を確定できない場合でも、旧個社調査を会社事前分布、連合2026最終集計の業種別年間一時金を実測アンカーとして、全30社へ定量推定を付与する。",
-    "model_type": "empirical_bayes_shrinkage",
-    "central_formula": "推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数。",
+    "model_type": "empirical_bayes_shrinkage_with_mechanism_upside",
+    "central_formula": "推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数 + 制度類型補正。",
     "weight_formula": "会社重み = clamp(基礎重み + 信頼度係数 × 旧信頼度 + 一次資料加点 - セクター推定減点, 下限, 上限)。",
-    "interval_formula": "下限・上限も会社事前レンジと業種実測値±業種不確実幅を同じ会社重みで合成する。",
-    "amount_formula": "参考換算額 = 業種実測年間金額 ÷ 業種実測月数 × 個社推定月数。個社の実額ではなく、同業種の平均基本月額を仮定した参考値とする。",
-    "verified_override_policy": "一次資料で支給回数・算定方式・最低月数を確認できた場合は、その値を推定構造または下限へ優先適用する。",
-    "disclosure_policy": "推定値、実測アンカー、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。"
+    "interval_formula": "下限・上限も会社事前レンジと業種実測値±業種不確実幅を合成し、業績連動制度だけ上側レンジを追加拡張する。総合判断・固定制度には上側プレミアムを付与しない。",
+    "amount_formula": "原則は業種実測年間金額 ÷ 業種実測年間月数 × 個社推定月数。会社公式の季別月数とモデル額がある場合は、会社基礎月額を優先した参考投影へ切り替える。",
+    "verified_override_policy": "一次資料で支給回数・算定方式・年間月数・季別モデル額を確認できた場合は、その値をモデルより優先する。",
+    "disclosure_policy": "推定値、実測アンカー、制度類型、アップサイド、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。"
   },
   "estimation_parameters": {
     "base_company_weight": 0.45,
@@ -588,9 +588,9 @@
     "quantitative_final_count": 8,
     "quantitative_provisional_count": 3,
     "quantified_company_count": 30,
-    "median_estimated_months": 5.47,
-    "median_estimated_amount_yen": 1870000,
-    "average_estimate_confidence": 0.55,
+    "median_estimated_months": 5.67,
+    "median_estimated_amount_yen": 1937000,
+    "average_estimate_confidence": 0.56,
     "evidence_status_counts": {
       "confirmed": 3,
       "partially_confirmed": 1,
@@ -602,14 +602,15 @@
       "source_reviewed": 1
     },
     "estimate_status_counts": {
-      "estimated": 26,
+      "estimated": 24,
       "estimated_with_verified_bound": 1,
-      "estimated_with_verified_structure": 3
+      "estimated_with_verified_structure": 4,
+      "verified_numeric": 1
     },
     "estimate_confidence_counts": {
-      "high": 3,
+      "high": 4,
       "low": 8,
-      "medium": 19
+      "medium": 18
     }
   },
   "records": [
@@ -630,7 +631,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
@@ -643,8 +644,22 @@
           "central": 1926000,
           "maximum": 2022000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "base_salary_linked",
+        "mechanism": {
+          "id": "base_salary_linked",
+          "label_ja": "固定・基本給連動",
+          "upside_profile": "low",
+          "upside_score": 0.15,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.56,
           "level": "medium",
@@ -738,7 +753,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "information_publication",
         "sector_name_ja": "情報・出版",
         "months": {
@@ -751,8 +766,22 @@
           "central": 2101000,
           "maximum": 2352000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.49,
           "level": "low",
@@ -846,7 +875,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
@@ -859,8 +888,22 @@
           "central": 1811000,
           "maximum": 2022000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.53,
           "level": "medium",
@@ -954,7 +997,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
@@ -967,8 +1010,22 @@
           "central": 1937000,
           "maximum": 2090000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.54,
           "level": "medium",
@@ -1062,21 +1119,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "service_hotel",
         "sector_name_ja": "サービス・ホテル",
         "months": {
           "minimum": 3.84,
-          "central": 4.35,
-          "maximum": 4.86
+          "central": 4.55,
+          "maximum": 5.66
         },
         "amount_yen": {
           "minimum": 846000,
-          "central": 958000,
-          "maximum": 1071000
+          "central": 1002000,
+          "maximum": 1247000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.54,
           "level": "medium",
@@ -1174,25 +1245,39 @@
       },
       "estimate": {
         "status": "estimated_with_verified_bound",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 8.57,
-          "central": 9.94,
-          "maximum": 11.32
+          "central": 10.29,
+          "maximum": 12.62
         },
         "amount_yen": {
           "minimum": 2922000,
-          "central": 3389000,
-          "maximum": 3860000
+          "central": 3509000,
+          "maximum": 4303000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 4,
         "classification": "hybrid",
+        "mechanism": {
+          "id": "formula_linked_performance",
+          "label_ja": "算式明示型・業績連動",
+          "upside_profile": "very_high",
+          "upside_score": 1.0,
+          "formula_disclosure": "explicit",
+          "source_url": "https://www.disco.co.jp/jp/csr/work_env/HumanCapital.html",
+          "source_note": "会社公式で会社業績連動テーブル、年4回、年間最低4か月の制度構造を確認。固定部分を含むため広義分類はハイブリッドだが、上側は算式明示型として扱う。"
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
-          "score": 0.73,
+          "score": 0.79,
           "level": "high",
-          "amount_score": 0.58
+          "amount_score": 0.64
         },
         "weights": {
           "company_prior": 0.89,
@@ -1235,6 +1320,11 @@
             "type": "official_sector_actual",
             "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
             "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          },
+          {
+            "type": "company_mechanism",
+            "statement": "会社公式で会社業績連動テーブル、年4回、年間最低4か月の制度構造を確認。固定部分を含むため広義分類はハイブリッドだが、上側は算式明示型として扱う。",
+            "reference": "https://www.disco.co.jp/jp/csr/work_env/HumanCapital.html"
           }
         ],
         "assumptions": [
@@ -1310,21 +1400,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 3.21,
-          "central": 5.78,
-          "maximum": 8.36
+          "central": 5.98,
+          "maximum": 9.16
         },
         "amount_yen": {
           "minimum": 1094000,
-          "central": 1971000,
-          "maximum": 2850000
+          "central": 2039000,
+          "maximum": 3123000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.44,
           "level": "low",
@@ -1418,21 +1522,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 4.37,
-          "central": 5.15,
-          "maximum": 5.93
+          "central": 5.35,
+          "maximum": 6.73
         },
         "amount_yen": {
           "minimum": 1490000,
-          "central": 1756000,
-          "maximum": 2022000
+          "central": 1824000,
+          "maximum": 2295000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.52,
           "level": "medium",
@@ -1526,21 +1644,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 4.77,
-          "central": 5.47,
-          "maximum": 6.18
+          "central": 5.67,
+          "maximum": 6.98
         },
         "amount_yen": {
           "minimum": 1626000,
-          "central": 1865000,
-          "maximum": 2107000
+          "central": 1933000,
+          "maximum": 2380000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.38,
           "level": "low",
@@ -1634,21 +1766,35 @@
       },
       "estimate": {
         "status": "estimated_with_verified_structure",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 5.01,
-          "central": 5.49,
-          "maximum": 5.97
+          "central": 5.69,
+          "maximum": 6.77
         },
         "amount_yen": {
           "minimum": 1708000,
-          "central": 1872000,
-          "maximum": 2036000
+          "central": 1940000,
+          "maximum": 2308000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.7,
           "level": "high",
@@ -1765,21 +1911,35 @@
       },
       "estimate": {
         "status": "estimated_with_verified_structure",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 1.37,
-          "central": 1.84,
-          "maximum": 2.32
+          "central": 2.04,
+          "maximum": 3.12
         },
         "amount_yen": {
           "minimum": 467000,
-          "central": 627000,
-          "maximum": 791000
+          "central": 696000,
+          "maximum": 1064000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 1,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.61,
           "level": "medium",
@@ -1887,21 +2047,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 3.75,
-          "central": 5.48,
-          "maximum": 7.2
+          "central": 5.68,
+          "maximum": 8.0
         },
         "amount_yen": {
           "minimum": 1279000,
-          "central": 1868000,
-          "maximum": 2455000
+          "central": 1937000,
+          "maximum": 2728000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.49,
           "level": "low",
@@ -1995,21 +2169,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 5.82,
-          "central": 6.69,
-          "maximum": 7.56
+          "central": 6.89,
+          "maximum": 8.36
         },
         "amount_yen": {
           "minimum": 1984000,
-          "central": 2281000,
-          "maximum": 2578000
+          "central": 2349000,
+          "maximum": 2850000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 4,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.6,
           "level": "medium",
@@ -2120,21 +2308,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 4.41,
-          "central": 7.03,
-          "maximum": 9.64
+          "central": 7.23,
+          "maximum": 10.44
         },
         "amount_yen": {
           "minimum": 1504000,
-          "central": 2397000,
-          "maximum": 3287000
+          "central": 2465000,
+          "maximum": 3560000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.46,
           "level": "low",
@@ -2228,21 +2430,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 5.03,
-          "central": 5.48,
-          "maximum": 5.93
+          "central": 5.68,
+          "maximum": 6.73
         },
         "amount_yen": {
           "minimum": 1715000,
-          "central": 1868000,
-          "maximum": 2022000
+          "central": 1937000,
+          "maximum": 2295000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.54,
           "level": "medium",
@@ -2336,7 +2552,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
@@ -2349,8 +2565,22 @@
           "central": 2298000,
           "maximum": 2455000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.57,
           "level": "medium",
@@ -2444,7 +2674,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
@@ -2457,8 +2687,22 @@
           "central": 1988000,
           "maximum": 2141000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.56,
           "level": "medium",
@@ -2552,21 +2796,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 4.36,
-          "central": 4.81,
-          "maximum": 5.26
+          "central": 5.01,
+          "maximum": 6.06
         },
         "amount_yen": {
           "minimum": 1487000,
-          "central": 1640000,
-          "maximum": 1793000
+          "central": 1708000,
+          "maximum": 2066000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.53,
           "level": "medium",
@@ -2659,26 +2917,40 @@
         "base_salary_link": null
       },
       "estimate": {
-        "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "status": "estimated_with_verified_structure",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
         "months": {
           "minimum": 5.03,
-          "central": 5.83,
-          "maximum": 6.62
+          "central": 6.03,
+          "maximum": 7.42
         },
         "amount_yen": {
           "minimum": 1715000,
-          "central": 1988000,
-          "maximum": 2257000
+          "central": 2056000,
+          "maximum": 2530000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "not_disclosed",
+          "source_url": "https://www.tel.com/sustainability/management-foundation/human-resource/",
+          "source_note": "東京エレクトロン公式は会社業績に連動する賞与とperformance bonusを明記する一方、一般従業員の利益連動式・標準月数・上限は開示していない。平均年間給与から賞与額を逆算しない。"
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
-          "score": 0.56,
+          "score": 0.61,
           "level": "medium",
-          "amount_score": 0.41
+          "amount_score": 0.46
         },
         "weights": {
           "company_prior": 0.69,
@@ -2716,6 +2988,11 @@
             "type": "official_sector_actual",
             "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
             "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          },
+          {
+            "type": "company_mechanism",
+            "statement": "東京エレクトロン公式は会社業績に連動する賞与とperformance bonusを明記する一方、一般従業員の利益連動式・標準月数・上限は開示していない。平均年間給与から賞与額を逆算しない。",
+            "reference": "https://www.tel.com/sustainability/management-foundation/human-resource/"
           }
         ],
         "assumptions": [
@@ -2768,21 +3045,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "other",
         "sector_name_ja": "その他（金融・投資等）",
         "months": {
           "minimum": 4.36,
-          "central": 4.82,
-          "maximum": 5.27
+          "central": 4.87,
+          "maximum": 5.57
         },
         "amount_yen": {
           "minimum": 1738000,
-          "central": 1921000,
-          "maximum": 2100000
+          "central": 1941000,
+          "maximum": 2220000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "hybrid",
+        "mechanism": {
+          "id": "hybrid",
+          "label_ja": "固定＋業績連動ハイブリッド",
+          "upside_profile": "medium",
+          "upside_score": 0.55,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.57,
           "level": "medium",
@@ -2876,7 +3167,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "other",
         "sector_name_ja": "その他（金融・投資等）",
         "months": {
@@ -2889,8 +3180,22 @@
           "central": 1905000,
           "maximum": 2212000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.49,
           "level": "low",
@@ -2984,21 +3289,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "other",
         "sector_name_ja": "その他（金融・投資等）",
         "months": {
           "minimum": 5.29,
-          "central": 6.06,
-          "maximum": 6.83
+          "central": 6.26,
+          "maximum": 7.63
         },
         "amount_yen": {
           "minimum": 2108000,
-          "central": 2415000,
-          "maximum": 2722000
+          "central": 2495000,
+          "maximum": 3041000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 1,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.49,
           "level": "low",
@@ -3092,7 +3411,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "transport",
         "sector_name_ja": "交通運輸",
         "months": {
@@ -3105,8 +3424,22 @@
           "central": 930000,
           "maximum": 1039000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "base_salary_linked",
+        "mechanism": {
+          "id": "base_salary_linked",
+          "label_ja": "固定・基本給連動",
+          "upside_profile": "low",
+          "upside_score": 0.15,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.57,
           "level": "medium",
@@ -3199,26 +3532,52 @@
         "base_salary_link": null
       },
       "estimate": {
-        "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "status": "verified_numeric",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "transport",
         "sector_name_ja": "交通運輸",
         "months": {
-          "minimum": 2.92,
-          "central": 3.45,
-          "maximum": 3.99
+          "minimum": 6.15,
+          "central": 6.15,
+          "maximum": 6.15
         },
         "amount_yen": {
-          "minimum": 606000,
-          "central": 716000,
-          "maximum": 828000
+          "minimum": 2041000,
+          "central": 2148000,
+          "maximum": 2256000
         },
+        "amount_method": "official_company_base_projection",
         "frequency_per_year": 2,
-        "classification": "base_salary_linked",
+        "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "not_applicable",
+          "source_url": "https://jr-central.co.jp/news/release/nws000001_00434.html",
+          "source_note": "JR東海は会社業績との機械的な利益連動式ではなく、各組合への回答として夏季・年末の支給月数を決定する労使妥結・総合判断型と扱う。"
+        },
+        "official_observations": {
+          "annual_months": {
+            "period": "2025",
+            "value": 6.15,
+            "source_url": "https://jr-central.co.jp/news/release/nws000001_00304.html",
+            "note": "2025年度は夏季3.05か月と年末3.10か月の合計6.15か月。会社公式の支給実績を年間値として採用。"
+          },
+          "latest_seasonal": {
+            "period": "2026-summer",
+            "months": 3.1,
+            "amount_yen": 1082800,
+            "model_age": 35,
+            "source_url": "https://jr-central.co.jp/news/release/nws000001_00434.html",
+            "note": "2026年度夏季手当は3.10か月、35歳モデル1,082,800円。年間額ではなく季別の会社公式モデル値。"
+          }
+        },
         "confidence": {
-          "score": 0.55,
-          "level": "medium",
-          "amount_score": 0.4
+          "score": 0.82,
+          "level": "high",
+          "amount_score": 0.67
         },
         "weights": {
           "company_prior": 0.68,
@@ -3245,7 +3604,7 @@
           },
           "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
         },
-        "override_note": null,
+        "override_note": "2025の会社公式年間6.15か月を優先",
         "basis": [
           {
             "type": "legacy_prior",
@@ -3256,20 +3615,35 @@
             "type": "official_sector_actual",
             "statement": "連合2026最終集計の交通運輸年間一時金は4.42か月・917,078円。",
             "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          },
+          {
+            "type": "company_mechanism",
+            "statement": "JR東海は会社業績との機械的な利益連動式ではなく、各組合への回答として夏季・年末の支給月数を決定する労使妥結・総合判断型と扱う。",
+            "reference": "https://jr-central.co.jp/news/release/nws000001_00434.html"
+          },
+          {
+            "type": "company_official_numeric",
+            "statement": "2025年度は夏季3.05か月と年末3.10か月の合計6.15か月。会社公式の支給実績を年間値として採用。",
+            "reference": "https://jr-central.co.jp/news/release/nws000001_00304.html"
+          },
+          {
+            "type": "company_official_numeric",
+            "statement": "2026年度夏季手当は3.10か月、35歳モデル1,082,800円。年間額ではなく季別の会社公式モデル値。",
+            "reference": "https://jr-central.co.jp/news/release/nws000001_00434.html"
           }
         ],
         "assumptions": [
           "旧調査の3か月は年間合計を意味する。",
           "年2回の季節支給が継続する。",
           "旧個社調査の相対的な高低が2026年にも一定程度残る。",
-          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+          "会社公式の季別モデル基礎額が年間換算にも近似利用できる。"
         ],
         "falsifiers": [
           "3か月が各回値で年間6か月相当と判明する。",
           "公式妥結値がレンジ外となる。",
           "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
         ],
-        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+        "amount_caution": "2026-summerの会社公式モデル額÷月数で基礎月額を推定し、別期間の公式年間月数を乗じた参考値。期間差を含むため実支給額ではない。"
       },
       "notes": [
         "確認済み事実とモデル推定を分離して表示する。"
@@ -3308,7 +3682,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "transport",
         "sector_name_ja": "交通運輸",
         "months": {
@@ -3321,8 +3695,22 @@
           "central": 726000,
           "maximum": 836000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.5,
           "level": "medium",
@@ -3416,7 +3804,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "transport",
         "sector_name_ja": "交通運輸",
         "months": {
@@ -3429,8 +3817,22 @@
           "central": 857000,
           "maximum": 969000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.55,
           "level": "medium",
@@ -3524,7 +3926,7 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "information_publication",
         "sector_name_ja": "情報・出版",
         "months": {
@@ -3537,8 +3939,22 @@
           "central": 1558000,
           "maximum": 1705000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "discretionary",
+        "mechanism": {
+          "id": "discretionary",
+          "label_ja": "労使妥結・総合判断",
+          "upside_profile": "low",
+          "upside_score": 0.25,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.59,
           "level": "medium",
@@ -3632,21 +4048,35 @@
       },
       "estimate": {
         "status": "estimated_with_verified_structure",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "information_publication",
         "sector_name_ja": "情報・出版",
         "months": {
           "minimum": 4.57,
-          "central": 5.05,
-          "maximum": 5.53
+          "central": 5.1,
+          "maximum": 5.83
         },
         "amount_yen": {
           "minimum": 1493000,
-          "central": 1650000,
-          "maximum": 1807000
+          "central": 1666000,
+          "maximum": 1905000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "hybrid",
+        "mechanism": {
+          "id": "hybrid",
+          "label_ja": "固定＋業績連動ハイブリッド",
+          "upside_profile": "medium",
+          "upside_score": 0.55,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.71,
           "level": "high",
@@ -3762,21 +4192,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "commercial_distribution",
         "sector_name_ja": "商業流通",
         "months": {
           "minimum": 4.78,
-          "central": 5.48,
-          "maximum": 6.17
+          "central": 5.68,
+          "maximum": 6.97
         },
         "amount_yen": {
           "minimum": 1445000,
-          "central": 1656000,
-          "maximum": 1865000
+          "central": 1717000,
+          "maximum": 2107000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 3,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.54,
           "level": "medium",
@@ -3870,21 +4314,35 @@
       },
       "estimate": {
         "status": "estimated",
-        "method": "empirical_bayes_shrinkage",
+        "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "other",
         "sector_name_ja": "その他（金融・投資等）",
         "months": {
           "minimum": 3.38,
-          "central": 4.77,
-          "maximum": 6.16
+          "central": 4.97,
+          "maximum": 6.96
         },
         "amount_yen": {
           "minimum": 1347000,
-          "central": 1901000,
-          "maximum": 2455000
+          "central": 1981000,
+          "maximum": 2774000
         },
+        "amount_method": "sector_implied",
         "frequency_per_year": 2,
         "classification": "performance_linked",
+        "mechanism": {
+          "id": "nonformula_performance",
+          "label_ja": "算式非開示型・業績連動",
+          "upside_profile": "high",
+          "upside_score": 0.8,
+          "formula_disclosure": "unknown",
+          "source_url": null,
+          "source_note": null
+        },
+        "official_observations": {
+          "annual_months": null,
+          "latest_seasonal": null
+        },
         "confidence": {
           "score": 0.47,
           "level": "low",
