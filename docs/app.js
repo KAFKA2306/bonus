@@ -15,6 +15,17 @@ const classificationLabels = {
 };
 const releaseLabels = { first: '第1回・暫定', final: '最終' };
 const confidenceLabels = { high: '高', medium: '中', low: '低' };
+const upsideLabels = { very_high: '最大', high: '大', medium: '中', low: '小' };
+const formulaLabels = {
+  explicit: '算式明示',
+  not_disclosed: '算式非開示',
+  not_applicable: '利益連動式なし',
+  unknown: '開示状況不明'
+};
+const amountMethodLabels = {
+  sector_implied: '業種平均基礎額による参考換算',
+  official_company_base_projection: '会社公式の季別モデル額から年間投影'
+};
 const estimateStatusLabels = {
   verified_numeric: '一次資料の明示値',
   estimated_with_verified_bound: '一次資料の境界付き推定',
@@ -104,22 +115,37 @@ function referenceLink(reference) {
 function basisList(items = []) {
   return items.map(item => `<li><strong>${escapeHtml(item.statement)}</strong><small>${referenceLink(item.reference)}</small></li>`).join('');
 }
+function officialObservations(estimate) {
+  const items = [];
+  const annual = estimate.official_observations?.annual_months;
+  const seasonal = estimate.official_observations?.latest_seasonal;
+  if (annual) items.push(`<li><strong>${escapeHtml(annual.period)} 年間 ${months(annual.value)}</strong><small>${escapeHtml(annual.note)} ${referenceLink(annual.source_url)}</small></li>`);
+  if (seasonal) items.push(`<li><strong>${escapeHtml(periodLabel(seasonal.period))} ${months(seasonal.months)} / ${yen(seasonal.amount_yen)}</strong><small>${escapeHtml(seasonal.note)} ${referenceLink(seasonal.source_url)}</small></li>`);
+  return items.length ? `<ul class="basis-list">${items.join('')}</ul>` : '<p class="muted">会社公式の個別月数・モデル額は未登録です。</p>';
+}
 function estimateDetails(record) {
   const estimate = record.estimate;
   const anchors = estimate.anchors;
+  const mechanism = estimate.mechanism;
   const facts = verifiedFacts(record);
   return `<details class="row-details"><summary>根拠と式</summary><div class="detail-panel estimate-panel">
+    <section><h3>制度類型とアップサイド</h3><dl class="formula-grid">
+      <dt>詳細分類</dt><dd>${escapeHtml(mechanism.label_ja)}</dd>
+      <dt>アップサイド</dt><dd>${escapeHtml(upsideLabels[mechanism.upside_profile] || mechanism.upside_profile)} / ${percent(mechanism.upside_score)}</dd>
+      <dt>算式開示</dt><dd>${escapeHtml(formulaLabels[mechanism.formula_disclosure] || mechanism.formula_disclosure)}</dd>
+      <dt>金額算定</dt><dd>${escapeHtml(amountMethodLabels[estimate.amount_method] || estimate.amount_method)}</dd>
+    </dl>${mechanism.source_url ? `<p><a class="evidence-link" href="${escapeHtml(mechanism.source_url)}" target="_blank" rel="noopener noreferrer">制度の一次資料 ↗</a></p>` : ''}${mechanism.source_note ? `<p class="muted">${escapeHtml(mechanism.source_note)}</p>` : ''}</section>
+    <section><h3>会社公式の数値</h3>${officialObservations(estimate)}</section>
     <section><h3>計算入力</h3><dl class="formula-grid">
       <dt>旧個社事前分布</dt><dd>${months(anchors.company_prior_months.minimum)}–${months(anchors.company_prior_months.maximum)}（中心 ${months(anchors.company_prior_months.central)}）</dd>
       <dt>業種実測</dt><dd>${months(anchors.sector_actual_months)} / ${yen(anchors.sector_actual_amount_yen)}</dd>
       <dt>会社重み</dt><dd>${percent(estimate.weights.company_prior)}</dd>
       <dt>業種重み</dt><dd>${percent(estimate.weights.sector_actual)}</dd>
       <dt>業種標本</dt><dd>${escapeHtml(sampleLabel(anchors.sector_sample_months))}</dd>
-    </dl>${estimate.override_note ? `<p class="override-note">${escapeHtml(estimate.override_note)}</p>` : ''}</section>
+    </dl>${estimate.override_note ? `<p class="override-note">${escapeHtml(estimate.override_note)}</p>` : ''}<p class="muted">${escapeHtml(estimate.amount_caution)}</p></section>
     <section><h3>一次資料で確認済み</h3>${facts.length ? `<ul>${list(facts)}</ul>` : '<p class="muted">個社の数値・制度は未確認。モデル推定を表示。</p>'}${sourceLinks(record)}</section>
     <section><h3>推定根拠</h3><ul class="basis-list">${basisList(estimate.basis)}</ul></section>
-    <section><h3>前提</h3><ul>${list(estimate.assumptions)}</ul></section>
-    <section><h3>反証条件</h3><ul>${list(estimate.falsifiers)}</ul></section>
+    <section><h3>前提・反証条件</h3><h4>前提</h4><ul>${list(estimate.assumptions)}</ul><h4>反証条件</h4><ul>${list(estimate.falsifiers)}</ul></section>
     <section><h3>残る調査</h3><ul>${list(record.survey.open_questions)}</ul><p>${escapeHtml(record.employee_scope)}</p></section>
   </div></details>`;
 }
@@ -128,13 +154,14 @@ function companyRow(record) {
   const m = estimate.months;
   const amount = estimate.amount_yen;
   const anchor = estimate.anchors;
-  const method = classificationLabels[estimate.classification] || estimate.classification;
+  const broadMethod = classificationLabels[estimate.classification] || estimate.classification;
+  const mechanism = estimate.mechanism;
   return `<tr>
     <th scope="row" class="company-cell"><strong>${escapeHtml(record.company_name_ja)}</strong><span>${escapeHtml(record.stock_code)}</span><small>${escapeHtml(estimateStatusLabels[estimate.status] || estimate.status)}</small></th>
     <td class="estimate-main numeric"><strong>${months(m.central)}</strong><span>${months(m.minimum)}–${months(m.maximum)}</span></td>
-    <td class="numeric"><strong>${yen(amount.central)}</strong><span>${yen(amount.minimum)}–${yen(amount.maximum)}</span><small>参考換算</small></td>
+    <td class="numeric"><strong>${yen(amount.central)}</strong><span>${yen(amount.minimum)}–${yen(amount.maximum)}</span><small>${escapeHtml(amountMethodLabels[estimate.amount_method] || '参考換算')}</small></td>
     <td><strong>${escapeHtml(estimate.sector_name_ja)} ${months(anchor.sector_actual_months)}</strong><span>${yen(anchor.sector_actual_amount_yen)}</span><small>${escapeHtml(sampleLabel(anchor.sector_sample_months))}</small></td>
-    <td><strong>${escapeHtml(method)}</strong><span>年${escapeHtml(estimate.frequency_per_year)}回</span></td>
+    <td><strong>${escapeHtml(mechanism.label_ja)}</strong><span>${escapeHtml(broadMethod)} / 年${escapeHtml(estimate.frequency_per_year)}回</span><small>アップサイド ${escapeHtml(upsideLabels[mechanism.upside_profile] || mechanism.upside_profile)} ${percent(mechanism.upside_score)}</small></td>
     <td><span class="confidence confidence-${escapeHtml(estimate.confidence.level)}">${escapeHtml(confidenceLabels[estimate.confidence.level])} ${percent(estimate.confidence.score)}</span><small>金額 ${percent(estimate.confidence.amount_score)}</small></td>
     <td>${estimateDetails(record)}</td>
   </tr>`;
@@ -143,9 +170,10 @@ function searchText(record) {
   const estimate = record.estimate;
   return normalize([
     record.company_name_ja, record.stock_code, estimate.sector_name_ja,
-    classificationLabels[estimate.classification], confidenceLabels[estimate.confidence.level],
-    estimateStatusLabels[estimate.status], record.employee_scope,
-    ...record.survey.open_questions, ...verifiedFacts(record),
+    classificationLabels[estimate.classification], estimate.mechanism.label_ja,
+    upsideLabels[estimate.mechanism.upside_profile], formulaLabels[estimate.mechanism.formula_disclosure],
+    confidenceLabels[estimate.confidence.level], estimateStatusLabels[estimate.status],
+    record.employee_scope, ...record.survey.open_questions, ...verifiedFacts(record),
     ...estimate.basis.map(item => item.statement),
     ...(record.sources || []).flatMap(source => [source.title, source.page_or_section])
   ].filter(Boolean).join(' '));
