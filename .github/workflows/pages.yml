@@ -1,4 +1,4 @@
-name: Deploy bonus source survey
+name: Deploy quantified bonus dashboard
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
       - "data/source_survey_*.yaml"
       - "data/quantitative_benchmarks_*.yaml"
       - "data/bonus_hypotheses_*.yaml"
+      - "data/company_estimation_model_*.yaml"
       - "nikkei225_bonus_survey_2024_en.yaml"
       - "scripts/**"
       - "tests/**"
@@ -20,6 +21,7 @@ on:
       - "data/source_survey_*.yaml"
       - "data/quantitative_benchmarks_*.yaml"
       - "data/bonus_hypotheses_*.yaml"
+      - "data/company_estimation_model_*.yaml"
       - "nikkei225_bonus_survey_2024_en.yaml"
       - "scripts/**"
       - "tests/**"
@@ -47,9 +49,9 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate verified facts
         run: python scripts/generate_bonus_summary.py --check
-      - name: Generate source-first Pages JSON
+      - name: Generate quantified Pages JSON
         run: python scripts/generate_pages_data.py
-      - name: Audit Pages bundle
+      - name: Audit quantified Pages bundle
         run: python scripts/validate_pages.py
       - name: Check JavaScript syntax
         run: node --check docs/app.js
@@ -71,7 +73,7 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
-      - name: Generate source-first bundle
+      - name: Generate quantified bundle
         run: python scripts/generate_pages_data.py
       - name: Publish generated bundle to gh-pages
         shell: bash
@@ -91,7 +93,7 @@ jobs:
           if git -C "${publish_dir}" diff --cached --quiet; then
             echo "gh-pages already matches the generated bundle"
           else
-            git -C "${publish_dir}" commit -m "Deploy bonus source survey from ${GITHUB_SHA::12}"
+            git -C "${publish_dir}" commit -m "Deploy quantified bonus dashboard from ${GITHUB_SHA::12}"
             git -C "${publish_dir}" push origin gh-pages
           fi
 
