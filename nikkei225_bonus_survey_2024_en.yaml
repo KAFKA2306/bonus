@@ -1,600 +1,267 @@
----
-# Nikkei 225 Major 30 Companies Bonus System Detailed Survey Results 2024
-# Survey Date: January 2025
-# Confidence Level: A(90%+), B(70-90%), C(40-70%), D(~40%)
-
+schema_version: 2
+as_of: '2026-07-31'
+index: Nikkei 225
+source_url: https://indexes.nikkei.co.jp/nkave/index/component
+source_updated_at: '2026-07-31'
+mutation_policy: official_snapshot
+industry_defaults:
+  医薬品: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  電気機器: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  自動車: {sector_id: manufacturing, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  精密機器: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  通信: {sector_id: information_publication, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  銀行: {sector_id: other, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  その他金融: {sector_id: other, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  証券: {sector_id: other, classification_hypothesis: performance_linked, frequency_per_year_hypothesis: 2}
+  保険: {sector_id: other, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  水産: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  食品: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  小売業: {sector_id: commercial_distribution, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  サービス: {sector_id: service_hotel, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  鉱業: {sector_id: manufacturing, classification_hypothesis: performance_linked, frequency_per_year_hypothesis: 2}
+  繊維: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  パルプ・紙: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  化学: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  石油: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  ゴム: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  窯業: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  鉄鋼: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  非鉄・金属: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  商社: {sector_id: commercial_distribution, classification_hypothesis: performance_linked, frequency_per_year_hypothesis: 2}
+  建設: {sector_id: manufacturing, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  機械: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  造船: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  その他製造: {sector_id: manufacturing, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  不動産: {sector_id: service_hotel, classification_hypothesis: hybrid, frequency_per_year_hypothesis: 2}
+  鉄道・バス: {sector_id: transport, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  陸運: {sector_id: transport, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  海運: {sector_id: transport, classification_hypothesis: performance_linked, frequency_per_year_hypothesis: 2}
+  空運: {sector_id: transport, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  電力: {sector_id: other, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
+  ガス: {sector_id: other, classification_hypothesis: discretionary, frequency_per_year_hypothesis: 2}
 companies:
-  - company_name: "KEYENCE"
-    company_name_ja: "キーエンス"
-    stock_code: "6861"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Career websites & Securities reports"
-        source_ja: "転職情報サイト・有価証券報告書"
-        detail: "4 bonuses per year, approximately 10% of operating profit distributed to all employees. FY2024 operating profit ¥549.7B, 12,261 employees = ~¥4.5M per person annually"
-        detail_ja: "年4回の賞与、営業利益の約10%を全社員に還元。2024年度営業利益5,497億円、従業員12,261人で1人あたり年間約450万円の業績給"
-        date: "2024"
-      - source: "Salary survey sites"
-        source_ja: "年収調査サイト"
-        detail: "More than half of annual income consists of bonuses, average annual income ¥20.39M"
-        detail_ja: "年収の半分以上が賞与で構成、平均年収2,039万円"
-        date: "FY2025 ending March"
-    calculation_method: "~10% of operating profit distributed to all employees + base salary-linked bonus (roughly 6-8 months of base salary paid quarterly)"
-    calculation_method_ja: "営業利益の約10%を全社員に分配 + 基本給連動賞与（四半期支給で基本給換算6-8ヶ月相当）"
-    notes: "Japan's highest level bonus system, 50-70% of annual income from bonuses"
-    notes_ja: "日本最高水準の賞与制度、年収の50-70%が賞与"
-
-  - company_name: "Toyota Motor"
-    company_name_ja: "トヨタ自動車"
-    stock_code: "7203"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "B"
-    evidence:
-      - source: "Bloomberg reporting"
-        source_ja: "Bloomberg報道"
-        detail: "In 2024 spring negotiations, union requested 7.6 months of annual lump sum payment, 0.9 months increase from previous year"
-        detail_ja: "2024年春闘で労組が年間一時金7.6カ月分を要求、前年より0.9カ月増"
-        date: "January 2024"
-      - source: "Spring negotiation related reports"
-        source_ja: "春闘関連報道"
-        detail: "History of temporarily suspending the conventional annual lump sum response system"
-        detail_ja: "従来の年間一時金回答制度を一時停止した経緯あり"
-        date: "2019"
-    calculation_method: "Approximately 7.6 months of base salary (request basis)"
-    calculation_method_ja: "基本給の7.6カ月分程度（要求ベース）"
-    notes: "Determined by comprehensive judgment of performance and business environment"
-    notes_ja: "業績と経営環境を総合的に判断して決定"
-
-  - company_name: "Sony Group"
-    company_name_ja: "ソニーグループ"
-    stock_code: "6758"
-    bonus_method: "Hybrid"
-    bonus_method_ja: "ハイブリッド"
-    confidence_level: "A"
-    evidence:
-      - source: "Nikkei Shimbun"
-        source_ja: "日本経済新聞"
-        detail: "From January 2025, winter bonus abolished, redistributed to monthly salary and summer bonus"
-        detail_ja: "2025年1月から冬季賞与を廃止、月給と夏季賞与に振り分け"
-        date: "January 2025"
-      - source: "Securities report"
-        source_ja: "有価証券報告書"
-        detail: "Average annual income ¥11.13M, previously performance-linked bonus system"
-        detail_ja: "平均年収1,113万円、従来は業績連動型賞与制度"
-        date: "FY2024 ending March"
-    calculation_method: "Transitioning from conventional performance-linked to base salary-focused (from 2025 only a summer bonus around 1 month, winter portion folded into monthly salary)"
-    calculation_method_ja: "従来の業績連動型から基本給重視型に移行中（2025年以降は夏季に約1ヶ月支給し冬季分は月給へ移行）"
-    notes: "Major bonus system overhaul from 2025, policy against industry trend"
-    notes_ja: "2025年から賞与制度を大幅変更、業界に逆行する施策"
-
-  - company_name: "SoftBank Group"
-    company_name_ja: "ソフトバンクグループ"
-    stock_code: "9984"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Securities reports and salary survey websites"
-        source_ja: "有価証券報告書・年収調査サイト"
-        detail: "Average annual income ¥849M, bonus approximately 5 months based on investment performance, paid twice yearly in summer and winter"
-        detail_ja: "平均年収849万円、投資実績に基づき約5ヶ月の賞与、夏冬の年2回支給"
-        date: "2024"
-      - source: "Investment company industry analysis"
-        source_ja: "投資会社業界分析"
-        detail: "Performance heavily tied to portfolio companies and Vision Fund returns"
-        detail_ja: "ポートフォリオ企業とビジョンファンドの運用成績に業績が強く連動"
-        date: "2024"
-    calculation_method: "~5 months of base salary based on investment portfolio performance and individual contributions, paid twice yearly"
-    calculation_method_ja: "基本給の約5ヶ月分、投資ポートフォリオ業績と個人貢献度連動、年2回支給"
-    notes: "High volatility due to investment company nature, significant upside potential during good performance years"
-    notes_ja: "投資会社特性により変動性が高い、好業績年の大幅上振れ可能性"
-
-  - company_name: "UFJ Financial Group"
-    company_name_ja: "三菱UFJフィナンシャル・グループ"
-    stock_code: "8306"
-    bonus_method: "Hybrid"
-    bonus_method_ja: "ハイブリッド"
-    confidence_level: "B"
-    evidence:
-      - source: "Financial industry reports"
-        source_ja: "金融業界レポート"
-        detail: "Combination of performance-linked and base salary-linked components; 2024 spring wage settlement granted roughly 5 months of base salary split between summer and winter bonuses"
-        detail_ja: "業績連動と基本給連動の組み合わせ。2024年春闘では夏冬合計で基本給約5ヶ月分"
-        date: "2024"
-    calculation_method: "Performance + base salary components; typical settlement about 5 months across two seasonal bonuses paid twice yearly (summer/winter)"
-    calculation_method_ja: "業績連動＋基本給連動。慣行として夏冬の年2回で合計5ヶ月程度"
-    notes: "Typical megabank bonus structure with limited volatility"
-    notes_ja: "メガバンク典型的な賞与構造で変動は限定的"
-
-  - company_name: "Takeda"
-    company_name_ja: "武田薬品工業"
-    stock_code: "4502"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "B"
-    evidence:
-      - source: "Pharmaceutical industry analysis"
-        source_ja: "製薬業界分析"
-        detail: "Considers R&D performance and global market results; twice-yearly bonuses typically total 5-6 months of base salary"
-        detail_ja: "研究開発成果と海外市場実績を考慮。年2回で基本給5〜6ヶ月が慣行"
-        date: "2024"
-    calculation_method: "R&D results + global performance evaluation; summer and winter payouts totaling roughly 5-6 months"
-    calculation_method_ja: "研究開発成果＋グローバル業績評価。夏冬で計5〜6ヶ月"
-    notes: "Global pharmaceutical company evaluation method with stable 5-6 month cycle"
-    notes_ja: "グローバル製薬企業の評価手法で安定した5〜6ヶ月サイクル"
-
-  - company_name: "Fast Retailing"
-    company_name_ja: "ファーストリテイリング"
-    stock_code: "9983"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Company announcements"
-        source_ja: "企業発表"
-        detail: "Strong correlation with store and company performance; semiannual bonuses around 2-3 months each plus a fiscal-year bonus"
-        detail_ja: "店舗業績と会社業績との強い連動性。半期ごとに2〜3ヶ月、決算賞与も支給"
-        date: "2024"
-    calculation_method: "Store performance + overall company results; two seasonal bonuses (~2-3 months each) paid twice yearly plus an additional fiscal-year bonus (total ~6-7 months)"
-    calculation_method_ja: "店舗業績＋全社業績。半期2〜3ヶ月を年2回支給し決算賞与を加えて年間6〜7ヶ月"
-    notes: "Retail industry performance-driven model with high upside during growth phases"
-    notes_ja: "小売業界の業績連動型モデルで成長局面では上振れ"
-
-  - company_name: "Shin-Etsu Chemical"
-    company_name_ja: "信越化学工業"
-    stock_code: "4063"
-    bonus_method: "Base salary-linked"
-    bonus_method_ja: "基本給連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Employee review sites & company reports"
-        source_ja: "従業員口コミサイト・企業レポート"
-        detail: "Stable twice-yearly bonus (June/December) of 5.5-6 months salary, not performance-linked but consistently paid in full"
-        detail_ja: "年2回（6月・12月）安定的な賞与支給、5.5-6ヶ月分、業績連動ではなく満額支給"
-        date: "2024"
-      - source: "Salary survey data"
-        source_ja: "給与調査データ"
-        detail: "Average annual income 876 million yen (age 41.3), stable bonus system without performance volatility"
-        detail_ja: "平均年収876万円（41.3歳）、業績による変動のない安定的賞与制度"
-        date: "FY2025 ending March"
-    calculation_method: "Fixed multiple of base salary (5.5-6 months) with seniority-based adjustments"
-    calculation_method_ja: "基本給の固定倍数（5.5-6ヶ月分）＋年功序列調整"
-    notes: "Stable chemical industry model, not performance-linked but consistently high payments"
-    notes_ja: "安定的化学業界モデル、業績非連動だが継続的高額支給"
-
-  - company_name: "Tokyo Electron"
-    company_name_ja: "東京エレクトロン"
-    stock_code: "8035"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Semiconductor industry analysis"
-        source_ja: "半導体業界分析"
-        detail: "Highly correlated with semiconductor market cycles; summer/winter bonuses typically total 5-7 months depending on demand swings"
-        detail_ja: "半導体市場サイクルとの高い連動性。需要動向により夏冬合計5〜7ヶ月"
-        date: "2024"
-    calculation_method: "Semiconductor market performance + company results; twice-yearly bonuses totaling roughly 5-7 months"
-    calculation_method_ja: "半導体市場業績＋会社業績。年2回で5〜7ヶ月"
-    notes: "High volatility due to market sensitivity (bonus months expand/contract with the cycle)"
-    notes_ja: "市場感応度が高く、ボーナス月数がサイクルで変動"
-
-  - company_name: "KDDI"
-    company_name_ja: "KDDI"
-    stock_code: "9433"
-    bonus_method: "Base salary-linked"
-    bonus_method_ja: "基本給連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and wage increase announcements"
-        source_ja: "2024年有価証券報告書・賃上げ発表"
-        detail: "Average annual income ¥987M, bonus approximately 5 months paid twice yearly in June and December, special bonus for high performers"
-        detail_ja: "平均年収987万円、6月・12月年2回約5ヶ月の賞与支給、高評価者特別賞与あり"
-        date: "2024"
-      - source: "Telecommunications industry stable compensation analysis"
-        source_ja: "通信業界安定報酬分析"
-        detail: "Base salary-linked bonus system with annual 6% wage increase, additional special bonuses for performance excellence"
-        detail_ja: "基本給連動賞与制度、年6%賃上げ、成果優秀者向け特別賞与追加"
-        date: "2024"
-    calculation_method: "5 months of base salary paid twice yearly (June/December), plus special performance bonuses for high achievers"
-    calculation_method_ja: "基本給の5ヶ月分を年2回支給（6月・12月）、高評価者向け特別賞与追加"
-    notes: "Stable telecommunications industry model with performance-based special bonuses, consistent wage increases"
-    notes_ja: "安定的通信業界モデル、成果連動特別賞与、継続的賃上げ実施"
-
-  - company_name: "NTT"
-    company_name_ja: "日本電信電話"
-    stock_code: "9432"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and employee evaluation systems"
-        source_ja: "2024年有価証券報告書・人事評価制度"
-        detail: "Average annual income ¥799M, bonus 4 months + α paid twice yearly in June and December, semi-annual goal achievement evaluation"
-        detail_ja: "平均年収799万円、年4ヶ月+αの賞与を6月・12月年2回支給、半期目標達成度評価"
-        date: "2024"
-      - source: "Telecommunications industry comprehensive analysis"
-        source_ja: "通信業界総合分析"
-        detail: "5-stage evaluation system based on goal achievement and performance, bonus varies by individual and organizational results"
-        detail_ja: "目標達成度と成果の5段階評価制度、個人・組織成果により賞与変動"
-        date: "2024"
-    calculation_method: "4 months + α of base salary based on semi-annual goal achievement evaluation and organizational performance, paid twice yearly"
-    calculation_method_ja: "基本給の4ヶ月+α、半期目標達成度評価と組織業績連動、年2回支給"
-    notes: "Large telecommunications corporation with comprehensive evaluation system, stable base with performance variations"
-    notes_ja: "大手通信企業の総合評価システム、安定基盤に成果変動要素"
-
-  - company_name: "Recruit Holdings"
-    company_name_ja: "リクルートホールディングス"
-    stock_code: "6098"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "HR industry analysis"
-        source_ja: "人材業界分析"
-        detail: "Strong link to business segment performance; semiannual bonuses around 2-2.5 months each (total 4-5 months)"
-        detail_ja: "事業セグメント業績との強い連動。半期ごとに2〜2.5ヶ月で年間4〜5ヶ月"
-        date: "2024"
-    calculation_method: "Business unit performance-based; roughly 4-5 months spread across two seasonal bonuses"
-    calculation_method_ja: "事業部門業績連動型。年2回で4〜5ヶ月"
-    notes: "HR services performance model with moderate variability"
-    notes_ja: "人材サービス業績モデルで変動は中程度"
-
-  - company_name: "Daikin Industries"
-    company_name_ja: "ダイキン工業"
-    stock_code: "6367"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Manufacturing industry reports"
-        source_ja: "製造業界レポート"
-        detail: "Global HVAC market performance correlation; union settlements place annual bonuses around 4-6 months split between summer and winter"
-        detail_ja: "グローバル空調市場業績との相関。組合妥結では夏冬で計4〜6ヶ月"
-        date: "2024"
-    calculation_method: "Global market performance + efficiency metrics; twice-yearly bonuses totaling roughly 4-6 months"
-    calculation_method_ja: "グローバル市場業績＋効率指標。年2回で計4〜6ヶ月"
-    notes: "Global manufacturing performance model with cyclical swings"
-    notes_ja: "グローバル製造業績モデルで景気循環の影響あり"
-
-  - company_name: "Advantest"
-    company_name_ja: "アドバンテスト"
-    stock_code: "6857"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Employee review sites & industry reports"
-        source_ja: "従業員口コミサイト・業界レポート"
-        detail: "Twice-yearly bonuses (June/December) of 4-5 months base salary, fully performance-linked. In profitable years up to 6 months additional, in loss years only 2 months total"
-        detail_ja: "年2回（6月・12月）4-5ヶ月分賞与、完全業績連動。黒字時は最大6ヶ月追加、赤字時は通年2ヶ月のみ"
-        date: "2024"
-      - source: "Semiconductor industry analysis"
-        source_ja: "半導体業界分析"
-        detail: "Average annual income 1,049 million yen, highly volatile due to silicon cycle, AI demand boosting 2024 performance"
-        detail_ja: "平均年収1,049万円、シリコンサイクルにより変動激しい、AI需要で2024年業績向上"
-        date: "FY2025 ending March"
-    calculation_method: "Base 4-5 months + performance multiplier (0.5x to 1.5x) based on semiconductor market cycles"
-    calculation_method_ja: "基本4-5ヶ月分＋業績倍率（0.5倍〜1.5倍）半導体市場サイクル連動"
-    notes: "High volatility semiconductor test equipment performance model, strongly tied to AI and memory demand"
-    notes_ja: "高変動半導体テスト装置業績モデル、AI・メモリ需要と強い連動"
-
-  - company_name: "Murata Manufacturing"
-    company_name_ja: "村田製作所"
-    stock_code: "6981"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Electronic components industry"
-        source_ja: "電子部品業界"
-        detail: "Smartphone and automotive electronics demand correlation; twice-yearly bonuses usually total 5-6 months"
-        detail_ja: "スマートフォン・車載電子機器需要との相関。年2回で計5〜6ヶ月が慣行"
-        date: "2024"
-    calculation_method: "Market demand + operational efficiency; semiannual bonuses totaling roughly 5-6 months"
-    calculation_method_ja: "市場需要＋運営効率性。年2回で5〜6ヶ月"
-    notes: "Electronics components market sensitivity with moderate volatility"
-    notes_ja: "電子部品市場感応性で変動は中程度"
-
-  - company_name: "Fanuc"
-    company_name_ja: "ファナック"
-    stock_code: "6954"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Employee review sites & company reports"
-        source_ja: "従業員口コミサイト・企業レポート"
-        detail: "Twice-yearly bonuses (June/December) ranging 4-12 months base salary based on performance. Recent stable performance yields ~1M yen minimum, top performers reach 4M yen"
-        detail_ja: "年2回（6月・12月）業績により4-12ヶ月分変動。近年安定業績で最低約100万円、優秀者は400万円"
-        date: "2024"
-      - source: "FA industry & securities reports"
-        source_ja: "FA業界・有価証券報告書"
-        detail: "Average annual income 1,238 million yen, world #1 in industrial robots and CNC machine tools, US market expansion driving growth"
-        detail_ja: "平均年収1,238万円、産業用ロボット・工作機械世界シェア1位、米国市場拡大が成長牽引"
-        date: "FY2024 ending March"
-    calculation_method: "Base 4 months + performance multiplier (1x to 3x) based on global FA automation demand and individual results"
-    calculation_method_ja: "基本4ヶ月分＋業績倍率（1倍〜3倍）グローバルFA自動化需要と個人成果連動"
-    notes: "World-leading FA automation performance model, benefiting from US manufacturing reshoring and labor cost increases"
-    notes_ja: "世界最高FA自動化業績モデル、米国製造業回帰・人件費上昇の恩恵"
-
-  - company_name: "SMC"
-    company_name_ja: "SMC"
-    stock_code: "6273"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Corporate earnings reports and employee websites"
-        source_ja: "決算資料・従業員口コミサイト"
-        detail: "Average annual income ¥865M, bonus 2-10 months depending on performance, typically 2 payments per year"
-        detail_ja: "平均年収865万円、業績により2-10ヶ月の賞与、年2回支給が一般的"
-        date: "2024"
-      - source: "Factory automation industry analysis"
-        source_ja: "ファクトリーオートメーション業界分析"
-        detail: "Leading pneumatic components manufacturer with global automation demand driving performance"
-        detail_ja: "空気圧機器リーディングメーカー、世界の自動化需要が業績を牽引"
-        date: "2024"
-    calculation_method: "2-10 months of base salary based on company and individual performance, paid twice yearly"
-    calculation_method_ja: "基本給の2-10ヶ月分、会社・個人業績連動、年2回支給"
-    notes: "World's largest pneumatic components company, benefits from global automation trends"
-    notes_ja: "世界最大の空気圧機器メーカー、世界の自動化トレンドの恩恵"
-
-  - company_name: "Disco"
-    company_name_ja: "ディスコ"
-    stock_code: "6146"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Employee review sites & company reports"
-        source_ja: "従業員口コミサイト・企業レポート"
-        detail: "Quarterly bonuses (March/June/September/December) totaling 9-12 months base salary, 40% linked to WILL internal currency system"
-        detail_ja: "年4回賞与（3/6/9/12月）計9-12ヶ月分、40%がWILL社内通貨制度連動"
-        date: "2024"
-      - source: "Nikkei winter bonus survey & securities reports"
-        source_ja: "日経冬季賞与調査・有価証券報告書"
-        detail: "Average annual income 1,672 million yen (age 37.3), topped 2024 winter bonus survey at 3.536 million yen per employee"
-        detail_ja: "平均年収1,672万円（37.3歳）、2024年冬季賞与調査1位で従業員1人あたり353.6万円"
-        date: "FY2025 ending March"
-    calculation_method: "Base 9-12 months + WILL currency performance (40% of bonus) + departmental results + individual evaluation"
-    calculation_method_ja: "基本9-12ヶ月分＋WILL通貨業績（賞与40%）＋部門業績＋個人評価"
-    notes: "Innovative internal market system (WILL currency) combined with traditional performance metrics, leading semiconductor equipment compensation"
-    notes_ja: "革新的社内市場制度（WILL通貨）と従来業績指標の組合せ、半導体装置業界最高水準報酬"
-
-  - company_name: "Hoya"
-    company_name_ja: "HOYA"
-    stock_code: "7741"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Optical components industry"
-        source_ja: "光学部品業界"
-        detail: "Medical and optical technology market correlation; summer/winter bonuses around 2-2.5 months each (total 4-5 months)"
-        detail_ja: "医療・光学技術市場との相関。夏冬に2〜2.5ヶ月ずつで年間4〜5ヶ月"
-        date: "2024"
-    calculation_method: "Technology market performance; semiannual bonuses totaling roughly 4-5 months"
-    calculation_method_ja: "技術市場業績。年2回で4〜5ヶ月"
-    notes: "Specialized optical technology focus with moderate variability"
-    notes_ja: "特殊光学技術特化で変動は中程度"
-
-  - company_name: "Nomura Research Institute"
-    company_name_ja: "野村総合研究所"
-    stock_code: "4307"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and employee compensation analysis"
-        source_ja: "2024年有価証券報告書・従業員報酬分析"
-        detail: "Average annual income ¥1,322M, bonus 3-4 months of monthly salary paid twice yearly, performance-based evaluation with significant bonus ratio"
-        detail_ja: "平均年収1,322万円、月給の3-4倍の賞与を年2回支給、成果連動評価で賞与比率が高い"
-        date: "2024"
-      - source: "IT consulting industry comprehensive analysis and compensation reform"
-        source_ja: "ITコンサルティング業界総合分析・報酬制度改革"
-        detail: "2024 salary system reform reducing bonus ratio in favor of monthly salary, performance differences of 50-100万円+ by position level"
-        detail_ja: "2024年給与制度改革で賞与比率削減し月給重視、職位により50-100万円以上の成果格差"
-        date: "2024"
-    calculation_method: "3-4 months of monthly salary as bonus paid twice yearly, with significant performance-based variations by role and evaluation"
-    calculation_method_ja: "月給の3-4倍を年2回賞与支給、役職・評価により大幅な成果格差"
-    notes: "Top-tier IT consulting firm with high bonus dependency, 2024 system reform increasing monthly salary ratio"
-    notes_ja: "最高クラスITコンサル企業、賞与依存型から2024年制度改革で月給比率向上"
-
-  - company_name: "Olympus"
-    company_name_ja: "オリンパス"
-    stock_code: "7733"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and medical device industry analysis"
-        source_ja: "2024年有価証券報告書・医療機器業界分析"
-        detail: "Average annual income ¥1,041M, bonus 6 months of salary paid twice yearly in July and December, grade-based evaluation system G12-G1"
-        detail_ja: "平均年収1,041万円、7月・12月年2回6ヶ月の賞与支給、G12-G1グレード制評価システム"
-        date: "2024"
-      - source: "Medical equipment manufacturing comprehensive compensation analysis"
-        source_ja: "医療機器製造業総合報酬分析"
-        detail: "High bonus ratio characteristic, goal management system with semi-annual achievement evaluation, potential to reach 10M yen at section chief level"
-        detail_ja: "高賞与比率が特徴、半期目標達成度評価の目標管理制度、係長クラスで1000万円到達可能性"
-        date: "2024"
-    calculation_method: "6 months of base salary as bonus paid twice yearly (July/December), with performance and grade-based variations"
-    calculation_method_ja: "基本給の6ヶ月分を年2回賞与支給（7月・12月）、成果・グレード連動変動"
-    notes: "Leading medical device manufacturer with high bonus dependency, comprehensive grade-based evaluation system"
-    notes_ja: "医療機器製造業界リーダー、高賞与依存型、総合的グレード制評価システム"
-
-  - company_name: "Terumo"
-    company_name_ja: "テルモ"
-    stock_code: "4543"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "B"
-    evidence:
-      - source: "Corporate IR reports and salary benchmarking sites"
-        source_ja: "企業IR資料・給与ベンチマークサイト"
-        detail: "Average annual income ¥778M, bonus 5.8 months based on healthcare market performance and individual evaluation, paid twice yearly"
-        detail_ja: "平均年収778万円、ヘルスケア市場業績と個人評価に基づき5.8ヶ月の賞与、年2回支給"
-        date: "2024"
-      - source: "Medical device industry comprehensive analysis"
-        source_ja: "医療機器業界総合分析"
-        detail: "Stable medical device demand with growth potential in aging society, regulatory compliance and R&D success factors"
-        detail_ja: "高齢化社会での安定的医療機器需要と成長可能性、規制適合と研究開発成功が要因"
-        date: "2024"
-    calculation_method: "5.8 months of base salary based on healthcare market performance, R&D success, and individual contributions, paid twice yearly"
-    calculation_method_ja: "基本給の5.8ヶ月分、ヘルスケア市場業績・研究開発成功・個人貢献度連動、年2回支給"
-    notes: "Stable medical device company with consistent bonus payments, benefits from aging society trends"
-    notes_ja: "安定的医療機器企業、継続的賞与支給、高齢化社会トレンドの恩恵"
-
-  - company_name: "JR East"
-    company_name_ja: "JR東日本"
-    stock_code: "9020"
-    bonus_method: "Base salary-linked"
-    bonus_method_ja: "基本給連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Railway industry reports"
-        source_ja: "鉄道業界レポート"
-        detail: "Stable transportation industry bonus structure; 2024 union agreement awarded roughly 4.5 months across summer and winter"
-        detail_ja: "安定的な運輸業界賞与構造。2024年妥結では夏冬合計約4.5ヶ月"
-        date: "2024"
-    calculation_method: "Fixed multiple of base salary with safety metrics; twice-yearly bonuses totaling about 4.5 months"
-    calculation_method_ja: "基本給固定倍数＋安全指標。年2回で計4.5ヶ月程度"
-    notes: "Public transportation stability focus with low volatility"
-    notes_ja: "公共交通安定性重視で変動は小さい"
-
-  - company_name: "JR Central"
-    company_name_ja: "JR東海"
-    stock_code: "9022"
-    bonus_method: "Base salary-linked"
-    bonus_method_ja: "基本給連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and transportation industry compensation analysis"
-        source_ja: "2024年有価証券報告書・運輸業界報酬分析"
-        detail: "Average annual income ¥760M, bonus approximately 3 months of salary paid twice yearly in June and December, seniority-based advancement system"
-        detail_ja: "平均年収760万円、6月・12月年2回約3ヶ月の賞与支給、年功序列昇進制度"
-        date: "2024"
-      - source: "Railway industry infrastructure operations analysis"
-        source_ja: "鉄道業界インフラ運営分析"
-        detail: "High profitability from Tokaido Shinkansen operations, stable compensation system with March 2024 salary increases"
-        detail_ja: "東海道新幹線運営の高収益性、2024年3月賃上げを含む安定報酬制度"
-        date: "2024"
-    calculation_method: "3 months of base salary as bonus paid twice yearly (June/December), with infrastructure project considerations"
-    calculation_method_ja: "基本給の3ヶ月分を年2回賞与支給（6月・12月）、インフラプロジェクト考慮"
-    notes: "Major railway operator with stable base salary-linked system, benefiting from highly profitable Shinkansen operations"
-    notes_ja: "大手鉄道事業者、安定的基本給連動制度、高収益新幹線事業の恩恵"
-
-  - company_name: "ANA Holdings"
-    company_name_ja: "ANAホールディングス"
-    stock_code: "9202"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and employee review sites"
-        source_ja: "2024年有価証券報告書・従業員口コミサイト"
-        detail: "Average annual income ¥730M, bonus typically 4 months (2.0 months + performance bonus when targets met), paid twice yearly in summer and winter"
-        detail_ja: "平均年収730万円、通常4ヶ月の賞与（目標達成時2.0ヶ月+α）、夏冬の年2回支給"
-        date: "2024"
-      - source: "Post-pandemic aviation industry recovery analysis"
-        source_ja: "パンデミック後航空業界回復分析"
-        detail: "Travel demand recovery driving bonus restoration after COVID-19 bonus cuts, performance-based system with group performance incentives"
-        detail_ja: "旅行需要回復によりコロナ後の賞与復活、グループ業績一時金を含む業績連動制度"
-        date: "2024"
-    calculation_method: "4 months of base salary based on group performance targets achievement and individual evaluation, paid twice yearly"
-    calculation_method_ja: "基本給の4ヶ月分、グループ業績目標達成と個人評価連動、年2回支給"
-    notes: "Post-pandemic recovery focus, bonus-dependent compensation structure with performance volatility"
-    notes_ja: "パンデミック後回復重視、業績変動性のある賞与依存型報酬構造"
-
-  - company_name: "Japan Airlines"
-    company_name_ja: "日本航空"
-    stock_code: "9201"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "C"
-    evidence:
-      - source: "Airline industry analysis"
-        source_ja: "航空業界分析"
-        detail: "International travel recovery and fuel efficiency; 2024 labor talks restored bonuses to roughly 3 months split summer/winter"
-        detail_ja: "国際旅行回復と燃料効率性。2024年の労使交渉で夏冬合計約3ヶ月に回復"
-        date: "2024"
-    calculation_method: "Route performance + efficiency metrics; twice-yearly bonuses totaling about 3 months"
-    calculation_method_ja: "路線業績＋効率指標。年2回で3ヶ月程度"
-    notes: "International route recovery emphasis with higher volatility than ANA"
-    notes_ja: "国際路線回復重視でANAより変動幅が大きい"
-
-  - company_name: "Daiwa Securities Group"
-    company_name_ja: "大和証券グループ本社"
-    stock_code: "8601"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "C"
-    evidence:
-      - source: "Securities industry reports"
-        source_ja: "証券業界レポート"
-        detail: "Market performance and client asset growth; bonus pools typically translate to 4-6 months depending on market conditions"
-        detail_ja: "市場業績と顧客資産成長。市況によりボーナスプールは年4〜6ヶ月規模"
-        date: "2024"
-    calculation_method: "Market performance + client asset metrics; twice-yearly payouts with discretionary adjustments (~4-6 months)"
-    calculation_method_ja: "市場業績＋顧客資産指標。年2回支給に裁量調整を加え計4〜6ヶ月"
-    notes: "Financial services market sensitivity with meaningful cyclicality"
-    notes_ja: "金融サービス市場感応性が高く景気循環の影響大"
-
-  - company_name: "Nomura Holdings"
-    company_name_ja: "野村ホールディングス"
-    stock_code: "8604"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "B"
-    evidence:
-      - source: "Investment banking analysis"
-        source_ja: "投資銀行分析"
-        detail: "Trading and investment banking performance correlation; discretionary pool often equals 6-8 months for core staff"
-        detail_ja: "トレーディング・投資銀行業績との相関。コア人材の裁量ボーナスは6〜8ヶ月規模"
-        date: "2024"
-    calculation_method: "Trading profits + investment banking fees; discretionary bonus pool typically 6-8 months paid annually at fiscal year-end"
-    calculation_method_ja: "トレーディング利益＋投資銀行手数料。裁量ボーナスは期末に年1回6〜8ヶ月規模"
-    notes: "Investment banking performance model with high upside/downside"
-    notes_ja: "投資銀行業績モデルで変動幅が大きい"
-
-  - company_name: "Hitachi"
-    company_name_ja: "日立製作所"
-    stock_code: "6501"
-    bonus_method: "Performance-linked"
-    bonus_method_ja: "業績連動"
-    confidence_level: "A"
-    evidence:
-      - source: "Conglomerate industry analysis"
-        source_ja: "総合電機業界分析"
-        detail: "Diversified technology business performance"
-        detail_ja: "多様化技術事業業績"
-        date: "2024"
-    calculation_method: "Business unit performance + technology innovation"
-    calculation_method_ja: "事業部門業績＋技術革新"
-    notes: "Diversified technology conglomerate model"
-    notes_ja: "多様化技術総合企業モデル"
-
-  - company_name: "Mitsubishi Electric"
-    company_name_ja: "三菱電機"
-    stock_code: "6503"
-    bonus_method: "Comprehensive judgment"
-    bonus_method_ja: "総合判断"
-    confidence_level: "A"
-    evidence:
-      - source: "Securities reports 2024 and compensation system reforms"
-        source_ja: "2024年有価証券報告書・報酬制度改革"
-        detail: "Average annual income ¥829M, bonus 5-6 months paid twice yearly, individual evaluation system reformed in March 2024 after 20 years"
-        detail_ja: "平均年収829万円、年2回5-6ヶ月の賞与支給、2024年3月に20年ぶりの個人評価制度改革"
-        date: "2024"
-      - source: "Job-based employment system introduction analysis"
-        source_ja: "ジョブ型雇用制度導入分析"
-        detail: "Comprehensive evaluation based on individual performance only, department performance bonus abolished, job-based evaluation for 6000 employees"
-        detail_ja: "個人総合評価のみでの賞与決定、部門業績加算廃止、6000人対象のジョブ型評価"
-        date: "2024"
-    calculation_method: "5-6 months of base salary based purely on individual comprehensive evaluation, paid twice yearly after 2024 reform"
-    calculation_method_ja: "基本給の5-6ヶ月分、2024年改革後は個人総合評価のみ連動、年2回支給"
-    notes: "Major compensation system overhaul in 2024, shift from department performance to individual evaluation focus"
-    notes_ja: "2024年大幅報酬制度改革、部門業績から個人評価重視へのシフト"
+- ['4151', 協和キリン, 医薬品]
+- ['4502', 武田薬品工業, 医薬品]
+- ['4503', アステラス製薬, 医薬品]
+- ['4506', 住友ファーマ, 医薬品]
+- ['4507', 塩野義製薬, 医薬品]
+- ['4519', 中外製薬, 医薬品]
+- ['4523', エーザイ, 医薬品]
+- ['4568', 第一三共, 医薬品]
+- ['4578', 大塚ホールディングス, 医薬品]
+- [285A, キオクシアホールディングス, 電気機器]
+- ['4062', イビデン, 電気機器]
+- ['6479', ミネベアミツミ, 電気機器]
+- ['6501', 日立製作所, 電気機器]
+- ['6503', 三菱電機, 電気機器]
+- ['6504', 富士電機, 電気機器]
+- ['6506', 安川電機, 電気機器]
+- ['6526', ソシオネクスト, 電気機器]
+- ['6645', オムロン, 電気機器]
+- ['6701', 日本電気, 電気機器]
+- ['6702', 富士通, 電気機器]
+- ['6723', ルネサスエレクトロニクス, 電気機器]
+- ['6724', セイコーエプソン, 電気機器]
+- ['6752', パナソニック ホールディングス, 電気機器]
+- ['6753', シャープ, 電気機器]
+- ['6758', ソニーグループ, 電気機器]
+- ['6762', TDK, 電気機器]
+- ['6770', アルプスアルパイン, 電気機器]
+- ['6841', 横河電機, 電気機器]
+- ['6857', アドバンテスト, 電気機器]
+- ['6861', キーエンス, 電気機器]
+- ['6902', デンソー, 電気機器]
+- ['6920', レーザーテック, 電気機器]
+- ['6954', ファナック, 電気機器]
+- ['6963', ローム, 電気機器]
+- ['6971', 京セラ, 電気機器]
+- ['6976', 太陽誘電, 電気機器]
+- ['6981', 村田製作所, 電気機器]
+- ['7735', SCREENホールディングス, 電気機器]
+- ['7751', キヤノン, 電気機器]
+- ['7752', リコー, 電気機器]
+- ['8035', 東京エレクトロン, 電気機器]
+- [543A, ARCHION, 自動車]
+- ['7201', 日産自動車, 自動車]
+- ['7202', いすゞ自動車, 自動車]
+- ['7203', トヨタ自動車, 自動車]
+- ['7211', 三菱自動車工業, 自動車]
+- ['7261', マツダ, 自動車]
+- ['7267', 本田技研工業, 自動車]
+- ['7269', スズキ, 自動車]
+- ['7270', SUBARU, 自動車]
+- ['7272', ヤマハ発動機, 自動車]
+- ['4543', テルモ, 精密機器]
+- ['4902', コニカミノルタ, 精密機器]
+- ['6146', ディスコ, 精密機器]
+- ['7731', ニコン, 精密機器]
+- ['7733', オリンパス, 精密機器]
+- ['7741', HOYA, 精密機器]
+- ['9432', NTT, 通信]
+- ['9433', KDDI, 通信]
+- ['9434', ソフトバンク, 通信]
+- ['9984', ソフトバンクグループ, 通信]
+- ['5831', しずおかフィナンシャルグループ, 銀行]
+- ['7186', 横浜フィナンシャルグループ, 銀行]
+- ['8304', あおぞら銀行, 銀行]
+- ['8306', 三菱UFJフィナンシャル・グループ, 銀行]
+- ['8308', りそなホールディングス, 銀行]
+- ['8309', 三井住友トラストグループ, 銀行]
+- ['8316', 三井住友フィナンシャルグループ, 銀行]
+- ['8331', 千葉銀行, 銀行]
+- ['8354', ふくおかフィナンシャルグループ, 銀行]
+- ['8411', みずほフィナンシャルグループ, 銀行]
+- ['8253', クレディセゾン, その他金融]
+- ['8591', オリックス, その他金融]
+- ['8697', 日本取引所グループ, その他金融]
+- ['8601', 大和証券グループ本社, 証券]
+- ['8604', 野村ホールディングス, 証券]
+- ['8630', SOMPOホールディングス, 保険]
+- ['8725', MS&ADインシュアランスグループホールディングス, 保険]
+- ['8750', 第一ライフグループ, 保険]
+- ['8766', 東京海上ホールディングス, 保険]
+- ['8795', T&Dホールディングス, 保険]
+- ['1332', ニッスイ, 水産]
+- ['2002', 日清製粉グループ本社, 食品]
+- ['2269', 明治ホールディングス, 食品]
+- ['2282', 日本ハム, 食品]
+- ['2501', サッポロビール, 食品]
+- ['2502', アサヒグループホールディングス, 食品]
+- ['2503', キリンホールディングス, 食品]
+- ['2801', キッコーマン, 食品]
+- ['2802', 味の素, 食品]
+- ['2871', ニチレイ, 食品]
+- ['2914', 日本たばこ産業, 食品]
+- ['3086', J.フロント リテイリング, 小売業]
+- ['3092', ZOZO, 小売業]
+- ['3099', 三越伊勢丹ホールディングス, 小売業]
+- ['3382', セブン&アイ・ホールディングス, 小売業]
+- ['7453', 良品計画, 小売業]
+- ['7532', パン・パシフィック・インターナショナルホールディングス, 小売業]
+- ['8233', 高島屋, 小売業]
+- ['8252', 丸井グループ, 小売業]
+- ['8267', イオン, 小売業]
+- ['9843', ニトリホールディングス, 小売業]
+- ['9983', ファーストリテイリング, 小売業]
+- ['2413', エムスリー, サービス]
+- ['2432', ディー・エヌ・エー, サービス]
+- ['3659', ネクソン, サービス]
+- ['3697', SHIFT, サービス]
+- ['4307', 野村総合研究所, サービス]
+- ['4324', 電通グループ, サービス]
+- ['4385', メルカリ, サービス]
+- ['4661', オリエンタルランド, サービス]
+- ['4689', LINEヤフー, サービス]
+- ['4704', トレンドマイクロ, サービス]
+- ['4751', サイバーエージェント, サービス]
+- ['4755', 楽天グループ, サービス]
+- ['6098', リクルートホールディングス, サービス]
+- ['6178', 日本郵政, サービス]
+- ['6532', ベイカレント, サービス]
+- ['7974', 任天堂, サービス]
+- ['9602', 東宝, サービス]
+- ['9735', セコム, サービス]
+- ['9766', コナミグループ, サービス]
+- ['1605', INPEX, 鉱業]
+- ['3401', 帝人, 繊維]
+- ['3402', 東レ, 繊維]
+- ['3861', 王子ホールディングス, パルプ・紙]
+- ['3405', クラレ, 化学]
+- ['3407', 旭化成, 化学]
+- ['4004', レゾナック・ホールディングス, 化学]
+- ['4005', 住友化学, 化学]
+- ['4021', 日産化学, 化学]
+- ['4042', 東ソー, 化学]
+- ['4043', トクヤマ, 化学]
+- ['4061', デンカ, 化学]
+- ['4063', 信越化学工業, 化学]
+- ['4183', 三井化学, 化学]
+- ['4188', 三菱ケミカルグループ, 化学]
+- ['4208', UBE, 化学]
+- ['4452', 花王, 化学]
+- ['4901', 富士フイルムホールディングス, 化学]
+- ['4911', 資生堂, 化学]
+- ['6988', 日東電工, 化学]
+- ['5019', 出光興産, 石油]
+- ['5020', ENEOSホールディングス, 石油]
+- ['5101', 横浜ゴム, ゴム]
+- ['5108', ブリヂストン, ゴム]
+- ['5201', AGC, 窯業]
+- ['5214', 日本電気硝子, 窯業]
+- ['5233', 太平洋セメント, 窯業]
+- ['5301', 東海カーボン, 窯業]
+- ['5332', TOTO, 窯業]
+- ['5333', NGK, 窯業]
+- ['5401', 日本製鉄, 鉄鋼]
+- ['5406', 神戸製鋼所, 鉄鋼]
+- ['5411', JFEホールディングス, 鉄鋼]
+- ['3436', SUMCO, 非鉄・金属]
+- ['5706', 三井金属, 非鉄・金属]
+- ['5711', 三菱マテリアル, 非鉄・金属]
+- ['5713', 住友金属鉱山, 非鉄・金属]
+- ['5714', DOWAホールディングス, 非鉄・金属]
+- ['5801', 古河電気工業, 非鉄・金属]
+- ['5802', 住友電気工業, 非鉄・金属]
+- ['5803', フジクラ, 非鉄・金属]
+- ['2768', 双日, 商社]
+- ['8001', 伊藤忠商事, 商社]
+- ['8002', 丸紅, 商社]
+- ['8015', 豊田通商, 商社]
+- ['8031', 三井物産, 商社]
+- ['8053', 住友商事, 商社]
+- ['8058', 三菱商事, 商社]
+- ['1721', コムシスホールディングス, 建設]
+- ['1801', 大成建設, 建設]
+- ['1802', 大林組, 建設]
+- ['1803', 清水建設, 建設]
+- ['1808', 長谷工コーポレーション, 建設]
+- ['1812', 鹿島建設, 建設]
+- ['1925', 大和ハウス工業, 建設]
+- ['1928', 積水ハウス, 建設]
+- ['1963', 日揮ホールディングス, 建設]
+- ['5631', 日本製鋼所, 機械]
+- ['6103', オークマ, 機械]
+- ['6113', アマダ, 機械]
+- ['6273', SMC, 機械]
+- ['6301', 小松製作所, 機械]
+- ['6302', 住友重機械工業, 機械]
+- ['6305', 日立建機, 機械]
+- ['6326', クボタ, 機械]
+- ['6361', 荏原製作所, 機械]
+- ['6367', ダイキン工業, 機械]
+- ['6471', 日本精工, 機械]
+- ['6472', NTN, 機械]
+- ['6473', ジェイテクト, 機械]
+- ['7004', カナデビア, 機械]
+- ['7011', 三菱重工業, 機械]
+- ['7013', IHI, 機械]
+- ['7012', 川崎重工業, 造船]
+- ['7832', バンダイナムコホールディングス, その他製造]
+- ['7911', TOPPANホールディングス, その他製造]
+- ['7912', 大日本印刷, その他製造]
+- ['7951', ヤマハ, その他製造]
+- ['3289', 東急不動産ホールディングス, 不動産]
+- ['8801', 三井不動産, 不動産]
+- ['8802', 三菱地所, 不動産]
+- ['8804', 東京建物, 不動産]
+- ['8830', 住友不動産, 不動産]
+- ['9001', 東武鉄道, 鉄道・バス]
+- ['9005', 東急, 鉄道・バス]
+- ['9007', 小田急電鉄, 鉄道・バス]
+- ['9008', 京王電鉄, 鉄道・バス]
+- ['9009', 京成電鉄, 鉄道・バス]
+- ['9020', 東日本旅客鉄道, 鉄道・バス]
+- ['9021', 西日本旅客鉄道, 鉄道・バス]
+- ['9022', 東海旅客鉄道, 鉄道・バス]
+- ['9064', ヤマトホールディングス, 陸運]
+- ['9147', NIPPON EXPRESSホールディングス, 陸運]
+- ['9101', 日本郵船, 海運]
+- ['9104', 商船三井, 海運]
+- ['9107', 川崎汽船, 海運]
+- ['9201', 日本航空, 空運]
+- ['9202', ANAホールディングス, 空運]
+- ['9501', 東京電力ホールディングス, 電力]
+- ['9502', 中部電力, 電力]
+- ['9503', 関西電力, 電力]
+- ['9531', 東京瓦斯, ガス]
+- ['9532', 大阪瓦斯, ガス]
