@@ -1,9 +1,11 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "as_of": "2026-08-02",
   "generated_from": "data/verified_bonus_facts_2026-08-02.yaml",
   "source_survey_generated_from": "data/source_survey_2026-08-02.yaml",
   "quantitative_benchmarks_generated_from": "data/quantitative_benchmarks_2026-08-02.yaml",
+  "hypotheses_generated_from": "data/bonus_hypotheses_2026-08-02.yaml",
+  "company_estimation_model_generated_from": "data/company_estimation_model_2026-08-02.yaml",
   "universe": {
     "source_file": "nikkei225_bonus_survey_2024_en.yaml",
     "mutation_policy": "frozen",
@@ -24,6 +26,25 @@
     "comparability_policy": "集計主体、対象企業・組合、季別・年間、金額・月数が異なるため、異なる行を同一母集団のランキングとして扱わない。",
     "company_policy": "集計値は個社の確認値へ転用せず、個社値は当該会社または労組の一次資料に明示された場合のみ採用する。",
     "revision_policy": "第1回集計は暫定値として保持し、最終集計公表後に置換または履歴化する。"
+  },
+  "estimation_methodology": {
+    "purpose": "個社一次資料で年間賞与月数を確定できない場合でも、旧個社調査を会社事前分布、連合2026最終集計の業種別年間一時金を実測アンカーとして、全30社へ定量推定を付与する。",
+    "model_type": "empirical_bayes_shrinkage",
+    "central_formula": "推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数。",
+    "weight_formula": "会社重み = clamp(基礎重み + 信頼度係数 × 旧信頼度 + 一次資料加点 - セクター推定減点, 下限, 上限)。",
+    "interval_formula": "下限・上限も会社事前レンジと業種実測値±業種不確実幅を同じ会社重みで合成する。",
+    "amount_formula": "参考換算額 = 業種実測年間金額 ÷ 業種実測月数 × 個社推定月数。個社の実額ではなく、同業種の平均基本月額を仮定した参考値とする。",
+    "verified_override_policy": "一次資料で支給回数・算定方式・最低月数を確認できた場合は、その値を推定構造または下限へ優先適用する。",
+    "disclosure_policy": "推定値、実測アンカー、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。"
+  },
+  "estimation_parameters": {
+    "base_company_weight": 0.45,
+    "confidence_multiplier": 0.5,
+    "verified_evidence_bonus": 0.15,
+    "sector_only_penalty": 0.05,
+    "minimum_company_weight": 0.55,
+    "maximum_company_weight": 0.9,
+    "minimum_sector_band_months": 0.35
   },
   "research_pipeline": [
     "候補ソース発見",
@@ -438,6 +459,122 @@
       "note": "前年差74,550円。要求額と妥結額を混同しない。"
     }
   ],
+  "sector_anchors": [
+    {
+      "id": "manufacturing",
+      "name_ja": "製造業",
+      "response_months": 5.44,
+      "demand_months": 5.62,
+      "previous_months": 5.45,
+      "response_amount_yen": 1854847,
+      "previous_amount_yen": 1739443,
+      "sample_months": {
+        "organizations": 1928,
+        "workers": 1449045
+      },
+      "sample_amount": {
+        "organizations": 1003,
+        "workers": 739115
+      },
+      "company_count": 17,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    },
+    {
+      "id": "commercial_distribution",
+      "name_ja": "商業流通",
+      "response_months": 3.87,
+      "demand_months": 4.46,
+      "previous_months": 3.89,
+      "response_amount_yen": 1169622,
+      "previous_amount_yen": 1136359,
+      "sample_months": {
+        "organizations": 85,
+        "workers": 95038
+      },
+      "sample_amount": {
+        "organizations": 63,
+        "workers": 68925
+      },
+      "company_count": 1,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    },
+    {
+      "id": "transport",
+      "name_ja": "交通運輸",
+      "response_months": 4.42,
+      "demand_months": 5.02,
+      "previous_months": 4.28,
+      "response_amount_yen": 917078,
+      "previous_amount_yen": 907781,
+      "sample_months": {
+        "organizations": 203,
+        "workers": 154288
+      },
+      "sample_amount": {
+        "organizations": 53,
+        "workers": 13173
+      },
+      "company_count": 4,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    },
+    {
+      "id": "service_hotel",
+      "name_ja": "サービス・ホテル",
+      "response_months": 4.04,
+      "demand_months": 4.57,
+      "previous_months": 4.28,
+      "response_amount_yen": 890000,
+      "previous_amount_yen": 854000,
+      "sample_months": {
+        "organizations": 28,
+        "workers": 164364
+      },
+      "sample_amount": {
+        "organizations": 1,
+        "workers": 473
+      },
+      "company_count": 1,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    },
+    {
+      "id": "information_publication",
+      "name_ja": "情報・出版",
+      "response_months": 5.42,
+      "demand_months": 5.7,
+      "previous_months": 6.44,
+      "response_amount_yen": 1770611,
+      "previous_amount_yen": 1783557,
+      "sample_months": {
+        "organizations": 33,
+        "workers": 13904
+      },
+      "sample_amount": {
+        "organizations": 23,
+        "workers": 130548
+      },
+      "company_count": 3,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    },
+    {
+      "id": "other",
+      "name_ja": "その他（金融・投資等）",
+      "response_months": 4.39,
+      "demand_months": 4.4,
+      "previous_months": 4.41,
+      "response_amount_yen": 1749584,
+      "previous_amount_yen": 1689580,
+      "sample_months": {
+        "organizations": 24,
+        "workers": 10471
+      },
+      "sample_amount": {
+        "organizations": 171,
+        "workers": 136553
+      },
+      "company_count": 4,
+      "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+    }
+  ],
   "summary": {
     "record_count": 30,
     "verified_record_count": 5,
@@ -450,6 +587,10 @@
     "quantitative_benchmark_count": 11,
     "quantitative_final_count": 8,
     "quantitative_provisional_count": 3,
+    "quantified_company_count": 30,
+    "median_estimated_months": 5.47,
+    "median_estimated_amount_yen": 1870000,
+    "average_estimate_confidence": 0.55,
     "evidence_status_counts": {
       "confirmed": 3,
       "partially_confirmed": 1,
@@ -459,6 +600,16 @@
       "evidence_found": 4,
       "queued": 25,
       "source_reviewed": 1
+    },
+    "estimate_status_counts": {
+      "estimated": 26,
+      "estimated_with_verified_bound": 1,
+      "estimated_with_verified_structure": 3
+    },
+    "estimate_confidence_counts": {
+      "high": 3,
+      "low": 8,
+      "medium": 19
     }
   },
   "records": [
@@ -466,7 +617,7 @@
       "stock_code": "4063",
       "company_name_ja": "信越化学工業",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -477,8 +628,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.37,
+          "central": 5.65,
+          "maximum": 5.93
+        },
+        "amount_yen": {
+          "minimum": 1831000,
+          "central": 1926000,
+          "maximum": 2022000
+        },
+        "frequency_per_year": 2,
+        "classification": "base_salary_linked",
+        "confidence": {
+          "score": 0.56,
+          "level": "medium",
+          "amount_score": 0.41
+        },
+        "weights": {
+          "company_prior": 0.69,
+          "sector_actual": 0.31
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.5,
+            "central": 5.75,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の安定的な5.5〜6か月を事前レンジとして採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4063"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "安定的な年2回支給慣行が継続する。",
+          "基本給連動係数の大幅変更がない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "業績連動比率が大幅に拡大する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -492,7 +716,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -501,7 +725,7 @@
       "stock_code": "4307",
       "company_name_ja": "野村総合研究所",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -512,8 +736,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "information_publication",
+        "sector_name_ja": "情報・出版",
+        "months": {
+          "minimum": 5.67,
+          "central": 6.43,
+          "maximum": 7.2
+        },
+        "amount_yen": {
+          "minimum": 1852000,
+          "central": 2101000,
+          "maximum": 2352000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.49,
+          "level": "low",
+          "amount_score": 0.29
+        },
+        "weights": {
+          "company_prior": 0.64,
+          "sector_actual": 0.36
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 6.0,
+            "central": 7.0,
+            "maximum": 8.0
+          },
+          "sector_actual_months": 5.42,
+          "sector_demand_months": 5.7,
+          "sector_previous_months": 6.44,
+          "sector_actual_amount_yen": 1770611,
+          "sector_implied_monthly_base_yen": 326681,
+          "sector_sample_months": {
+            "organizations": 33,
+            "workers": 13904
+          },
+          "sector_sample_amount": {
+            "organizations": 23,
+            "workers": 130548
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の各回3〜4か月・年2回という記述を年間換算し制度改革リスクを織り込む。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4307"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の情報・出版年間一時金は5.42か月・1,770,611円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "各回月数という旧記述の解釈が正しい。",
+          "月給比率引上げ後も賞与が大幅縮小していない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "旧記述が年間合計3〜4か月だったと判明する。",
+          "制度改革後の公式値がレンジ外となる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -527,7 +824,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -536,7 +833,7 @@
       "stock_code": "4502",
       "company_name_ja": "武田薬品工業",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -547,8 +844,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 4.69,
+          "central": 5.31,
+          "maximum": 5.93
+        },
+        "amount_yen": {
+          "minimum": 1599000,
+          "central": 1811000,
+          "maximum": 2022000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.53,
+          "level": "medium",
+          "amount_score": 0.38
+        },
+        "weights": {
+          "company_prior": 0.67,
+          "sector_actual": 0.33
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.5,
+            "central": 5.25,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "製薬大手の標準的な年2回賞与と旧調査5〜6か月を基礎とする。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4502"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "グローバル評価制度が国内従業員にも概ね適用される。",
+          "賞与比率の急激な縮小がない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式採用・報酬資料の標準値がレンジ外となる。",
+          "年俸制への移行で月数換算が不適切になる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -562,7 +932,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -571,7 +941,7 @@
       "stock_code": "4543",
       "company_name_ja": "テルモ",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -582,8 +952,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.23,
+          "central": 5.68,
+          "maximum": 6.13
+        },
+        "amount_yen": {
+          "minimum": 1783000,
+          "central": 1937000,
+          "maximum": 2090000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.54,
+          "level": "medium",
+          "amount_score": 0.39
+        },
+        "weights": {
+          "company_prior": 0.675,
+          "sector_actual": 0.325
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.3,
+            "central": 5.8,
+            "maximum": 6.3
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の5.8か月を中心に医療機器業績の変動幅を付加。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#4543"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "医療機器需要と個人評価が賞与へ反映される。",
+          "年2回制度が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式値がレンジ外となる。",
+          "固定額賞与へ変更される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -597,7 +1040,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -606,7 +1049,7 @@
       "stock_code": "6098",
       "company_name_ja": "リクルートホールディングス",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -617,8 +1060,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "service_hotel",
+        "sector_name_ja": "サービス・ホテル",
+        "months": {
+          "minimum": 3.84,
+          "central": 4.35,
+          "maximum": 4.86
+        },
+        "amount_yen": {
+          "minimum": 846000,
+          "central": 958000,
+          "maximum": 1071000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.54,
+          "level": "medium",
+          "amount_score": 0.27
+        },
+        "weights": {
+          "company_prior": 0.675,
+          "sector_actual": 0.325
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 4.5,
+            "maximum": 5.0
+          },
+          "sector_actual_months": 4.04,
+          "sector_demand_months": 4.57,
+          "sector_previous_months": 4.28,
+          "sector_actual_amount_yen": 890000,
+          "sector_implied_monthly_base_yen": 220297,
+          "sector_sample_months": {
+            "organizations": 28,
+            "workers": 164364
+          },
+          "sector_sample_amount": {
+            "organizations": 1,
+            "workers": 473
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "事業部門業績連動と旧調査4〜5か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6098"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計のサービス・ホテル年間一時金は4.04か月・890,000円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "事業部門業績連動が継続する。",
+          "年俸制への全面移行がない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "月数換算不能な報酬体系へ変更される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -632,7 +1148,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -655,6 +1171,84 @@
         "pool_basis": "会社業績に連動するテーブルで賞与原資・支給月数を決定",
         "allocation_logic": "Will賞与部分は直近6か月の部門Will比率、次に個人Will比率で二段階配分",
         "base_salary_link": "Will収支は基本給とは直接連動しない"
+      },
+      "estimate": {
+        "status": "estimated_with_verified_bound",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 8.57,
+          "central": 9.94,
+          "maximum": 11.32
+        },
+        "amount_yen": {
+          "minimum": 2922000,
+          "central": 3389000,
+          "maximum": 3860000
+        },
+        "frequency_per_year": 4,
+        "classification": "hybrid",
+        "confidence": {
+          "score": 0.73,
+          "level": "high",
+          "amount_score": 0.58
+        },
+        "weights": {
+          "company_prior": 0.89,
+          "sector_actual": 0.11
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 9.0,
+            "central": 10.5,
+            "maximum": 12.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": "一次資料の最低4か月を下限へ適用",
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "公式情報で年4回・年間最低4か月・会社業績連動テーブルを確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6146"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の年間9〜12か月を事前分布として使用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6146"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "好業績時の業績連動部分が最低保証を大きく上回る。",
+          "賞与原資テーブルが大幅縮小していない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式上限が9か月未満と示される。",
+          "月給への恒久移管で賞与比率が大幅低下する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
       },
       "notes": [
         "Will会計は人事評価制度ではなく管理会計制度。",
@@ -703,7 +1297,7 @@
       "stock_code": "6273",
       "company_name_ja": "SMC",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -714,8 +1308,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 3.21,
+          "central": 5.78,
+          "maximum": 8.36
+        },
+        "amount_yen": {
+          "minimum": 1094000,
+          "central": 1971000,
+          "maximum": 2850000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.44,
+          "level": "low",
+          "amount_score": 0.29
+        },
+        "weights": {
+          "company_prior": 0.61,
+          "sector_actual": 0.39
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 2.0,
+            "central": 6.0,
+            "maximum": 10.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の2〜10か月を広い不確実性レンジとして維持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6273"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "会社・個人業績による大幅変動がある。",
+          "年2回支給が標準である。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "変動賞与制度が廃止される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -729,7 +1396,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -738,7 +1405,7 @@
       "stock_code": "6367",
       "company_name_ja": "ダイキン工業",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -749,8 +1416,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 4.37,
+          "central": 5.15,
+          "maximum": 5.93
+        },
+        "amount_yen": {
+          "minimum": 1490000,
+          "central": 1756000,
+          "maximum": 2022000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.52,
+          "level": "medium",
+          "amount_score": 0.37
+        },
+        "weights": {
+          "company_prior": 0.665,
+          "sector_actual": 0.335
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 5.0,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の労使妥結レンジ4〜6か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6367"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "グローバル空調業績が賞与へ反映される。",
+          "年2回制度が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "算定方式が固定額中心へ変わる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -764,7 +1504,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -773,7 +1513,7 @@
       "stock_code": "6501",
       "company_name_ja": "日立製作所",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -784,8 +1524,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 4.77,
+          "central": 5.47,
+          "maximum": 6.18
+        },
+        "amount_yen": {
+          "minimum": 1626000,
+          "central": 1865000,
+          "maximum": 2107000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.38,
+          "level": "low",
+          "amount_score": 0.23
+        },
+        "weights": {
+          "company_prior": 0.55,
+          "sector_actual": 0.45
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.5,
+            "central": 5.5,
+            "maximum": 6.5
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "sector_prior",
+            "statement": "旧調査に数値がないため総合電機・重電大手のセクター事前分布を低確度で設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6501"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "同業重電大手の年2回・5〜6か月前後の制度が参考になる。",
+          "事業部門業績連動が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料が異なる月数を示す。",
+          "報酬制度が年俸制中心で月数換算不能となる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -799,7 +1612,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -818,6 +1631,84 @@
         "pool_basis": "前年度の成果・行動評価による総合評価",
         "allocation_logic": "個人の総合評価を賃金・賞与へ直接反映",
         "base_salary_link": "賃金と賞与の双方に総合評価を連動"
+      },
+      "estimate": {
+        "status": "estimated_with_verified_structure",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.01,
+          "central": 5.49,
+          "maximum": 5.97
+        },
+        "amount_yen": {
+          "minimum": 1708000,
+          "central": 1872000,
+          "maximum": 2036000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.7,
+          "level": "high",
+          "amount_score": 0.55
+        },
+        "weights": {
+          "company_prior": 0.87,
+          "sector_actual": 0.13
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.0,
+            "central": 5.5,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "2024年度の新人事制度で成果・行動評価を賃金と賞与へ直接反映することを確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6503"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年2回・年間5〜6か月を想定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6503"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "制度刷新は配分差を拡大するが標準評価者の総額を急減させない。",
+          "年2回支給が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "労使資料で標準者の年間一時金がレンジ外と判明する。",
+          "評価連動分が月例賃金へ移管される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
       },
       "notes": [
         "2024年度に等級・評価・報酬制度を刷新し、年功的要素を廃止。",
@@ -853,7 +1744,7 @@
         "next_channel_name_ja": "会社・産業別労働組合公式",
         "open_questions": [
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する"
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する"
         ]
       }
     },
@@ -871,6 +1762,84 @@
         "pool_basis": "募集要項では業績給と記載",
         "allocation_logic": "対象会社・新卒採用範囲では年1回。全従業員共通制度かは未確認",
         "base_salary_link": null
+      },
+      "estimate": {
+        "status": "estimated_with_verified_structure",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 1.37,
+          "central": 1.84,
+          "maximum": 2.32
+        },
+        "amount_yen": {
+          "minimum": 467000,
+          "central": 627000,
+          "maximum": 791000
+        },
+        "frequency_per_year": 1,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.61,
+          "level": "medium",
+          "amount_score": 0.46
+        },
+        "weights": {
+          "company_prior": 0.81,
+          "sector_actual": 0.19
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 0.5,
+            "central": 1.0,
+            "maximum": 1.5
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "対象会社の新卒募集要項で業績給を年1回支給すると確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6758"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "冬季賞与の月給移管後に残る夏季業績給を約1か月とする旧仮説。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6758"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "年1回の業績給が主要対象会社の標準設計を反映する。",
+          "月給移管後も残存賞与が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "業績給が固定額方式で月数換算不能と判明する。",
+          "対象会社ごとに制度が大きく異なる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
       },
       "notes": [
         "応募資格は2027年3月末卒業見込み等。業績給は年1回と明記されているが、全従業員共通制度かは未確認。",
@@ -897,7 +1866,7 @@
         "next_channel_id": "labor_union_official",
         "next_channel_name_ja": "会社・産業別労働組合公式",
         "open_questions": [
-          "標準者の年間月数または妥結額が明記されているか確認する"
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する"
         ]
       }
     },
@@ -905,7 +1874,7 @@
       "stock_code": "6857",
       "company_name_ja": "アドバンテスト",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -916,8 +1885,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 3.75,
+          "central": 5.48,
+          "maximum": 7.2
+        },
+        "amount_yen": {
+          "minimum": 1279000,
+          "central": 1868000,
+          "maximum": 2455000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.49,
+          "level": "low",
+          "amount_score": 0.34
+        },
+        "weights": {
+          "company_prior": 0.64,
+          "sector_actual": 0.36
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 3.0,
+            "central": 5.5,
+            "maximum": 8.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半導体サイクルの大きな変動を反映し旧調査の通常値と上振れを包含。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6857"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "半導体テスト需要と利益が賞与へ強く連動する。",
+          "年2回支給が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式月数がレンジ外となる。",
+          "固定給中心への制度改定が行われる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -931,7 +1973,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -950,6 +1992,84 @@
         "pool_basis": null,
         "allocation_logic": null,
         "base_salary_link": null
+      },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.82,
+          "central": 6.69,
+          "maximum": 7.56
+        },
+        "amount_yen": {
+          "minimum": 1984000,
+          "central": 2281000,
+          "maximum": 2578000
+        },
+        "frequency_per_year": 4,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.6,
+          "level": "medium",
+          "amount_score": 0.45
+        },
+        "weights": {
+          "company_prior": 0.8,
+          "sector_actual": 0.2
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 6.0,
+            "central": 7.0,
+            "maximum": 8.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "一次情報監査済みレコードがあり、確認できた制度構造または未確認範囲を仮説の境界条件に用いる。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#6861"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年4回・6〜8か月相当。高年収構造から賞与比率が高いという事前分布を置く。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6861"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "旧調査で観測された制度構造または同業慣行が基準日時点でも方向性として有効である。",
+          "月例給与・株式報酬への大規模な恒久移管が行われていない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "会社公式・労働組合公式・法定開示で標準的な年間賞与月数が推定レンジ外と示される。",
+          "支給回数・算定基礎・対象従業員の制度が仮説と異なることが公式資料で確認される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
       },
       "notes": [
         "2026年3月期の公式有価証券報告書は確認したが、従業員賞与の原資・月数・配分式は公式IR索引から確認できない。",
@@ -978,7 +2098,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -987,7 +2107,7 @@
       "stock_code": "6954",
       "company_name_ja": "ファナック",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -998,8 +2118,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 4.41,
+          "central": 7.03,
+          "maximum": 9.64
+        },
+        "amount_yen": {
+          "minimum": 1504000,
+          "central": 2397000,
+          "maximum": 3287000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.46,
+          "level": "low",
+          "amount_score": 0.31
+        },
+        "weights": {
+          "company_prior": 0.62,
+          "sector_actual": 0.38
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 8.0,
+            "maximum": 12.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の4〜12か月という高変動レンジを維持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6954"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "FA需要と個人評価による大きな倍率変動が存在する。",
+          "年2回支給が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式制度が狭い固定レンジを示す。",
+          "株式報酬中心へ移行する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1013,7 +2206,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1022,7 +2215,7 @@
       "stock_code": "6981",
       "company_name_ja": "村田製作所",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1033,8 +2226,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.03,
+          "central": 5.48,
+          "maximum": 5.93
+        },
+        "amount_yen": {
+          "minimum": 1715000,
+          "central": 1868000,
+          "maximum": 2022000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.54,
+          "level": "medium",
+          "amount_score": 0.39
+        },
+        "weights": {
+          "company_prior": 0.675,
+          "sector_actual": 0.325
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.0,
+            "central": 5.5,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "電子部品需要連動という旧調査と5〜6か月レンジを採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#6981"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "スマートフォン・車載需要が賞与へ反映される。",
+          "年2回制度が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "業績非連動の固定制度へ変更される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1048,7 +2314,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1057,7 +2323,7 @@
       "stock_code": "7203",
       "company_name_ja": "トヨタ自動車",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1068,8 +2334,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 6.29,
+          "central": 6.74,
+          "maximum": 7.2
+        },
+        "amount_yen": {
+          "minimum": 2145000,
+          "central": 2298000,
+          "maximum": 2455000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.57,
+          "level": "medium",
+          "amount_score": 0.42
+        },
+        "weights": {
+          "company_prior": 0.7,
+          "sector_actual": 0.3
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 6.8,
+            "central": 7.3,
+            "maximum": 7.8
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の春闘要求7.6か月を中心に要求と妥結の差を考慮したレンジ。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7203"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "春闘要求値と実際の妥結値の差がレンジ内に収まる。",
+          "年間一時金制度が継続している。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料の年間一時金がレンジ外となる。",
+          "一時金制度の算定基礎が大幅変更される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1083,7 +2422,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1092,7 +2431,7 @@
       "stock_code": "7733",
       "company_name_ja": "オリンパス",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1103,8 +2442,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.37,
+          "central": 5.83,
+          "maximum": 6.28
+        },
+        "amount_yen": {
+          "minimum": 1831000,
+          "central": 1988000,
+          "maximum": 2141000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.56,
+          "level": "medium",
+          "amount_score": 0.41
+        },
+        "weights": {
+          "company_prior": 0.69,
+          "sector_actual": 0.31
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.5,
+            "central": 6.0,
+            "maximum": 6.5
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の6か月を中心に評価差をレンジ化。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7733"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "グレード・成果評価が月数差へ反映される。",
+          "年2回制度が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式標準値がレンジ外となる。",
+          "報酬制度の大幅変更が行われる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1118,7 +2530,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1127,7 +2539,7 @@
       "stock_code": "7741",
       "company_name_ja": "HOYA",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1138,8 +2550,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 4.36,
+          "central": 4.81,
+          "maximum": 5.26
+        },
+        "amount_yen": {
+          "minimum": 1487000,
+          "central": 1640000,
+          "maximum": 1793000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.53,
+          "level": "medium",
+          "amount_score": 0.38
+        },
+        "weights": {
+          "company_prior": 0.67,
+          "sector_actual": 0.33
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 4.5,
+            "maximum": 5.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の医療・光学事業連動4〜5か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#7741"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "医療・光学事業業績が賞与へ反映される。",
+          "年2回制度が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "年俸制中心へ変更される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1153,7 +2638,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1162,7 +2647,7 @@
       "stock_code": "8035",
       "company_name_ja": "東京エレクトロン",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1173,8 +2658,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "manufacturing",
+        "sector_name_ja": "製造業",
+        "months": {
+          "minimum": 5.03,
+          "central": 5.83,
+          "maximum": 6.62
+        },
+        "amount_yen": {
+          "minimum": 1715000,
+          "central": 1988000,
+          "maximum": 2257000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.56,
+          "level": "medium",
+          "amount_score": 0.41
+        },
+        "weights": {
+          "company_prior": 0.69,
+          "sector_actual": 0.31
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.0,
+            "central": 6.0,
+            "maximum": 7.0
+          },
+          "sector_actual_months": 5.44,
+          "sector_demand_months": 5.62,
+          "sector_previous_months": 5.45,
+          "sector_actual_amount_yen": 1854847,
+          "sector_implied_monthly_base_yen": 340965,
+          "sector_sample_months": {
+            "organizations": 1928,
+            "workers": 1449045
+          },
+          "sector_sample_amount": {
+            "organizations": 1003,
+            "workers": 739115
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半導体サイクル連動を前提に旧調査5〜7か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8035"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の製造業年間一時金は5.44か月・1,854,847円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "半導体市場業績が賞与へ反映される。",
+          "年2回支給構造が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式標準月数がレンジ外となる。",
+          "報酬の株式化で現金賞与が縮小する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1188,7 +2746,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1197,7 +2755,7 @@
       "stock_code": "8306",
       "company_name_ja": "三菱UFJフィナンシャル・グループ",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1208,8 +2766,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "other",
+        "sector_name_ja": "その他（金融・投資等）",
+        "months": {
+          "minimum": 4.36,
+          "central": 4.82,
+          "maximum": 5.27
+        },
+        "amount_yen": {
+          "minimum": 1738000,
+          "central": 1921000,
+          "maximum": 2100000
+        },
+        "frequency_per_year": 2,
+        "classification": "hybrid",
+        "confidence": {
+          "score": 0.57,
+          "level": "medium",
+          "amount_score": 0.42
+        },
+        "weights": {
+          "company_prior": 0.7,
+          "sector_actual": 0.3
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.5,
+            "central": 5.0,
+            "maximum": 5.5
+          },
+          "sector_actual_months": 4.39,
+          "sector_demand_months": 4.4,
+          "sector_previous_months": 4.41,
+          "sector_actual_amount_yen": 1749584,
+          "sector_implied_monthly_base_yen": 398538,
+          "sector_sample_months": {
+            "organizations": 24,
+            "workers": 10471
+          },
+          "sector_sample_amount": {
+            "organizations": 171,
+            "workers": 136553
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "メガバンクの基本給連動部分と業績連動部分を合わせた旧調査中心値。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8306"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計のその他（金融・投資等）年間一時金は4.39か月・1,749,584円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "大手銀行の安定的な年2回制度が継続する。",
+          "業績連動部分の変動は限定的である。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料の年間月数がレンジ外となる。",
+          "報酬制度が年俸制中心へ移行する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1223,7 +2854,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1232,7 +2863,7 @@
       "stock_code": "8601",
       "company_name_ja": "大和証券グループ本社",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1243,8 +2874,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "other",
+        "sector_name_ja": "その他（金融・投資等）",
+        "months": {
+          "minimum": 4.01,
+          "central": 4.78,
+          "maximum": 5.55
+        },
+        "amount_yen": {
+          "minimum": 1598000,
+          "central": 1905000,
+          "maximum": 2212000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.49,
+          "level": "low",
+          "amount_score": 0.34
+        },
+        "weights": {
+          "company_prior": 0.64,
+          "sector_actual": 0.36
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 5.0,
+            "maximum": 6.0
+          },
+          "sector_actual_months": 4.39,
+          "sector_demand_months": 4.4,
+          "sector_previous_months": 4.41,
+          "sector_actual_amount_yen": 1749584,
+          "sector_implied_monthly_base_yen": 398538,
+          "sector_sample_months": {
+            "organizations": 24,
+            "workers": 10471
+          },
+          "sector_sample_amount": {
+            "organizations": 171,
+            "workers": 136553
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "市況連動の旧調査4〜6か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8601"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計のその他（金融・投資等）年間一時金は4.39か月・1,749,584円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "市場業績と顧客資産成長が賞与原資へ反映される。",
+          "年2回支給が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "年俸・株式報酬中心へ移行する。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1258,7 +2962,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1267,7 +2971,7 @@
       "stock_code": "8604",
       "company_name_ja": "野村ホールディングス",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1278,8 +2982,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "other",
+        "sector_name_ja": "その他（金融・投資等）",
+        "months": {
+          "minimum": 5.29,
+          "central": 6.06,
+          "maximum": 6.83
+        },
+        "amount_yen": {
+          "minimum": 2108000,
+          "central": 2415000,
+          "maximum": 2722000
+        },
+        "frequency_per_year": 1,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.49,
+          "level": "low",
+          "amount_score": 0.34
+        },
+        "weights": {
+          "company_prior": 0.64,
+          "sector_actual": 0.36
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 6.0,
+            "central": 7.0,
+            "maximum": 8.0
+          },
+          "sector_actual_months": 4.39,
+          "sector_demand_months": 4.4,
+          "sector_previous_months": 4.41,
+          "sector_actual_amount_yen": 1749584,
+          "sector_implied_monthly_base_yen": 398538,
+          "sector_sample_months": {
+            "organizations": 24,
+            "workers": 10471
+          },
+          "sector_sample_amount": {
+            "organizations": 171,
+            "workers": 136553
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "投資銀行・トレーディング業績連動の旧調査6〜8か月を採用。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#8604"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計のその他（金融・投資等）年間一時金は4.39か月・1,749,584円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "コア人材の裁量ボーナス構造が維持される。",
+          "期末年1回支給が標準である。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式制度がレンジ外を示す。",
+          "現金賞与が株式報酬へ大幅移管される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1293,7 +3070,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1302,7 +3079,7 @@
       "stock_code": "9020",
       "company_name_ja": "JR東日本",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1313,8 +3090,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "transport",
+        "sector_name_ja": "交通運輸",
+        "months": {
+          "minimum": 3.95,
+          "central": 4.48,
+          "maximum": 5.01
+        },
+        "amount_yen": {
+          "minimum": 820000,
+          "central": 930000,
+          "maximum": 1039000
+        },
+        "frequency_per_year": 2,
+        "classification": "base_salary_linked",
+        "confidence": {
+          "score": 0.57,
+          "level": "medium",
+          "amount_score": 0.42
+        },
+        "weights": {
+          "company_prior": 0.7,
+          "sector_actual": 0.3
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 4.5,
+            "maximum": 5.0
+          },
+          "sector_actual_months": 4.42,
+          "sector_demand_months": 5.02,
+          "sector_previous_months": 4.28,
+          "sector_actual_amount_yen": 917078,
+          "sector_implied_monthly_base_yen": 207484,
+          "sector_sample_months": {
+            "organizations": 203,
+            "workers": 154288
+          },
+          "sector_sample_amount": {
+            "organizations": 53,
+            "workers": 13173
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の労使妥結約4.5か月を中心値に設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9020"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の交通運輸年間一時金は4.42か月・917,078円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "公共交通の安定的な労使慣行が継続する。",
+          "安全指標加算の影響は限定的である。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式妥結月数がレンジ外となる。",
+          "基本給連動制度が廃止される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1328,7 +3178,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1337,7 +3187,7 @@
       "stock_code": "9022",
       "company_name_ja": "JR東海",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1348,8 +3198,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "transport",
+        "sector_name_ja": "交通運輸",
+        "months": {
+          "minimum": 2.92,
+          "central": 3.45,
+          "maximum": 3.99
+        },
+        "amount_yen": {
+          "minimum": 606000,
+          "central": 716000,
+          "maximum": 828000
+        },
+        "frequency_per_year": 2,
+        "classification": "base_salary_linked",
+        "confidence": {
+          "score": 0.55,
+          "level": "medium",
+          "amount_score": 0.4
+        },
+        "weights": {
+          "company_prior": 0.68,
+          "sector_actual": 0.32
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 2.5,
+            "central": 3.0,
+            "maximum": 3.5
+          },
+          "sector_actual_months": 4.42,
+          "sector_demand_months": 5.02,
+          "sector_previous_months": 4.28,
+          "sector_actual_amount_yen": 917078,
+          "sector_implied_monthly_base_yen": 207484,
+          "sector_sample_months": {
+            "organizations": 203,
+            "workers": 154288
+          },
+          "sector_sample_amount": {
+            "organizations": 53,
+            "workers": 13173
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の年間約3か月という解釈を採用し記述曖昧性をレンジで表現。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9022"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の交通運輸年間一時金は4.42か月・917,078円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "旧調査の3か月は年間合計を意味する。",
+          "年2回の季節支給が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "3か月が各回値で年間6か月相当と判明する。",
+          "公式妥結値がレンジ外となる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1363,7 +3286,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1372,7 +3295,7 @@
       "stock_code": "9201",
       "company_name_ja": "日本航空",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1383,8 +3306,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "transport",
+        "sector_name_ja": "交通運輸",
+        "months": {
+          "minimum": 2.96,
+          "central": 3.5,
+          "maximum": 4.03
+        },
+        "amount_yen": {
+          "minimum": 614000,
+          "central": 726000,
+          "maximum": 836000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.5,
+          "level": "medium",
+          "amount_score": 0.35
+        },
+        "weights": {
+          "company_prior": 0.65,
+          "sector_actual": 0.35
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 2.5,
+            "central": 3.0,
+            "maximum": 3.5
+          },
+          "sector_actual_months": 4.42,
+          "sector_demand_months": 5.02,
+          "sector_previous_months": 4.28,
+          "sector_actual_amount_yen": 917078,
+          "sector_implied_monthly_base_yen": 207484,
+          "sector_sample_months": {
+            "organizations": 203,
+            "workers": 154288
+          },
+          "sector_sample_amount": {
+            "organizations": 53,
+            "workers": 13173
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の回復後約3か月を中心に設定。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9201"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の交通運輸年間一時金は4.42か月・917,078円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "国際旅行需要の回復が継続する。",
+          "年2回制度が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式支給月数がレンジ外となる。",
+          "大幅な業績悪化で一時金が停止される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1398,7 +3394,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1407,7 +3403,7 @@
       "stock_code": "9202",
       "company_name_ja": "ANAホールディングス",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1418,8 +3414,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "transport",
+        "sector_name_ja": "交通運輸",
+        "months": {
+          "minimum": 3.6,
+          "central": 4.13,
+          "maximum": 4.67
+        },
+        "amount_yen": {
+          "minimum": 747000,
+          "central": 857000,
+          "maximum": 969000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.55,
+          "level": "medium",
+          "amount_score": 0.4
+        },
+        "weights": {
+          "company_prior": 0.68,
+          "sector_actual": 0.32
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 3.5,
+            "central": 4.0,
+            "maximum": 4.5
+          },
+          "sector_actual_months": 4.42,
+          "sector_demand_months": 5.02,
+          "sector_previous_months": 4.28,
+          "sector_actual_amount_yen": 917078,
+          "sector_implied_monthly_base_yen": 207484,
+          "sector_sample_months": {
+            "organizations": 203,
+            "workers": 154288
+          },
+          "sector_sample_amount": {
+            "organizations": 53,
+            "workers": 13173
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の通常4か月を中心に航空需要変動を反映。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9202"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の交通運輸年間一時金は4.42か月・917,078円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "旅行需要回復が維持される。",
+          "グループ業績一時金が継続する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式支給月数がレンジ外となる。",
+          "航空需要悪化で一時金が停止される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1433,7 +3502,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1442,7 +3511,7 @@
       "stock_code": "9432",
       "company_name_ja": "日本電信電話",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1453,8 +3522,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "information_publication",
+        "sector_name_ja": "情報・出版",
+        "months": {
+          "minimum": 4.31,
+          "central": 4.77,
+          "maximum": 5.22
+        },
+        "amount_yen": {
+          "minimum": 1408000,
+          "central": 1558000,
+          "maximum": 1705000
+        },
+        "frequency_per_year": 2,
+        "classification": "discretionary",
+        "confidence": {
+          "score": 0.59,
+          "level": "medium",
+          "amount_score": 0.39
+        },
+        "weights": {
+          "company_prior": 0.71,
+          "sector_actual": 0.29
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.0,
+            "central": 4.5,
+            "maximum": 5.0
+          },
+          "sector_actual_months": 5.42,
+          "sector_demand_months": 5.7,
+          "sector_previous_months": 6.44,
+          "sector_actual_amount_yen": 1770611,
+          "sector_implied_monthly_base_yen": 326681,
+          "sector_sample_months": {
+            "organizations": 33,
+            "workers": 13904
+          },
+          "sector_sample_amount": {
+            "organizations": 23,
+            "workers": 130548
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査の4か月＋αをレンジ化。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9432"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の情報・出版年間一時金は5.42か月・1,770,611円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "半期評価と組織業績の連動が継続する。",
+          "年2回支給が維持される。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式年間月数がレンジ外となる。",
+          "評価制度の大幅改定が行われる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1468,7 +3610,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1487,6 +3629,84 @@
         "pool_basis": "会社業績賞与と個人業績連動賞与で構成",
         "allocation_logic": "会社業績と個人の成果に基づき決定。サステナビリティKPIも全社員賞与に連動",
         "base_salary_link": null
+      },
+      "estimate": {
+        "status": "estimated_with_verified_structure",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "information_publication",
+        "sector_name_ja": "情報・出版",
+        "months": {
+          "minimum": 4.57,
+          "central": 5.05,
+          "maximum": 5.53
+        },
+        "amount_yen": {
+          "minimum": 1493000,
+          "central": 1650000,
+          "maximum": 1807000
+        },
+        "frequency_per_year": 2,
+        "classification": "hybrid",
+        "confidence": {
+          "score": 0.71,
+          "level": "high",
+          "amount_score": 0.51
+        },
+        "weights": {
+          "company_prior": 0.875,
+          "sector_actual": 0.125
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 4.5,
+            "central": 5.0,
+            "maximum": 5.5
+          },
+          "sector_actual_months": 5.42,
+          "sector_demand_months": 5.7,
+          "sector_previous_months": 6.44,
+          "sector_actual_amount_yen": 1770611,
+          "sector_implied_monthly_base_yen": 326681,
+          "sector_sample_months": {
+            "organizations": 33,
+            "workers": 13904
+          },
+          "sector_sample_amount": {
+            "organizations": 23,
+            "workers": 130548
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "verified_fact",
+            "statement": "会社業績賞与と個人業績連動賞与の組合せを公式情報で確認。",
+            "reference": "data/verified_bonus_facts_2026-08-02.yaml#9433"
+          },
+          {
+            "type": "legacy_prior",
+            "statement": "旧調査では年2回・年間約5か月を中心値としていた。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9433"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の情報・出版年間一時金は5.42か月・1,770,611円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "通信大手の安定収益により変動幅は比較的小さい。",
+          "基本給引上げ後も賞与係数が急減していない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式労使資料がレンジ外を示す。",
+          "賞与の大部分が月給へ移管される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
       },
       "notes": [
         "旧データの約5か月・年2回という数値は公式ページで確認できないため移行しない。"
@@ -1521,7 +3741,7 @@
         "next_channel_name_ja": "会社・産業別労働組合公式",
         "open_questions": [
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する"
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する"
         ]
       }
     },
@@ -1529,7 +3749,7 @@
       "stock_code": "9983",
       "company_name_ja": "ファーストリテイリング",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1540,8 +3760,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "commercial_distribution",
+        "sector_name_ja": "商業流通",
+        "months": {
+          "minimum": 4.78,
+          "central": 5.48,
+          "maximum": 6.17
+        },
+        "amount_yen": {
+          "minimum": 1445000,
+          "central": 1656000,
+          "maximum": 1865000
+        },
+        "frequency_per_year": 3,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.54,
+          "level": "medium",
+          "amount_score": 0.39
+        },
+        "weights": {
+          "company_prior": 0.675,
+          "sector_actual": 0.325
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 5.5,
+            "central": 6.25,
+            "maximum": 7.0
+          },
+          "sector_actual_months": 3.87,
+          "sector_demand_months": 4.46,
+          "sector_previous_months": 3.89,
+          "sector_actual_amount_yen": 1169622,
+          "sector_implied_monthly_base_yen": 302228,
+          "sector_sample_months": {
+            "organizations": 85,
+            "workers": 95038
+          },
+          "sector_sample_amount": {
+            "organizations": 63,
+            "workers": 68925
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "半期賞与2回と決算賞与を合算した旧調査6〜7か月を基礎とする。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9983"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計の商業流通年間一時金は3.87か月・1,169,622円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "決算賞与を含む支給構造が維持される。",
+          "店舗・全社業績が賞与へ連動する。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "決算賞与が廃止される。",
+          "公式標準月数がレンジ外となる。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1555,7 +3848,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }
@@ -1564,7 +3857,7 @@
       "stock_code": "9984",
       "company_name_ja": "ソフトバンクグループ",
       "subject": "employees",
-      "employee_scope": "一次情報の調査対象。対象会社・雇用区分は未確定。",
+      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
       "as_of": "2026-08-02",
@@ -1575,8 +3868,81 @@
         "allocation_logic": null,
         "base_salary_link": null
       },
+      "estimate": {
+        "status": "estimated",
+        "method": "empirical_bayes_shrinkage",
+        "sector_id": "other",
+        "sector_name_ja": "その他（金融・投資等）",
+        "months": {
+          "minimum": 3.38,
+          "central": 4.77,
+          "maximum": 6.16
+        },
+        "amount_yen": {
+          "minimum": 1347000,
+          "central": 1901000,
+          "maximum": 2455000
+        },
+        "frequency_per_year": 2,
+        "classification": "performance_linked",
+        "confidence": {
+          "score": 0.47,
+          "level": "low",
+          "amount_score": 0.32
+        },
+        "weights": {
+          "company_prior": 0.63,
+          "sector_actual": 0.37
+        },
+        "anchors": {
+          "company_prior_months": {
+            "minimum": 3.0,
+            "central": 5.0,
+            "maximum": 7.0
+          },
+          "sector_actual_months": 4.39,
+          "sector_demand_months": 4.4,
+          "sector_previous_months": 4.41,
+          "sector_actual_amount_yen": 1749584,
+          "sector_implied_monthly_base_yen": 398538,
+          "sector_sample_months": {
+            "organizations": 24,
+            "workers": 10471
+          },
+          "sector_sample_amount": {
+            "organizations": 171,
+            "workers": 136553
+          },
+          "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+        },
+        "override_note": null,
+        "basis": [
+          {
+            "type": "legacy_prior",
+            "statement": "投資事業の変動性を踏まえ旧調査の5か月を広いレンジで保持。",
+            "reference": "nikkei225_bonus_survey_2024_en.yaml#9984"
+          },
+          {
+            "type": "official_sector_actual",
+            "statement": "連合2026最終集計のその他（金融・投資等）年間一時金は4.39か月・1,749,584円。",
+            "reference": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf"
+          }
+        ],
+        "assumptions": [
+          "投資成果が賞与原資へ反映される。",
+          "株式報酬への全面移行はない。",
+          "旧個社調査の相対的な高低が2026年にも一定程度残る。",
+          "参考換算額では個社の基本月額を業種平均と同じと仮定する。"
+        ],
+        "falsifiers": [
+          "公式制度で標準月数がレンジ外と示される。",
+          "現金賞与が株式報酬へ大幅移管される。",
+          "会社・労組の一次資料で年間月数または金額が推定レンジ外と確認される。"
+        ],
+        "amount_caution": "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。"
+      },
       "notes": [
-        "一次情報レコードは未整備。推定値は公開しない。"
+        "確認済み事実とモデル推定を分離して表示する。"
       ],
       "sources": [],
       "survey": {
@@ -1590,7 +3956,7 @@
         "open_questions": [
           "賞与の算定方式を会社・労組の一次資料で特定する",
           "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額が明記されているか確認する",
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
           "原資の決定式または業績連動条件を確認する"
         ]
       }

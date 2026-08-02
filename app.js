@@ -1,10 +1,5 @@
-const state = { data: null, stage: 'all', query: '', sortKey: 'company', sortDirection: 'asc' };
+const state = { data: null, confidence: 'all', query: '', sortKey: 'months', sortDirection: 'desc' };
 
-const stageLabels = {
-  evidence_found: '一次証拠あり',
-  source_reviewed: '資料確認済み',
-  queued: '未着手'
-};
 const tierLabels = {
   primary_company: '会社一次',
   primary_collective: '労使一次',
@@ -19,27 +14,33 @@ const classificationLabels = {
   hybrid: 'ハイブリッド'
 };
 const releaseLabels = { first: '第1回・暫定', final: '最終' };
-const stageOrder = { evidence_found: 0, source_reviewed: 1, queued: 2 };
+const confidenceLabels = { high: '高', medium: '中', low: '低' };
+const estimateStatusLabels = {
+  verified_numeric: '一次資料の明示値',
+  estimated_with_verified_bound: '一次資料の境界付き推定',
+  estimated_with_verified_structure: '制度確認済み推定',
+  estimated: 'モデル推定'
+};
 
 function escapeHtml(value = '') {
   return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'})[char]);
 }
 function normalize(value = '') { return String(value).normalize('NFKC').toLocaleLowerCase('ja'); }
 function list(items = []) { return items.length ? items.map(item => `<li>${escapeHtml(item)}</li>`).join('') : '<li>なし</li>'; }
-function channelName(id) {
-  return state.data?.source_registry.find(item => item.id === id)?.name_ja || id || '必須チャネル確認済み';
-}
 function number(value) { return Number(value).toLocaleString('ja-JP'); }
+function yen(value) { return `¥${number(Math.round(Number(value)))}`; }
+function months(value) { return `${Number(value).toFixed(2)}か月`; }
+function percent(value) { return `${Math.round(Number(value) * 100)}%`; }
 function valueLabel(value, unit) {
-  if (unit === 'yen') return `¥${number(value)}`;
-  if (unit === 'months') return `${Number(value).toFixed(2)}か月`;
+  if (unit === 'yen') return yen(value);
+  if (unit === 'months') return months(value);
   return `${value}`;
 }
 function changeLabel(value, unit) {
   const numeric = Number(value);
   const sign = numeric > 0 ? '+' : '';
   if (unit === 'percent') return `${sign}${numeric.toFixed(2)}%`;
-  if (unit === 'yen') return `${sign}¥${number(numeric)}`;
+  if (unit === 'yen') return `${sign}${yen(numeric)}`;
   if (unit === 'months') return `${sign}${numeric.toFixed(2)}か月`;
   return `${sign}${numeric}`;
 }
@@ -75,7 +76,7 @@ function verifiedFacts(record) {
   const annual = record.bonus?.annual_months;
   if (annual) {
     const label = annual.kind === 'range' ? `${annual.minimum}–${annual.maximum}か月` : `${annual.value}か月${annual.kind === 'minimum' ? '以上' : annual.kind === 'maximum' ? '以下' : ''}`;
-    facts.push(`年換算月数: ${label}`);
+    facts.push(`一次資料の年換算月数: ${label}`);
   }
   if (record.bonus?.pool_basis) facts.push(`原資: ${record.bonus.pool_basis}`);
   return facts;
@@ -95,39 +96,66 @@ function sourceRow(source) {
     <td>${link}</td>
   </tr>`;
 }
-function details(record) {
-  const reviewed = record.survey.reviewed_channel_ids.map(channelName);
-  return `<details class="row-details"><summary>調査内容</summary><div class="detail-panel">
-    <section><h3>個社一次資料</h3>${sourceLinks(record)}</section>
-    <section><h3>確認済みチャネル</h3><ul>${list(reviewed)}</ul></section>
-    <section><h3>未解決の問い</h3><ul>${list(record.survey.open_questions)}</ul></section>
-    <section><h3>対象範囲・注記</h3><p>${escapeHtml(record.employee_scope)}</p><ul>${list(record.notes || [])}</ul></section>
+function referenceLink(reference) {
+  const text = escapeHtml(reference);
+  if (String(reference).startsWith('https://')) return `<a href="${text}" target="_blank" rel="noopener noreferrer">一次資料 ↗</a>`;
+  return `<code>${text}</code>`;
+}
+function basisList(items = []) {
+  return items.map(item => `<li><strong>${escapeHtml(item.statement)}</strong><small>${referenceLink(item.reference)}</small></li>`).join('');
+}
+function estimateDetails(record) {
+  const estimate = record.estimate;
+  const anchors = estimate.anchors;
+  const facts = verifiedFacts(record);
+  return `<details class="row-details"><summary>根拠と式</summary><div class="detail-panel estimate-panel">
+    <section><h3>計算入力</h3><dl class="formula-grid">
+      <dt>旧個社事前分布</dt><dd>${months(anchors.company_prior_months.minimum)}–${months(anchors.company_prior_months.maximum)}（中心 ${months(anchors.company_prior_months.central)}）</dd>
+      <dt>業種実測</dt><dd>${months(anchors.sector_actual_months)} / ${yen(anchors.sector_actual_amount_yen)}</dd>
+      <dt>会社重み</dt><dd>${percent(estimate.weights.company_prior)}</dd>
+      <dt>業種重み</dt><dd>${percent(estimate.weights.sector_actual)}</dd>
+      <dt>業種標本</dt><dd>${escapeHtml(sampleLabel(anchors.sector_sample_months))}</dd>
+    </dl>${estimate.override_note ? `<p class="override-note">${escapeHtml(estimate.override_note)}</p>` : ''}</section>
+    <section><h3>一次資料で確認済み</h3>${facts.length ? `<ul>${list(facts)}</ul>` : '<p class="muted">個社の数値・制度は未確認。モデル推定を表示。</p>'}${sourceLinks(record)}</section>
+    <section><h3>推定根拠</h3><ul class="basis-list">${basisList(estimate.basis)}</ul></section>
+    <section><h3>前提</h3><ul>${list(estimate.assumptions)}</ul></section>
+    <section><h3>反証条件</h3><ul>${list(estimate.falsifiers)}</ul></section>
+    <section><h3>残る調査</h3><ul>${list(record.survey.open_questions)}</ul><p>${escapeHtml(record.employee_scope)}</p></section>
   </div></details>`;
 }
 function companyRow(record) {
-  const survey = record.survey;
-  const facts = verifiedFacts(record);
+  const estimate = record.estimate;
+  const m = estimate.months;
+  const amount = estimate.amount_yen;
+  const anchor = estimate.anchors;
+  const method = classificationLabels[estimate.classification] || estimate.classification;
   return `<tr>
-    <th scope="row" class="company-cell"><strong>${escapeHtml(record.company_name_ja)}</strong><span>${escapeHtml(record.stock_code)}</span></th>
-    <td><span class="status status-${escapeHtml(survey.stage)}">${escapeHtml(stageLabels[survey.stage])}</span></td>
-    <td><strong>${survey.reviewed_required_count} / ${survey.required_channel_count}</strong><small>${Math.round(survey.coverage_ratio * 100)}%</small></td>
-    <td><strong>${escapeHtml(survey.next_channel_name_ja || '必須チャネル確認済み')}</strong></td>
-    <td>${facts.length ? `<ul class="compact-list">${list(facts)}</ul>` : '<span class="muted">推定せず未確認</span>'}</td>
-    <td>${details(record)}</td>
+    <th scope="row" class="company-cell"><strong>${escapeHtml(record.company_name_ja)}</strong><span>${escapeHtml(record.stock_code)}</span><small>${escapeHtml(estimateStatusLabels[estimate.status] || estimate.status)}</small></th>
+    <td class="estimate-main numeric"><strong>${months(m.central)}</strong><span>${months(m.minimum)}–${months(m.maximum)}</span></td>
+    <td class="numeric"><strong>${yen(amount.central)}</strong><span>${yen(amount.minimum)}–${yen(amount.maximum)}</span><small>参考換算</small></td>
+    <td><strong>${escapeHtml(estimate.sector_name_ja)} ${months(anchor.sector_actual_months)}</strong><span>${yen(anchor.sector_actual_amount_yen)}</span><small>${escapeHtml(sampleLabel(anchor.sector_sample_months))}</small></td>
+    <td><strong>${escapeHtml(method)}</strong><span>年${escapeHtml(estimate.frequency_per_year)}回</span></td>
+    <td><span class="confidence confidence-${escapeHtml(estimate.confidence.level)}">${escapeHtml(confidenceLabels[estimate.confidence.level])} ${percent(estimate.confidence.score)}</span><small>金額 ${percent(estimate.confidence.amount_score)}</small></td>
+    <td>${estimateDetails(record)}</td>
   </tr>`;
 }
 function searchText(record) {
+  const estimate = record.estimate;
   return normalize([
-    record.company_name_ja, record.stock_code, stageLabels[record.survey.stage],
-    record.survey.next_channel_name_ja, record.employee_scope,
+    record.company_name_ja, record.stock_code, estimate.sector_name_ja,
+    classificationLabels[estimate.classification], confidenceLabels[estimate.confidence.level],
+    estimateStatusLabels[estimate.status], record.employee_scope,
     ...record.survey.open_questions, ...verifiedFacts(record),
+    ...estimate.basis.map(item => item.statement),
     ...(record.sources || []).flatMap(source => [source.title, source.page_or_section])
   ].filter(Boolean).join(' '));
 }
 function sortValue(record, key) {
   if (key === 'company') return `${record.company_name_ja}-${record.stock_code}`;
-  if (key === 'stage') return stageOrder[record.survey.stage] ?? 9;
-  if (key === 'coverage') return record.survey.coverage_ratio;
+  if (key === 'months') return record.estimate.months.central;
+  if (key === 'amount') return record.estimate.amount_yen.central;
+  if (key === 'sector') return `${record.estimate.sector_name_ja}-${record.company_name_ja}`;
+  if (key === 'confidence') return record.estimate.confidence.score;
   return record.stock_code;
 }
 function sorted(records) {
@@ -148,8 +176,8 @@ function renderCompanies() {
   if (!state.data) return;
   const query = normalize(state.query.trim());
   const records = sorted(state.data.records.filter(record => {
-    const stageMatch = state.stage === 'all' || record.survey.stage === state.stage;
-    return stageMatch && (!query || searchText(record).includes(query));
+    const confidenceMatch = state.confidence === 'all' || record.estimate.confidence.level === state.confidence;
+    return confidenceMatch && (!query || searchText(record).includes(query));
   }));
   document.querySelector('#company-body').innerHTML = records.map(companyRow).join('');
   document.querySelector('#result-count').textContent = `${records.length}社 / 全${state.data.records.length}社`;
@@ -158,11 +186,11 @@ function renderCompanies() {
 }
 function setMetrics(data) {
   document.querySelector('#as-of').textContent = `基準日 ${data.as_of}`;
-  document.querySelector('#metric-channels').textContent = data.summary.source_channel_count;
-  document.querySelector('#metric-benchmarks').textContent = data.summary.quantitative_benchmark_count;
-  document.querySelector('#metric-final').textContent = data.summary.quantitative_final_count;
+  document.querySelector('#metric-quantified').textContent = `${data.summary.quantified_company_count} / ${data.summary.record_count}`;
+  document.querySelector('#metric-median-months').textContent = months(data.summary.median_estimated_months);
+  document.querySelector('#metric-median-amount').textContent = yen(data.summary.median_estimated_amount_yen);
+  document.querySelector('#metric-confidence').textContent = percent(data.summary.average_estimate_confidence);
   document.querySelector('#metric-verified').textContent = data.summary.verified_record_count;
-  document.querySelector('#metric-coverage').textContent = `${Math.round(data.summary.research_coverage_ratio * 100)}%`;
 }
 async function init() {
   try {
@@ -175,19 +203,19 @@ async function init() {
     renderCompanies();
   } catch (error) {
     document.querySelector('#benchmark-body').innerHTML = `<tr><td colspan="8" class="load-error">データを読み込めませんでした: ${escapeHtml(error.message)}</td></tr>`;
-    document.querySelector('#company-body').innerHTML = `<tr><td colspan="6" class="load-error">データを読み込めませんでした: ${escapeHtml(error.message)}</td></tr>`;
+    document.querySelector('#company-body').innerHTML = `<tr><td colspan="7" class="load-error">データを読み込めませんでした: ${escapeHtml(error.message)}</td></tr>`;
     document.querySelector('#result-count').textContent = '読み込み失敗';
   }
 }
 document.querySelector('#search').addEventListener('input', event => { state.query = event.target.value; renderCompanies(); });
 document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => {
   document.querySelectorAll('.filter').forEach(item => { const active = item === button; item.classList.toggle('active',active); item.setAttribute('aria-pressed',String(active)); });
-  state.stage = button.dataset.stage; renderCompanies();
+  state.confidence = button.dataset.confidence; renderCompanies();
 }));
 document.querySelectorAll('.sort-button').forEach(button => button.addEventListener('click', () => {
   const key = button.dataset.sort;
   if (state.sortKey === key) state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
-  else { state.sortKey = key; state.sortDirection = key === 'coverage' ? 'desc' : 'asc'; }
+  else { state.sortKey = key; state.sortDirection = key === 'company' || key === 'sector' ? 'asc' : 'desc'; }
   renderCompanies();
 }));
 init();
