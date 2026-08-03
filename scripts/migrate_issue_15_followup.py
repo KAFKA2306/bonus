@@ -70,20 +70,12 @@ def update_generate_pages_fixture() -> None:
 def update_html_build_marker() -> None:
     html_path = ROOT / "docs" / "index.html"
     validator_path = ROOT / "scripts" / "validate_pages.py"
-    old = 'name="bonus-build" content="quantified-v7"'
+    html_old = 'name="bonus-build" content="nikkei225-v1"'
+    validator_old = 'name="bonus-build" content="quantified-v7"'
     new = 'name="bonus-build" content="quantified-v8"'
 
-    html = html_path.read_text(encoding="utf-8")
-    validator = validator_path.read_text(encoding="utf-8")
-
-    if old not in html and new not in html:
-        raise RuntimeError("docs/index.html does not contain the expected bonus build marker")
-    if old not in validator and new not in validator:
-        raise RuntimeError("scripts/validate_pages.py does not contain the expected bonus build marker")
-
-    html_path.write_text(html.replace(old, new), encoding="utf-8")
-    validator_path.write_text(validator.replace(old, new), encoding="utf-8")
-
+    replace_once(html_path, html_old, new)
+    replace_once(validator_path, validator_old, new)
     replace_once(
         validator_path,
         '        "<title>主要30社 賞与定量モデル</title>",\n',
