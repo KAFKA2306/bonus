@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply the two fail-closed follow-up edits found by issue #15 diagnostics."""
+"""Apply the fail-closed follow-up edits found by issue #15 diagnostics."""
 from __future__ import annotations
 
 import re
@@ -46,22 +46,27 @@ def update_generate_pages_fixture() -> None:
     path.write_text(updated, encoding="utf-8")
 
 
-def update_html_schema_marker() -> None:
-    path = ROOT / "docs" / "index.html"
-    text = path.read_text(encoding="utf-8")
-    old = 'data-schema-version="4"'
-    new = 'data-schema-version="5"'
-    count = text.count(old)
-    if count == 0:
-        if new in text:
-            return
-        raise RuntimeError("docs/index.html does not contain the expected schema marker")
-    path.write_text(text.replace(old, new), encoding="utf-8")
+def update_html_build_marker() -> None:
+    html_path = ROOT / "docs" / "index.html"
+    validator_path = ROOT / "scripts" / "validate_pages.py"
+    old = 'name="bonus-build" content="quantified-v7"'
+    new = 'name="bonus-build" content="quantified-v8"'
+
+    html = html_path.read_text(encoding="utf-8")
+    validator = validator_path.read_text(encoding="utf-8")
+
+    if old not in html and new not in html:
+        raise RuntimeError("docs/index.html does not contain the expected bonus build marker")
+    if old not in validator and new not in validator:
+        raise RuntimeError("scripts/validate_pages.py does not contain the expected bonus build marker")
+
+    html_path.write_text(html.replace(old, new), encoding="utf-8")
+    validator_path.write_text(validator.replace(old, new), encoding="utf-8")
 
 
 def main() -> int:
     update_generate_pages_fixture()
-    update_html_schema_marker()
+    update_html_build_marker()
     print("PASS: issue 15 follow-up migration applied")
     return 0
 
