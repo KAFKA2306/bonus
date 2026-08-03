@@ -216,6 +216,14 @@ def model(codes):
                 "previous_amount_yen": 1739443,
                 "sample_months": {"organizations": 1928, "workers": 1449045},
                 "sample_amount": {"organizations": 1003, "workers": 739115},
+                "amount_conversion": {
+                    "status": "unavailable",
+                    "amount_sample_id": "fixture-sector-1:amount",
+                    "months_sample_id": "fixture-sector-1:months",
+                    "matched_population": False,
+                    "aggregation": "worker_weighted_average",
+                    "reason": "different respondent samples",
+                },
                 "source_url": "https://example.com/rengo.pdf",
                 "company_codes": list(codes),
             }
@@ -260,7 +268,7 @@ class PagesTests(unittest.TestCase):
             [record("6146")],
             {"6146": "ディスコ", "7203": "トヨタ"},
         )
-        self.assertEqual(payload["schema_version"], 4)
+        self.assertEqual(payload["schema_version"], 5)
         self.assertEqual(payload["summary"]["record_count"], 2)
         self.assertEqual(payload["summary"]["quantified_company_count"], 2)
         self.assertEqual(payload["summary"]["quantitative_benchmark_count"], 2)
@@ -271,7 +279,8 @@ class PagesTests(unittest.TestCase):
         self.assertIn("mechanism", first["estimate"])
         queued = payload["records"][1]
         self.assertEqual(queued["survey"]["stage"], "queued")
-        self.assertGreater(queued["estimate"]["amount_yen"]["central"], 0)
+        self.assertEqual(queued["estimate"]["amount_status"], "unavailable")
+        self.assertIsNone(queued["estimate"]["amount_yen"])
         self.assertTrue(render_json(payload).endswith("\n"))
 
     def test_research_coverage_remains_separate_from_quantification(self):

@@ -75,7 +75,7 @@ def main() -> int:
     actual = DEFAULT_OUTPUT.read_text(encoding="utf-8")
     assert actual == expected, "Pages JSON is stale; run python scripts/generate_pages_data.py"
     public = json.loads(actual)
-    assert public["schema_version"] == 4
+    assert public["schema_version"] == 5
     assert public["generated_from"] == str(input_path.relative_to(ROOT))
     assert public["source_survey_generated_from"] == str(survey_path.relative_to(ROOT))
     assert public["quantitative_benchmarks_generated_from"] == str(quantitative_path.relative_to(ROOT))
@@ -89,6 +89,8 @@ def main() -> int:
     assert public["summary"]["quantitative_final_count"] > 0
     assert public["summary"]["quantitative_provisional_count"] > 0
     assert public["summary"]["median_estimated_months"] > 0
+    assert public["summary"]["amount_available_company_count"] > 0
+    assert public["summary"]["amount_unavailable_company_count"] > 0
     assert public["summary"]["median_estimated_amount_yen"] > 0
     assert 0 < public["summary"]["average_estimate_confidence"] <= 1
     assert public["universe"]["coverage_ratio"] == 1.0
@@ -104,9 +106,18 @@ def main() -> int:
         months = estimate["months"]
         amount = estimate["amount_yen"]
         assert 0 < months["minimum"] <= months["central"] <= months["maximum"] <= 24
-        assert 0 < amount["minimum"] <= amount["central"] <= amount["maximum"]
+        if estimate["amount_status"] == "available":
+            assert isinstance(amount, dict)
+            assert 0 < amount["minimum"] <= amount["central"] <= amount["maximum"]
+            assert 0 <= estimate["confidence"]["amount_score"] <= 1
+            assert estimate["amount_conversion"]["status"] in {"matched_sample", "company_official"}
+        else:
+            assert estimate["amount_status"] == "unavailable"
+            assert amount is None
+            assert estimate["confidence"]["amount_score"] is None
+            assert estimate["amount_method"] == "not_estimable_from_available_samples"
+            assert estimate["amount_conversion"]["matched_population"] is False
         assert 0 <= estimate["confidence"]["score"] <= 1
-        assert 0 <= estimate["confidence"]["amount_score"] <= 1
         assert abs(
             estimate["weights"]["company_prior"]
             + estimate["weights"]["sector_actual"]
@@ -119,8 +130,8 @@ def main() -> int:
     css = (DOCS / "styles.css").read_text(encoding="utf-8")
 
     for marker in (
-        'name="bonus-build" content="quantified-v7"',
-        "<title>主要30社 賞与定量モデル</title>",
+        'name="bonus-build" content="quantified-v8"',
+        "<title>日経225 賞与定量モデル</title>",
         'id="companies"', 'id="benchmarks"', 'id="sources"', 'id="rules"',
         'id="benchmark-body"', 'id="source-body"', 'id="company-body"', 'id="company-table"',
         'id="metric-quantified"', 'id="metric-median-months"', 'id="metric-median-amount"',
@@ -142,7 +153,7 @@ def main() -> int:
     for marker in (
         "./data/bonus.json", "quantitative_benchmarks", "function benchmarkRow",
         "function sourceRow", "function companyRow", "function estimateDetails",
-        "record.estimate", "estimate.months", "estimate.amount_yen", "estimate.weights",
+        "record.estimate", "estimate.months", "estimate.amount_yen", "estimate.amount_status", "estimate.weights",
         "quantified_company_count", "median_estimated_months", "average_estimate_confidence",
         "setAttribute('aria-sort'", "setAttribute('aria-pressed'", "#benchmark-body",
         "#source-body", "#company-body",

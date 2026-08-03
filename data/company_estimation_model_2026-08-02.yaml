@@ -6,58 +6,58 @@ methodology:
   central_formula: 推定中心値 = 会社重み × 旧個社中心値 + (1 - 会社重み) × 2026年業種実測月数 + 制度類型補正。
   weight_formula: 会社重み = clamp(基礎重み + 信頼度係数 × 旧信頼度 + 一次資料加点 - セクター推定減点, 下限, 上限)。
   interval_formula: 下限・上限も会社事前レンジと業種実測値±業種不確実幅を合成し、業績連動制度だけ上側レンジを追加拡張する。総合判断・固定制度には上側プレミアムを付与しない。
-  amount_formula: 原則は業種実測年間金額 ÷ 業種実測年間月数 × 個社推定月数。会社公式の季別月数とモデル額がある場合は、会社基礎月額を優先した参考投影へ切り替える。
+  amount_formula: 個社金額は、同一標本で金額と月数を対応確認できる場合、または会社公式の季別モデル額と月数がある場合だけ算出する。異なる標本の平均金額÷平均月数は使用しない。
   verified_override_policy: 一次資料で支給回数・算定方式・年間月数・季別モデル額を確認できた場合は、その値をモデルより優先する。
-  disclosure_policy: 推定値、実測アンカー、制度類型、アップサイド、会社重み、前提、反証条件を同時表示し、確認済み事実と混同させない。
+  disclosure_policy: 月数推定と金額可用性を分離し、金額を統計的に算定できない場合はnullとunavailableを公開する。
 parameters:
   base_company_weight: 0.45
-  confidence_multiplier: 0.50
+  confidence_multiplier: 0.5
   verified_evidence_bonus: 0.15
   sector_only_penalty: 0.05
   minimum_company_weight: 0.55
-  maximum_company_weight: 0.90
+  maximum_company_weight: 0.9
   minimum_sector_band_months: 0.35
 mechanisms:
   formula_linked_performance:
     label_ja: 算式明示型・業績連動
     broad_classification: performance_linked
     upside_profile: very_high
-    upside_score: 1.00
-    minimum_adjustment_months: 0.00
+    upside_score: 1.0
+    minimum_adjustment_months: 0.0
     central_adjustment_months: 0.35
-    maximum_adjustment_months: 1.30
+    maximum_adjustment_months: 1.3
   nonformula_performance:
     label_ja: 算式非開示型・業績連動
     broad_classification: performance_linked
     upside_profile: high
-    upside_score: 0.80
-    minimum_adjustment_months: 0.00
-    central_adjustment_months: 0.20
-    maximum_adjustment_months: 0.80
+    upside_score: 0.8
+    minimum_adjustment_months: 0.0
+    central_adjustment_months: 0.2
+    maximum_adjustment_months: 0.8
   hybrid:
     label_ja: 固定＋業績連動ハイブリッド
     broad_classification: hybrid
     upside_profile: medium
     upside_score: 0.55
-    minimum_adjustment_months: 0.00
+    minimum_adjustment_months: 0.0
     central_adjustment_months: 0.05
-    maximum_adjustment_months: 0.30
+    maximum_adjustment_months: 0.3
   discretionary:
     label_ja: 労使妥結・総合判断
     broad_classification: discretionary
     upside_profile: low
     upside_score: 0.25
-    minimum_adjustment_months: 0.00
-    central_adjustment_months: 0.00
-    maximum_adjustment_months: 0.00
+    minimum_adjustment_months: 0.0
+    central_adjustment_months: 0.0
+    maximum_adjustment_months: 0.0
   base_salary_linked:
     label_ja: 固定・基本給連動
     broad_classification: base_salary_linked
     upside_profile: low
     upside_score: 0.15
-    minimum_adjustment_months: 0.00
-    central_adjustment_months: 0.00
-    maximum_adjustment_months: 0.00
+    minimum_adjustment_months: 0.0
+    central_adjustment_months: 0.0
+    maximum_adjustment_months: 0.0
 default_mechanism_by_classification:
   performance_linked: nonformula_performance
   hybrid: hybrid
@@ -93,7 +93,7 @@ company_overrides:
       note: 2025年度は夏季3.05か月と年末3.10か月の合計6.15か月。会社公式の支給実績を年間値として採用。
     latest_seasonal:
       period: 2026-summer
-      months: 3.10
+      months: 3.1
       amount_yen: 1082800
       model_age: 35
       source_url: https://jr-central.co.jp/news/release/nws000001_00434.html
@@ -106,10 +106,38 @@ sectors:
     previous_months: 5.45
     response_amount_yen: 1854847
     previous_amount_yen: 1739443
-    sample_months: {organizations: 1928, workers: 1449045}
-    sample_amount: {organizations: 1003, workers: 739115}
+    sample_months:
+      organizations: 1928
+      workers: 1449045
+    sample_amount:
+      organizations: 1003
+      workers: 739115
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['6861', '7203', '6758', '4502', '4063', '8035', '6367', '6857', '6981', '6954', '6273', '6146', '7741', '7733', '4543', '6501', '6503']
+    company_codes:
+    - '6861'
+    - '7203'
+    - '6758'
+    - '4502'
+    - '4063'
+    - '8035'
+    - '6367'
+    - '6857'
+    - '6981'
+    - '6954'
+    - '6273'
+    - '6146'
+    - '7741'
+    - '7733'
+    - '4543'
+    - '6501'
+    - '6503'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:manufacturing:amount
+      months_sample_id: rengo-2026-final:manufacturing:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples
   commercial_distribution:
     name_ja: 商業流通
     response_months: 3.87
@@ -117,10 +145,22 @@ sectors:
     previous_months: 3.89
     response_amount_yen: 1169622
     previous_amount_yen: 1136359
-    sample_months: {organizations: 85, workers: 95038}
-    sample_amount: {organizations: 63, workers: 68925}
+    sample_months:
+      organizations: 85
+      workers: 95038
+    sample_amount:
+      organizations: 63
+      workers: 68925
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['9983']
+    company_codes:
+    - '9983'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:commercial_distribution:amount
+      months_sample_id: rengo-2026-final:commercial_distribution:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples
   transport:
     name_ja: 交通運輸
     response_months: 4.42
@@ -128,10 +168,25 @@ sectors:
     previous_months: 4.28
     response_amount_yen: 917078
     previous_amount_yen: 907781
-    sample_months: {organizations: 203, workers: 154288}
-    sample_amount: {organizations: 53, workers: 13173}
+    sample_months:
+      organizations: 203
+      workers: 154288
+    sample_amount:
+      organizations: 53
+      workers: 13173
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['9020', '9022', '9202', '9201']
+    company_codes:
+    - '9020'
+    - '9022'
+    - '9202'
+    - '9201'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:transport:amount
+      months_sample_id: rengo-2026-final:transport:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples
   service_hotel:
     name_ja: サービス・ホテル
     response_months: 4.04
@@ -139,29 +194,70 @@ sectors:
     previous_months: 4.28
     response_amount_yen: 890000
     previous_amount_yen: 854000
-    sample_months: {organizations: 28, workers: 164364}
-    sample_amount: {organizations: 1, workers: 473}
+    sample_months:
+      organizations: 28
+      workers: 164364
+    sample_amount:
+      organizations: 1
+      workers: 473
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['6098']
+    company_codes:
+    - '6098'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:service_hotel:amount
+      months_sample_id: rengo-2026-final:service_hotel:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples
   information_publication:
     name_ja: 情報・出版
     response_months: 5.42
-    demand_months: 5.70
+    demand_months: 5.7
     previous_months: 6.44
     response_amount_yen: 1770611
     previous_amount_yen: 1783557
-    sample_months: {organizations: 33, workers: 13904}
-    sample_amount: {organizations: 23, workers: 130548}
+    sample_months:
+      organizations: 33
+      workers: 13904
+    sample_amount:
+      organizations: 23
+      workers: 130548
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['9433', '9432', '4307']
+    company_codes:
+    - '9433'
+    - '9432'
+    - '4307'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:information_publication:amount
+      months_sample_id: rengo-2026-final:information_publication:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples
   other:
     name_ja: その他（金融・投資等）
     response_months: 4.39
-    demand_months: 4.40
+    demand_months: 4.4
     previous_months: 4.41
     response_amount_yen: 1749584
     previous_amount_yen: 1689580
-    sample_months: {organizations: 24, workers: 10471}
-    sample_amount: {organizations: 171, workers: 136553}
+    sample_months:
+      organizations: 24
+      workers: 10471
+    sample_amount:
+      organizations: 171
+      workers: 136553
     source_url: https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/kaito_no7_ichiji.pdf
-    company_codes: ['9984', '8306', '8601', '8604']
+    company_codes:
+    - '9984'
+    - '8306'
+    - '8601'
+    - '8604'
+    amount_conversion:
+      status: unavailable
+      amount_sample_id: rengo-2026-final:other:amount
+      months_sample_id: rengo-2026-final:other:months
+      matched_population: false
+      aggregation: worker_weighted_average
+      reason: amount and months aggregates use different respondent samples

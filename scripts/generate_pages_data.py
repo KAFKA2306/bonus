@@ -159,6 +159,7 @@ def _public_sector_anchors(model: dict[str, Any]) -> list[dict[str, Any]]:
                 "previous_amount_yen": int(item["previous_amount_yen"]),
                 "sample_months": item["sample_months"],
                 "sample_amount": item["sample_amount"],
+                "amount_conversion": item["amount_conversion"],
                 "company_count": len(item["company_codes"]),
                 "source_url": item["source_url"],
             }
@@ -222,11 +223,19 @@ def build_public_payload(
     )
     total_required = len(public_records) * len(required_channels)
     central_months = [item["estimate"]["months"]["central"] for item in public_records]
-    central_amounts = [item["estimate"]["amount_yen"]["central"] for item in public_records]
+    central_amounts = [
+        item["estimate"]["amount_yen"]["central"]
+        for item in public_records
+        if isinstance(item["estimate"].get("amount_yen"), dict)
+        and isinstance(item["estimate"]["amount_yen"].get("central"), (int, float))
+    ]
+    amount_available_count = sum(
+        item["estimate"].get("amount_status") == "available" for item in public_records
+    )
     confidence_scores = [item["estimate"]["confidence"]["score"] for item in public_records]
 
     return {
-        "schema_version": 4,
+        "schema_version": 5,
         "as_of": max(source_survey["as_of"], quantitative["as_of"], company_model["as_of"]),
         "generated_from": relative_path(input_path),
         "source_survey_generated_from": relative_path(source_survey_path),
@@ -273,8 +282,12 @@ def build_public_payload(
             "quantitative_final_count": release_counts["final"],
             "quantitative_provisional_count": release_counts["first"],
             "quantified_company_count": len(estimates_by_code),
+            "amount_available_company_count": amount_available_count,
+            "amount_unavailable_company_count": len(public_records) - amount_available_count,
             "median_estimated_months": round(statistics.median(central_months), 2),
-            "median_estimated_amount_yen": int(statistics.median(central_amounts)),
+            "median_estimated_amount_yen": (
+                int(statistics.median(central_amounts)) if central_amounts else None
+            ),
             "average_estimate_confidence": round(statistics.mean(confidence_scores), 2),
             "evidence_status_counts": dict(sorted(status_counts.items())),
             "research_stage_counts": dict(sorted(stage_counts.items())),
