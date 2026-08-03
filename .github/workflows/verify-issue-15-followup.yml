@@ -1,0 +1,164 @@
+name: Verify issue 15 follow-up and finalize
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-issue-15-followup.yml
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+
+jobs:
+  verify-and-finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Cancel obsolete diagnostic runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --repo "$GITHUB_REPOSITORY" --workflow fix-issue-15.yml \
+            --limit 20 --json databaseId,status \
+            --jq '.[] | select(.status == "queued" or .status == "in_progress") | .databaseId' \
+            | while read -r run_id; do
+                [ -n "$run_id" ] && gh run cancel "$run_id" --repo "$GITHUB_REPOSITORY" || true
+              done
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deterministic dependency
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Apply migrations and run all gates
+        run: |
+          set +e
+          python scripts/migrate_issue_15.py > /tmp/migration.log 2>&1
+          migration=$?
+          python scripts/migrate_issue_15_followup.py > /tmp/followup.log 2>&1
+          followup=$?
+
+          unittest=125
+          summary=125
+          generate=125
+          amount_audit=125
+          pages=125
+          javascript=125
+
+          if [ "$migration" -eq 0 ] && [ "$followup" -eq 0 ]; then
+            python -m unittest discover -s tests -v > /tmp/unittest.log 2>&1
+            unittest=$?
+            python scripts/generate_bonus_summary.py --check > /tmp/summary.log 2>&1
+            summary=$?
+            python scripts/generate_pages_data.py > /tmp/generate.log 2>&1
+            generate=$?
+            python scripts/audit_amount_conversion.py > /tmp/amount_audit.log 2>&1
+            amount_audit=$?
+            python scripts/validate_pages.py > /tmp/pages.log 2>&1
+            pages=$?
+            node --check docs/app.js > /tmp/javascript.log 2>&1
+            javascript=$?
+          else
+            for name in unittest summary generate amount_audit pages javascript; do
+              echo 'not run because a migration failed' > "/tmp/$name.log"
+            done
+          fi
+          set -e
+
+          for name in migration followup unittest summary generate amount_audit pages javascript; do
+            echo "===== $name ====="
+            cat "/tmp/$name.log"
+          done
+
+          git add -A
+          git diff --cached --binary > /tmp/issue-15-verified.patch
+          git reset
+
+          MIGRATION="$migration" FOLLOWUP="$followup" UNITTEST="$unittest" SUMMARY="$summary" \
+          GENERATE="$generate" AMOUNT_AUDIT="$amount_audit" PAGES="$pages" \
+          JAVASCRIPT="$javascript" python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          workspace = str(Path.cwd())
+          names = (
+              'migration', 'followup', 'unittest', 'summary',
+              'generate', 'amount_audit', 'pages', 'javascript',
+          )
+          codes = {name: int(os.environ[name.upper()]) for name in names}
+
+          def read_log(name: str) -> str:
+              text = Path(f'/tmp/{name}.log').read_text(encoding='utf-8', errors='replace')
+              return text.replace(workspace, '<workspace>')[-16000:]
+
+          amount_summary = None
+          amount_path = Path('audit/amount_conversion_diff.json')
+          if amount_path.exists():
+              amount = json.loads(amount_path.read_text(encoding='utf-8'))
+              amount_summary = {
+                  'company_count': amount.get('company_count'),
+                  'amount_available_company_count': amount.get('amount_available_company_count'),
+                  'amount_unavailable_company_count': amount.get('amount_unavailable_company_count'),
+              }
+
+          payload = {
+              'schema_version': 1,
+              'issue': 15,
+              'generated_at': datetime.now(timezone.utc).isoformat(),
+              'status': 'passed' if all(code == 0 for code in codes.values()) else 'failed',
+              'exit_codes': codes,
+              'amount_conversion_summary': amount_summary,
+              'logs': {name: read_log(name) for name in names},
+          }
+          Path('/tmp/issue-15-verification.json').write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PY
+      - name: Publish verification evidence
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin main
+          git checkout -B main origin/main
+          mkdir -p audit
+          cp /tmp/issue-15-verification.json audit/issue-15-verification.json
+          git add audit/issue-15-verification.json
+          git commit -m 'test: record issue 15 follow-up verification [skip ci]' || true
+          git push origin HEAD:main
+      - name: Require every gate to pass
+        run: python -c "import json,sys; data=json.load(open('audit/issue-15-verification.json')); sys.exit(0 if data['status']=='passed' else 1)"
+      - name: Commit verified outputs and remove one-time machinery
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B main origin/main
+          git apply --index /tmp/issue-15-verified.patch
+          git rm \
+            scripts/migrate_issue_15.py \
+            scripts/migrate_issue_15_followup.py \
+            .github/workflows/fix-issue-15.yml \
+            .github/workflows/verify-issue-15-followup.yml
+          git add -A
+          git commit -m 'fix: require matched samples for bonus amount conversion [skip ci]'
+          git push origin HEAD:main
+      - name: Close issue and delete related branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue close 15 --repo "$GITHUB_REPOSITORY" --reason completed \
+            --comment 'Implemented matched-sample amount conversion, null/unavailable output for unmatched samples, public UI handling, schema v5, 30-company difference audit, and passing model/Pages/JavaScript checks.'
+          for branch in \
+            agent/fix-bonus-sample-mismatch \
+            ops/trigger-issue-15-verification \
+            ops/diagnose-issue-15 \
+            agent/fix-issue-15-followup; do
+            git push origin --delete "$branch" || true
+          done
