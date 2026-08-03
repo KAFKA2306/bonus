@@ -1,0 +1,157 @@
+name: Verify issue 15 artifact
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-issue-15-pr.yml
+      - scripts/migrate_issue_15.py
+      - scripts/migrate_issue_15_followup.py
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deterministic dependency
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Apply migrations
+        run: |
+          python scripts/migrate_issue_15.py
+          python scripts/migrate_issue_15_followup.py
+      - name: Run all model and Pages gates
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/generate_bonus_summary.py --check
+          python scripts/generate_pages_data.py
+          python scripts/audit_amount_conversion.py
+          python scripts/validate_pages.py
+          node --check docs/app.js
+      - name: Write passing audit evidence
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          amount = json.loads(
+              Path('audit/amount_conversion_diff.json').read_text(encoding='utf-8')
+          )
+          payload = {
+              'schema_version': 1,
+              'issue': 15,
+              'generated_at': datetime.now(timezone.utc).isoformat(),
+              'status': 'passed',
+              'exit_codes': {
+                  'migration': 0,
+                  'followup': 0,
+                  'unittest': 0,
+                  'summary': 0,
+                  'generate': 0,
+                  'amount_audit': 0,
+                  'pages': 0,
+                  'javascript': 0,
+              },
+              'amount_conversion_summary': {
+                  'company_count': amount['company_count'],
+                  'amount_available_company_count': amount['amount_available_company_count'],
+                  'amount_unavailable_company_count': amount['amount_unavailable_company_count'],
+              },
+              'checks': [
+                  'python -m unittest discover -s tests -v',
+                  'python scripts/generate_bonus_summary.py --check',
+                  'python scripts/generate_pages_data.py',
+                  'python scripts/audit_amount_conversion.py',
+                  'python scripts/validate_pages.py',
+                  'node --check docs/app.js',
+              ],
+          }
+          Path('audit/issue-15-verification.json').write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PY
+      - name: Remove runtime caches
+        run: find . -type d -name __pycache__ -prune -exec rm -rf '{}' +
+      - name: Package the verified repository tree delta
+        run: |
+          python - <<'PY'
+          import json
+          import shutil
+          import subprocess
+          from pathlib import Path
+
+          excluded = {
+              '.github/workflows/fix-issue-15.yml',
+              '.github/workflows/trigger-issue-15-build-marker.yml',
+              '.github/workflows/verify-issue-15-followup.yml',
+              '.github/workflows/verify-issue-15-pr.yml',
+              'scripts/migrate_issue_15.py',
+              'scripts/migrate_issue_15_followup.py',
+          }
+          raw = subprocess.check_output(
+              ['git', 'status', '--porcelain=v1', '-z'],
+              text=True,
+          )
+          changed = []
+          for entry in [item for item in raw.split('\0') if item]:
+              path = entry[3:]
+              if ' -> ' in path:
+                  path = path.split(' -> ', 1)[1]
+              if path not in excluded and Path(path).is_file():
+                  changed.append(path)
+          if 'audit/issue-15-verification.json' not in changed:
+              changed.append('audit/issue-15-verification.json')
+
+          root = Path('/tmp/verified-tree')
+          root.mkdir(parents=True, exist_ok=True)
+          for path in sorted(set(changed)):
+              destination = root / path
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(path, destination)
+
+          manifest = {
+              'schema_version': 1,
+              'base_commit': subprocess.check_output(
+                  ['git', 'rev-parse', 'origin/main'], text=True
+              ).strip(),
+              'upsert_paths': sorted(set(changed)),
+              'delete_paths': sorted(excluded),
+          }
+          (root / 'manifest.json').write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(manifest, ensure_ascii=False, indent=2))
+          PY
+          tar -cf /tmp/issue-15-verified-tree.tar -C /tmp verified-tree
+      - uses: actions/upload-artifact@v4
+        with:
+          name: issue-15-verified-tree
+          path: /tmp/issue-15-verified-tree.tar
+          if-no-files-found: error
+          retention-days: 7
+      - name: Publish verified implementation branch
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm \
+            .github/workflows/fix-issue-15.yml \
+            .github/workflows/trigger-issue-15-build-marker.yml \
+            .github/workflows/verify-issue-15-followup.yml \
+            .github/workflows/verify-issue-15-pr.yml \
+            scripts/migrate_issue_15.py \
+            scripts/migrate_issue_15_followup.py
+          git add -A
+          git commit -m 'fix: require matched samples for bonus amount conversion'
+          git push --force origin HEAD:refs/heads/agent/apply-issue-15-verified-tree
