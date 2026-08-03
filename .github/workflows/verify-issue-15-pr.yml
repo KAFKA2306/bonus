@@ -80,6 +80,8 @@ jobs:
               encoding='utf-8',
           )
           PY
+      - name: Remove runtime caches
+        run: find . -type d -name __pycache__ -prune -exec rm -rf '{}' +
       - name: Package the verified repository tree delta
         run: |
           python - <<'PY'
