@@ -1,27 +1,29 @@
 {
   "schema_version": 1,
   "issue": 15,
-  "generated_at": "2026-08-03T04:16:53.606292+00:00",
-  "status": "failed",
+  "generated_at": "2026-08-03T09:30:28.928799+00:00",
+  "status": "passed",
   "exit_codes": {
     "migration": 0,
-    "followup": 1,
-    "unittest": 125,
-    "summary": 125,
-    "generate": 125,
-    "amount_audit": 125,
-    "pages": 125,
-    "javascript": 125
+    "followup": 0,
+    "unittest": 0,
+    "summary": 0,
+    "generate": 0,
+    "amount_audit": 0,
+    "pages": 0,
+    "javascript": 0
   },
-  "amount_conversion_summary": null,
-  "logs": {
-    "migration": "PASS: issue 15 source migration applied\n",
-    "followup": "Traceback (most recent call last):\n  File \"<workspace>/scripts/migrate_issue_15_followup.py\", line 70, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<workspace>/scripts/migrate_issue_15_followup.py\", line 64, in main\n    update_html_schema_marker()\n  File \"<workspace>/scripts/migrate_issue_15_followup.py\", line 58, in update_html_schema_marker\n    raise RuntimeError(\"docs/index.html does not contain the expected schema marker\")\nRuntimeError: docs/index.html does not contain the expected schema marker\n",
-    "unittest": "not run because a migration failed\n",
-    "summary": "not run because a migration failed\n",
-    "generate": "not run because a migration failed\n",
-    "amount_audit": "not run because a migration failed\n",
-    "pages": "not run because a migration failed\n",
-    "javascript": "not run because a migration failed\n"
-  }
+  "amount_conversion_summary": {
+    "company_count": 30,
+    "amount_available_company_count": 1,
+    "amount_unavailable_company_count": 29
+  },
+  "checks": [
+    "python -m unittest discover -s tests -v",
+    "python scripts/generate_bonus_summary.py --check",
+    "python scripts/generate_pages_data.py",
+    "python scripts/audit_amount_conversion.py",
+    "python scripts/validate_pages.py",
+    "node --check docs/app.js"
+  ]
 }

@@ -83,6 +83,34 @@ def _positive_sample(value: Any, field_name: str) -> dict[str, int]:
     return result
 
 
+def _validate_amount_conversion(value: Any, field_name: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValidationError(f"{field_name} must be an object")
+    amount_sample_id = _required_text(value.get("amount_sample_id"), f"{field_name}.amount_sample_id")
+    months_sample_id = _required_text(value.get("months_sample_id"), f"{field_name}.months_sample_id")
+    aggregation = _required_text(value.get("aggregation"), f"{field_name}.aggregation")
+    reason = _required_text(value.get("reason"), f"{field_name}.reason")
+    matched_population = value.get("matched_population")
+    if not isinstance(matched_population, bool):
+        raise ValidationError(f"{field_name}.matched_population must be boolean")
+    if matched_population and amount_sample_id != months_sample_id:
+        raise ValidationError(
+            f"{field_name} cannot be matched when amount_sample_id and months_sample_id differ"
+        )
+    status = "matched_sample" if matched_population else "unavailable"
+    if value.get("status") != status:
+        raise ValidationError(f"{field_name}.status must be {status}")
+    return {
+        **value,
+        "status": status,
+        "amount_sample_id": amount_sample_id,
+        "months_sample_id": months_sample_id,
+        "matched_population": matched_population,
+        "aggregation": aggregation,
+        "reason": reason,
+    }
+
+
 def _validate_official_months(value: Any, field_name: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValidationError(f"{field_name} must be an object")
@@ -226,6 +254,9 @@ def validate_company_estimation_model(
         previous_amount = _number(item.get("previous_amount_yen"), f"{prefix}.previous_amount_yen", positive=True)
         sample_months = _positive_sample(item.get("sample_months"), f"{prefix}.sample_months")
         sample_amount = _positive_sample(item.get("sample_amount"), f"{prefix}.sample_amount")
+        amount_conversion = _validate_amount_conversion(
+            item.get("amount_conversion"), f"{prefix}.amount_conversion"
+        )
         source_url = item.get("source_url")
         if not is_https_url(source_url):
             raise ValidationError(f"{prefix}.source_url must be https")
@@ -253,6 +284,7 @@ def validate_company_estimation_model(
             "previous_amount_yen": previous_amount,
             "sample_months": sample_months,
             "sample_amount": sample_amount,
+            "amount_conversion": amount_conversion,
             "company_codes": normalized_codes,
         }
 
@@ -393,7 +425,17 @@ def _apply_model_override(
 
 def _amount_from_sector(
     estimate: dict[str, float], sector: dict[str, Any]
-) -> tuple[dict[str, int], str, str]:
+) -> tuple[dict[str, int] | None, str, str, dict[str, Any]]:
+    conversion = dict(sector["amount_conversion"])
+    if not conversion["matched_population"]:
+        return (
+            None,
+            "not_estimable_from_available_samples",
+            "業種の金額平均と月数平均は回答標本が異なるため、比から個社金額を算定しない。",
+            {**conversion, "status": "unavailable", "monthly_base_yen": None},
+        )
+    if conversion["amount_sample_id"] != conversion["months_sample_id"]:
+        raise ValidationError("matched amount conversion requires one shared sample id")
     implied_monthly_base = sector["response_amount_yen"] / sector["response_months"]
     amount = {
         key: int(round(implied_monthly_base * estimate[key] / 1000) * 1000)
@@ -401,17 +443,23 @@ def _amount_from_sector(
     }
     return (
         amount,
-        "sector_implied",
-        "業種平均基本月額を仮定した参考換算であり、個社の実支給額ではない。月数と金額の標本も一致しない。",
+        "matched_sector_sample",
+        "同一回答標本の年間金額と年間月数から得た基礎月額による参考換算。",
+        {
+            **conversion,
+            "status": "matched_sample",
+            "monthly_base_yen": int(round(implied_monthly_base)),
+        },
     )
 
 
 def _amount_from_official_seasonal_base(
     annual_months: dict[str, float], seasonal: dict[str, Any]
-) -> tuple[dict[str, int], str, str]:
+) -> tuple[dict[str, int], str, str, dict[str, Any]]:
     monthly_base = seasonal["amount_yen"] / seasonal["months"]
     central = monthly_base * annual_months["central"]
     uncertainty_rate = 0.05
+    sample_id = f"company-official:{seasonal['source_url']}:{seasonal['period']}"
     return (
         {
             "minimum": int(round(central * (1 - uncertainty_rate) / 1000) * 1000),
@@ -423,6 +471,15 @@ def _amount_from_official_seasonal_base(
             f"{seasonal['period']}の会社公式モデル額÷月数で基礎月額を推定し、別期間の公式年間月数を乗じた参考値。"
             "期間差を含むため実支給額ではない。"
         ),
+        {
+            "status": "company_official",
+            "amount_sample_id": sample_id,
+            "months_sample_id": sample_id,
+            "matched_population": True,
+            "aggregation": "company_model_employee",
+            "reason": "company published amount and months for the same seasonal model employee",
+            "monthly_base_yen": int(round(monthly_base)),
+        },
     )
 
 
@@ -500,11 +557,14 @@ def build_company_estimates(
         estimate = {key: round(max(0.1, value), 2) for key, value in estimate.items()}
 
         if override.get("amount_policy") == "project_from_official_seasonal_base":
-            amount, amount_method, amount_caution = _amount_from_official_seasonal_base(
+            amount, amount_method, amount_caution, amount_conversion = _amount_from_official_seasonal_base(
                 estimate, override["latest_seasonal"]
             )
         else:
-            amount, amount_method, amount_caution = _amount_from_sector(estimate, sector)
+            amount, amount_method, amount_caution, amount_conversion = _amount_from_sector(
+                estimate, sector
+            )
+        amount_status = "available" if amount is not None else "unavailable"
 
         verified_record = bool(
             record
@@ -521,15 +581,18 @@ def build_company_estimates(
             confidence_score = max(confidence_score, 0.82)
         confidence_score = round(_clamp(confidence_score, 0.25, 0.90), 2)
 
-        amount_score = confidence_score - 0.15
-        if amount_method == "sector_implied":
-            if sector["sample_amount"]["organizations"] < 10:
-                amount_score -= 0.12
-            elif sector["sample_amount"]["organizations"] < 50:
-                amount_score -= 0.05
+        if amount is None:
+            amount_score = None
         else:
-            amount_score = max(amount_score, 0.65)
-        amount_score = round(_clamp(amount_score, 0.15, 0.82), 2)
+            amount_score = confidence_score - 0.15
+            if amount_method == "matched_sector_sample":
+                if sector["sample_amount"]["organizations"] < 10:
+                    amount_score -= 0.12
+                elif sector["sample_amount"]["organizations"] < 50:
+                    amount_score -= 0.05
+            else:
+                amount_score = max(amount_score, 0.65)
+            amount_score = round(_clamp(amount_score, 0.15, 0.82), 2)
 
         status = "estimated"
         if override.get("official_annual_months") or (
@@ -591,8 +654,10 @@ def build_company_estimates(
 
         assumptions = list(hypothesis["assumptions"])
         assumptions.append("旧個社調査の相対的な高低が2026年にも一定程度残る。")
-        if amount_method == "sector_implied":
-            assumptions.append("参考換算額では個社の基本月額を業種平均と同じと仮定する。")
+        if amount_method == "not_estimable_from_available_samples":
+            assumptions.append("金額標本と月数標本が異なるため、個社参考金額を算定しない。")
+        elif amount_method == "matched_sector_sample":
+            assumptions.append("同一標本から得た業種基礎月額を個社月数へ参考適用する。")
         else:
             assumptions.append("会社公式の季別モデル基礎額が年間換算にも近似利用できる。")
         falsifiers = list(hypothesis["falsifiers"])
@@ -605,7 +670,9 @@ def build_company_estimates(
             "sector_name_ja": sector["name_ja"],
             "months": estimate,
             "amount_yen": amount,
+            "amount_status": amount_status,
             "amount_method": amount_method,
+            "amount_conversion": amount_conversion,
             "frequency_per_year": frequency,
             "classification": classification,
             "mechanism": {
@@ -640,9 +707,7 @@ def build_company_estimates(
                 "sector_demand_months": sector["demand_months"],
                 "sector_previous_months": sector["previous_months"],
                 "sector_actual_amount_yen": int(sector["response_amount_yen"]),
-                "sector_implied_monthly_base_yen": int(
-                    round(sector["response_amount_yen"] / sector["response_months"])
-                ),
+                "sector_implied_monthly_base_yen": amount_conversion.get("monthly_base_yen"),
                 "sector_sample_months": sector["sample_months"],
                 "sector_sample_amount": sector["sample_amount"],
                 "source_url": sector["source_url"],

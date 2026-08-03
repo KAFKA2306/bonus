@@ -106,6 +106,14 @@ def model(codes=None):
                 "previous_amount_yen": 1739443,
                 "sample_months": {"organizations": 1928, "workers": 1449045},
                 "sample_amount": {"organizations": 1003, "workers": 739115},
+                "amount_conversion": {
+                    "status": "unavailable",
+                    "amount_sample_id": "rengo:manufacturing:amount",
+                    "months_sample_id": "rengo:manufacturing:months",
+                    "matched_population": False,
+                    "aggregation": "worker_weighted_average",
+                    "reason": "different respondent samples",
+                },
                 "source_url": "https://example.com/rengo.pdf",
                 "company_codes": codes,
             }
@@ -163,6 +171,8 @@ class CompanyEstimateTests(unittest.TestCase):
         self.assertGreaterEqual(result["months"]["minimum"], 4.0)
         self.assertEqual(result["frequency_per_year"], 4)
         self.assertEqual(result["mechanism"]["upside_profile"], "medium")
+        self.assertIsNone(result["amount_yen"])
+        self.assertEqual(result["amount_status"], "unavailable")
         self.assertAlmostEqual(
             result["weights"]["company_prior"]
             + result["weights"]["sector_actual"],
@@ -228,6 +238,8 @@ class CompanyEstimateTests(unittest.TestCase):
         self.assertEqual(result["mechanism"]["upside_profile"], "low")
         self.assertEqual(result["months"]["central"], 6.15)
         self.assertEqual(result["amount_method"], "official_company_base_projection")
+        self.assertEqual(result["amount_status"], "available")
+        self.assertEqual(result["amount_conversion"]["status"], "company_official")
         self.assertGreater(result["amount_yen"]["central"], 2_000_000)
 
     def test_nonformula_performance_expands_upside_without_salary_inference(self):
@@ -251,8 +263,10 @@ class CompanyEstimateTests(unittest.TestCase):
         self.assertEqual(result["mechanism"]["upside_profile"], "high")
         self.assertEqual(result["mechanism"]["formula_disclosure"], "not_disclosed")
         self.assertGreater(result["months"]["maximum"], 7.0)
-        self.assertEqual(result["amount_method"], "sector_implied")
-        self.assertIn("業種平均基本月額", result["amount_caution"])
+        self.assertEqual(result["amount_method"], "not_estimable_from_available_samples")
+        self.assertEqual(result["amount_status"], "unavailable")
+        self.assertIsNone(result["amount_yen"])
+        self.assertIn("回答標本", result["amount_caution"])
 
     def test_rejects_incomplete_sector_coverage(self):
         with self.assertRaises(ValidationError):
@@ -274,6 +288,38 @@ class CompanyEstimateTests(unittest.TestCase):
         }
         with self.assertRaises(ValidationError):
             validate_company_estimation_model(payload, {"6146"})
+
+    def test_matched_sector_sample_allows_amount_conversion(self):
+        payload = model()
+        conversion = payload["sectors"]["manufacturing"]["amount_conversion"]
+        conversion.update(
+            {
+                "status": "matched_sample",
+                "amount_sample_id": "rengo:manufacturing:matched",
+                "months_sample_id": "rengo:manufacturing:matched",
+                "matched_population": True,
+                "reason": "same respondents answered both fields",
+            }
+        )
+        validated = validate_company_estimation_model(payload, {"6146"})
+        result = build_company_estimates({"6146": hypothesis()}, [], validated)["6146"]
+        self.assertEqual(result["amount_status"], "available")
+        self.assertEqual(result["amount_method"], "matched_sector_sample")
+        self.assertGreater(result["amount_yen"]["central"], 0)
+        self.assertGreater(result["amount_conversion"]["monthly_base_yen"], 0)
+
+    def test_rejects_mismatched_ids_claimed_as_matched_population(self):
+        payload = model()
+        conversion = payload["sectors"]["manufacturing"]["amount_conversion"]
+        conversion.update(
+            {
+                "status": "matched_sample",
+                "matched_population": True,
+            }
+        )
+        with self.assertRaises(ValidationError):
+            validate_company_estimation_model(payload, {"6146"})
+
 
 
 if __name__ == "__main__":

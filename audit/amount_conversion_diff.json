@@ -1,0 +1,675 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-03T09:30:26.804362+00:00",
+  "source": "docs/data/bonus.json",
+  "policy": "do_not_divide_amount_and_month_averages_from_different_samples",
+  "company_count": 30,
+  "amount_available_company_count": 1,
+  "amount_unavailable_company_count": 29,
+  "records": [
+    {
+      "stock_code": "4063",
+      "company_name_ja": "信越化学工業",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1831000,
+        "central": 1926000,
+        "maximum": 2022000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "4307",
+      "company_name_ja": "野村総合研究所",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:information_publication:amount",
+        "months_sample_id": "rengo-2026-final:information_publication:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1852000,
+        "central": 2101000,
+        "maximum": 2352000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "4502",
+      "company_name_ja": "武田薬品工業",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1599000,
+        "central": 1811000,
+        "maximum": 2022000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "4543",
+      "company_name_ja": "テルモ",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1783000,
+        "central": 1937000,
+        "maximum": 2090000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6098",
+      "company_name_ja": "リクルートホールディングス",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:service_hotel:amount",
+        "months_sample_id": "rengo-2026-final:service_hotel:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 846000,
+        "central": 1002000,
+        "maximum": 1247000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6146",
+      "company_name_ja": "ディスコ",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 2922000,
+        "central": 3509000,
+        "maximum": 4303000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6273",
+      "company_name_ja": "SMC",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1094000,
+        "central": 2039000,
+        "maximum": 3123000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6367",
+      "company_name_ja": "ダイキン工業",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1490000,
+        "central": 1824000,
+        "maximum": 2295000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6501",
+      "company_name_ja": "日立製作所",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1626000,
+        "central": 1933000,
+        "maximum": 2380000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6503",
+      "company_name_ja": "三菱電機",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1708000,
+        "central": 1940000,
+        "maximum": 2308000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6758",
+      "company_name_ja": "ソニーグループ",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 467000,
+        "central": 696000,
+        "maximum": 1064000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6857",
+      "company_name_ja": "アドバンテスト",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1279000,
+        "central": 1937000,
+        "maximum": 2728000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6861",
+      "company_name_ja": "キーエンス",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1984000,
+        "central": 2349000,
+        "maximum": 2850000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6954",
+      "company_name_ja": "ファナック",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1504000,
+        "central": 2465000,
+        "maximum": 3560000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "6981",
+      "company_name_ja": "村田製作所",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1715000,
+        "central": 1937000,
+        "maximum": 2295000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "7203",
+      "company_name_ja": "トヨタ自動車",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 2145000,
+        "central": 2298000,
+        "maximum": 2455000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "7733",
+      "company_name_ja": "オリンパス",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1831000,
+        "central": 1988000,
+        "maximum": 2141000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "7741",
+      "company_name_ja": "HOYA",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1487000,
+        "central": 1708000,
+        "maximum": 2066000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "8035",
+      "company_name_ja": "東京エレクトロン",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:manufacturing:amount",
+        "months_sample_id": "rengo-2026-final:manufacturing:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1715000,
+        "central": 2056000,
+        "maximum": 2530000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "8306",
+      "company_name_ja": "三菱UFJフィナンシャル・グループ",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:other:amount",
+        "months_sample_id": "rengo-2026-final:other:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1738000,
+        "central": 1941000,
+        "maximum": 2220000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "8601",
+      "company_name_ja": "大和証券グループ本社",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:other:amount",
+        "months_sample_id": "rengo-2026-final:other:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1598000,
+        "central": 1905000,
+        "maximum": 2212000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "8604",
+      "company_name_ja": "野村ホールディングス",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:other:amount",
+        "months_sample_id": "rengo-2026-final:other:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 2108000,
+        "central": 2495000,
+        "maximum": 3041000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9020",
+      "company_name_ja": "JR東日本",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:transport:amount",
+        "months_sample_id": "rengo-2026-final:transport:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 820000,
+        "central": 930000,
+        "maximum": 1039000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9022",
+      "company_name_ja": "JR東海",
+      "amount_status": "available",
+      "amount_method": "official_company_base_projection",
+      "amount_conversion": {
+        "status": "company_official",
+        "amount_sample_id": "company-official:https://jr-central.co.jp/news/release/nws000001_00434.html:2026-summer",
+        "months_sample_id": "company-official:https://jr-central.co.jp/news/release/nws000001_00434.html:2026-summer",
+        "matched_population": true,
+        "aggregation": "company_model_employee",
+        "reason": "company published amount and months for the same seasonal model employee",
+        "monthly_base_yen": 349290
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1276000,
+        "central": 1276000,
+        "maximum": 1276000
+      },
+      "current_publishable_amount_yen": {
+        "minimum": 2041000,
+        "central": 2148000,
+        "maximum": 2256000
+      },
+      "central_change_yen": 872000
+    },
+    {
+      "stock_code": "9201",
+      "company_name_ja": "日本航空",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:transport:amount",
+        "months_sample_id": "rengo-2026-final:transport:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 614000,
+        "central": 726000,
+        "maximum": 836000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9202",
+      "company_name_ja": "ANAホールディングス",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:transport:amount",
+        "months_sample_id": "rengo-2026-final:transport:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 747000,
+        "central": 857000,
+        "maximum": 969000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9432",
+      "company_name_ja": "日本電信電話",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:information_publication:amount",
+        "months_sample_id": "rengo-2026-final:information_publication:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1408000,
+        "central": 1558000,
+        "maximum": 1705000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9433",
+      "company_name_ja": "KDDI",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:information_publication:amount",
+        "months_sample_id": "rengo-2026-final:information_publication:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1493000,
+        "central": 1666000,
+        "maximum": 1905000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9983",
+      "company_name_ja": "ファーストリテイリング",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:commercial_distribution:amount",
+        "months_sample_id": "rengo-2026-final:commercial_distribution:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1445000,
+        "central": 1717000,
+        "maximum": 2107000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    },
+    {
+      "stock_code": "9984",
+      "company_name_ja": "ソフトバンクグループ",
+      "amount_status": "unavailable",
+      "amount_method": "not_estimable_from_available_samples",
+      "amount_conversion": {
+        "status": "unavailable",
+        "amount_sample_id": "rengo-2026-final:other:amount",
+        "months_sample_id": "rengo-2026-final:other:months",
+        "matched_population": false,
+        "aggregation": "worker_weighted_average",
+        "reason": "amount and months aggregates use different respondent samples",
+        "monthly_base_yen": null
+      },
+      "retired_cross_sample_projection_yen": {
+        "minimum": 1347000,
+        "central": 1981000,
+        "maximum": 2774000
+      },
+      "current_publishable_amount_yen": null,
+      "central_change_yen": null
+    }
+  ]
+}
