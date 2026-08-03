@@ -1,5 +1,6 @@
 name: Fix issue 15 amount sample mismatch
 
+# One-time verification trigger: 2026-08-03
 on:
   push:
     branches: [main]
@@ -71,10 +72,12 @@ jobs:
           git commit -m 'fix: require matched samples for bonus amount conversion [skip ci]'
           git pull --rebase origin main
           git push origin HEAD:main
-      - name: Close issue and delete merged branch
+      - name: Close issue and delete merged branches
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh issue close 15 --repo "$GITHUB_REPOSITORY" --reason completed \
             --comment 'Implemented matched-sample amount conversion, null/unavailable output for unmatched samples, public UI handling, 30-company difference audit, and passing regression/Pages checks.'
-          git push origin --delete agent/fix-bonus-sample-mismatch || true
+          for branch in agent/fix-bonus-sample-mismatch ops/trigger-issue-15-verification; do
+            git push origin --delete "$branch" || true
+          done
