@@ -8,7 +8,7 @@
   "company_estimation_model_generated_from": "data/company_estimation_model_2026-08-02.yaml",
   "universe": {
     "source_file": "https://indexes.nikkei.co.jp/nkave/index/component?idx=nk225",
-    "source_as_of": "2026-08-03",
+    "source_as_of": "2026-08-04",
     "mutation_policy": "official_snapshot_at_build",
     "tracked_companies": 225,
     "covered_companies": 225,
