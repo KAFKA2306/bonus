@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="日経225全社の賞与を、個社一次資料と2026年の業種別実測値から根拠付きで検索・比較するダッシュボード">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="comparison-v9">
-  <title>日経225 賞与比較ワークスペース</title>
+  <meta name="bonus-build" content="quantified-v8">
+  <meta name="bonus-ui" content="comparison-v9">
+  <title>日経225 賞与定量モデル</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./comparison.css">
 </head>
@@ -28,7 +29,7 @@
     <section class="shell metrics" aria-label="定量モデル概要">
       <article><span>定量化済み</span><strong id="metric-quantified">—</strong><small>全225社に月数レンジ</small></article>
       <article><span>推定中央値</span><strong id="metric-median-months">—</strong><small>年間基本給月数</small></article>
-      <article><span>金額換算可能</span><strong id="metric-amount-available">—</strong><small>対応標本または会社公式値</small></article>
+      <article><span>金額換算可能</span><strong id="metric-amount-available">—</strong><span id="metric-median-amount" hidden>—</span><small>対応標本または会社公式値</small></article>
       <article><span>平均信頼度</span><strong id="metric-confidence">—</strong><small>0–100%</small></article>
       <article><span>個社一次資料あり</span><strong id="metric-verified">—</strong><small>制度・回数・下限等</small></article>
     </section>
@@ -39,7 +40,7 @@
 
       <form class="comparison-toolbar" id="company-controls" role="search" aria-label="企業検索と絞り込み">
         <label class="control-field control-search" for="search"><span>会社・コード・業種・方式を検索</span><input id="search" type="search" placeholder="例：東京エレクトロン、8035、電機" autocomplete="off"></label>
-        <label class="control-field" for="confidence-filter"><span>信頼度</span><select id="confidence-filter"><option value="all">すべて</option><option value="high">高</option><option value="medium">中</option><option value="low">低</option></select></label>
+        <label class="control-field" for="confidence-filter"><span>信頼度</span><select id="confidence-filter"><option value="all" data-confidence="all">すべて</option><option value="high">高</option><option value="medium">中</option><option value="low">低</option></select></label>
         <label class="control-field" for="status-filter"><span>推定状態</span><select id="status-filter"><option value="all">すべて</option><option value="verified">一次資料の明示値</option><option value="company_estimate">個社情報を含む推定</option><option value="sector_initial">業種初期推定</option><option value="amount_unavailable">金額算定不可</option></select></label>
         <label class="control-field" for="sector-filter"><span>業種</span><select id="sector-filter"><option value="all">すべて</option></select></label>
         <label class="control-field" for="sort-select"><span>並び順</span><select id="sort-select"><option value="months-desc">月数 高い順</option><option value="months-asc">月数 低い順</option><option value="confidence-desc">信頼度 高い順</option><option value="company-asc">会社名順</option><option value="sector-asc">業種順</option></select></label>
@@ -47,7 +48,7 @@
         <button class="clear-control" id="clear-filters" type="button">条件をリセット</button>
       </form>
 
-      <div class="result-bar" aria-live="polite"><strong id="result-count">読み込み中</strong><span id="active-filter-summary">全社を表示</span></div>
+      <div class="result-bar" aria-live="polite"><strong id="result-count" role="status">読み込み中</strong><span id="active-filter-summary">全社を表示</span></div>
 
       <aside id="compare-tray" class="compare-tray" aria-labelledby="compare-tray-title" hidden>
         <div><span class="kicker">COMPARE</span><h3 id="compare-tray-title"><span id="compare-count">0</span>社を選択中</h3><div id="compare-chips" class="compare-chips"></div></div>
