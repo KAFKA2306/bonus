@@ -3,50 +3,75 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="日経225全社の賞与を、個社一次資料と2026年の業種別実測値から根拠付きで定量推定する比較ダッシュボード">
+  <meta name="description" content="日経225全社の賞与を、個社一次資料と2026年の業種別実測値から根拠付きで検索・比較するダッシュボード">
   <meta name="theme-color" content="#fbfaf7">
-  <meta name="bonus-build" content="quantified-v8">
-  <title>日経225 賞与定量モデル</title>
+  <meta name="bonus-build" content="comparison-v9">
+  <title>日経225 賞与比較ワークスペース</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#companies">企業別定量表へ移動</a>
+  <a class="skip-link" href="#companies">企業検索・比較へ移動</a>
   <header class="site-header">
-    <a class="brand" href="#top"><span class="brand-mark">量</span><span>賞与定量モデル</span></a>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">量</span><span>賞与比較</span></a>
     <nav aria-label="主要ナビゲーション">
-      <a href="#companies">企業別推定</a><a href="#benchmarks">実測値</a><a href="#sources">参照サイト</a><a href="#rules">推定ロジック</a><a href="https://github.com/KAFKA2306/bonus">GitHub ↗</a>
+      <a href="#companies">企業を探す</a><a href="#comparison">比較</a><a href="#benchmarks">実測値</a><a href="#sources">出典</a><a href="#rules">推定ロジック</a><a href="https://github.com/KAFKA2306/bonus">GitHub ↗</a>
     </nav>
   </header>
   <main id="top">
-    <section class="hero shell">
-      <div class="eyebrow">NIKKEI 225 QUANTIFIED BONUS ESTIMATION</div>
-      <h1>日経225全社に、<br>根拠付きの数値を出す。</h1>
-      <p class="lead">個社一次資料がある会社は公式値を優先し、未確認会社は日経公式業種と連合2026年最終集計を実測アンカーとして定量化します。制度類型によりアップサイドを分け、推定月数、レンジ、参考換算額、信頼度を同時表示します。</p>
-      <div class="meta-line"><span id="as-of">基準日 —</span><span>公式Universe 225社</span><span>個社推定30社＋業種初期推定195社</span><span>確認事実と推定を分離</span></div>
+    <section class="hero shell" aria-labelledby="page-title">
+      <div class="eyebrow">NIKKEI 225 BONUS COMPARISON WORKSPACE</div>
+      <h1 id="page-title">企業を探し、<br>根拠をそろえて比較する。</h1>
+      <p class="lead">個社一次資料の明示値、一次資料の境界付き推定、制度確認済み推定、業種初期推定を区別します。金額換算できない企業は0円ではなく「算定不可」として扱います。</p>
+      <div class="meta-line"><span id="as-of">基準日 —</span><span>公式Universe 225社</span><span>比較は2〜5社</span><span>確認事実と推定を分離</span></div>
     </section>
     <section class="shell metrics" aria-label="定量モデル概要">
       <article><span>定量化済み</span><strong id="metric-quantified">—</strong><small>全225社に月数レンジ</small></article>
       <article><span>推定中央値</span><strong id="metric-median-months">—</strong><small>年間基本給月数</small></article>
-      <article><span>参考換算中央値</span><strong id="metric-median-amount">—</strong><small>業種平均基本月額を仮定</small></article>
+      <article><span>金額換算可能</span><strong id="metric-amount-available">—</strong><small>対応標本または会社公式値</small></article>
       <article><span>平均信頼度</span><strong id="metric-confidence">—</strong><small>0–100%</small></article>
       <article><span>個社一次資料あり</span><strong id="metric-verified">—</strong><small>制度・回数・下限等</small></article>
     </section>
-    <section id="companies" class="shell section-block">
-      <div class="section-heading"><div><span class="kicker">COMPANY ESTIMATES</span><h2>日経225企業別の定量比較</h2></div><p>参考換算額は個社実額ではありません。低信頼度の業種初期推定は、会社・労組一次資料の取得時に置換されます。</p></div>
-      <div class="model-note"><strong>推定式:</strong> 個社資料・個社事前分布を優先し、未確認会社は日経業種→連合2026業種別実測へ接続。業績連動は上側レンジを拡張し、総合判断型はアップサイドを抑制します。</div>
-      <div class="toolbar">
-        <label class="search" for="search"><span>検索</span><input id="search" type="search" placeholder="会社名・証券コード・業種・算定方式" autocomplete="off"></label>
-        <div class="filters" role="group" aria-label="推定信頼度フィルター"><button class="filter active" data-confidence="all" aria-pressed="true" aria-controls="company-table">全社</button><button class="filter" data-confidence="high" aria-pressed="false" aria-controls="company-table">高</button><button class="filter" data-confidence="medium" aria-pressed="false" aria-controls="company-table">中</button><button class="filter" data-confidence="low" aria-pressed="false" aria-controls="company-table">低</button></div>
+
+    <section id="companies" class="shell section-block" tabindex="-1" aria-labelledby="companies-title">
+      <div class="section-heading"><div><span class="kicker">FIND AND COMPARE</span><h2 id="companies-title">企業を探す</h2></div><p>カードは要点確認、比較表は多数企業の走査に使います。検索・絞り込み・並び順・比較対象はURLに保存されます。</p></div>
+      <div class="model-note"><strong>状態の読み方:</strong> 「一次資料の明示値」「個社情報を含む推定」「業種初期推定」を文言で区別します。金額可用性は別の状態です。</div>
+
+      <form class="comparison-toolbar" id="company-controls" role="search" aria-label="企業検索と絞り込み">
+        <label class="control-field control-search" for="search"><span>会社・コード・業種・方式を検索</span><input id="search" type="search" placeholder="例：東京エレクトロン、8035、電機" autocomplete="off"></label>
+        <label class="control-field" for="confidence-filter"><span>信頼度</span><select id="confidence-filter"><option value="all">すべて</option><option value="high">高</option><option value="medium">中</option><option value="low">低</option></select></label>
+        <label class="control-field" for="status-filter"><span>推定状態</span><select id="status-filter"><option value="all">すべて</option><option value="verified">一次資料の明示値</option><option value="company_estimate">個社情報を含む推定</option><option value="sector_initial">業種初期推定</option><option value="amount_unavailable">金額算定不可</option></select></label>
+        <label class="control-field" for="sector-filter"><span>業種</span><select id="sector-filter"><option value="all">すべて</option></select></label>
+        <label class="control-field" for="sort-select"><span>並び順</span><select id="sort-select"><option value="months-desc">月数 高い順</option><option value="months-asc">月数 低い順</option><option value="confidence-desc">信頼度 高い順</option><option value="company-asc">会社名順</option><option value="sector-asc">業種順</option></select></label>
+        <fieldset class="view-switch"><legend>表示</legend><button type="button" data-view="cards" aria-pressed="false">カード</button><button type="button" data-view="table" aria-pressed="true">比較表</button></fieldset>
+        <button class="clear-control" id="clear-filters" type="button">条件をリセット</button>
+      </form>
+
+      <div class="result-bar" aria-live="polite"><strong id="result-count">読み込み中</strong><span id="active-filter-summary">全社を表示</span></div>
+
+      <aside id="compare-tray" class="compare-tray" aria-labelledby="compare-tray-title" hidden>
+        <div><span class="kicker">COMPARE</span><h3 id="compare-tray-title"><span id="compare-count">0</span>社を選択中</h3><div id="compare-chips" class="compare-chips"></div></div>
+        <div class="compare-actions"><button id="show-comparison" type="button">比較を見る</button><button id="clear-comparison" type="button">選択解除</button></div>
+      </aside>
+
+      <section id="comparison" class="comparison-panel" hidden aria-labelledby="comparison-title">
+        <div class="comparison-heading"><div><span class="kicker">SIDE-BY-SIDE</span><h3 id="comparison-title">選択企業の比較</h3><p>月数、金額可用性、業種アンカー、制度、信頼度、根拠状態を同じ順序で確認します。</p></div><button id="close-comparison" type="button">比較を閉じる</button></div>
+        <div id="comparison-table-wrap" class="comparison-desktop" tabindex="0" aria-label="選択企業比較表。横方向にスクロールできます。"></div>
+        <div id="comparison-cards" class="comparison-mobile"></div>
+      </section>
+
+      <div id="company-card-list" class="company-card-list" hidden aria-label="企業カード一覧"></div>
+      <div id="company-table-wrap" class="table-wrap company-wrap" tabindex="0" aria-label="企業比較表。横方向にスクロールできます。">
+        <table id="company-table" class="comparison-table company-table"><caption>日経225全社の賞与推定月数・参考換算額・根拠</caption><thead><tr><th scope="col">比較</th><th data-column="company" aria-sort="none"><button class="sort-button" data-sort="company">会社</button></th><th data-column="months" aria-sort="descending"><button class="sort-button" data-sort="months">年間賞与月数</button></th><th data-column="amount" aria-sort="none"><button class="sort-button" data-sort="amount">参考換算額</button></th><th data-column="sector" aria-sort="none"><button class="sort-button" data-sort="sector">業種実測アンカー</button></th><th>方式・回数</th><th data-column="confidence" aria-sort="none"><button class="sort-button" data-sort="confidence">信頼度</button></th><th>根拠</th></tr></thead><tbody id="company-body"></tbody></table>
       </div>
-      <p id="result-count" class="result-count" role="status" aria-live="polite">読み込み中</p>
-      <div class="table-wrap company-wrap" tabindex="0"><table id="company-table" class="comparison-table company-table"><caption>日経225全社の賞与推定月数・参考換算額・根拠</caption><thead><tr><th data-column="company" aria-sort="none"><button class="sort-button" data-sort="company">会社</button></th><th data-column="months" aria-sort="none"><button class="sort-button" data-sort="months">年間賞与月数</button></th><th data-column="amount" aria-sort="none"><button class="sort-button" data-sort="amount">参考換算額</button></th><th data-column="sector" aria-sort="none"><button class="sort-button" data-sort="sector">業種実測アンカー</button></th><th>方式・回数</th><th data-column="confidence" aria-sort="none"><button class="sort-button" data-sort="confidence">信頼度</button></th><th>根拠</th></tr></thead><tbody id="company-body"></tbody></table></div>
-      <p id="empty" class="empty" hidden>条件に一致する企業はありません。</p>
+      <button id="load-more" class="load-more" type="button" hidden>さらに60社を表示</button>
+      <div id="empty" class="empty-state" hidden><h3>条件に一致する企業はありません</h3><p>検索語または絞り込み条件を変更してください。</p><button type="button" id="empty-clear">全社を表示</button></div>
     </section>
-    <section id="benchmarks" class="shell section-block"><div class="section-heading"><div><span class="kicker">ACTUAL BENCHMARKS</span><h2>推定を支える実測値</h2></div><p>連合、経団連、厚生労働省の一次資料を、対象範囲・集計方法・標本数・公表段階とともに収録します。</p></div><div class="benchmark-note"><strong>比較上の注意:</strong> 異なる母集団の集計を単純なランキングとして扱いません。</div><div class="table-wrap benchmark-wrap" tabindex="0"><table class="comparison-table benchmark-table"><caption>公式資料から抽出した賞与・一時金の定量情報</caption><thead><tr><th>公表主体・対象</th><th>公表段階</th><th>値</th><th>前年値</th><th>増減</th><th>標本</th><th>対象範囲・注意</th><th>一次資料</th></tr></thead><tbody id="benchmark-body"></tbody></table></div></section>
-    <section id="sources" class="shell section-block"><div class="section-heading"><div><span class="kicker">SOURCE MAP</span><h2>参照サイトの役割</h2></div><p>一次資料は推定の置換・補正に使い、公的集計は業種アンカーに使います。</p></div><div class="table-wrap source-wrap" tabindex="0"><table class="comparison-table source-table"><caption>賞与調査に利用する参照チャネル</caption><thead><tr><th>優先</th><th>参照先</th><th>区分</th><th>確認できること</th><th>限界</th><th>リンク</th></tr></thead><tbody id="source-body"></tbody></table></div></section>
-    <section id="rules" class="shell section-block method-grid"><div><span class="kicker">MODEL CONTRACT</span><h2>推定ロジック</h2></div><div class="rules"><article><b>01</b><div><h3>公式Universe</h3><p>日経平均公式構成銘柄ページから225社と日経業種を取得します。</p></div></article><article><b>02</b><div><h3>個社優先</h3><p>既存30社と一次資料確認済み会社は業種初期推定より優先します。</p></div></article><article><b>03</b><div><h3>制度アップサイド</h3><p>業績連動は上側分布を広げ、総合判断・固定型は上側を抑えます。</p></div></article><article><b>04</b><div><h3>不確実性表示</h3><p>下限・中心・上限、信頼度、前提、反証条件を公開します。</p></div></article></div></section>
+
+    <section id="benchmarks" class="shell section-block"><div class="section-heading"><div><span class="kicker">ACTUAL BENCHMARKS</span><h2>推定を支える実測値</h2></div><p>連合、経団連、厚生労働省の一次資料を、対象範囲・集計方法・標本数・公表段階とともに収録します。</p></div><div class="benchmark-note"><strong>比較上の注意:</strong> 異なる母集団の集計を単純なランキングとして扱いません。</div><div class="table-wrap benchmark-wrap" tabindex="0" aria-label="公的実測値の表。横方向にスクロールできます。"><table class="comparison-table benchmark-table"><caption>公式資料から抽出した賞与・一時金の定量情報</caption><thead><tr><th>公表主体・対象</th><th>公表段階</th><th>値</th><th>前年値</th><th>増減</th><th>標本</th><th>対象範囲・注意</th><th>一次資料</th></tr></thead><tbody id="benchmark-body"></tbody></table></div></section>
+    <section id="sources" class="shell section-block"><div class="section-heading"><div><span class="kicker">SOURCE MAP</span><h2>参照サイトの役割</h2></div><p>一次資料は推定の置換・補正に使い、公的集計は業種アンカーに使います。</p></div><div class="table-wrap source-wrap" tabindex="0" aria-label="参照チャネル表。横方向にスクロールできます。"><table class="comparison-table source-table"><caption>賞与調査に利用する参照チャネル</caption><thead><tr><th>優先</th><th>参照先</th><th>区分</th><th>確認できること</th><th>限界</th><th>リンク</th></tr></thead><tbody id="source-body"></tbody></table></div></section>
+    <section id="rules" class="shell section-block method-grid"><div><span class="kicker">MODEL CONTRACT</span><h2>推定ロジック</h2></div><div class="rules"><article><b>01</b><div><h3>公式Universe</h3><p>日経平均公式構成銘柄ページから225社と日経業種を取得します。</p></div></article><article><b>02</b><div><h3>個社優先</h3><p>一次資料の明示値と確認済み制度を業種初期推定より優先します。</p></div></article><article><b>03</b><div><h3>標本対応</h3><p>月数と金額の標本が対応しない場合、金額を算定不可とします。</p></div></article><article><b>04</b><div><h3>不確実性表示</h3><p>下限・中心・上限、信頼度、前提、反証条件を公開します。</p></div></article></div></section>
   </main>
-  <footer class="shell"><span>日経225 賞与定量モデル</span><a href="https://github.com/KAFKA2306/bonus">Data and code: KAFKA2306/bonus</a></footer>
+  <footer class="shell"><span>日経225 賞与比較ワークスペース</span><a href="https://github.com/KAFKA2306/bonus">Data and code: KAFKA2306/bonus</a></footer>
   <script src="./app.js" defer></script>
 </body>
 </html>
