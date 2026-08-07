@@ -94,8 +94,9 @@ benchmarks:
     change_value: 1.88
     change_unit: percent
     sample: {organizations: 112, workers: 671000}
+    previous_sample: {organizations: 112, workers: null}
     source_url: https://www.keidanren.or.jp/policy/2026/037.pdf
-    note: 第1回集計。最終集計公表後に更新する。
+    note: 第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。
   - id: keidanren_2026_summer_manufacturing
     source_id: keidanren_bonus
     publisher: 日本経済団体連合会
@@ -112,8 +113,9 @@ benchmarks:
     change_value: 1.63
     change_unit: percent
     sample: {organizations: 99, workers: null}
+    previous_sample: {organizations: 99, workers: null}
     source_url: https://www.keidanren.or.jp/policy/2026/037.pdf
-    note: 第1回集計。最終集計公表後に更新する。
+    note: 第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。
   - id: keidanren_2026_summer_nonmanufacturing
     source_id: keidanren_bonus
     publisher: 日本経済団体連合会
@@ -130,8 +132,9 @@ benchmarks:
     change_value: 4.01
     change_unit: percent
     sample: {organizations: 13, workers: null}
+    previous_sample: {organizations: 13, workers: null}
     source_url: https://www.keidanren.or.jp/policy/2026/037.pdf
-    note: 第1回集計。最終集計公表後に更新する。
+    note: 第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。
   - id: mhlw_2025_summer_settlement
     source_id: mhlw_bonus
     publisher: 厚生労働省
@@ -148,6 +151,7 @@ benchmarks:
     change_value: 5.31
     change_unit: percent
     sample: {organizations: 342, workers: null}
+    previous_sample: {organizations: 326, workers: null}
     source_url: https://www.mhlw.go.jp/stf/newpage_62643.html
     note: 前年差47,715円。民間主要企業の集計であり全事業所平均ではない。
   - id: mhlw_2025_summer_request
@@ -158,14 +162,14 @@ benchmarks:
     published_at: '2025-09-12'
     release_status: final
     aggregation: company_average
-    scope: 資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。
+    scope: 資本金10億円以上、従業員1000人以上、労働組合のある企業のうち要求額を把握できた258社。
     metric: request_amount
     value: 997430
     unit: yen
     previous_value: 937922
     change_value: 6.34
     change_unit: percent
-    sample: {organizations: 342, workers: null}
+    sample: {organizations: 258, workers: null}
     source_url: https://www.mhlw.go.jp/stf/newpage_62643.html
     note: 前年差59,508円。要求額と妥結額を混同しない。
   - id: mhlw_2025_yearend_settlement
@@ -184,6 +188,7 @@ benchmarks:
     change_value: 7.37
     change_unit: percent
     sample: {organizations: 330, workers: null}
+    previous_sample: {organizations: 324, workers: null}
     source_url: https://www.mhlw.go.jp/stf/newpage_68123.html
     note: 前年差65,724円。民間主要企業の集計であり全事業所平均ではない。
   - id: mhlw_2025_yearend_request
@@ -194,13 +199,13 @@ benchmarks:
     published_at: '2026-01-09'
     release_status: final
     aggregation: company_average
-    scope: 資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。
+    scope: 資本金10億円以上、従業員1000人以上、労働組合のある企業のうち要求額を把握できた222社。
     metric: request_amount
     value: 1008354
     unit: yen
     previous_value: 933804
     change_value: 7.98
     change_unit: percent
-    sample: {organizations: 330, workers: null}
+    sample: {organizations: 222, workers: null}
     source_url: https://www.mhlw.go.jp/stf/newpage_68123.html
     note: 前年差74,550円。要求額と妥結額を混同しない。

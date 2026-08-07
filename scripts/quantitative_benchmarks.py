@@ -21,6 +21,8 @@ ALLOWED_METRICS = {
 }
 ALLOWED_UNITS = {"yen", "months"}
 ALLOWED_CHANGE_UNITS = {"yen", "months", "percent"}
+DENOMINATOR_WARNING_THRESHOLD = 0.10
+YOY_FORMULA = "(current_value / previous_value - 1) * 100"
 
 
 def latest_quantitative_benchmarks(data_dir: Path = DATA_DIR) -> Path:
@@ -43,6 +45,71 @@ def _number(value: Any, field_name: str, *, positive: bool = False) -> float:
     if positive and result <= 0:
         raise ValidationError(f"{field_name} must be positive")
     return result
+
+
+def _sample(value: Any, field_name: str, *, required: bool) -> dict[str, Any] | None:
+    if value is None and not required:
+        return None
+    if not isinstance(value, dict):
+        raise ValidationError(f"{field_name} must be an object")
+    organizations = value.get("organizations")
+    if not isinstance(organizations, int) or isinstance(organizations, bool) or organizations < 1:
+        raise ValidationError(f"{field_name}.organizations must be a positive integer")
+    workers = value.get("workers")
+    if workers is not None and (
+        not isinstance(workers, int) or isinstance(workers, bool) or workers < 1
+    ):
+        raise ValidationError(f"{field_name}.workers must be null or a positive integer")
+    return {"organizations": organizations, "workers": workers}
+
+
+def build_yoy_audit(item: dict[str, Any]) -> dict[str, Any]:
+    """Return deterministic YoY arithmetic and denominator-comparability metadata."""
+    current = float(item["value"])
+    previous = float(item["previous_value"])
+    calculated_percent = round((current / previous - 1) * 100, 2)
+    current_sample = item["sample"]
+    previous_sample = item.get("previous_sample")
+    current_orgs = current_sample["organizations"]
+    previous_orgs = previous_sample["organizations"] if previous_sample else None
+    if previous_orgs is None:
+        denominator_change_ratio = None
+        denominator_warning = None
+        denominator_status = "previous_sample_unavailable"
+    else:
+        denominator_change_ratio = round((current_orgs / previous_orgs) - 1, 4)
+        denominator_warning = abs(denominator_change_ratio) >= DENOMINATOR_WARNING_THRESHOLD
+        denominator_status = "warning" if denominator_warning else "comparable"
+    period = str(item["period"])
+    target_year = int(period[:4]) if len(period) >= 4 and period[:4].isdigit() else None
+    return {
+        "formula": YOY_FORMULA,
+        "calculated_percent": calculated_percent,
+        "target_period": period,
+        "target_year": target_year,
+        "aggregate_organizations": current_orgs,
+        "previous_aggregate_organizations": previous_orgs,
+        "denominator_change_ratio": denominator_change_ratio,
+        "denominator_warning_threshold": DENOMINATOR_WARNING_THRESHOLD,
+        "denominator_warning": denominator_warning,
+        "denominator_status": denominator_status,
+    }
+
+
+def _audit_note(audit: dict[str, Any]) -> str:
+    base = (
+        "前年比式: (当年値 ÷ 前年値 - 1) × 100 "
+        f"= {audit['calculated_percent']:.2f}%。"
+    )
+    if audit["previous_aggregate_organizations"] is None:
+        return base + f" 集計対象: {audit['aggregate_organizations']}組織（前年分母は一次資料未登録のため警告判定不可）。"
+    change = audit["denominator_change_ratio"] * 100
+    warning = "10%以上の分母変更警告" if audit["denominator_warning"] else "10%未満"
+    return (
+        base
+        + f" 集計対象: 当年{audit['aggregate_organizations']}組織 / 前年{audit['previous_aggregate_organizations']}組織"
+        + f"（{change:+.2f}%、{warning}）。"
+    )
 
 
 def validate_quantitative_benchmarks(payload: Any, source_ids: set[str]) -> dict[str, Any]:
@@ -102,18 +169,19 @@ def validate_quantitative_benchmarks(payload: Any, source_ids: set[str]) -> dict
                 raise ValidationError(f"{prefix}.change_unit must match unit unless percent")
             if abs((value - previous) - change) > 0.01:
                 raise ValidationError(f"{prefix}.change_value does not match value difference")
-        sample = item.get("sample")
-        if not isinstance(sample, dict):
-            raise ValidationError(f"{prefix}.sample must be an object")
-        organizations = sample.get("organizations")
-        if not isinstance(organizations, int) or isinstance(organizations, bool) or organizations < 1:
-            raise ValidationError(f"{prefix}.sample.organizations must be a positive integer")
-        workers = sample.get("workers")
-        if workers is not None and (not isinstance(workers, int) or isinstance(workers, bool) or workers < 1):
-            raise ValidationError(f"{prefix}.sample.workers must be null or a positive integer")
+        current_sample = _sample(item.get("sample"), f"{prefix}.sample", required=True)
+        previous_sample = _sample(
+            item.get("previous_sample"), f"{prefix}.previous_sample", required=False
+        )
         if not is_https_url(item.get("source_url")):
             raise ValidationError(f"{prefix}.source_url must be https")
-        validated.append(dict(item))
+        row = {**item, "sample": current_sample}
+        if previous_sample is not None:
+            row["previous_sample"] = previous_sample
+        audit = build_yoy_audit(row)
+        row["yoy_audit"] = audit
+        row["note"] = f"{item['note']} {_audit_note(audit)}"
+        validated.append(row)
 
     return {**payload, "methodology": dict(methodology), "benchmarks": validated}
 
