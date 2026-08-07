@@ -8,7 +8,7 @@
   "company_estimation_model_generated_from": "data/company_estimation_model_2026-08-02.yaml",
   "universe": {
     "source_file": "https://indexes.nikkei.co.jp/nkave/index/component?idx=nk225",
-    "source_as_of": "2026-08-04",
+    "source_as_of": "2026-08-07",
     "mutation_policy": "official_snapshot_at_build",
     "tracked_companies": 225,
     "covered_companies": 225,
@@ -229,7 +229,19 @@
         "workers": 2030429
       },
       "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
-      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。"
+      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 0.39%。 集計対象: 2512組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 0.39,
+        "target_period": "2026",
+        "target_year": 2026,
+        "aggregate_organizations": 2512,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     },
     {
       "id": "rengo_2026_annual_amount_fulltime",
@@ -252,7 +264,19 @@
         "workers": 1088787
       },
       "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
-      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。"
+      "note": "月数集計と金額集計は対象組合が異なるため相互換算しない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 7.62%。 集計対象: 1314組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 7.62,
+        "target_period": "2026",
+        "target_year": 2026,
+        "aggregate_organizations": 1314,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     },
     {
       "id": "rengo_2026_seasonal_months_fulltime",
@@ -275,7 +299,19 @@
         "workers": 1921390
       },
       "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
-      "note": "年間一時金とは集計対象組合が異なる。"
+      "note": "年間一時金とは集計対象組合が異なる。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 1.60%。 集計対象: 2870組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 1.6,
+        "target_period": "2026",
+        "target_year": 2026,
+        "aggregate_organizations": 2870,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     },
     {
       "id": "rengo_2026_seasonal_amount_fulltime",
@@ -298,7 +334,19 @@
         "workers": 1004495
       },
       "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/kaito/press_no7.pdf",
-      "note": "年間一時金とは集計対象組合が異なる。"
+      "note": "年間一時金とは集計対象組合が異なる。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 5.64%。 集計対象: 1800組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 5.64,
+        "target_period": "2026",
+        "target_year": 2026,
+        "aggregate_organizations": 1800,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     },
     {
       "id": "keidanren_2026_summer_total",
@@ -320,8 +368,24 @@
         "organizations": 112,
         "workers": 671000
       },
+      "previous_sample": {
+        "organizations": 112,
+        "workers": null
+      },
       "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
-      "note": "第1回集計。最終集計公表後に更新する。"
+      "note": "第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 1.88%。 集計対象: 当年112組織 / 前年112組織（+0.00%、10%未満）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 1.88,
+        "target_period": "2026-summer",
+        "target_year": 2026,
+        "aggregate_organizations": 112,
+        "previous_aggregate_organizations": 112,
+        "denominator_change_ratio": 0.0,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": false,
+        "denominator_status": "comparable"
+      }
     },
     {
       "id": "keidanren_2026_summer_manufacturing",
@@ -343,8 +407,24 @@
         "organizations": 99,
         "workers": null
       },
+      "previous_sample": {
+        "organizations": 99,
+        "workers": null
+      },
       "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
-      "note": "第1回集計。最終集計公表後に更新する。"
+      "note": "第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 1.63%。 集計対象: 当年99組織 / 前年99組織（+0.00%、10%未満）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 1.63,
+        "target_period": "2026-summer",
+        "target_year": 2026,
+        "aggregate_organizations": 99,
+        "previous_aggregate_organizations": 99,
+        "denominator_change_ratio": 0.0,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": false,
+        "denominator_status": "comparable"
+      }
     },
     {
       "id": "keidanren_2026_summer_nonmanufacturing",
@@ -366,8 +446,24 @@
         "organizations": 13,
         "workers": null
       },
+      "previous_sample": {
+        "organizations": 13,
+        "workers": null
+      },
       "source_url": "https://www.keidanren.or.jp/policy/2026/037.pdf",
-      "note": "第1回集計。最終集計公表後に更新する。"
+      "note": "第1回集計。2025年妥結額は2026年の集計企業による同対象比較。最終集計公表後に更新する。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 4.01%。 集計対象: 当年13組織 / 前年13組織（+0.00%、10%未満）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 4.01,
+        "target_period": "2026-summer",
+        "target_year": 2026,
+        "aggregate_organizations": 13,
+        "previous_aggregate_organizations": 13,
+        "denominator_change_ratio": 0.0,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": false,
+        "denominator_status": "comparable"
+      }
     },
     {
       "id": "mhlw_2025_summer_settlement",
@@ -389,8 +485,24 @@
         "organizations": 342,
         "workers": null
       },
+      "previous_sample": {
+        "organizations": 326,
+        "workers": null
+      },
       "source_url": "https://www.mhlw.go.jp/stf/newpage_62643.html",
-      "note": "前年差47,715円。民間主要企業の集計であり全事業所平均ではない。"
+      "note": "前年差47,715円。民間主要企業の集計であり全事業所平均ではない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 5.31%。 集計対象: 当年342組織 / 前年326組織（+4.91%、10%未満）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 5.31,
+        "target_period": "2025-summer",
+        "target_year": 2025,
+        "aggregate_organizations": 342,
+        "previous_aggregate_organizations": 326,
+        "denominator_change_ratio": 0.0491,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": false,
+        "denominator_status": "comparable"
+      }
     },
     {
       "id": "mhlw_2025_summer_request",
@@ -401,7 +513,7 @@
       "published_at": "2025-09-12",
       "release_status": "final",
       "aggregation": "company_average",
-      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業のうち要求額を把握できた258社。",
       "metric": "request_amount",
       "value": 997430,
       "unit": "yen",
@@ -409,11 +521,23 @@
       "change_value": 6.34,
       "change_unit": "percent",
       "sample": {
-        "organizations": 342,
+        "organizations": 258,
         "workers": null
       },
       "source_url": "https://www.mhlw.go.jp/stf/newpage_62643.html",
-      "note": "前年差59,508円。要求額と妥結額を混同しない。"
+      "note": "前年差59,508円。要求額と妥結額を混同しない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 6.34%。 集計対象: 258組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 6.34,
+        "target_period": "2025-summer",
+        "target_year": 2025,
+        "aggregate_organizations": 258,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     },
     {
       "id": "mhlw_2025_yearend_settlement",
@@ -435,8 +559,24 @@
         "organizations": 330,
         "workers": null
       },
+      "previous_sample": {
+        "organizations": 324,
+        "workers": null
+      },
       "source_url": "https://www.mhlw.go.jp/stf/newpage_68123.html",
-      "note": "前年差65,724円。民間主要企業の集計であり全事業所平均ではない。"
+      "note": "前年差65,724円。民間主要企業の集計であり全事業所平均ではない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 7.37%。 集計対象: 当年330組織 / 前年324組織（+1.85%、10%未満）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 7.37,
+        "target_period": "2025-yearend",
+        "target_year": 2025,
+        "aggregate_organizations": 330,
+        "previous_aggregate_organizations": 324,
+        "denominator_change_ratio": 0.0185,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": false,
+        "denominator_status": "comparable"
+      }
     },
     {
       "id": "mhlw_2025_yearend_request",
@@ -447,7 +587,7 @@
       "published_at": "2026-01-09",
       "release_status": "final",
       "aggregation": "company_average",
-      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業の集計。",
+      "scope": "資本金10億円以上、従業員1000人以上、労働組合のある企業のうち要求額を把握できた222社。",
       "metric": "request_amount",
       "value": 1008354,
       "unit": "yen",
@@ -455,11 +595,23 @@
       "change_value": 7.98,
       "change_unit": "percent",
       "sample": {
-        "organizations": 330,
+        "organizations": 222,
         "workers": null
       },
       "source_url": "https://www.mhlw.go.jp/stf/newpage_68123.html",
-      "note": "前年差74,550円。要求額と妥結額を混同しない。"
+      "note": "前年差74,550円。要求額と妥結額を混同しない。 前年比式: (当年値 ÷ 前年値 - 1) × 100 = 7.98%。 集計対象: 222組織（前年分母は一次資料未登録のため警告判定不可）。",
+      "yoy_audit": {
+        "formula": "(current_value / previous_value - 1) * 100",
+        "calculated_percent": 7.98,
+        "target_period": "2025-yearend",
+        "target_year": 2025,
+        "aggregate_organizations": 222,
+        "previous_aggregate_organizations": null,
+        "denominator_change_ratio": null,
+        "denominator_warning_threshold": 0.1,
+        "denominator_warning": null,
+        "denominator_status": "previous_sample_unavailable"
+      }
     }
   ],
   "sector_anchors": [
