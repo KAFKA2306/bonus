@@ -1,0 +1,28 @@
+{
+  "facets": {
+    "metric": {
+      "annual_bonus_amount": 1,
+      "annual_bonus_months": 1,
+      "request_amount": 2,
+      "seasonal_bonus_amount": 1,
+      "seasonal_bonus_months": 1,
+      "settlement_amount": 5
+    },
+    "period": {
+      "2025-summer": 2,
+      "2025-yearend": 2,
+      "2026": 4,
+      "2026-summer": 3
+    },
+    "publisher": {
+      "厚生労働省": 4,
+      "日本労働組合総連合会": 4,
+      "日本経済団体連合会": 3
+    },
+    "release_status": {
+      "final": 8,
+      "first": 3
+    }
+  },
+  "schema_version": 1
+}

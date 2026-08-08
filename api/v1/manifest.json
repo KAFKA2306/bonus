@@ -1,0 +1,25 @@
+{
+  "api_version": "v1",
+  "as_of": "2026-08-02",
+  "cache": {
+    "strategy": "revalidate_manifest_then_fetch_changed_files"
+  },
+  "distributions": {
+    "benchmarks.csv": {
+      "bytes": 3337,
+      "sha256": "39f07037f543f86ebcdeb665f1c8561bc553d6a14bd258aca1858b63c4cba6bf"
+    },
+    "benchmarks.json": {
+      "bytes": 10641,
+      "sha256": "7462406a54a7ea200e9318ea7d958a105680fe853e9d664802de5dfbe6ffc8ca"
+    },
+    "facets.json": {
+      "bytes": 569,
+      "sha256": "a7834e1c5a281cbb1301cc68724355fcbf342be47ebc50a63331f76746da849b"
+    }
+  },
+  "record_count": 11,
+  "schema_version": 1,
+  "source_sha256": "bdd7de2a2b9a0f4e4f2f5f416a6f01ec7232e6fcf0380e8d81e11bf373405ca9",
+  "source_snapshot": "data/quantitative_benchmarks_2026-08-02.yaml"
+}
