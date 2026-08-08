@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-08-08T01:14:33Z",
+  "publisher": "日本労働組合総連合会",
+  "source_id": "rengo_shunto_2026_final_index",
+  "source_url": "https://www.jtuc-rengo.or.jp/activity/roudou/shuntou/2026/yokyu_kaito/",
+  "source_kind": "official_release_index",
+  "observed": {
+    "final_aggregation_date": "2026-07-01",
+    "final_publication_date": "2026-07-03",
+    "summary_publication_date": "2026-07-16",
+    "release_label": "第7回（最終）回答集計"
+  },
+  "linked_benchmark_ids": [
+    "rengo_2026_annual_months_fulltime",
+    "rengo_2026_annual_amount_fulltime",
+    "rengo_2026_seasonal_months_fulltime",
+    "rengo_2026_seasonal_amount_fulltime"
+  ],
+  "retrieval_conditions": {
+    "method": "manual_verification_of_official_web_index",
+    "network_access_required_in_ci": false,
+    "history_policy": "append_new_snapshot_do_not_overwrite_prior_observations"
+  },
+  "rights": {
+    "note": "Source metadata and factual observations only. Follow the publisher's terms for reuse of source content.",
+    "terms_url": "https://www.jtuc-rengo.or.jp/info/rule.html"
+  }
+}
