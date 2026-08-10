@@ -73,7 +73,7 @@ jobs:
           manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
           payload = json.loads((root / 'benchmarks.json').read_text(encoding='utf-8'))
           assert manifest['record_count'] == len(payload['benchmarks']) == 11
-          assert len({row['id'] for row in payload['benchmarks']}) == 11
+          assert len({row['id'] for row in payload['benchmarks']} ) == 11
           with (root / 'benchmarks.csv').open(encoding='utf-8', newline='') as handle:
               assert sum(1 for _ in csv.DictReader(handle)) == 11
           for name, meta in manifest['distributions'].items():
@@ -96,9 +96,11 @@ jobs:
           test -s docs/embed/compare/widget.css
           test -s docs/embed/compare/widget.js
           test -s docs/services/media-data-widget.md
-      - name: Remove Python cache residue
+      - name: Remove validation residue
         if: always()
-        run: find . -type d -name __pycache__ -prune -exec rm -rf {} +
+        run: |
+          find . -type d -name __pycache__ -prune -exec rm -rf {} +
+          rm -f docs/data/media-widget-v1.json
       - name: Verify checkout clean
         if: always()
         shell: bash
