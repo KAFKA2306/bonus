@@ -1,0 +1,16 @@
+{
+  "schema_version": "bonus.media-widget-kpi.v1",
+  "issue": "https://github.com/KAFKA2306/bonus/issues/30",
+  "window_days": 45,
+  "status": "not_started",
+  "metrics": {
+    "demo_proposals": 0,
+    "external_trial_embeds": 0,
+    "embed_referral_sessions": 0,
+    "qualified_business_inquiries": 0,
+    "paid_pilots": 0,
+    "continuation_requests": 0
+  },
+  "evidence": [],
+  "note": "Only verified real-world outcomes may increment these counters. Do not infer customer names, revenue, embeds, or inquiries."
+}
