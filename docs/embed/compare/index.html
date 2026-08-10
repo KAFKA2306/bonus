@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>賞与比較ウィジェット | KAFKA Bonus</title>
+  <link rel="stylesheet" href="widget.css">
+</head>
+<body>
+  <main class="widget" aria-labelledby="widget-title">
+    <header>
+      <p class="eyebrow">KAFKA Bonus / Media Widget</p>
+      <h1 id="widget-title">賞与比較</h1>
+      <p id="as-of" class="muted">データを読み込み中…</p>
+    </header>
+    <div id="error" class="error" role="alert" hidden></div>
+    <section id="cards" class="cards" aria-live="polite"></section>
+    <footer>
+      <p class="disclaimer">確認済み事実とモデル推定は異なります。利用不可の金額は0円に変換しません。</p>
+      <nav class="actions" aria-label="関連リンク">
+        <a id="full-link" href="../../" target="_blank" rel="noopener noreferrer">比較サイトで詳しく見る</a>
+        <a id="inquiry-link" href="https://github.com/KAFKA2306/bonus/issues/new" target="_blank" rel="noopener noreferrer">媒体への導入を相談する</a>
+      </nav>
+    </footer>
+  </main>
+  <script src="widget.js" defer></script>
+</body>
+</html>
