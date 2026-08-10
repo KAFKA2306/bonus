@@ -1,0 +1,5467 @@
+{
+  "as_of": "2026-08-02",
+  "contract": {
+    "amount_rule": "unavailable amounts remain null and must never be rendered as zero or inferred yen",
+    "provenance_rule": "sources are projected only from the canonical bonus.json record",
+    "status_values": [
+      "verified",
+      "estimated",
+      "unavailable"
+    ]
+  },
+  "record_count": 225,
+  "records": [
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1332",
+      "company_name_ja": "（株）ニッスイ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1605",
+      "company_name_ja": "（株）ＩＮＰＥＸ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1721",
+      "company_name_ja": "コムシスホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1801",
+      "company_name_ja": "大成建設（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1802",
+      "company_name_ja": "（株）大林組",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1803",
+      "company_name_ja": "清水建設（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1808",
+      "company_name_ja": "（株）長谷工コーポレーション",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1812",
+      "company_name_ja": "鹿島建設（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1925",
+      "company_name_ja": "大和ハウス工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1928",
+      "company_name_ja": "積水ハウス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "1963",
+      "company_name_ja": "日揮ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2002",
+      "company_name_ja": "（株）日清製粉グループ本社",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2269",
+      "company_name_ja": "明治ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2282",
+      "company_name_ja": "日本ハム（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2413",
+      "company_name_ja": "エムスリー（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2432",
+      "company_name_ja": "（株）ディー・エヌ・エー",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2501",
+      "company_name_ja": "サッポロビール（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2502",
+      "company_name_ja": "アサヒグループホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2503",
+      "company_name_ja": "キリンホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2768",
+      "company_name_ja": "双日（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2801",
+      "company_name_ja": "キッコーマン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2802",
+      "company_name_ja": "味の素（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "285A",
+      "company_name_ja": "キオクシアホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2871",
+      "company_name_ja": "（株）ニチレイ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "2914",
+      "company_name_ja": "日本たばこ産業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3086",
+      "company_name_ja": "Ｊ．フロント　リテイリング（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3092",
+      "company_name_ja": "（株）ＺＯＺＯ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3099",
+      "company_name_ja": "（株）三越伊勢丹ホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3289",
+      "company_name_ja": "東急不動産ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3382",
+      "company_name_ja": "（株）セブン＆アイ・ホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3401",
+      "company_name_ja": "帝人（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3402",
+      "company_name_ja": "東レ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3405",
+      "company_name_ja": "（株）クラレ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3407",
+      "company_name_ja": "旭化成（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3436",
+      "company_name_ja": "（株）ＳＵＭＣＯ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3659",
+      "company_name_ja": "（株）ネクソン",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3697",
+      "company_name_ja": "（株）ＳＨＩＦＴ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "3861",
+      "company_name_ja": "王子ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4004",
+      "company_name_ja": "（株）レゾナック・ホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4005",
+      "company_name_ja": "住友化学（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4021",
+      "company_name_ja": "日産化学（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4042",
+      "company_name_ja": "東ソー（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4043",
+      "company_name_ja": "（株）トクヤマ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4061",
+      "company_name_ja": "デンカ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4062",
+      "company_name_ja": "イビデン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4063",
+      "company_name_ja": "信越化学工業",
+      "confidence": {
+        "level": "medium",
+        "score": 0.56
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.65,
+        "maximum": 5.93,
+        "minimum": 5.37
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4151",
+      "company_name_ja": "協和キリン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4183",
+      "company_name_ja": "三井化学（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4188",
+      "company_name_ja": "三菱ケミカルグループ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4208",
+      "company_name_ja": "ＵＢＥ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4307",
+      "company_name_ja": "野村総合研究所",
+      "confidence": {
+        "level": "low",
+        "score": 0.49
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.43,
+        "maximum": 7.2,
+        "minimum": 5.67
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4324",
+      "company_name_ja": "（株）電通グループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4385",
+      "company_name_ja": "（株）メルカリ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4452",
+      "company_name_ja": "花王（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4502",
+      "company_name_ja": "武田薬品工業",
+      "confidence": {
+        "level": "medium",
+        "score": 0.53
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.31,
+        "maximum": 5.93,
+        "minimum": 4.69
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4503",
+      "company_name_ja": "アステラス製薬（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4506",
+      "company_name_ja": "住友ファーマ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4507",
+      "company_name_ja": "塩野義製薬（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4519",
+      "company_name_ja": "中外製薬（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4523",
+      "company_name_ja": "エーザイ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4543",
+      "company_name_ja": "テルモ",
+      "confidence": {
+        "level": "medium",
+        "score": 0.54
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.68,
+        "maximum": 6.13,
+        "minimum": 5.23
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4568",
+      "company_name_ja": "第一三共（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4578",
+      "company_name_ja": "大塚ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4661",
+      "company_name_ja": "（株）オリエンタルランド",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4689",
+      "company_name_ja": "ＬＩＮＥヤフー（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4704",
+      "company_name_ja": "トレンドマイクロ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4751",
+      "company_name_ja": "（株）サイバーエージェント",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4755",
+      "company_name_ja": "楽天グループ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4901",
+      "company_name_ja": "富士フイルムホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4902",
+      "company_name_ja": "コニカミノルタ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "4911",
+      "company_name_ja": "（株）資生堂",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5019",
+      "company_name_ja": "出光興産（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5020",
+      "company_name_ja": "ＥＮＥＯＳホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5101",
+      "company_name_ja": "横浜ゴム（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5108",
+      "company_name_ja": "（株）ブリヂストン",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5201",
+      "company_name_ja": "ＡＧＣ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5214",
+      "company_name_ja": "日本電気硝子（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5233",
+      "company_name_ja": "太平洋セメント（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5301",
+      "company_name_ja": "東海カーボン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5332",
+      "company_name_ja": "ＴＯＴＯ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5333",
+      "company_name_ja": "ＮＧＫ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5401",
+      "company_name_ja": "日本製鉄（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5406",
+      "company_name_ja": "（株）神戸製鋼所",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5411",
+      "company_name_ja": "ＪＦＥホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "543A",
+      "company_name_ja": "ＡＲＣＨＩＯＮ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5631",
+      "company_name_ja": "（株）日本製鋼所",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5706",
+      "company_name_ja": "三井金属（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5711",
+      "company_name_ja": "三菱マテリアル（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5713",
+      "company_name_ja": "住友金属鉱山（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5714",
+      "company_name_ja": "ＤＯＷＡホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5801",
+      "company_name_ja": "古河電気工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5802",
+      "company_name_ja": "住友電気工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5803",
+      "company_name_ja": "（株）フジクラ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "5831",
+      "company_name_ja": "（株）しずおかフィナンシャルグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6098",
+      "company_name_ja": "リクルートホールディングス",
+      "confidence": {
+        "level": "medium",
+        "score": 0.54
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.55,
+        "maximum": 5.66,
+        "minimum": 3.84
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6103",
+      "company_name_ja": "オークマ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6113",
+      "company_name_ja": "（株）アマダ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": "hybrid",
+      "company_id": "6146",
+      "company_name_ja": "ディスコ",
+      "confidence": {
+        "level": "high",
+        "score": 0.79
+      },
+      "evidence_status": "confirmed",
+      "months": {
+        "central": 10.29,
+        "maximum": 12.62,
+        "minimum": 8.57
+      },
+      "sources": [
+        {
+          "title": "Will会計",
+          "type": "company_official",
+          "url": "https://www.disco.co.jp/jp/csr/management/will.html"
+        },
+        {
+          "title": "人的資本戦略",
+          "type": "company_official",
+          "url": "https://www.disco.co.jp/jp/csr/work_env/HumanCapital.html"
+        },
+        {
+          "title": "よくある質問（採用）",
+          "type": "company_official",
+          "url": "https://www.disco.co.jp/recruit/information/faq/"
+        }
+      ],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6178",
+      "company_name_ja": "日本郵政（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6273",
+      "company_name_ja": "SMC",
+      "confidence": {
+        "level": "low",
+        "score": 0.44
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.98,
+        "maximum": 9.16,
+        "minimum": 3.21
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6301",
+      "company_name_ja": "（株）小松製作所",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6302",
+      "company_name_ja": "住友重機械工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6305",
+      "company_name_ja": "日立建機（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6326",
+      "company_name_ja": "（株）クボタ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6361",
+      "company_name_ja": "（株）荏原製作所",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6367",
+      "company_name_ja": "ダイキン工業",
+      "confidence": {
+        "level": "medium",
+        "score": 0.52
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.35,
+        "maximum": 6.73,
+        "minimum": 4.37
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6471",
+      "company_name_ja": "日本精工（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6472",
+      "company_name_ja": "ＮＴＮ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6473",
+      "company_name_ja": "（株）ジェイテクト",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6479",
+      "company_name_ja": "ミネベアミツミ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6501",
+      "company_name_ja": "日立製作所",
+      "confidence": {
+        "level": "low",
+        "score": 0.38
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.67,
+        "maximum": 6.98,
+        "minimum": 4.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": "performance_linked",
+      "company_id": "6503",
+      "company_name_ja": "三菱電機",
+      "confidence": {
+        "level": "high",
+        "score": 0.7
+      },
+      "evidence_status": "confirmed",
+      "months": {
+        "central": 5.69,
+        "maximum": 6.77,
+        "minimum": 5.01
+      },
+      "sources": [
+        {
+          "title": "人的資本価値最大化に向けて人事制度を刷新",
+          "type": "company_official",
+          "url": "https://www.mitsubishielectric.co.jp/ja/pr/2024/0312/"
+        },
+        {
+          "title": "人と組織が共に成長する人財マネジメント",
+          "type": "company_official",
+          "url": "https://www.mitsubishielectric.co.jp/ja/sustainability/social/humancapital/management/"
+        }
+      ],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6504",
+      "company_name_ja": "富士電機（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6506",
+      "company_name_ja": "（株）安川電機",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6526",
+      "company_name_ja": "（株）ソシオネクスト",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6532",
+      "company_name_ja": "（株）ベイカレント",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6645",
+      "company_name_ja": "オムロン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6701",
+      "company_name_ja": "日本電気（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6702",
+      "company_name_ja": "富士通（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6723",
+      "company_name_ja": "ルネサスエレクトロニクス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6724",
+      "company_name_ja": "セイコーエプソン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6752",
+      "company_name_ja": "パナソニック　ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6753",
+      "company_name_ja": "シャープ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": "performance_linked",
+      "company_id": "6758",
+      "company_name_ja": "ソニーグループ",
+      "confidence": {
+        "level": "medium",
+        "score": 0.61
+      },
+      "evidence_status": "partially_confirmed",
+      "months": {
+        "central": 2.04,
+        "maximum": 3.12,
+        "minimum": 1.37
+      },
+      "sources": [
+        {
+          "title": "新卒採用 募集要項（2027年4月入社対象）",
+          "type": "company_official",
+          "url": "https://www.sony.com/ja/SonyInfo/Jobs/newgrads/info/requirements/group/"
+        }
+      ],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6762",
+      "company_name_ja": "ＴＤＫ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6770",
+      "company_name_ja": "アルプスアルパイン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6841",
+      "company_name_ja": "横河電機（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6857",
+      "company_name_ja": "アドバンテスト",
+      "confidence": {
+        "level": "low",
+        "score": 0.49
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.68,
+        "maximum": 8.0,
+        "minimum": 3.75
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6861",
+      "company_name_ja": "キーエンス",
+      "confidence": {
+        "level": "medium",
+        "score": 0.6
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.89,
+        "maximum": 8.36,
+        "minimum": 5.82
+      },
+      "sources": [
+        {
+          "title": "有価証券報告書 第57期（2025年3月21日―2026年3月20日）",
+          "type": "regulator_filing",
+          "url": "https://www.keyence.co.jp/investor/library/securitiesreport.jsp"
+        }
+      ],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6902",
+      "company_name_ja": "（株）デンソー",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6920",
+      "company_name_ja": "レーザーテック（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6954",
+      "company_name_ja": "ファナック",
+      "confidence": {
+        "level": "low",
+        "score": 0.46
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 7.23,
+        "maximum": 10.44,
+        "minimum": 4.41
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6963",
+      "company_name_ja": "ローム（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6971",
+      "company_name_ja": "京セラ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6976",
+      "company_name_ja": "太陽誘電（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6981",
+      "company_name_ja": "村田製作所",
+      "confidence": {
+        "level": "medium",
+        "score": 0.54
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.68,
+        "maximum": 6.73,
+        "minimum": 5.03
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "6988",
+      "company_name_ja": "日東電工（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7004",
+      "company_name_ja": "カナデビア（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7011",
+      "company_name_ja": "三菱重工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7012",
+      "company_name_ja": "川崎重工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7013",
+      "company_name_ja": "（株）ＩＨＩ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7186",
+      "company_name_ja": "（株）横浜フィナンシャルグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7201",
+      "company_name_ja": "日産自動車（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7202",
+      "company_name_ja": "いすゞ自動車（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7203",
+      "company_name_ja": "トヨタ自動車",
+      "confidence": {
+        "level": "medium",
+        "score": 0.57
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.74,
+        "maximum": 7.2,
+        "minimum": 6.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7211",
+      "company_name_ja": "三菱自動車工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7261",
+      "company_name_ja": "マツダ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7267",
+      "company_name_ja": "本田技研工業（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7269",
+      "company_name_ja": "スズキ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7270",
+      "company_name_ja": "（株）ＳＵＢＡＲＵ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7272",
+      "company_name_ja": "ヤマハ発動機（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.69,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7453",
+      "company_name_ja": "（株）良品計画",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7532",
+      "company_name_ja": "（株）パン・パシフィック・インターナショナルホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7731",
+      "company_name_ja": "（株）ニコン",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7733",
+      "company_name_ja": "オリンパス",
+      "confidence": {
+        "level": "medium",
+        "score": 0.56
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.83,
+        "maximum": 6.28,
+        "minimum": 5.37
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7735",
+      "company_name_ja": "（株）ＳＣＲＥＥＮホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7741",
+      "company_name_ja": "HOYA",
+      "confidence": {
+        "level": "medium",
+        "score": 0.53
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.01,
+        "maximum": 6.06,
+        "minimum": 4.36
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7751",
+      "company_name_ja": "キヤノン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7752",
+      "company_name_ja": "（株）リコー",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 7.39,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7832",
+      "company_name_ja": "（株）バンダイナムコホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7911",
+      "company_name_ja": "ＴＯＰＰＡＮホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7912",
+      "company_name_ja": "大日本印刷（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7951",
+      "company_name_ja": "ヤマハ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.44,
+        "maximum": 6.99,
+        "minimum": 4.34
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "7974",
+      "company_name_ja": "任天堂（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8001",
+      "company_name_ja": "伊藤忠商事（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8002",
+      "company_name_ja": "丸紅（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8015",
+      "company_name_ja": "豊田通商（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8031",
+      "company_name_ja": "三井物産（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8035",
+      "company_name_ja": "東京エレクトロン",
+      "confidence": {
+        "level": "medium",
+        "score": 0.61
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.03,
+        "maximum": 7.42,
+        "minimum": 5.03
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8053",
+      "company_name_ja": "住友商事（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8058",
+      "company_name_ja": "三菱商事（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 6.34,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8233",
+      "company_name_ja": "（株）高島屋",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8252",
+      "company_name_ja": "（株）丸井グループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8253",
+      "company_name_ja": "（株）クレディセゾン",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8267",
+      "company_name_ja": "イオン（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8304",
+      "company_name_ja": "（株）あおぞら銀行",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8306",
+      "company_name_ja": "三菱UFJフィナンシャル・グループ",
+      "confidence": {
+        "level": "medium",
+        "score": 0.57
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.87,
+        "maximum": 5.57,
+        "minimum": 4.36
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8308",
+      "company_name_ja": "（株）りそなホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8309",
+      "company_name_ja": "三井住友トラストグループ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8316",
+      "company_name_ja": "（株）三井住友フィナンシャルグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8331",
+      "company_name_ja": "（株）千葉銀行",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8354",
+      "company_name_ja": "（株）ふくおかフィナンシャルグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8411",
+      "company_name_ja": "（株）みずほフィナンシャルグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8591",
+      "company_name_ja": "オリックス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8601",
+      "company_name_ja": "大和証券グループ本社",
+      "confidence": {
+        "level": "low",
+        "score": 0.49
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.78,
+        "maximum": 5.55,
+        "minimum": 4.01
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8604",
+      "company_name_ja": "野村ホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.49
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.26,
+        "maximum": 7.63,
+        "minimum": 5.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8630",
+      "company_name_ja": "ＳＯＭＰＯホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8697",
+      "company_name_ja": "（株）日本取引所グループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8725",
+      "company_name_ja": "ＭＳ＆ＡＤインシュアランスグループホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8750",
+      "company_name_ja": "（株）第一ライフグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8766",
+      "company_name_ja": "東京海上ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8795",
+      "company_name_ja": "（株）Ｔ＆Ｄホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8801",
+      "company_name_ja": "三井不動産（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8802",
+      "company_name_ja": "三菱地所（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8804",
+      "company_name_ja": "東京建物（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "8830",
+      "company_name_ja": "住友不動産（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.94,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9001",
+      "company_name_ja": "東武鉄道（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9005",
+      "company_name_ja": "東急（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9007",
+      "company_name_ja": "小田急電鉄（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9008",
+      "company_name_ja": "京王電鉄（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9009",
+      "company_name_ja": "京成電鉄（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9020",
+      "company_name_ja": "JR東日本",
+      "confidence": {
+        "level": "medium",
+        "score": 0.57
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.48,
+        "maximum": 5.01,
+        "minimum": 3.95
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9021",
+      "company_name_ja": "西日本旅客鉄道（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": 2148000,
+        "maximum_yen": 2256000,
+        "minimum_yen": 2041000,
+        "status": "available"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9022",
+      "company_name_ja": "JR東海",
+      "confidence": {
+        "level": "high",
+        "score": 0.82
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 6.15,
+        "maximum": 6.15,
+        "minimum": 6.15
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9064",
+      "company_name_ja": "ヤマトホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9101",
+      "company_name_ja": "日本郵船（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 6.37,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9104",
+      "company_name_ja": "（株）商船三井",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 6.37,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9107",
+      "company_name_ja": "川崎汽船（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 6.37,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9147",
+      "company_name_ja": "ＮＩＰＰＯＮ　ＥＸＰＲＥＳＳホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.42,
+        "maximum": 5.67,
+        "minimum": 3.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9201",
+      "company_name_ja": "日本航空",
+      "confidence": {
+        "level": "medium",
+        "score": 0.5
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.5,
+        "maximum": 4.03,
+        "minimum": 2.96
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9202",
+      "company_name_ja": "ANAホールディングス",
+      "confidence": {
+        "level": "medium",
+        "score": 0.55
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.13,
+        "maximum": 4.67,
+        "minimum": 3.6
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9432",
+      "company_name_ja": "日本電信電話",
+      "confidence": {
+        "level": "medium",
+        "score": 0.59
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.77,
+        "maximum": 5.22,
+        "minimum": 4.31
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": "hybrid",
+      "company_id": "9433",
+      "company_name_ja": "KDDI",
+      "confidence": {
+        "level": "high",
+        "score": 0.71
+      },
+      "evidence_status": "confirmed",
+      "months": {
+        "central": 5.1,
+        "maximum": 5.83,
+        "minimum": 4.57
+      },
+      "sources": [
+        {
+          "title": "人財育成―評価・報酬制度",
+          "type": "company_official",
+          "url": "https://www.kddi.com/corporate/sustainability/society/employee/"
+        },
+        {
+          "title": "サステナビリティ 方針・体制",
+          "type": "company_official",
+          "url": "https://www.kddi.com/corporate/sustainability/management/"
+        }
+      ],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9434",
+      "company_name_ja": "ソフトバンク（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.42,
+        "maximum": 6.97,
+        "minimum": 4.32
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9501",
+      "company_name_ja": "東京電力ホールディングス（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.64,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9502",
+      "company_name_ja": "中部電力（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.64,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9503",
+      "company_name_ja": "関西電力（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.64,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9531",
+      "company_name_ja": "東京瓦斯（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.64,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9532",
+      "company_name_ja": "大阪瓦斯（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.39,
+        "maximum": 5.64,
+        "minimum": 3.29
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9602",
+      "company_name_ja": "東宝（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9735",
+      "company_name_ja": "セコム（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9766",
+      "company_name_ja": "コナミグループ（株）",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.04,
+        "maximum": 5.99,
+        "minimum": 2.94
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9843",
+      "company_name_ja": "（株）ニトリホールディングス",
+      "confidence": {
+        "level": "low",
+        "score": 0.3
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 3.87,
+        "maximum": 5.42,
+        "minimum": 2.77
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9983",
+      "company_name_ja": "ファーストリテイリング",
+      "confidence": {
+        "level": "medium",
+        "score": 0.54
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 5.68,
+        "maximum": 6.97,
+        "minimum": 4.78
+      },
+      "sources": [],
+      "status": "estimated"
+    },
+    {
+      "amount": {
+        "central_yen": null,
+        "maximum_yen": null,
+        "minimum_yen": null,
+        "status": "unavailable"
+      },
+      "as_of": "2026-08-02",
+      "classification": null,
+      "company_id": "9984",
+      "company_name_ja": "ソフトバンクグループ",
+      "confidence": {
+        "level": "low",
+        "score": 0.47
+      },
+      "evidence_status": "unknown",
+      "months": {
+        "central": 4.97,
+        "maximum": 6.96,
+        "minimum": 3.38
+      },
+      "sources": [],
+      "status": "estimated"
+    }
+  ],
+  "schema_version": "bonus.media-widget.v1",
+  "source_schema_version": 5
+}
