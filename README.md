@@ -2,125 +2,155 @@
 
 **賞与は「会社別の数字」を集めるほど、比較を間違えやすくなる。**
 
-会社公式の明示値、労組集計、業種平均、モデル推定は同じ数字ではありません。このリポジトリは、確認できた事実と推定を分離し、対応する標本が確認できない金額は `0円` にせず `null` のまま残します。
+会社公式の明示値、労組集計、業種平均、モデル推定は同じ数字ではありません。このrepositoryは、主要30社の賞与を **「確認できた事実」と「比較のための推定」を混ぜずに並べ、どこまで信じてよいか判断できる状態**へ変える定量比較基盤です。
 
-**公開ページ:** https://kafka2306.github.io/bonus/  
-**Repository:** https://github.com/KAFKA2306/bonus
+- 公開ページ: https://kafka2306.github.io/bonus/
+- Repository: https://github.com/KAFKA2306/bonus
 
-主要30社の賞与について、一次資料で確認できた事実と、実測値を用いたモデル推定を分離して公開する定量比較基盤です。個社の明示値が見つかるまで空欄にするのではなく、旧個社調査を会社事前分布、連合2026年最終集計の業種別年間一時金を実測アンカーとして、全30社へ月数レンジと参考換算額を付与します。
+## Vision
 
-## 根本ロジック
+賞与比較を「大きい金額順のランキング」から、**会社ごとの制度・月数・推定range・根拠・不確実性を同じ画面で読み、比較条件まで確認できる体験**へ変えます。
 
-1. 会社公式、労組公式、EDINET、TDnetで確認できた制度・回数・月数を確認事実として保存する。
-2. 個社の年間月数を直接確認できない場合は、旧個社調査のレンジを会社事前分布として残す。
-3. 連合2026年最終集計の業種別年間一時金月数・金額を実測アンカーとして使う。
-4. 個社事前分布を、その信頼度と一次資料の有無に応じて業種実測値へ縮約する。
-5. 単一点ではなく、下限・中心値・上限、モデル信頼度、会社重み、業種重みを公開する。
-6. 一次資料で確認した支給回数、算定方式、最低月数はモデル値より優先する。
-7. 参考換算額は、金額と月数が同一標本で対応する場合、または会社公式モデル額がある場合だけ算出する。
-8. 金額標本と月数標本が異なる場合は金額をnull・unavailableとし、月数推定だけを公開する。
-9. 会社・労組の明示値が得られた時点で、推定を確認事実へ置換する。
+利用者が知りたいのは単一点ではありません。
 
-## 推定式
+- その値は会社公式なのかモデル推定なのか
+- 年間月数と季別金額を混ぜていないか
+- 金額と月数は同じ標本なのか
+- 同一sampleでなければ、なぜ金額を出していないのか
+- どのsector実測をanchorにしたか
+- 一次資料が見つかったら、推定はどう置換されるか
 
-中心値は次の経験ベイズ型縮約で求めます。
+## Design philosophy
+
+- **Fact and estimate stay separate.** verified factをmodel valueで上書きしない。
+- **Null is not zero.** 対応sampleを確認できない金額は`null`として残し、0円へ変換しない。
+- **Range before false precision.** point estimateだけでなくlower / center / upper、weight、confidenceを公開する。
+- **Matched samples before currency conversion.** amountとmonthsのsampleが一致しないなら比を基本月額として扱わない。
+- **Primary evidence overrides priors.** company / unionの明示値が得られたら推定を確認事実へ置換する。
+- **Universe stays fixed for comparison.** 主要30社を途中で都合よく入れ替えず、coverageと比較条件をCIで固定する。
+
+## Why / 差別化
+
+賞与記事やdashboardは、金額・月数の大きさだけを比較しやすいです。しかし平均金額と平均月数の回答sampleが違えば、その比から作った「基本月額」は存在しない架空の値になります。
+
+このrepositoryの差別化は経験ベイズ式そのものではなく、**比較したいからといって対応していない数字を無理に接続しないこと**です。
+
+その結果、値が出せないcompanyは空欄ではなく「なぜ unavailable なのか」まで説明できます。
+
+## Reader journey
 
 ```text
-個社推定月数
-  = 会社重み × 旧個社中心値
-  + 業種重み × 2026年業種実測月数
-
-業種重み = 1 - 会社重み
+companyを選ぶ
+  → verified factsを見る
+  → estimated months rangeを見る
+  → sector anchor / company weightを見る
+  → amount availabilityを確認
+  → source / sample boundaryを見る
+  → comparisonに使える範囲を判断
 ```
 
-会社重みは、旧個社調査の信頼度、一次資料で制度構造を確認できたか、セクター事前分布だけに依存していないかを反映し、0.55から0.90に制限します。下限と上限も同じ考え方で、旧個社レンジと業種実測値周辺の不確実幅を合成します。
+## Root logic
 
-参考換算額は次の式です。
+1. company / union / EDINET / TDnetの制度・回数・月数をverified factとして保存
+2. 個社年間月数が不明なら旧調査rangeをcompany priorとして保持
+3. 連合2026最終集計のsector annual bonusをobserved anchorとして使用
+4. evidence strengthに応じてcompany priorをsector observationへshrink
+5. lower / center / upper、company / sector weight、confidenceを公開
+6. primary sourceのexplicit constraintをmodelより優先
+7. amountはmatched sampleまたはofficial company projectionだけで算出
+8. sample mismatchなら`amount_status: unavailable`, `amount_yen: null`
+9. verified company fact取得時にestimateを置換
+
+## Estimation model
 
 ```text
-業種推定基本月額 = 業種実測年間一時金額 ÷ 業種実測年間月数
-個社参考換算額   = 業種推定基本月額 × 個社推定月数
+estimated annual months
+  = company_weight × company_prior_center
+  + sector_weight × sector_observed_months
+
+sector_weight = 1 - company_weight
 ```
 
-月数集計と金額集計では標本が異なる場合があります。このため金額には月数より低い信頼度を付け、モデル上の参考値としてのみ表示します。
+company weightはprior confidenceと一次資料の有無を反映し、現行modelでは0.55〜0.90に制限します。
 
+amount conversionを許可する経路:
 
-## 金額換算の可用性
+- `matched_sector_sample`
+- `official_company_base_projection`
 
-業種集計の年間一時金額と年間月数について、回答組織・回答労働者が異なる場合、その二つの平均値の比を基本月額とは扱いません。対応標本を確認できない会社は`amount_status: unavailable`、`amount_yen: null`として公開し、0円とは区別します。
+sample ID / match status / aggregation method / reasonは`amount_conversion`へ保存します。
 
-金額を公開できる経路は次の二つです。
+## 2026 sector anchors
 
-- 同一標本について金額と月数が対応している`matched_sector_sample`
-- 会社公式の季別モデル額と月数を使う`official_company_base_projection`
+`data/company_estimation_model_YYYY-MM-DD.yaml` がsector observationとcompany assignmentを保持します。
 
-標本ID、対応可否、集計方式、算定理由は`amount_conversion`へ保存します。旧方式との差分は`audit/amount_conversion_diff.json`で監査できます。
+代表例:
 
-## 2026年の業種実測アンカー
-
-`data/company_estimation_model_YYYY-MM-DD.yaml` に、連合2026春季生活闘争の最終集計から抽出した業種別の年間一時金を保存します。
-
-| 業種アンカー | 年間月数 | 年間金額 | 30社への割当例 |
+| sector | annual months | annual amount | example allocation |
 |---|---:|---:|---|
-| 製造業 | 5.44か月 | 1,854,847円 | トヨタ、ソニー、東京エレクトロン、ディスコ等 |
-| 商業流通 | 3.87か月 | 1,169,622円 | ファーストリテイリング |
-| 交通運輸 | 4.42か月 | 917,078円 | JR東日本、JR東海、ANA、JAL |
-| サービス・ホテル | 4.04か月 | 890,000円 | リクルートHD |
-| 情報・出版 | 5.42か月 | 1,770,611円 | KDDI、NTT、野村総合研究所 |
-| その他 | 4.39か月 | 1,749,584円 | ソフトバンクグループ、MUFG、証券2社 |
+| 製造業 | 5.44 | 1,854,847円 | トヨタ、ソニー、東京エレクトロン、ディスコ等 |
+| 商業流通 | 3.87 | 1,169,622円 | ファーストリテイリング |
+| 交通運輸 | 4.42 | 917,078円 | JR東日本、JR東海、ANA、JAL |
+| サービス・ホテル | 4.04 | 890,000円 | リクルートHD |
+| 情報・出版 | 5.42 | 1,770,611円 | KDDI、NTT、野村総合研究所 |
+| その他 | 4.39 | 1,749,584円 | ソフトバンクグループ、MUFG、証券2社 |
 
-業種分類はモデル入力として明示し、会社の実際の労使集計区分が確認できた場合は差し替えます。
+最新の正準値はdata fileを優先し、README固定値を正本とはしません。
 
-## 公的な定量スナップショット
+## Official benchmark snapshots
 
-`data/quantitative_benchmarks_YYYY-MM-DD.yaml` には、比較用の公式集計を保存します。
+`data/quantitative_benchmarks_YYYY-MM-DD.yaml` には比較用の公式集計を保存します。
 
-- 連合 2026春季生活闘争の最終集計
-- 経団連 2026年夏季賞与・一時金の第1回集計
-- 厚生労働省 民間主要企業の2025年夏季・年末一時金
+- 連合 2026春季生活闘争 最終集計
+- 経団連 2026年夏季賞与・一時金 第1回集計
+- 厚生労働省 民間主要企業 2025年夏季・年末一時金
 
-金額・月数、要求・妥結、年間・季別、労働者加重平均・企業平均を別系列として保持します。増減率・前年差はCIで再計算します。
+amount / months、request / settlement、annual / seasonal、weighted / company averageを別seriesとして保持します。
 
-## 公開ページ
+## Public dashboard
 
-GitHub Pagesでは次を表示します。
+表示するもの:
 
-- **企業別の定量比較:** 推定月数レンジ、参考換算額レンジ、業種実測アンカー、方式・回数、信頼度
-- **根拠と式:** 旧個社事前分布、業種実測、会社・業種重み、一次資料、前提、反証条件
-- **推定を支える実測値:** 連合、経団連、厚生労働省の公式集計
-- **参照サイトの役割:** 会社公式、労組、EDINET、TDnet、公的統計の用途と限界
+- company-level estimated months range
+- reference amount range when available
+- sector observed anchor
+- method / frequency
+- confidence
+- source / equation / assumption / falsification condition
+- official quantitative benchmark
 
-企業別の調査進捗は詳細欄へ残しますが、主表を未着手キューにはしません。全30社の数値比較を主目的とします。
+主表を「未調査queue」にはせず、比較可能な30社universeとして表示します。
 
-## データモデル
+## Canonical data
 
-- 固定調査銘柄: `nikkei225_bonus_survey_2024_en.yaml`
-- 確認事実: `data/verified_bonus_facts_YYYY-MM-DD.yaml`
-- 会社事前分布: `data/bonus_hypotheses_YYYY-MM-DD.yaml`
-- 業種アンカー・モデル設定: `data/company_estimation_model_YYYY-MM-DD.yaml`
-- ソース・メタサーベイ: `data/source_survey_YYYY-MM-DD.yaml`
-- 公的定量ベンチマーク: `data/quantitative_benchmarks_YYYY-MM-DD.yaml`
-- 会社推定エンジン: `scripts/company_estimates.py`
-- 公開JSON生成: `scripts/generate_pages_data.py`
-- Pages監査: `scripts/validate_pages.py`
-- 本番監査: `scripts/audit_live_pages.py`
+- `nikkei225_bonus_survey_2024_en.yaml` — fixed universe
+- `data/verified_bonus_facts_YYYY-MM-DD.yaml` — verified facts
+- `data/bonus_hypotheses_YYYY-MM-DD.yaml` — company priors
+- `data/company_estimation_model_YYYY-MM-DD.yaml` — sector anchors / model config
+- `data/source_survey_YYYY-MM-DD.yaml` — source ledger
+- `data/quantitative_benchmarks_YYYY-MM-DD.yaml` — official benchmark snapshots
+- `scripts/company_estimates.py` — estimator
+- `scripts/generate_pages_data.py` — public JSON generation
+- `scripts/validate_pages.py` — Pages audit
+- `scripts/audit_live_pages.py` — production audit
 
-## 検証契約
+## Quality gate
 
-CIは次を確認します。
+CI verifies at least:
 
-- 固定Universe 30社を変更していないこと
-- 会社事前分布が30社を過不足なく覆うこと
-- 業種アンカーへの会社割当が30社を過不足・重複なく覆うこと
-- 業種実測の月数、金額、標本、公式URLが揃っていること
-- 推定月数と参考換算額が全30社で正の順序付きレンジになること
-- 会社重みと業種重みの合計が1になること
-- 一次資料の明示下限・上限・回数・方式が推定へ反映されること
-- 確認事実と推定値が別フィールドに保持されること
-- 公開JSON、HTML、CSS、JavaScriptが同じスキーマ5を使用すること
-- デプロイ後の公開ファイルが生成物とバイト一致すること
+- fixed 30-company universe
+- priors cover exactly 30 companies
+- sector assignment covers exactly 30 without duplicate
+- sector months / amount / sample / official URL completeness
+- ordered positive estimate ranges
+- company + sector weights = 1
+- explicit verified constraints override model
+- verified facts and estimates remain separate fields
+- unmatched amount samples stay unavailable/null
+- public JSON / HTML / CSS / JS schema consistency
+- deployed artifact byte parity
 
-## 実行方法
+## Local verification
 
 ```bash
 python -m pip install PyYAML==6.0.3
@@ -131,6 +161,10 @@ python scripts/validate_pages.py
 node --check docs/app.js
 ```
 
-`docs/data/bonus.json` と `gh-pages` ブランチは直接編集せず、確認事実、会社事前分布、業種アンカー、ソース台帳、公的定量スナップショットから生成します。
+`docs/data/bonus.json` と `gh-pages` branchは直接編集せず、canonical inputsから生成します。
 
-**最終ロジック更新:** 2026-08-02
+## Done
+
+成功指標は30社すべてに金額を埋めることではありません。
+
+**比較できる値と比較できない値を分け、利用者が「これは事実・これは推定・これはsample不一致で算出不可」と判断できること**をDoneとします。
