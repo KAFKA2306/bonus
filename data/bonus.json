@@ -1,14 +1,14 @@
 {
   "schema_version": 5,
   "as_of": "2026-08-02",
-  "generated_from": "data/verified_bonus_facts_2026-08-02.yaml",
+  "generated_from": "data/verified_bonus_facts_2026-08-15.yaml",
   "source_survey_generated_from": "data/source_survey_2026-08-02.yaml",
   "quantitative_benchmarks_generated_from": "data/quantitative_benchmarks_2026-08-02.yaml",
   "hypotheses_generated_from": "data/bonus_hypotheses_2026-08-02.yaml",
   "company_estimation_model_generated_from": "data/company_estimation_model_2026-08-02.yaml",
   "universe": {
     "source_file": "https://indexes.nikkei.co.jp/nkave/index/component?idx=nk225",
-    "source_as_of": "2026-08-12",
+    "source_as_of": "2026-08-14",
     "mutation_policy": "official_snapshot_at_build",
     "tracked_companies": 225,
     "covered_companies": 225,
@@ -780,13 +780,13 @@
   ],
   "summary": {
     "record_count": 225,
-    "verified_record_count": 5,
-    "confirmed_or_partial_count": 4,
+    "verified_record_count": 6,
+    "confirmed_or_partial_count": 5,
     "source_channel_count": 9,
     "primary_channel_count": 5,
     "required_channel_count": 4,
-    "reviewed_required_channel_count": 5,
-    "research_coverage_ratio": 0.0417,
+    "reviewed_required_channel_count": 6,
+    "research_coverage_ratio": 0.05,
     "quantitative_benchmark_count": 11,
     "quantitative_final_count": 8,
     "quantitative_provisional_count": 3,
@@ -797,25 +797,25 @@
     "median_estimated_amount_yen": 2148000,
     "average_estimate_confidence": 0.56,
     "evidence_status_counts": {
-      "confirmed": 3,
+      "confirmed": 4,
       "partially_confirmed": 1,
-      "unknown": 26
+      "unknown": 25
     },
     "research_stage_counts": {
-      "evidence_found": 4,
-      "queued": 25,
+      "evidence_found": 5,
+      "queued": 24,
       "source_reviewed": 1
     },
     "estimate_status_counts": {
-      "estimated": 24,
+      "estimated": 23,
       "estimated_with_verified_bound": 1,
-      "estimated_with_verified_structure": 4,
+      "estimated_with_verified_structure": 5,
       "verified_numeric": 1
     },
     "estimate_confidence_counts": {
       "high": 4,
-      "low": 8,
-      "medium": 18
+      "low": 7,
+      "medium": 19
     },
     "company_specific_prior_count": 30,
     "sector_prior_count": 195,
@@ -5697,7 +5697,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -6257,7 +6257,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -6709,7 +6709,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -7377,7 +7377,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -11069,7 +11069,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -11686,7 +11686,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -12354,7 +12354,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -12914,7 +12914,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -14844,19 +14844,19 @@
       "stock_code": "6857",
       "company_name_ja": "アドバンテスト",
       "subject": "employees",
-      "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
-      "classification": null,
-      "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "employee_scope": "株式会社アドバンテストの新卒採用募集要項で確認できる日本の新卒採用対象者、および公式DE&Iページで説明されるグローバル人事制度の範囲",
+      "classification": "performance_linked",
+      "evidence_status": "confirmed",
+      "as_of": "2026-08-15",
       "bonus": {
-        "frequency_per_year": null,
+        "frequency_per_year": 2,
         "annual_months": null,
-        "pool_basis": null,
+        "pool_basis": "公式DE&Iページでは、賞与は連結決算の損益を反映する仕組みと説明",
         "allocation_logic": null,
         "base_salary_link": null
       },
       "estimate": {
-        "status": "estimated",
+        "status": "estimated_with_verified_structure",
         "method": "empirical_bayes_shrinkage_with_mechanism_upside",
         "sector_id": "manufacturing",
         "sector_name_ja": "製造業",
@@ -14893,8 +14893,8 @@
           "latest_seasonal": null
         },
         "confidence": {
-          "score": 0.49,
-          "level": "low",
+          "score": 0.59,
+          "level": "medium",
           "amount_score": null
         },
         "weights": {
@@ -14949,22 +14949,39 @@
         "amount_caution": "業種の金額平均と月数平均は回答標本が異なるため、比から個社金額を算定しない。"
       },
       "notes": [
-        "確認済み事実とモデル推定を分離して表示する。"
+        "新卒採用募集要項は賞与を年2回（6月、12月）と明記。月数は明記されていないため格納しない。",
+        "国内グループ会社の賞与月数実績は株式会社アドバンテスト本体の従業員値ではないため、本レコードへ転用しない。"
       ],
-      "sources": [],
+      "sources": [
+        {
+          "type": "company_official",
+          "title": "募集要項｜新卒採用情報｜株式会社アドバンテスト",
+          "url": "https://www2.advantest.com/external/careers/recruit/",
+          "published_at": null,
+          "retrieved_at": "2026-08-15",
+          "page_or_section": "昇給・賞与"
+        },
+        {
+          "type": "company_official",
+          "title": "ダイバーシティ、エクイティ&インクルージョン(DE&I)",
+          "url": "https://www.advantest.com/ja/about/sustainability/society/dei/",
+          "published_at": null,
+          "retrieved_at": "2026-08-15",
+          "page_or_section": "グローバル人事制度"
+        }
+      ],
       "survey": {
-        "stage": "queued",
-        "reviewed_channel_ids": [],
+        "stage": "evidence_found",
+        "reviewed_channel_ids": [
+          "company_official"
+        ],
         "required_channel_count": 4,
-        "reviewed_required_count": 0,
-        "coverage_ratio": 0.0,
-        "next_channel_id": "company_official",
-        "next_channel_name_ja": "会社公式（IR・人事・採用）",
+        "reviewed_required_count": 1,
+        "coverage_ratio": 0.25,
+        "next_channel_id": "labor_union_official",
+        "next_channel_name_ja": "会社・産業別労働組合公式",
         "open_questions": [
-          "賞与の算定方式を会社・労組の一次資料で特定する",
-          "年間の支給回数・支給時期を確認する",
-          "標準者の年間月数または妥結額を確認し、モデル推定を置換する",
-          "原資の決定式または業績連動条件を確認する"
+          "標準者の年間月数または妥結額を確認し、モデル推定を置換する"
         ]
       }
     },
@@ -15336,7 +15353,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -15788,7 +15805,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -16780,7 +16797,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -17880,7 +17897,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -18116,7 +18133,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -19432,7 +19449,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -20321,7 +20338,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -21205,7 +21222,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -21333,7 +21350,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -23081,7 +23098,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -23317,7 +23334,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -24016,7 +24033,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -24144,7 +24161,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -24272,7 +24289,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -25630,7 +25647,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
@@ -25758,7 +25775,7 @@
       "employee_scope": "個社一次資料の対象範囲は未確定。定量値は業種実測アンカーを用いたモデル推定。",
       "classification": null,
       "evidence_status": "unknown",
-      "as_of": "2026-08-02",
+      "as_of": "2026-08-15",
       "bonus": {
         "frequency_per_year": null,
         "annual_months": null,
