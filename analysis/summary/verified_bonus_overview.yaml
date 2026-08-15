@@ -1,19 +1,19 @@
-summary_generated_on: '2026-08-02'
-input_snapshot: data/verified_bonus_facts_2026-08-02.yaml
-snapshot_as_of: '2026-08-02'
+summary_generated_on: '2026-08-15'
+input_snapshot: data/verified_bonus_facts_2026-08-15.yaml
+snapshot_as_of: '2026-08-15'
 universe:
   source_file: nikkei225_bonus_survey_2024_en.yaml
   mutation_policy: frozen
   universe_changed: false
-record_count: 5
+record_count: 6
 evidence_status_counts:
-  confirmed: 3
+  confirmed: 4
   partially_confirmed: 1
   unknown: 1
 classification_counts:
   hybrid: 2
-  performance_linked: 2
-confirmed_or_partial_count: 4
+  performance_linked: 3
+confirmed_or_partial_count: 5
 explicit_point_months_count: 0
 explicit_point_months_average: null
 records:
@@ -47,6 +47,15 @@ records:
   frequency_per_year: 1
   annual_months: null
   primary_source_count: 1
+- stock_code: '6857'
+  company_name_ja: アドバンテスト
+  employee_scope: 株式会社アドバンテストの新卒採用募集要項で確認できる日本の新卒採用対象者、および公式DE&Iページで説明されるグローバル人事制度の範囲
+  classification: performance_linked
+  evidence_status: confirmed
+  as_of: '2026-08-15'
+  frequency_per_year: 2
+  annual_months: null
+  primary_source_count: 2
 - stock_code: '6861'
   company_name_ja: キーエンス
   employee_scope: 連結・単体の従業員賞与制度
