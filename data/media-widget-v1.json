@@ -1098,7 +1098,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "4063",
       "company_name_ja": "信越化学工業",
@@ -1218,7 +1218,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "4307",
       "company_name_ja": "野村総合研究所",
@@ -1314,7 +1314,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "4502",
       "company_name_ja": "武田薬品工業",
@@ -1458,7 +1458,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "4543",
       "company_name_ja": "テルモ",
@@ -2274,7 +2274,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6098",
       "company_name_ja": "リクルートホールディングス",
@@ -2410,7 +2410,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6273",
       "company_name_ja": "SMC",
@@ -2554,7 +2554,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6367",
       "company_name_ja": "ダイキン工業",
@@ -2674,7 +2674,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6501",
       "company_name_ja": "日立製作所",
@@ -3134,15 +3134,15 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-02",
-      "classification": null,
+      "as_of": "2026-08-16",
+      "classification": "performance_linked",
       "company_id": "6861",
       "company_name_ja": "キーエンス",
       "confidence": {
         "level": "medium",
         "score": 0.6
       },
-      "evidence_status": "unknown",
+      "evidence_status": "confirmed",
       "months": {
         "central": 6.89,
         "maximum": 8.36,
@@ -3150,9 +3150,14 @@
       },
       "sources": [
         {
-          "title": "有価証券報告書 第57期（2025年3月21日―2026年3月20日）",
-          "type": "regulator_filing",
-          "url": "https://www.keyence.co.jp/investor/library/securitiesreport.jsp"
+          "title": "募集要項｜新卒採用｜株式会社キーエンス",
+          "type": "company_official",
+          "url": "https://www.keyence-jobs.jp/recruit/guideline/"
+        },
+        {
+          "title": "人事制度｜新卒採用｜株式会社キーエンス",
+          "type": "company_official",
+          "url": "https://www.keyence-jobs.jp/workplace/system/"
         }
       ],
       "status": "estimated"
@@ -3212,7 +3217,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6954",
       "company_name_ja": "ファナック",
@@ -3308,7 +3313,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "6981",
       "company_name_ja": "村田製作所",
@@ -3524,7 +3529,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "7203",
       "company_name_ja": "トヨタ自動車",
@@ -3764,7 +3769,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "7733",
       "company_name_ja": "オリンパス",
@@ -3812,7 +3817,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "7741",
       "company_name_ja": "HOYA",
@@ -4100,7 +4105,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "8035",
       "company_name_ja": "東京エレクトロン",
@@ -4292,7 +4297,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "8306",
       "company_name_ja": "三菱UFJフィナンシャル・グループ",
@@ -4484,7 +4489,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "8601",
       "company_name_ja": "大和証券グループ本社",
@@ -4508,7 +4513,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "8604",
       "company_name_ja": "野村ホールディングス",
@@ -4892,7 +4897,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9020",
       "company_name_ja": "JR東日本",
@@ -4940,7 +4945,7 @@
         "minimum_yen": 2041000,
         "status": "available"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9022",
       "company_name_ja": "JR東海",
@@ -5084,7 +5089,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9201",
       "company_name_ja": "日本航空",
@@ -5108,7 +5113,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9202",
       "company_name_ja": "ANAホールディングス",
@@ -5132,7 +5137,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9432",
       "company_name_ja": "日本電信電話",
@@ -5431,7 +5436,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9983",
       "company_name_ja": "ファーストリテイリング",
@@ -5455,7 +5460,7 @@
         "minimum_yen": null,
         "status": "unavailable"
       },
-      "as_of": "2026-08-15",
+      "as_of": "2026-08-16",
       "classification": null,
       "company_id": "9984",
       "company_name_ja": "ソフトバンクグループ",
