@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "17 0 * * *"
+  pull_request:
+    paths:
+      - scripts/audit_live_pages.py
+      - .github/workflows/live-audit.yml
 
 permissions:
   contents: read
