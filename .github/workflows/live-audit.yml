@@ -8,6 +8,11 @@ on:
     paths:
       - scripts/audit_live_pages.py
       - .github/workflows/live-audit.yml
+  push:
+    branches: [main]
+    paths:
+      - scripts/audit_live_pages.py
+      - .github/workflows/live-audit.yml
 
 permissions:
   contents: read
@@ -22,7 +27,9 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
-      - name: Generate expected fact and hypothesis JSON
-        run: python scripts/generate_pages_data.py
+      - name: Generate the deployed dashboard data
+        run: |
+          python scripts/generate_pages_data.py
+          python scripts/expand_nikkei225.py
       - name: Audit deployed dashboard
         run: python scripts/audit_live_pages.py --attempts 12 --delay 5
