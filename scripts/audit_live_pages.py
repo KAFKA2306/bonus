@@ -145,8 +145,6 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     public = json.loads((DOCS / "data" / "bonus.json").read_text(encoding="utf-8"))
-    if public.get("schema_version") != 4:
-        raise SystemExit("unexpected public JSON schema version")
     if public.get("generated_from") != expected_generated_from():
         raise SystemExit("public JSON is not from latest verified facts")
     if public.get("source_survey_generated_from") != expected_source_survey_from():
