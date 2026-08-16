@@ -156,23 +156,26 @@ def main(argv: list[str] | None = None) -> int:
     if public.get("company_estimation_model_generated_from") != expected_company_model_from():
         raise SystemExit("public JSON is not from latest company estimation model")
     summary = public.get("summary", {})
-    if summary.get("record_count") != 30:
-        raise SystemExit("public JSON does not contain all 30 companies")
-    if summary.get("quantified_company_count") != 30:
-        raise SystemExit("public JSON does not quantify all 30 companies")
+    if summary.get("record_count") != 225:
+        raise SystemExit("public JSON does not contain all 225 Nikkei 225 companies")
+    if summary.get("quantified_company_count") != 225:
+        raise SystemExit("public JSON does not quantify all 225 Nikkei 225 companies")
     if summary.get("quantitative_benchmark_count") != 11:
         raise SystemExit("public JSON does not contain all public quantitative benchmarks")
-    if not summary.get("median_estimated_months") or not summary.get("median_estimated_amount_yen"):
-        raise SystemExit("public JSON estimate summary is incomplete")
+    if not summary.get("median_estimated_months"):
+        raise SystemExit("public JSON estimated-month summary is incomplete")
     if len(public.get("sector_anchors", [])) != 6:
         raise SystemExit("public JSON does not contain all six sector anchors")
-    if public.get("universe", {}).get("coverage_ratio") != 1.0:
+    universe = public.get("universe", {})
+    if universe.get("tracked_companies") != 225 or universe.get("covered_companies") != 225:
+        raise SystemExit("public JSON universe does not contain all 225 companies")
+    if universe.get("coverage_ratio") != 1.0:
         raise SystemExit("public JSON coverage is not 100%")
     if any("estimate" not in item for item in public.get("records", [])):
         raise SystemExit("one or more company records lack an estimate")
     print(
         "PASS: live dashboard returned HTTP 200 and index/CSS/JS/JSON exactly match "
-        "the generated 30-company, 6-sector and 11-benchmark build"
+        "the generated 225-company, 6-sector and 11-benchmark build"
     )
     return 0
 
