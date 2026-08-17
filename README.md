@@ -1,5 +1,9 @@
 # 主要30社 賞与定量モデル
 
+[![Verify bonus facts](https://github.com/KAFKA2306/bonus/actions/workflows/verified-bonus.yml/badge.svg)](https://github.com/KAFKA2306/bonus/actions/workflows/verified-bonus.yml)
+[![Deploy Nikkei 225 quantified bonus dashboard](https://github.com/KAFKA2306/bonus/actions/workflows/pages.yml/badge.svg)](https://github.com/KAFKA2306/bonus/actions/workflows/pages.yml)
+[![Audit live bonus dashboard](https://github.com/KAFKA2306/bonus/actions/workflows/live-audit.yml/badge.svg)](https://github.com/KAFKA2306/bonus/actions/workflows/live-audit.yml)
+
 **賞与は「会社別の数字」を集めるほど、比較を間違えやすくなる。**
 
 会社公式の明示値、労組集計、業種平均、モデル推定は同じ数字ではありません。このrepositoryは、主要30社の賞与を **「確認できた事実」と「比較のための推定」を混ぜずに並べ、どこまで信じてよいか判断できる状態**へ変える定量比較基盤です。
