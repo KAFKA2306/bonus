@@ -38,6 +38,8 @@ def main() -> int:
             'data-view="cards"',
             'data-view="table"',
             'id="compare-tray"',
+            'id="copy-comparison-url"',
+            'navigator.clipboard.writeText(location.href)',
             'id="comparison"',
             'id="comparison-table-wrap"',
             'id="comparison-cards"',
@@ -98,6 +100,7 @@ def main() -> int:
     assert "overflow-x: hidden !important" not in css
     assert html.count('id="comparison"') == 1
     assert html.count('id="company-card-list"') == 1
+    assert html.count('id="copy-comparison-url"') == 1
 
     print("PASS: responsive search, card, URL-state and 2-5 company comparison contracts")
     return 0
