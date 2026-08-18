@@ -55,7 +55,7 @@
 
       <aside id="compare-tray" class="compare-tray" aria-labelledby="compare-tray-title" hidden>
         <div><span class="kicker">COMPARE</span><h3 id="compare-tray-title"><span id="compare-count">0</span>社を選択中</h3><div id="compare-chips" class="compare-chips"></div></div>
-        <div class="compare-actions"><button id="show-comparison" type="button">比較を見る</button><button id="clear-comparison" type="button">選択解除</button></div>
+        <div class="compare-actions"><button id="show-comparison" type="button">比較を見る</button><button id="copy-comparison-url" type="button" onclick="navigator.clipboard.writeText(location.href).then(() => { document.querySelector('#result-count').textContent = '比較URLをコピーしました'; }).catch(() => { document.querySelector('#result-count').textContent = 'URLをコピーできませんでした'; })">比較URLをコピー</button><button id="clear-comparison" type="button">選択解除</button></div>
       </aside>
 
       <section id="comparison" class="comparison-panel" hidden aria-labelledby="comparison-title">
